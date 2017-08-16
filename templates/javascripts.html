@@ -1,0 +1,42 @@
+{% load compress %}
+{% load staticfiles %}
+
+{% compress js %}
+<script type="text/javascript" src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'bower_components/bootstrap/dist/js/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'bower_components/bootstrap-material-design/dist/js/material.js' %}"></script>
+<script type="text/javascript" src="{% static 'bower_components/bootstrap-material-design/dist/js/ripples.js' %}"></script>
+<script type="text/javascript" src="{% static 'bower_components/underscore/underscore.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'bower_components/angular/angular.js' %}"></script>
+<script type="text/javascript" src="{% static 'bower_components/angular-route/angular-route.js' %}"></script>
+<script type="text/javascript" src="{% static 'bower_components/angular-cookies/angular-cookies.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'bower_components/ngDialog/js/ngDialog.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/snackbarjs/snackbar.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'javascripts/projecthub.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'javascripts/projecthub.config.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/projecthub.routes.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/authentication/authentication.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/authentication/services/authentication.service.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/authentication/controllers/register.controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/authentication/controllers/login.controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/layout/layout.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/layout/controllers/navbar.controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/projects/projects.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/projects/services/projects.service.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/utils/utils.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/utils/services/snackbar.service.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/layout/controllers/index.controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/projects/directives/discover-projects.directive.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/projects/controllers/discover-projects.controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/projects/directives/project.directive.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/projects/controllers/new-project.controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/profiles/profiles.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/profiles/services/profile.service.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/profiles/controllers/profile.controller.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/profiles/controllers/profile-settings.controller.js' %}"></script>
+{% endcompress %}
+

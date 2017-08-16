@@ -1,0 +1,26 @@
+/* Individual Project */
+
+.project {}
+
+.project .project__meta {
+  font-weight: bold;
+  text-align: right;
+  padding-bottom: 19px;
+}
+
+.project .project__meta a:hover {
+  text-decoration: none;
+}
+
+
+/* DiscoverProjects */
+
+.no-projects-here {
+  text-align: center;
+}
+
+.btn-add-new-project {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
