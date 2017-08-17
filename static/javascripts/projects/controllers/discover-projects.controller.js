@@ -13,6 +13,8 @@
 
   /**
   * @namespace DiscoverProjectsController
+  * @desc contains an algorithm for ensuring similarly-sized columns.
+  *   TODO this algorithm needs to be reviewed.
   */
   function DiscoverProjectsController($scope) {
     var vm = this;
