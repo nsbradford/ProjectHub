@@ -1,5 +1,5 @@
 """
-	projects/tests.py
+	tests/projects/tests.py
 	Nicholas S. Bradford
 	08-17-17
 
@@ -10,8 +10,8 @@ from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from models import Project
-import views
+from projects.models import Project
+from projects import views
 
 
 class ProjectTests(APITestCase):
