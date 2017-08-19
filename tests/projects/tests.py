@@ -20,7 +20,7 @@ class ProjectTests(APITestCase):
     data = {'author': 'myauthor', 'content': 'mycontent'}
 
     def test_create_project_must_be_authenticated(self):
-        """ Ensure we can create a new project object. """
+        """ Ensure we get 403 FORBIDDEN when posting while unauthenticated. """
         response = self.client.post(self.url, self.data, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 

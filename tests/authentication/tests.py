@@ -15,19 +15,71 @@ from authentication.models import Account
 
 class AccountTests(APITestCase):
 
-    def test_API_create_account(self):
-        """ Test account creation. """
-        url = '/api/v1/accounts/'
-        data = {    'email': 'johndoe@gmail.com', 
-                    'username': 'johndoe', 
-                    'password': 'password123'
-                }
-        response = self.client.post(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Account.objects.count(), 1)
-        self.assertEqual(Account.objects.get().email, 'johndoe@gmail.com')
-        self.assertEqual(Account.objects.get().username, 'johndoe')
+    url = '/api/v1/accounts/'
+    data = {    'email': 'johndoe@gmail.com', 
+                'username': 'johndoe', 
+                'password': 'password123'
+            }   
 
-    def test_API_create_account_requires_password(self):
-        """ POST without password results in error. """
+    def tearDown(self):
+        """ After each test, remove all accounts in the test database."""
+        # Account.objects.all().delete()
         pass
+
+
+    def test_API_create_account(self):
+        """ Test account creation and deletion. """
+        self.assertEqual(Account.objects.count(), 0)
+        
+        post_response = self.client.post(self.url, self.data, format='json')
+        self.assertEqual(post_response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Account.objects.count(), 1)
+        new_account = Account.objects.get()
+        self.assertEqual(new_account.email, 'johndoe@gmail.com')
+        self.assertEqual(new_account.username, 'johndoe')
+
+
+    def test_API_delete_account_must_be_authenticated(self):
+        """ """
+        self.assertEqual(Account.objects.count(), 0)
+        
+        post_response = self.client.post(self.url, self.data, format='json')
+        self.assertEqual(post_response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Account.objects.count(), 1)
+        new_account = Account.objects.get()
+        self.assertEqual(new_account.email, 'johndoe@gmail.com')
+        self.assertEqual(new_account.username, 'johndoe')
+
+        delete_response = self.client.delete(self.url, {'id': new_account.id})
+        self.assertEqual(delete_response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(Account.objects.count(), 1)
+
+    def test_API_delete_account(self):
+        """ TODO must authenticated before deleting account """
+        self.assertEqual(Account.objects.count(), 0)
+        
+        post_response = self.client.post(self.url, self.data, format='json')
+        self.assertEqual(post_response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Account.objects.count(), 1)
+        new_account = Account.objects.get()
+        self.assertEqual(new_account.email, 'johndoe@gmail.com')
+        self.assertEqual(new_account.username, 'johndoe')
+
+        self.client.login(email='johndoe@gmail.com', password='password123')
+
+        # TODO
+
+        # delete_response = self.client.delete(self.url, {'asdf': new_account.id})
+        # self.assertEqual(delete_response.status_code, status.HTTP_403_FORBIDDEN)
+        # self.assertEqual(Account.objects.count(), 0)
+        
+
+    # def test_API_get_account(self):
+    #     pass
+
+    # def test_API_udpate_account(self):
+    #     pass
+
+    # def test_API_create_account_requires_password(self):
+    #     """ POST without password results in error. """
+    #     pass
