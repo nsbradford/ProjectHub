@@ -16,6 +16,7 @@ from authentication.models import Account
 class AccountTests(APITestCase):
 
     url = '/api/v1/accounts/'
+    # url_delete = url + 'delete/'
     data = {    'email': 'johndoe@gmail.com', 
                 'username': 'johndoe', 
                 'password': 'password123'
@@ -40,7 +41,7 @@ class AccountTests(APITestCase):
 
 
     def test_API_delete_account_must_be_authenticated(self):
-        """ """
+        """ Only an authenticated user can delete their own account. """
         self.assertEqual(Account.objects.count(), 0)
         
         post_response = self.client.post(self.url, self.data, format='json')
@@ -54,8 +55,9 @@ class AccountTests(APITestCase):
         self.assertEqual(delete_response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(Account.objects.count(), 1)
 
+
     def test_API_delete_account(self):
-        """ TODO must authenticated before deleting account """
+        """ Deleting account removes entry from database. """
         self.assertEqual(Account.objects.count(), 0)
         
         post_response = self.client.post(self.url, self.data, format='json')
@@ -67,11 +69,9 @@ class AccountTests(APITestCase):
 
         self.client.login(email='johndoe@gmail.com', password='password123')
 
-        # TODO
-
-        # delete_response = self.client.delete(self.url, {'asdf': new_account.id})
-        # self.assertEqual(delete_response.status_code, status.HTTP_403_FORBIDDEN)
-        # self.assertEqual(Account.objects.count(), 0)
+        delete_response = self.client.delete(self.url + 'johndoe' + '/')
+        self.assertEqual(delete_response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Account.objects.count(), 0)
         
 
     # def test_API_get_account(self):

@@ -68,7 +68,7 @@ Create a Python virtual environment, install bower components, instantiate the d
     * POST (create)   '/api/v1/accounts/', profile data
     * PUT (update)    '/api/v1/accounts/' + profile.username + '/', profile data
     * GET             '/api/v1/accounts/' + username + '/'
-    * DELETE          '/api/v1/accounts/' + profile.id + '/'
+    * DELETE          '/api/v1/accounts/' + profile.username + '/'
 * API ProjectViewSet and nested: 
     * GET (get all)   '/api/v1/projects/'
     * POST (create)   '/api/v1/projects/'
