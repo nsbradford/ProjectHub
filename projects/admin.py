@@ -1,3 +1,10 @@
+"""
+	projects/admin.py
+	Nicholas S. Bradford
+	08-17-17
+
+"""
+
 from django.contrib import admin
 
-# Register your models here.
+# TODO Register your models here.

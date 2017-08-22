@@ -24,7 +24,11 @@
 
     /**
     * @name activate
-    * @desc Actions to be performed when this controller is instantiated
+    * @desc Actions to be performed when this controller is instantiated.
+    *   On project.created or project.created.error, update the projects
+    *   array to reflect the changes. On successful add, we actually
+    *   add the project before receiving confirmation to avoid waiting for
+    *   another API response, increasing the perceived speed.
     * @memberOf projecthub.layout.controllers.IndexController
     */
     function activate() {

@@ -73,11 +73,12 @@
     * @memberOf projecthub.profiles.controllers.ProfileSettingsController
     */
     function destroy() {
-      Profile.destroy(vm.profile.username).then(profileSuccessFn, profileErrorFn);
+      Profile.destroy(vm.profile).then(profileSuccessFn, profileErrorFn);
 
       /**
       * @name profileSuccessFn
-      * @desc Redirect to index and display success snackbar
+      * @desc Redirect to index and display success snackbar.
+      *   Unauthenticate and return to index page.
       */
       function profileSuccessFn(data, status, headers, config) {
         Authentication.unauthenticate();
@@ -90,6 +91,7 @@
       /**
       * @name profileErrorFn
       * @desc Display error snackbar
+      *   Simply display snackbar error; there's no reason it should fail.
       */
       function profileErrorFn(data, status, headers, config) {
         Snackbar.error(data.error);

@@ -1,3 +1,9 @@
+"""
+    projects/views.py
+    Nicholas S. Bradford
+    08-17-17
+
+"""
 
 from rest_framework import permissions, viewsets
 from rest_framework.response import Response
@@ -8,15 +14,23 @@ from projects.serializers import ProjectSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
+    """ Combined RESTful view for Project model. """
+
     queryset = Project.objects.order_by('-created_at')
     serializer_class = ProjectSerializer
 
     def get_permissions(self):
+        """ We allow anyone to use requests in SAFE_METHODS (GET, HEAD, OPTIONS).
+                Otherwise, require authentication and authorization.
+        """
         if self.request.method in permissions.SAFE_METHODS:
             return (permissions.AllowAny(),)
         return (permissions.IsAuthenticated(), IsAuthorOfProject(),)
 
     def perform_create(self, serializer):
+        """ Automatically add the current Account as the author
+                of the project.
+        """
         instance = serializer.save(author=self.request.user)
         return super(ProjectViewSet, self).perform_create(serializer)
 
