@@ -14,7 +14,7 @@ from authentication.models import Account
 
 
 class APIAccountTests(APITestCase):
-
+    """ RESTful API tests for Account. """
 
     email = 'johndoe@gmail.com'
     username = 'johndoe'
@@ -52,6 +52,10 @@ class APIAccountTests(APITestCase):
     # Helpers
 
     def setup_account(self):
+        """ Create an account and confirm it is stored properly.
+            Returns:
+                The created Account.
+        """
         self.assertEqual(Account.objects.count(), 0)
         post_response = self.client.post(self.url, self.setup_data, format='json')
         self.assertEqual(post_response.status_code, status.HTTP_201_CREATED)
