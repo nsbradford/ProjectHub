@@ -47,9 +47,9 @@ class ProjectTests(APITestCase):
     #     self.assertEqual(Account.objects.get().content, 'mycontent')
 
 
-    def test_create_project(self):
-        """ Ensure we can create a new project object. """
-        self.setup_account()
+    # def test_create_project(self):
+    #     """ Ensure we can create a new project object. """
+    #     self.setup_account()
 
 
     # def test_get_single_project(self):

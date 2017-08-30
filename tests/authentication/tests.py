@@ -129,12 +129,11 @@ class APIAccountTests(APITestCase):
         """ TODO: Passwords must match when updating an account. 
                 Look in serializer update.
         """
-        # self.setup_account()
-        # self.client.login(email=self.email, password=self.password)
-        # update_response = self.client.put(self.url_username, self.update_data_bad_pass)
-        # self.assertEqual(update_response.status_code, status.HTTP_400_BAD_REQUEST)
-        # self.assertEqual(Account.objects.count(), 1)
-        pass
+        self.setup_account()
+        self.client.login(email=self.email, password=self.password)
+        update_response = self.client.put(self.url_username, self.update_data_bad_pass)
+        self.assertEqual(update_response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Account.objects.count(), 1)
 
 
     def test_API_delete_account_must_login(self):

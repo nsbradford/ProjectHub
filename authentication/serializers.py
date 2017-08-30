@@ -28,6 +28,11 @@ class AccountSerializer(serializers.ModelSerializer):
         """
         if 'password' not in data:
             raise serializers.ValidationError('Password is required.')
+        if 'password' not in data and 'confirm_password' in data:
+            raise serializers.ValidationError('Must supply password.')
+        if 'password' in data and 'confirm_password' in data:
+            if data['password'] != data['confirm_password']:
+                raise serializers.ValidationError('Updated passwords must match.')
         return data
 
 
@@ -58,6 +63,8 @@ class AccountSerializer(serializers.ModelSerializer):
                 TODO password validation: should enforce minimum length,
                     lowercase and uppercase letters, disallowed insecure strings
                     like 'password', etc. (there are libraries for this)
+                TODO Django REST Framework 3.0+ supports dynamic fields, potentially
+                    allowing us to update using only a subset of fields?
                 Args:
                     instance (Account): object to update
                     validated_data (dict): JSON data for updated fields
