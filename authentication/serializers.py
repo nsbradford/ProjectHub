@@ -21,6 +21,15 @@ class AccountSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     confirm_password = serializers.CharField(write_only=True, required=False)
 
+    def validate(self, data):
+        """ Perform object-level validation on all the data. Called automatically
+                as part of is_valid(). As per documentation, must return data
+                or raise serializers.ValidationError
+        """
+        if 'password' not in data:
+            raise serializers.ValidationError('Password is required.')
+        return data
+
 
     class Meta:
         """ Defines metadata for our serializer to operate on. 
