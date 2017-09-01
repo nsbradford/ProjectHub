@@ -22,6 +22,9 @@ class AccountManager(BaseUserManager):
         """
         if not email:
             raise ValueError('Users must have a valid email address.')
+        # if not password:
+        #     raise ValueError('Users must have a valid password.')
+        # TODO can add username to the normal arguments
         if not kwargs.get('username'):
             raise ValueError('Users must have a valid username.')
         account = self.model(
