@@ -17,17 +17,17 @@ class AccountSerializer(serializers.ModelSerializer):
             and write_only=True (so that password, even hashed and salted, shouldn't
             be visible to the client in the AJAX response)
     """
-
-    password = serializers.CharField(write_only=True, required=False)
-    confirm_password = serializers.CharField(write_only=True, required=False)
+    password = serializers.CharField(write_only=True, required=False, allow_blank=True)
+    # new_password = serializers.CharField(write_only=True, required=False, allow_blank=True)
+    # confirm_password = serializers.CharField(write_only=True, required=False, allow_blank=True)
 
     def validate(self, data):
         """ Perform object-level validation on all the data. Called automatically
                 as part of is_valid(). As per documentation, must return data
                 or raise serializers.ValidationError
         """
-        if 'password' not in data:
-            raise serializers.ValidationError('Password is required.')
+        # if 'password' in data and 'confirm_password' not in data:
+        #     raise serializers.ValidationError('Password is required.')
         if 'password' not in data and 'confirm_password' in data:
             raise serializers.ValidationError('Must supply password.')
         if 'password' in data and 'confirm_password' in data:
@@ -44,8 +44,8 @@ class AccountSerializer(serializers.ModelSerializer):
 
         model = Account
         fields = ('id', 'email', 'username', 'created_at', 'updated_at',
-                    'first_name', 'last_name', 'tagline', 'password',
-                    'confirm_password',)
+                    'first_name', 'last_name', 'tagline', 'password',)
+                    # 'new_password', 'confirm_password',)
         read_only_fields = ('created_at', 'updated_at',)
 
 

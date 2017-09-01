@@ -14,7 +14,7 @@ from django.contrib.auth.models import BaseUserManager
 class AccountManager(BaseUserManager):
     """ A custom Manager is required when creating a custom user model. """
 
-    def create_user(self, email, password, **kwargs):
+    def create_user(self, email, password=None, **kwargs):
         """ Ensure user has email and username (and password). 
             Normalize the email address by lowercasing the domain part of it.
                 (Technically the standard allows case sensitivity in local part/name,
@@ -22,8 +22,8 @@ class AccountManager(BaseUserManager):
         """
         if not email:
             raise ValueError('Users must have a valid email address.')
-        if not password:
-            raise ValueError('Users must have a valid password.')
+        # if not password:
+        #     raise ValueError('Users must have a valid password.')
         # TODO can add username to the normal arguments
         if not kwargs.get('username'):
             raise ValueError('Users must have a valid username.')
