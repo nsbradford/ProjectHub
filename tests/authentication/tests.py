@@ -88,7 +88,9 @@ class APIAccountTests(APITestCase):
 
 
     # def test_API_create_account_requires_password(self):
-    #     """ POST without password results in error. """
+    #     """ POST without password results in error. 
+    #         TODO breaking. 
+    #     """
     #     self.assertEqual(Account.objects.count(), 0)
     #     post_response = self.client.post(self.url, self.incomplete_data, format='json')
     #     self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
