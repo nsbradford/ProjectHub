@@ -31,14 +31,15 @@
     */
     function submit() {
       $rootScope.$broadcast('project.created', {
-        content: vm.content,
+        title: vm.title,
+        description: vm.description,
         author: {
           username: Authentication.getAuthenticatedAccount().username
         }
       });
 
       $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
-      Projects.create(vm.content).then(createProjectSuccessFn, createProjectErrorFn);
+      Projects.create(vm.title, vm.description).then(createProjectSuccessFn, createProjectErrorFn);
 
 
       /**

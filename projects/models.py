@@ -25,11 +25,12 @@ class Project(models.Model):
         projectDuration: how long the duration of the project is.
     """
     author = models.ForeignKey(Account)
-    content = models.TextField()
+    title = models.CharField(max_length=40, default='MyTitle')
+    description = models.TextField()
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return '{0}'.format(self.content)
+        return 'Title: {0}; Description: '.format(self.title, self.description)
 

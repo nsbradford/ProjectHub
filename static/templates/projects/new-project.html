@@ -1,11 +1,19 @@
 <form role="form" ng-submit="vm.submit()">
   <div class="form-group">
-    <label for="project__content">New project</label>
+    <!-- <label for="project__content">New project</label> -->
+    <label for="project__title">Title</label> 
     <textarea class="form-control" 
-              id="project__content" 
+              id="project__title" 
               rows="3" 
-              placeholder="ex. This is my first time posting on ProjectHub!" 
-              ng-model="vm.content">
+              placeholder="E.g. 'Algorithmic trading with Python'" 
+              ng-model="vm.title">
+    </textarea>
+    <label for="project__title">Description</label> 
+    <textarea class="form-control" 
+              id="project__description" 
+              rows="3" 
+              placeholder="ex. 'This is your big chance to get rich!'" 
+              ng-model="vm.description">
     </textarea>
   </div>
 

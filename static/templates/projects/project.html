@@ -3,13 +3,14 @@
     <div class="well">
       <div class="project">
         <div class="project__meta">
+            {{ project.title }} by
           <a href="/+{{ project.author.username }}">
             +{{ project.author.username }}
           </a>
         </div>
 
         <div class="project__content">
-          {{ project.content }}
+          {{ project.description }}
         </div>
       </div>
     </div>
