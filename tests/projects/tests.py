@@ -21,7 +21,9 @@ class ProjectTests(APITestCase):
     username = 'johndoe'
     password = 'password123'
     author = 'myauthor'
-    content = 'mycontent'
+    title = 'mytitle'
+    description = 'mydescription'
+    major = 'CS'
     tagline = 'This is the tagline for John Doe #1'
     setup_data = {  
                 'email': email, 
@@ -30,7 +32,9 @@ class ProjectTests(APITestCase):
                 'tagline': tagline
             }
     project_data = {
-        'content': content
+        'title': title,
+        'description': description,
+        'major': major
     }
     accounts_url = '/api/v1/accounts/'
     project_url = '/api/v1/projects/'
@@ -58,6 +62,7 @@ class ProjectTests(APITestCase):
 
     def test_create_project(self):
         """ Ensure we can create a new project object. """
+        # TODO FAILING
         self.assertEqual(Account.objects.count(), 0)
         new_account = self.setup_account()
         self.client.login(email=self.email, password=self.password)
@@ -66,7 +71,9 @@ class ProjectTests(APITestCase):
         self.assertEqual(Account.objects.count(), 1)
         new_project = Project.objects.get()
         self.assertEqual(new_project.author, new_account)
-        self.assertEqual(new_project.author, new_account)
+        self.assertEqual(new_project.title, self.title)
+        self.assertEqual(new_project.description, self.description)
+        self.assertEqual(new_project.major, self.major)
 
     # def test_update_project(self):
     #     """ TODO allow projects to be edited. """
