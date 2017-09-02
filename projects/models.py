@@ -10,6 +10,17 @@ from django.db import models
 from authentication.models import Account
 
 
+class Major(models.Model):
+    title = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('title',)
+    
+
+
 class Project(models.Model):
     """ 
     TODO: ForeignKey for Many to One, and ManyToManyField 
@@ -25,12 +36,14 @@ class Project(models.Model):
         projectDuration: how long the duration of the project is.
     """
     author = models.ForeignKey(Account)
-    title = models.CharField(max_length=40, default='MyTitle')
+    title = models.CharField(max_length=40)
     description = models.TextField()
+    # majors = models.ManyToManyField(Major)
+    major = models.CharField(max_length=40, default='N/A')
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return 'Title: {0}; Description: '.format(self.title, self.description)
+        return 'Title: {0}; Description: {1}, Major {2}'.format(self.title, self.description, self.major)
 

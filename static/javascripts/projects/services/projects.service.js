@@ -45,10 +45,13 @@
     * @returns {Promise}
     * @memberOf projecthub.projects.services.Projects
     */
-    function create(title, description) {
+    function create(title, description, majors) {
+      console.log(majors)
       return $http.post('/api/v1/projects/', {
         title: title,
-        description: description
+        description: description,
+        // majors: majors
+        major: majors // TODO only handling a single major currently
       });
     }
 

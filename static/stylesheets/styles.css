@@ -3,22 +3,29 @@
 
 /* Individual Project */
 
-.project {}
+.project {
+
+}
 
 .project .project__meta {
   font-weight: bold;
   text-align: left;
   font-size: 20px;
   padding-bottom: 19px;
-  color: #607D8B;
 }
+
+.project .project__meta a:hover {
+}
+
 
 .project .project__content {
   padding-bottom: 10px;
+  font-size: 15px;
 }
 
 .project__author{
   text-align: right;
+
 }
 
 .project__author a.author {
@@ -26,8 +33,38 @@
   text-align: right;
 }
 
-.project .project__meta a:hover {
-  text-decoration: none;
+.project__author .fa {
+  color: #0277bd;
+  padding-top: 5px;
+  padding-right: 15px;
+  font-size: 1em;
+}
+
+.project .project__required {
+  font-weight:  bold;
+  font-size: 15px;
+}
+
+.project .project__location {
+  margin-top: 10px;
+  font-weight: normal;
+  font-size: 15px;
+  /*color: #607D8B;*/
+}
+
+.project .project__location .fa {
+  padding-right: 10px;
+  font-size: 1em;
+  color: #607D8B;
+}
+
+.project .project__major {
+  border-radius: 5px;
+  background: #607D8B;
+  display: inline-block;
+  padding: 3px 10px 3px 10px;
+  color: white;
+  font-weight: normal;
 }
 
 /* new-project */

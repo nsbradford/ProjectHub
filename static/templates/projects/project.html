@@ -11,10 +11,35 @@
           {{ project.description }}
         </div>
 
+        <div class="project__required">
+          Major: 
+          <div class="project__major">
+            {{ project.major }}
+          </div>
+
+          <div class="project__location">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            Worcester, MA
+          </div>
+
+          <div class="project__location">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            3 hours/week for 6 months
+          </div>
+        </div>
+
         <div class="project__author">
+
+          <!-- ngShow="project.author.username == vm.user.username" -->
+          <div style="display: inline-block" >
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </div>
+
           <a class="author" href="/+{{ project.author.username }}">
-              +{{ project.author.username }}
+            +{{ project.author.username }}
           </a>
+
         </div>
 
       </div>
