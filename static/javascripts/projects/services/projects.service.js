@@ -40,13 +40,18 @@
     /**
     * @name create
     * @desc Create a new Project
-    * @param {string} content The content of the new Project
+    * @param {string} title The title of the new Project
+    * @param {string} description The description of the new Project
     * @returns {Promise}
     * @memberOf projecthub.projects.services.Projects
     */
-    function create(content) {
+    function create(title, description, majors) {
+      console.log(majors)
       return $http.post('/api/v1/projects/', {
-        content: content
+        title: title,
+        description: description,
+        // majors: majors
+        major: majors // TODO only handling a single major currently
       });
     }
 

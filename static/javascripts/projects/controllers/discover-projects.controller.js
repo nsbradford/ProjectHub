@@ -75,7 +75,7 @@
       */
       function columnMapFn(column) {
         var lengths = column.map(function (element) {
-          return element.content.length;
+          return element.description.length;
         });
 
         return lengths.reduce(sum, 0) * column.length;

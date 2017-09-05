@@ -1,15 +1,82 @@
+    /*grey: #607D8B; */
+    /*blue: #0277bd;*/
+
 /* Individual Project */
 
-.project {}
+.project {
+
+}
 
 .project .project__meta {
   font-weight: bold;
-  text-align: right;
+  text-align: left;
+  font-size: 20px;
   padding-bottom: 19px;
 }
 
 .project .project__meta a:hover {
-  text-decoration: none;
+}
+
+
+.project .project__content {
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+
+.project__author{
+  text-align: right;
+
+}
+
+.project__author a.author {
+  font-weight: bold;
+  text-align: right;
+}
+
+.project__author .fa {
+  color: #0277bd;
+  padding-top: 5px;
+  padding-right: 15px;
+  font-size: 1em;
+}
+
+.project .project__required {
+  font-weight:  bold;
+  font-size: 15px;
+}
+
+.project .project__location {
+  margin-top: 10px;
+  font-weight: normal;
+  font-size: 15px;
+  /*color: #607D8B;*/
+}
+
+.project .project__location .fa {
+  padding-right: 10px;
+  font-size: 1em;
+  color: #607D8B;
+}
+
+.project .project__major {
+  border-radius: 5px;
+  background: #607D8B;
+  display: inline-block;
+  padding: 3px 10px 3px 10px;
+  color: white;
+  font-weight: normal;
+}
+
+/* new-project */
+
+.new-project h1 {
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.new-project label {
+  padding-top: 30px;
 }
 
 
@@ -24,3 +91,52 @@
   bottom: 20px;
   right: 20px;
 }
+
+/* Navbar */
+/* See https://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap-3 */
+
+/* navbar */
+.navbar-default {
+    background-color: #0277bd;
+    border-color: #0277bd;
+}
+
+
+
+/* Title */
+/*.navbar-default .navbar-brand {
+    color: #777;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+*/
+
+/* Link */
+/*.navbar-default .navbar-nav > li > a {
+    color: #777;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+*/
+
+/* Caret */
+/*.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}*/

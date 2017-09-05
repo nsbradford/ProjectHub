@@ -8,8 +8,11 @@
 from rest_framework import serializers
 
 from authentication.serializers import AccountSerializer
-from projects.models import Project
+from projects.models import Project, Major
 
+import logging
+log = logging.getLogger('projecthub')
+log.debug('!!!!!!')
 
 class ProjectSerializer(serializers.ModelSerializer):
     """ Serialize Project for use with RESTful API.
@@ -22,12 +25,33 @@ class ProjectSerializer(serializers.ModelSerializer):
     """
 
     author = AccountSerializer(read_only=True, required=False)
+    # majors = serializers.SlugRelatedField(
+    #         many=True,
+    #         slug_field='title',
+    #         queryset=Major.objects.all()
+    #     )
+
+    def validate(self, data):
+        """ Perform object-level validation on all the data. Called automatically
+                as part of is_valid(). As per documentation, must return data
+                or raise serializers.ValidationError
+        """
+        valid_majors = set('CS, RBE')
+        majors = set(data['major'])
+        log.debug('valid: {}\t actual: {}'.format(valid_majors, majors))
+        if False: # TODO finish validating the list of majors
+            raise serializers.ValidationError('Must supply password.')
+        return data
+
+
 
     class Meta:
         """ Meta class configuring serializer. """
         model = Project
-        fields = ('id', 'author', 'content', 'created_at', 'updated_at')
+        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at', 'major')
         read_only_fields = ('id', 'created_at', 'updated_at')
+
+
 
     def get_validation_exclusions(self, *args, **kwargs):
         """ Add 'author' to validation exclusions, because we'll be setting it

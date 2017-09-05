@@ -1,5 +1,8 @@
 # ====== hey i added this myself :) ====== #
 
+logfile
+/static/stylesheets/font-awesome-4.6.3/
+
 # SQLite3 database
 *.sqlite3
 
