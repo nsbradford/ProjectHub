@@ -1,6 +1,33 @@
     /*grey: #607D8B; */
     /*blue: #0277bd;*/
 
+/* Homepage */
+
+.homepage {
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  /*display: table-cell;*/
+}
+
+.homepage h1 {
+  color: #0277bd;
+  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+  font-weight: 300;
+  font-size: 60px;
+}
+
+.homepage span {
+  color: #607D8B;
+}
+
+.homepage h2 {
+  color: #607D8B;
+  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+}
+
 /* Individual Project */
 
 .project {
