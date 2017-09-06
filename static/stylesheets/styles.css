@@ -17,31 +17,51 @@
 
 /* Homepage */
 
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
-    font-family: 'Open Sans',Helvetica,Arial,sans-serif;
-    color: #607D8B;
-    background-color: white;
+  height: 100%;
+  width: 100%;
+  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+  color: #607D8B;
+  background-color: white;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
 }
 
 .homepage {
-  text-align: center;
-  vertical-align: middle;
   display: table;
   width: 100%;
   height: 100%;
   background-color: transparent;
+
+  text-align: center;
+  vertical-align: middle;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
 }
 
 .homepage .homepage-body {
-    display: table-cell;
-    vertical-align: middle;
+/*  height: 100%;
+  width: 100%;*/
+  display: table-cell;
+  /*position: relative;*/
+  vertical-align: middle;
 }
 
 .homepage h1 {
   color: #0277bd;
   font-family: 'Open Sans',Helvetica,Arial,sans-serif;
   font-weight: 200;
-  font-size: 80px;
+  font-size: 120px;
 }
 
 .homepage span {

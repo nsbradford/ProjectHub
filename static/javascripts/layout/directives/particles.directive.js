@@ -4,14 +4,6 @@
     .module('projecthub.layout.directives')
     .directive('particlesDrv', ['$window', '$log', particlesDrv]);
 
-  // var app = angular.module('particlesApp', []);
-  // app.controller('particlesCtrl', ['$scope', particlesCtrl]);
-  // app.directive('particles', ['$window', '$log', particlesDrv]);
-
-  // function particlesCtrl($scope) {
-  //   $scope.showParticles = true;
-  // }
-
   function particlesDrv($window, $log) {
     return {
       restrict: 'A',
