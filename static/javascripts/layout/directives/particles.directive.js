@@ -15,7 +15,7 @@
   function particlesDrv($window, $log) {
     return {
       restrict: 'A',
-      template: '<div class="particleJs" id="particleJs"></div>',
+      template: '<div class="backdrop" id="particleJs"></div>',
       link: function(scope, element, attrs, fn) {
         $log.debug('test');
         $window.particlesJS('particleJs', {
