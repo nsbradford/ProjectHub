@@ -9,15 +9,15 @@
 .homepage {
   text-align: center;
   vertical-align: middle;
-  /*display: inline-block;*/
+  display: inline-block;
   display: table;
   width: 100%;
   height: 100%;
-/*  background-color: transparent;
+  background-color: transparent;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  -o-background-size: cover;*/
+  -o-background-size: cover;
 }
 
 .homepage h1 {
