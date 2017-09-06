@@ -2,12 +2,22 @@
     /*blue: #0277bd;*/
 
 /* Homepage */
+/*.html {
+  background-color: white;
+}*/
 
 .homepage {
   text-align: center;
   vertical-align: middle;
-  display: inline-block;
-  /*display: table-cell;*/
+  /*display: inline-block;*/
+  display: table;
+  width: 100%;
+  height: 100%;
+/*  background-color: transparent;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;*/
 }
 
 .homepage h1 {
@@ -27,7 +37,20 @@
   font-weight: 300;
   font-size: 30px;
 }
-
+/*
+.register-button {
+  color: white;
+  background: black;
+  background-color: #607D8B;
+}
+.discover-button {
+  color: white;
+  color: #607D8B;
+  border: 2px solid black;
+  background: #607D8B;
+  color: #0099cc;
+}
+*/
 /* Individual Project */
 
 .project {
