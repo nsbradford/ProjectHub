@@ -9,13 +9,13 @@
     .module('projecthub.authentication.services')
     .factory('Authentication', Authentication);
 
-  Authentication.$inject = ['$cookies', '$http'];
+  Authentication.$inject = ['$cookies', '$http', 'Snackbar'];
 
   /**
   * @namespace Authentication
   * @returns {Factory}
   */
-  function Authentication($cookies, $http) {
+  function Authentication($cookies, $http, Snackbar) {
     /**
     * @name Authentication
     * @desc The Factory to be returned
@@ -55,6 +55,7 @@
       * @desc Log the new user in
       */
       function registerSuccessFn(data, status, headers, config) {
+        console.log('Registration success');
         Authentication.login(email, password);
       }
 
@@ -63,7 +64,9 @@
       * @desc Log "Epic failure!" to the console
       */
       function registerErrorFn(data, status, headers, config) {
-        console.error('Epic failure!');
+        var msg = 'Email and/or username may already be taken.'
+        console.error(msg);
+        Snackbar.error(msg);
       }
     }
 
@@ -88,7 +91,7 @@
       function loginSuccessFn(data, status, headers, config) {
         Authentication.setAuthenticatedAccount(data.data);
 
-        window.location = '/';
+        window.location = '/discover';
       }
 
       /**

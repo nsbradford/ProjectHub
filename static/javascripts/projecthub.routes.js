@@ -16,6 +16,10 @@
       controller: 'RegisterController', 
       controllerAs: 'vm',
       templateUrl: '/static/templates/authentication/register.html'
+    }).when('/about', {
+      templateUrl: 'static/templates/about/about.html'
+    }).when('/policies/terms-of-service', {
+      templateUrl: 'static/templates/about/termsofservice.html'
     }).when('/', {
       templateUrl: 'static/templates/layout/index.html'
     }).when('/discover', {
