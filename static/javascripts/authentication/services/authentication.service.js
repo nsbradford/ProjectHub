@@ -91,7 +91,7 @@
       function loginSuccessFn(data, status, headers, config) {
         Authentication.setAuthenticatedAccount(data.data);
 
-        window.location = '/';
+        window.location = '/discover';
       }
 
       /**

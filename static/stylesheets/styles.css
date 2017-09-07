@@ -1,6 +1,10 @@
 /*grey: #607D8B; */
 /*blue: #0277bd;*/
 
+a {
+  color: #0277bd;
+}
+
 /* for styling particles.js */
 .backdrop {
   background-size: cover;
@@ -99,10 +103,26 @@ body {
 
 /* /register */
 
+.form-text-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .error-span {
   color:red;
   font-style:italic
 }
+
+.agreement-label { 
+  font-weight: normal;
+  cursor: pointer;
+}
+
+input.agreement-checkbox {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
 
 /* Individual Project */
 

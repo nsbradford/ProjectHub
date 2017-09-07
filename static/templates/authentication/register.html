@@ -1,30 +1,41 @@
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <h1>Register</h1>
+    <h1 class="form-text-title">Register for ProjectHub</h1>
 
     <div class="well">
       <form role="form" ng-submit="vm.register()">
         <div class="form-group">
           <label for="register__email">Email</label>
           <span ng-show='vm.missing_email' class='error-span'> required</span>
-          <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="ex. john@notgoogle.com" />
+          <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="" />
         </div>
 
         <div class="form-group">
           <label for="register__username">Username</label>
           <span ng-show='vm.missing_username' class='error-span'> required</span>
-          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="ex. john" />
+          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="" />
         </div>
 
         <div class="form-group">
           <label for="register__password">Password</label>
           <span ng-show='vm.missing_password' class='error-span'> required</span>
-          <input type="password" class="form-control" id="register__password" ng-model="vm.password" placeholder="ex. thisisnotgoogleplus" />
+          <input type="password" class="form-control" id="register__password" ng-model="vm.password" placeholder="8+ characters and numbers" />
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <input type="checkbox" class="agreement-checkbox" id="register__agreement" ng-model="vm.agreement">
+          <label class="agreement-label" for="register__agreement">
+            I accept the <a href="/policies/terms-of-service">Terms of Use</a>.
+          </label>
+          <span ng-show='vm.missing_agreement' class='error-span'> required</span>
         </div>
 
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+
       </form>
     </div>
   </div>

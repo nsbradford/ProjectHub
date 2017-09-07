@@ -17,8 +17,9 @@
   function RegisterController($location, $scope, Authentication, Snackbar) {
     var vm = this;
     vm.missing_email = false;
-    // vm.missing_username = false;
-    // vm.missing_password = false;
+    vm.missing_username = false;
+    vm.missing_password = false;
+    vm.missing_agreement = false;
     vm.register = register;
 
     activate();
@@ -44,6 +45,7 @@
       vm.missing_email = !vm.email ? true : false;
       vm.missing_password = !vm.password ? true : false;
       vm.missing_username = !vm.username ? true : false;
+      vm.missing_agreement = !vm.agreement ? true : false;
 
       if (vm.email && vm.password && vm.username) {
         Authentication.register(vm.email, vm.password, vm.username);
