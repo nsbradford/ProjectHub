@@ -1,20 +1,66 @@
-    /*grey: #607D8B; */
-    /*blue: #0277bd;*/
+/*grey: #607D8B; */
+/*blue: #0277bd;*/
+
+/* for styling particles.js */
+.backdrop {
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  position: fixed; /* important for particles to work!!! */
+  top: 0;
+  z-index: -999;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
 
 /* Homepage */
 
+html {
+  height: calc(100% - 40px);
+  width: 100%;
+}
+
+body {
+  height: calc(100% - 40px);
+  width: 100%;
+  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+  color: #607D8B;
+  background-color: white;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+}
+
 .homepage {
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
   text-align: center;
   vertical-align: middle;
-  display: inline-block;
-  /*display: table-cell;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.homepage .homepage-body {
+/*  height: 100%;
+  width: 100%;*/
+  display: table-cell;
+  /*position: relative;*/
+  vertical-align: middle;
 }
 
 .homepage h1 {
   color: #0277bd;
   font-family: 'Open Sans',Helvetica,Arial,sans-serif;
-  font-weight: 300;
-  font-size: 60px;
+  font-weight: 200;
+  font-size: 120px;
 }
 
 .homepage span {
@@ -24,8 +70,31 @@
 .homepage h2 {
   color: #607D8B;
   font-family: 'Open Sans',Helvetica,Arial,sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   font-size: 30px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.btn {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.discover-button {
+  color: #0277bd !important;
+  background-color: transparent !important;
+  border: 2px solid #0277bd;
+}
+
+.register-button {
+  color: #607D8B !important;
+  background-color: transparent !important;
+  border: 2px solid #607D8B;
 }
 
 /* Individual Project */
@@ -120,7 +189,8 @@
 }
 
 /* Navbar */
-/* See https://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap-3 */
+/* See https://stackoverflow.com/questions/18529274/
+   change-navbar-color-in-twitter-bootstrap-3 */
 
 /* navbar */
 .navbar-default {
