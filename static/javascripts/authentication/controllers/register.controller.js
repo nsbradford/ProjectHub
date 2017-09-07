@@ -9,14 +9,16 @@
     .module('projecthub.authentication.controllers')
     .controller('RegisterController', RegisterController);
 
-  RegisterController.$inject = ['$location', '$scope', 'Authentication'];
+  RegisterController.$inject = ['$location', '$scope', 'Authentication', 'Snackbar'];
 
   /**
   * @namespace RegisterController
   */
-  function RegisterController($location, $scope, Authentication) {
+  function RegisterController($location, $scope, Authentication, Snackbar) {
     var vm = this;
-
+    vm.missing_email = false;
+    // vm.missing_username = false;
+    // vm.missing_password = false;
     vm.register = register;
 
     activate();
@@ -39,7 +41,16 @@
     * @memberOf projecthub.authentication.controllers.RegisterController
     */
     function register() {
-      Authentication.register(vm.email, vm.password, vm.username);
+      vm.missing_email = !vm.email ? true : false;
+      vm.missing_password = !vm.password ? true : false;
+      vm.missing_username = !vm.username ? true : false;
+
+      if (vm.email && vm.password && vm.username) {
+        Authentication.register(vm.email, vm.password, vm.username);
+      }
+      else {
+        Snackbar.error('Must complete required fields.');
+      }
     }
   }
 })();
