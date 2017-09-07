@@ -84,20 +84,19 @@ body {
   margin-right: 10px;
   margin-left: 10px;
 }
-/*
-.register-button {
-  color: white;
-  background: black;
-  background-color: #607D8B;
-}
+
 .discover-button {
-  color: white;
-  color: #607D8B;
-  border: 2px solid black;
-  background: #607D8B;
-  color: #0099cc;
+  color: #0277bd !important;
+  background-color: transparent !important;
+  border: 2px solid #0277bd;
 }
-*/
+
+.register-button {
+  color: #607D8B !important;
+  background-color: transparent !important;
+  border: 2px solid #607D8B;
+}
+
 /* Individual Project */
 
 .project {
@@ -190,7 +189,8 @@ body {
 }
 
 /* Navbar */
-/* See https://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap-3 */
+/* See https://stackoverflow.com/questions/18529274/
+   change-navbar-color-in-twitter-bootstrap-3 */
 
 /* navbar */
 .navbar-default {
