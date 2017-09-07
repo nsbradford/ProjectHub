@@ -103,6 +103,11 @@ body {
 
 /* /register */
 
+.show-hide-password {
+  float: right; 
+  text-align: right
+}
+
 .form-text-title {
   text-align: center;
   margin-bottom: 30px;

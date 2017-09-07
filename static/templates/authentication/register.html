@@ -19,9 +19,15 @@
         <div class="form-group">
           <label for="register__password">Password</label>
           <span ng-show='vm.missing_password' class='error-span'> required</span>
-          <input type="password" class="form-control" id="register__password" ng-model="vm.password" placeholder="8+ characters and numbers" />
-        </div>
+        
+          <span class="show-hide-password">
+            <input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="vm.hideShowPassword()" />
+            <label class="agreement-label" for="checkbox">Show password</label>
+          </span>
 
+          <input type="{{vm.inputType}}" class="form-control" id="register__password" ng-model="vm.password" placeholder="8+ characters and numbers" />
+        </div>
+        
         <br>
 
         <div class="form-group">

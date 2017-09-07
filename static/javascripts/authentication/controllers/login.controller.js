@@ -16,8 +16,9 @@
   */
   function LoginController($location, $scope, Authentication) {
     var vm = this;
-
+    vm.inputType = 'password';
     vm.login = login;
+    vm.hideShowPassword = hideShowPassword;
 
     activate();
 
@@ -40,6 +41,15 @@
     */
     function login() {
       Authentication.login(vm.email, vm.password);
+    }
+
+    function hideShowPassword() {
+      if (vm.inputType == 'password'){
+        vm.inputType = 'text';
+      }
+      else {
+        vm.inputType = 'password';
+      }
     }
   }
 })();
