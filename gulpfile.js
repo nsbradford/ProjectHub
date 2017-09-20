@@ -23,4 +23,4 @@ gulp.task('sass', function(){
 });
 
 
-gulp.task('default', ['serve']);
+gulp.task('Auto-Compile', ['serve']);
