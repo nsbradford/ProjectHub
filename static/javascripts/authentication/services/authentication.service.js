@@ -99,7 +99,9 @@
        * @desc Log "Epic failure!" to the console
        */
       function loginErrorFn(data, status, headers, config) {
-        console.error('Epic failure!');
+        var loginError = 'The username/password combination you entered was invalid.';
+        console.error(loginError);
+        Snackbar.error(loginError);        
       }
     }
 
