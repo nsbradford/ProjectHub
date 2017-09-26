@@ -19,6 +19,7 @@
     vm.inputType = 'password';
     vm.login = login;
     vm.hideShowPassword = hideShowPassword;
+    vm.error = true;
 
     activate();
 

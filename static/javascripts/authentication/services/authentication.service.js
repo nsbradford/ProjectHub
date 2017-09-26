@@ -55,7 +55,6 @@
       * @desc Log the new user in
       */
       function registerSuccessFn(data, status, headers, config) {
-        console.log('Registration success');
         Authentication.login(email, password);
       }
 
@@ -64,9 +63,7 @@
       * @desc Log "Epic failure!" to the console
       */
       function registerErrorFn(data, status, headers, config) {
-        var msg = 'Email and/or username may already be taken.'
-        console.error(msg);
-        Snackbar.error(msg);
+        Snackbar.error('Email and/or username may already be taken.');
       }
     }
 
@@ -99,9 +96,7 @@
        * @desc Log "Epic failure!" to the console
        */
       function loginErrorFn(data, status, headers, config) {
-        var loginError = 'The username/password combination you entered was invalid.';
-        console.error(loginError);
-        Snackbar.error(loginError);        
+        Snackbar.error('The username/password combination you entered was invalid.');        
       }
     }
 
@@ -172,10 +167,10 @@
 
       /**
        * @name logoutErrorFn
-       * @desc Log "Epic failure!" to the console
+       * @desc Inform user that something went wrong during logout.
        */
       function logoutErrorFn(data, status, headers, config) {
-        console.error('Epic failure!');
+        Snackbar.error('Something went wrong during Logout.')
       }
     }
 
