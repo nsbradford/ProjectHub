@@ -1,4 +1,4 @@
-/*grey: #607D8B; */
+grey: #607D8B; */
 /*blue: #0277bd;*/
 
 a {
@@ -230,7 +230,21 @@ input.agreement-checkbox {
     border-color: #0277bd;
 }
 
+.navbar .navbar-brand {
+  color: white;
+}
 
+.navbar .navbar-nav li a{ 
+  color: white;
+}
+
+.navbar .navbar-brand:hover {
+  color: #e0e0e0;
+}
+
+.navbar .navbar-nav li a:hover{ 
+  color: #e0e0e0;
+}
 
 /* Title */
 /*.navbar-default .navbar-brand {
@@ -268,4 +282,4 @@ input.agreement-checkbox {
 /*.navbar-default .navbar-nav > .dropdown > a .caret {
     border-top-color: #777;
     border-bottom-color: #777;
-}*/
+}
