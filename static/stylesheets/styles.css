@@ -29,7 +29,7 @@ html {
 body {
   height: calc(100% - 40px);
   width: 100%;
-  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+  font-family: 'Avenir',Helvetica,Arial,sans-serif;
   color: black;
   background-color: white;
 }
@@ -43,6 +43,11 @@ body p {
   color: #687685;
   font-size: 20px;
   line-height: 35px;
+  margin-bottom: 20px;
+}
+
+label {
+  /*color: #687685;*/
 }
 
 .about-text {
@@ -77,8 +82,7 @@ body p {
 
 .homepage h1 {
   color: #0277bd;
-  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
-  font-weight: 200;
+  font-weight: 400;
   font-size: 120px;
 }
 
@@ -88,7 +92,6 @@ body p {
 
 .homepage h2 {
   color: #687685;
-  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
   font-weight: 200;
   font-size: 30px;
   padding-top: 30px;
@@ -104,7 +107,10 @@ body p {
   margin-left: 10px;
   margin-top: 20px;
   box-shadow: none !important;
-    transition: opacity .2s ease-in-out, transform .2s ease-in-out; 
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out; 
+  /*font-size: 20px;*/
+  font-weight: 700 !important;
+  letter-spacing: 3px;
 }
 
 .btn:hover, 
@@ -146,6 +152,7 @@ body p {
 .agreement-label { 
   font-weight: normal;
   cursor: pointer;
+  color: #687685;
 }
 
 input.agreement-checkbox {
