@@ -1,4 +1,4 @@
-/*grey: #607D8B; */
+/*grey: #687685; */
 /*blue: #0277bd;*/
 
 a {
@@ -30,8 +30,23 @@ body {
   height: calc(100% - 40px);
   width: 100%;
   font-family: 'Open Sans',Helvetica,Arial,sans-serif;
-  color: #607D8B;
+  color: black;
   background-color: white;
+}
+
+body h1 {
+  font-size: 40px;
+  color: black;
+}
+
+body p {
+  color: #687685;
+  font-size: 20px;
+  line-height: 35px;
+}
+
+.about-text {
+  margin-bottom: 40px;
 }
 
 .main {
@@ -68,11 +83,11 @@ body {
 }
 
 .homepage span {
-  color: #607D8B;
+  color: #687685;
 }
 
 .homepage h2 {
-  color: #607D8B;
+  color: #687685;
   font-family: 'Open Sans',Helvetica,Arial,sans-serif;
   font-weight: 200;
   font-size: 30px;
@@ -87,6 +102,15 @@ body {
   padding-bottom: 20px;
   margin-right: 10px;
   margin-left: 10px;
+  margin-top: 20px;
+  box-shadow: none !important;
+    transition: opacity .2s ease-in-out, transform .2s ease-in-out; 
+}
+
+.btn:hover, 
+.btn:focus{
+  opacity: .7;
+  transform: scale(1.05);
 }
 
 .discover-button {
@@ -96,9 +120,9 @@ body {
 }
 
 .register-button {
-  color: #607D8B !important;
+  color: #687685 !important;
   background-color: transparent !important;
-  border: 2px solid #607D8B;
+  border: 2px solid #687685;
 }
 
 /* /register */
@@ -110,7 +134,8 @@ body {
 
 .form-text-title {
   text-align: center;
-  margin-bottom: 30px;
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
 .error-span {
@@ -177,18 +202,18 @@ input.agreement-checkbox {
   margin-top: 10px;
   font-weight: normal;
   font-size: 15px;
-  /*color: #607D8B;*/
+  /*color: #687685;*/
 }
 
 .project .project__location .fa {
   padding-right: 10px;
   font-size: 1em;
-  color: #607D8B;
+  color: #687685;
 }
 
 .project .project__major {
   border-radius: 5px;
-  background: #607D8B;
+  background: #687685;
   display: inline-block;
   padding: 3px 10px 3px 10px;
   color: white;
