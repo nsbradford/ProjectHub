@@ -39,6 +39,7 @@ class ProjectTests(APITestCase):
     accounts_url = '/api/v1/accounts/'
     project_url = '/api/v1/projects/'
 
+
     def setup_account(self):
         """ Create an account and confirm it is stored properly.
             Returns:
@@ -54,15 +55,7 @@ class ProjectTests(APITestCase):
         return new_account
 
 
-    def test_create_project_must_be_authenticated(self):
-        """ Ensure we get 403 FORBIDDEN when posting while unauthenticated. """
-        response = self.client.post(self.project_url, self.project_data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-
-    def test_create_project(self):
-        """ Ensure we can create a new project object. """
-        # TODO FAILING
+    def setup_account_and_project(self):
         self.assertEqual(Account.objects.count(), 0)
         new_account = self.setup_account()
         self.client.login(email=self.email, password=self.password)
@@ -74,6 +67,26 @@ class ProjectTests(APITestCase):
         self.assertEqual(new_project.title, self.title)
         self.assertEqual(new_project.description, self.description)
         self.assertEqual(new_project.major, self.major)
+        return new_account
+
+
+    def test_create_project_must_be_authenticated(self):
+        """ Ensure we get 403 FORBIDDEN when posting while unauthenticated. """
+        response = self.client.post(self.project_url, self.project_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+    def test_create_project(self):
+        """ Ensure we can create a new project object. """
+        self.setup_account_and_project()
+
+
+    def test_delete_project(self):
+        new_account = self.setup_account_and_project()
+        project_id = str(new_account.pk) # '1'
+        response = self.client.post(self.project_url + project_id)
+        self.assertEqual(response.status_code, status.HTTP_200_OK) # TODO throwing 405 error
+        
 
     # def test_update_project(self):
     #     """ TODO allow projects to be edited. """
