@@ -1,5 +1,6 @@
 <div class="col-md-4 col-md-offset-4">
-  <div class="well" ng-show="vm.profile">
+  <div class="well login-no-shadow" ng-show="vm.profile">
+    <h1 class="form-text-title">Settings</h1>
     <form role="form" class="settings" ng-submit="vm.update()">
       <div class="form-group">
         <label for="settings__email">Email</label>
@@ -31,9 +32,9 @@
         <textarea class="form-control" id="settings__tagline" ng-model="vm.profile.tagline" placeholder="ex. Computer Science student @ WPI who loves front-end design!" />
       </div>
 
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="button" class="btn btn-danger pull-right" ng-click="vm.destroy()">Delete Account</button>
+      <div class="form-group text-center">
+        <button type="submit" class="btn discover-button">Update</button>
+        <button type="button" class="btn red-button" ng-click="vm.destroy()">Delete Account</button>
       </div>
     </form>
   </div>
