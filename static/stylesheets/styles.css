@@ -137,9 +137,9 @@ label {
 }
 
 .red-button {
-  color: red !important;
+  color: #d32323 !important;
   background-color: transparent !important;
-  border: 2px solid red;
+  border: 2px solid #d32323;
 }
 
 /* /register */
