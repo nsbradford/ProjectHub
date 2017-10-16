@@ -7,11 +7,11 @@
  * 4. default -- build and serve
  */
 
-let gulp        = require('gulp');
-let ngAnnotate = require('gulp-ng-annotate');
-let uglify = require('gulp-uglify');
-let browserSync = require('browser-sync').create();
-let sass        = require('gulp-sass');
+const gulp        = require('gulp');
+const ngAnnotate = require('gulp-ng-annotate');
+const uglify = require('gulp-uglify');
+const browserSync = require('browser-sync').create();
+const sass        = require('gulp-sass');
 
 
 gulp.task('build', function () {
@@ -37,7 +37,7 @@ gulp.task('sass', function(){
   return gulp.src('static/stylesheets/sass/**/*.scss')
     .pipe(sass())
     .on('error', sass.logError) 
-    .pipe(gulp.dest('static/stylesheets/css'))
+    .pipe(gulp.dest('static/stylesheets/css'));
 });
 
 
