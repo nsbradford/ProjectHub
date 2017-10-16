@@ -26,6 +26,7 @@ html {
   width: 100%;
 }
 
+
 body {
   height: calc(100% - 40px);
   width: 100%;
@@ -133,6 +134,12 @@ label {
   color: #687685 !important;
   background-color: transparent !important;
   border: 2px solid #687685;
+}
+
+.red-button {
+  color: red !important;
+  background-color: transparent !important;
+  border: 2px solid red;
 }
 
 /* /register */
@@ -246,14 +253,21 @@ input.agreement-checkbox {
 
 /* new-project */
 
+
+.new-project {
+  padding: 20px;
+  font-family: 'Avenir',Helvetica,Arial,sans-serif;
+}
+
 .new-project h1 {
   text-align: center;
   padding-bottom: 20px;
   padding-top: 20px;
+  font-family: 'Avenir',Helvetica,Arial,sans-serif;
 }
 
 .new-project label {
-  padding-top: 30px;
+  /*padding-top: 30px;*/
 }
 
 
