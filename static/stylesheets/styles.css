@@ -137,7 +137,7 @@ label {
 
 /* /register */
 
-body .well {
+body .login-no-shadow {
   box-shadow: none;
 }
 
