@@ -18,6 +18,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     queryset = Project.objects.order_by('-created_at')
     serializer_class = ProjectSerializer
+    lookup_field = 'pk'
 
     def get_permissions(self):
         """ We allow anyone to use requests in SAFE_METHODS (GET, HEAD, OPTIONS).
