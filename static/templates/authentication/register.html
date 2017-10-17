@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-md-4 col-md-offset-4">
+  <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
     <h1 class="form-text-title">Register for ProjectHub</h1>
 
-    <div class="well">
+    <div class="well login-no-shadow">
       <form role="form" ng-submit="vm.register()">
         <div class="form-group">
           <label for="register__email">Email</label>
@@ -21,7 +21,7 @@
           <span ng-show='vm.missing_password' class='error-span'> required</span>
         
           <span class="show-hide-password">
-            <input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="vm.hideShowPassword()" />
+            <input type="checkbox" class="agreement-checkbox" id="checkbox" tabindex="-1" ng-model="passwordCheckbox" ng-click="vm.hideShowPassword()" />
             <label class="agreement-label" for="checkbox">Show password</label>
           </span>
 
@@ -38,8 +38,8 @@
           <span ng-show='vm.missing_agreement' class='error-span'> required</span>
         </div>
 
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group text-center">
+          <button type="submit" class="btn discover-button">Register</button>
         </div>
 
       </form>
