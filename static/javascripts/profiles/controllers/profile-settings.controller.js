@@ -73,7 +73,10 @@
     * @memberOf projecthub.profiles.controllers.ProfileSettingsController
     */
     function destroy() {
-      Profile.destroy(vm.profile).then(profileSuccessFn, profileErrorFn);
+      var confirmed = confirm('Are you sure you want to delete your account? This action can\'t be undone.');
+      if (confirmed) {
+        Profile.destroy(vm.profile).then(profileSuccessFn, profileErrorFn);
+      }
 
       /**
       * @name profileSuccessFn
@@ -83,7 +86,6 @@
       function profileSuccessFn(data, status, headers, config) {
         Authentication.unauthenticate();
         window.location = '/';
-
         Snackbar.show('Your account has been deleted.');
       }
 
