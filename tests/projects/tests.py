@@ -40,6 +40,11 @@ class ProjectTests(APITestCase):
     project_url = '/api/v1/projects/'
 
 
+    @staticmethod
+    def make_project_url(account):
+        return ProjectTests.project_url + str(account.pk) + '/'
+
+
     def setup_account(self):
         """ Create an account and confirm it is stored properly.
             Returns:
@@ -81,11 +86,19 @@ class ProjectTests(APITestCase):
         self.setup_account_and_project()
 
 
-    # def test_delete_project(self):
-    #     new_account = self.setup_account_and_project()
-    #     project_id = str(new_account.pk) # '1'
-    #     response = self.client.post(self.project_url + project_id)
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK) # TODO throwing 405 error
+    def test_delete_project_must_be_authenticated(self):
+        new_account = self.setup_account_and_project()
+        self.client.logout()
+        response = self.client.delete(ProjectTests.make_project_url(new_account))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+    def test_delete_project(self):
+        new_account = self.setup_account_and_project()
+        self.assertEqual(len(Project.objects.all()), 1)
+        response = self.client.delete(ProjectTests.make_project_url(new_account))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(len(Project.objects.all()), 0)
         
 
     # def test_update_project(self):
