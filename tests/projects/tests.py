@@ -105,6 +105,19 @@ class ProjectTests(APITestCase):
     #     """ TODO allow projects to be edited. """
     #     pass
 
-    # def test_get_single_project(self):
-    #     """ TODO GET a single project by author and project name. """
-    #     pass
+
+    def test_get_single_project(self):
+        """ TODO GET a single project by author and project name. """
+        new_account = self.setup_account_and_project()
+        self.assertEqual(len(Project.objects.all()), 1)
+        get_response = self.client.get(ProjectTests.make_project_url(new_account))
+        self.assertEqual(get_response.status_code, status.HTTP_200_OK)
+        # print get_response.data
+        # print get_response.data['author']['username'], self.author # has a nested author object you must compare to
+        self.assertEqual(len(get_response.data), 7)
+        self.assertEqual(get_response.data['author']['username'], self.username)
+        self.assertEqual(get_response.data['title'], self.title)
+        self.assertEqual(get_response.data['description'], self.description)
+        self.assertEqual(get_response.data['major'], self.major)
+        self.assertIn('created_at', get_response.data)
+        self.assertIn('updated_at', get_response.data)
