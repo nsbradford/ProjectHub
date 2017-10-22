@@ -71,8 +71,11 @@ Create a Python virtual environment, install bower components, instantiate the d
     * DELETE          '/api/v1/accounts/' + profile.username + '/'
 * API ProjectViewSet and nested: 
     * GET (get all)   '/api/v1/projects/'
-    * POST (create)   '/api/v1/projects/'
-    * GET (get one)   '/api/v1/accounts/' + username + '/projects/'
+    * POST (create)   '/api/v1/projects/', project data
+    * PUT (update)    '/api/v1/projects/' + pk + '/', project data
+    * GET (a user's)  '/api/v1/accounts/' + username + '/projects/'
+    * GET (get one)   '/api/v1/projects/' + pk + '/'
+    * DELETE          '/api/v1/projects/' + pk + '/'
 * API LoginView:      api/v1/auth/login/
 * API LogoutView:     api/v1/auth/logout/
 
