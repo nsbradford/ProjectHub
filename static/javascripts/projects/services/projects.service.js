@@ -20,8 +20,11 @@
       all: all,
       create: create,
       get: get,
-      getById: getById
+      getById: getById,
+      deleteById: deleteById
     };
+
+    var project_url = '/api/v1/projects/'
 
     return Projects;
 
@@ -34,7 +37,7 @@
     * @memberOf projecthub.projects.services.Projects
     */
     function all() {
-      return $http.get('/api/v1/projects/');
+      return $http.get(project_url);
     }
 
 
@@ -48,7 +51,7 @@
     */
     function create(title, description, majors) {
       // console.log(majors)
-      return $http.post('/api/v1/projects/', {
+      return $http.post(project_url, {
         title: title,
         description: description,
         // majors: majors // TODO only handling a single major currently
@@ -76,7 +79,14 @@
      * @memberOf projecthub.projects.services.Projects
      */
     function getById(project_id) {
-      return $http.get('/api/v1/projects/' + project_id + '/');
+      return $http.get(project_url + project_id + '/');
+    }
+
+    /**
+     *
+     */
+    function deleteById(project_id) {
+      return $http.delete(project_url + project_id + '/')
     }
   }
 })();

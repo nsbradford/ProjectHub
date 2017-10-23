@@ -221,7 +221,16 @@ input.agreement-checkbox {
   color: #0277bd;
   padding-top: 5px;
   padding-right: 15px;
-  font-size: 1em;
+  font-size: 2em;
+  transition: opacity .1s ease-in-out, transform .1s ease-in-out; 
+  cursor: pointer;
+}
+
+.project__author .fa:hover, 
+.project__author .fa:focus{
+  opacity: .7;
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
 .project .project__required {
