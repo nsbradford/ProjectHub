@@ -38,6 +38,10 @@
       controller: 'ProfileSettingsController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/profiles/settings.html'
+    }).when('/projects/:project_id', {
+      controller: 'SingleProjectController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/projects/single-project.html'
     }).otherwise('/');
   }
 })();

@@ -19,7 +19,8 @@
     var Projects = {
       all: all,
       create: create,
-      get: get
+      get: get,
+      getById: getById
     };
 
     return Projects;
@@ -64,6 +65,18 @@
      */
     function get(username) {
       return $http.get('/api/v1/accounts/' + username + '/projects/');
+    }
+
+    /**
+     * @name get
+     * @desc Get the Project of the given project_id
+     * @param {string} username The username to get Projects for
+     * @param {string} project_id The project_id to get
+     * @returns {Promise}
+     * @memberOf projecthub.projects.services.Projects
+     */
+    function getById(project_id) {
+      return $http.get('/api/v1/projects/' + project_id + '/');
     }
   }
 })();
