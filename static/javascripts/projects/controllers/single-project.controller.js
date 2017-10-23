@@ -41,7 +41,6 @@
         */
       function projectsSuccessFn(data, status, headers, config) {
         vm.project = data.data;
-        console.log('ID:' + vm.project.id)
       }
 
 
