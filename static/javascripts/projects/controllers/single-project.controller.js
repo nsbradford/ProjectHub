@@ -22,9 +22,13 @@
 
     activate();
 
-    function deleteProject() {
+    function userIsProjectOwner() {
       var account = Authentication.getAuthenticatedAccount()
-      if (account.username != vm.project.author.username) {
+      return account.username === vm.project.author.username
+    }
+
+    function deleteProject() {
+      if (!userIsProjectOwner()) {
         alert('You\'re not the owner of this project, so you can\'t delete it.')
       }
       else{
@@ -36,9 +40,15 @@
     }
 
     function editProject() {
-      alert('Editing projects is not supported in this version.');
+      if (!userIsProjectOwner()) {
+        alert('You\'re not the owner of this project, so you can\'t edit it.')
+      }
+      else {
+        alert('Editing projects is not supported in this version.');
+      }
     }
 
+    vm.userIsProjectOwner = userIsProjectOwner
     vm.deleteProject = deleteProject
     vm.editProject = editProject
 
