@@ -19,11 +19,13 @@
 
     // vm.profile = undefined;
     vm.project = undefined
+    vm.isUserOwnerOfProject = false
 
     activate();
 
     function userIsProjectOwner() {
       var account = Authentication.getAuthenticatedAccount()
+      if (account === undefined) return false
       return account.username === vm.project.author.username
     }
 
@@ -35,6 +37,8 @@
         var confirmed = confirm('Are you sure you want to delete this project? This action can\'t be undone.');
         if (confirmed) {
           Projects.deleteById(vm.project.id)
+          window.location = '/discover';
+          Snackbar.show('This project has been deleted.');
         }
       }
     }
@@ -44,7 +48,7 @@
         alert('You\'re not the owner of this project, so you can\'t edit it.')
       }
       else {
-        alert('Editing projects is not supported in this version.');
+        $location.url('projects/+' + vm.project.id + '/edit/');
       }
     }
 
@@ -68,12 +72,15 @@
         Projects.getById(project_id).then(projectsSuccessFn, projectsErrorFn);
       }
 
+      // 
+
       /**
         * @name projectsSucessFn
         * @desc Update `projects` on viewmodel
         */
       function projectsSuccessFn(data, status, headers, config) {
         vm.project = data.data;
+        vm.isUserOwnerOfProject = userIsProjectOwner()
       }
 
       /**

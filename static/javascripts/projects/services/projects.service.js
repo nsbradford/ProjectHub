@@ -21,7 +21,8 @@
       create: create,
       get: get,
       getById: getById,
-      deleteById: deleteById
+      deleteById: deleteById,
+      update: update
     };
 
     var project_url = '/api/v1/projects/'
@@ -87,6 +88,13 @@
      */
     function deleteById(project_id) {
       return $http.delete(project_url + project_id + '/')
+    }
+
+    /**
+     *
+     */
+    function update(project) {
+      return $http.put(project_url + project.id + '/', project);
     }
   }
 })();

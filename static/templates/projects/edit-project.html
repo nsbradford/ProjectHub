@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <h1 class="form-text-title">Edit Project</h1>
+  
+    <div class="well login-no-shadow" ng-show="vm.project">
+      
+      <form role="form" class="settings" ng-submit="vm.update()">
+        <!-- <div class="form-group">
+          <label for="settings__email">Title</label>
+          <input type="text" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="ex. john@example.com" />
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label for="settings__password">Password</label>
+          <input type="password" class="form-control" id="settings__password" ng-model="vm.profile.password" placeholder="ex. notgoogleplus" />
+        </div>
+
+        <div class="form-group">
+          <label for="settings__new-password">[New Password DO NOT USE]</label>
+          <input type="new_password" class="form-control" id="settings__new-password" ng-model="vm.profile.new_password" placeholder="ex. notgoogleplus" />
+        </div>
+
+        <div class="form-group">
+          <label for="settings__confirm-password">Confirm Password</label>
+          <input type="password" class="form-control" id="settings__confirm-password" ng-model="vm.profile.confirm_password" placeholder="ex. notgoogleplus" />
+        </div> -->
+<!-- 
+        <div class="form-group">
+          <label for="settings__username">Username</label>
+          <input type="text" class="form-control" id="settings__username" ng-model="vm.profile.username" placeholder="ex. notgoogleplus" />
+        </div>
+
+        <div class="form-group">
+          <label for="settings__tagline">Tagline</label>
+          <textarea class="form-control" id="settings__tagline" ng-model="vm.profile.tagline" placeholder="ex. Computer Science student @ WPI who loves front-end design!" />
+        </div>
+ -->
+        <div class="form-group text-center">
+          <button type="submit" class="btn discover-button">Update</button>
+          <button type="button" class="btn red-button" ng-click="vm.destroy()">Delete Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

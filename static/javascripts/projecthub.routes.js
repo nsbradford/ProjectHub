@@ -42,6 +42,10 @@
       controller: 'SingleProjectController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/projects/single-project.html'
+    }).when('/projects/:project_id/edit/', {
+      controller: 'EditProjectController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/projects/edit-project.html'
     }).otherwise('/');
   }
 })();
