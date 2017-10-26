@@ -19,13 +19,17 @@
   function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects) {
     var vm = this;
 
-    vm.destroy = destroy;
-    vm.update = update;
     vm.isUserOwnerOfProject = false
     vm.project = undefined
 
+    vm.destroy = destroy;
+    vm.update = update;
+
     activate();
 
+    /**
+     *
+     */
     function userIsProjectOwner() {
       var account = Authentication.getAuthenticatedAccount()
       console.log(account.username, vm.project.author.username)

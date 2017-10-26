@@ -9,7 +9,8 @@
     .module('projecthub.projects.controllers')
     .controller('SingleProjectController', SingleProjectController);
 
-  SingleProjectController.$inject = ['$location', '$routeParams', 'Projects', 'Profile', 'Snackbar', 'Authentication'];
+  SingleProjectController.$inject = ['$location', '$routeParams', 'Projects', 'Profile', 
+    'Snackbar', 'Authentication'];
 
   /**
   * @namespace SingleProjectController
