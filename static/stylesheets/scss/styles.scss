@@ -50,7 +50,7 @@ a {
       letter-spacing: 2px;
     }
     p {
-      color: $brand-seconday;
+      color: $brand-secondary;
       font-size: 20px;
       line-height: 35px;
       margin-bottom: 20px;
@@ -99,11 +99,11 @@ a {
     }
     
     span {
-      color: $brand-seconday;
+      color: $brand-secondary;
     }
     
     h2 {
-      color: $brand-seconday;
+      color: $brand-secondary;
       font-weight: 300;
       font-size: 34px;
       padding-top: 30px;
@@ -141,9 +141,9 @@ a {
   }
   
   .register-button {
-    color: $brand-seconday !important;
+    color: $brand-secondary !important;
     background-color: transparent !important;
-    border: 2px solid $brand-seconday;
+    border: 2px solid $brand-secondary;
   }
   
   .red-button {
@@ -242,14 +242,14 @@ a {
       .fa {
         padding-right: 10px;
         font-size: 1em;
-        color: $brand-seconday;
+        color: $brand-secondary;
       }
     }
     
     
     .project__major {
       border-radius: 5px;
-      background: $brand-seconday;
+      background: $brand-secondary;
       display: inline-block;
       padding: 3px 10px 3px 10px;
       color: white;

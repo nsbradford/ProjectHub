@@ -1,0 +1,273 @@
+/**
+ * styles.scss
+ *
+ * @author Ben Bianchi
+ *
+ * Main file that is used to compile all scss into a css that is renderable in the browser.
+ *
+ *
+ */
+a {
+  color: #0277bd; }
+
+/* for styling particles.js */
+.backdrop {
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  position: fixed;
+  /* important for particles to work!!! */
+  top: 0;
+  z-index: -999;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover; }
+
+/* Homepage */
+html {
+  height: calc(100% - 40px);
+  width: 100%; }
+
+body {
+  height: calc(100% - 40px);
+  width: 100%;
+  font-family: 'Avenir',Helvetica,Arial,sans-serif;
+  color: #3B434C;
+  background-color: white;
+  font-size: 16px; }
+  body h1 {
+    font-size: 40px;
+    color: #3B434C;
+    font-weight: 400;
+    letter-spacing: 2px; }
+  body p {
+    color: #687685;
+    font-size: 20px;
+    line-height: 35px;
+    margin-bottom: 20px; }
+
+label {
+  color: #3B434C;
+  font-weight: 500; }
+
+.about-text {
+  margin-bottom: 40px; }
+
+.main {
+  height: 100%;
+  width: 100%; }
+
+.homepage {
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover; }
+  .homepage .homepage-body {
+    /*  height: 100%;
+      width: 100%;*/
+    display: table-cell;
+    /*position: relative;*/
+    vertical-align: middle; }
+  .homepage h1 {
+    color: #0277bd;
+    font-weight: 400;
+    font-size: 8.7vw; }
+  .homepage span {
+    color: #687685; }
+  .homepage h2 {
+    color: #687685;
+    font-weight: 300;
+    font-size: 34px;
+    padding-top: 30px;
+    padding-bottom: 50px; }
+
+.btn {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 20px;
+  box-shadow: none !important;
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+  font-size: 16px;
+  font-weight: 700 !important;
+  letter-spacing: 3px; }
+  .btn:hover, .btn:focus {
+    opacity: .7;
+    transform: scale(1.05); }
+
+.discover-button {
+  color: #0277bd !important;
+  background-color: transparent !important;
+  border: 2px solid #0277bd; }
+
+.register-button {
+  color: #687685 !important;
+  background-color: transparent !important;
+  border: 2px solid #687685; }
+
+.red-button {
+  color: #d32323 !important;
+  background-color: transparent !important;
+  border: 2px solid #d32323; }
+
+/* /register */
+body .login-no-shadow {
+  box-shadow: none; }
+
+.form-control, .form-control:focus {
+  padding: 10px;
+  height: 3em !important;
+  border-style: solid;
+  border-width: 1px !important;
+  border-color: #C5CBD2 !important;
+  border-radius: 3px !important;
+  margin-bottom: 25px; }
+
+.show-hide-password {
+  float: right;
+  text-align: right; }
+
+.form-text-title {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px; }
+
+.error-span {
+  color: red;
+  font-style: italic; }
+
+.agreement-label {
+  font-weight: normal;
+  cursor: pointer; }
+
+input.agreement-checkbox {
+  margin-right: 10px;
+  cursor: pointer; }
+
+/* Individual Project */
+.project .project__meta {
+  font-weight: bold;
+  text-align: left;
+  font-size: 20px;
+  padding-bottom: 19px; }
+  .project .project__meta .project__content {
+    padding-bottom: 10px;
+    font-size: 15px; }
+
+.project .project__author {
+  text-align: right; }
+
+.project a.author {
+  font-weight: bold;
+  text-align: right; }
+
+.project .fa {
+  color: #0277bd;
+  padding-top: 5px;
+  padding-right: 15px;
+  font-size: 1em; }
+
+.project .project__required {
+  font-weight: bold;
+  font-size: 15px; }
+
+.project .project__location {
+  margin-top: 10px;
+  font-weight: normal;
+  font-size: 15px; }
+  .project .project__location .fa {
+    padding-right: 10px;
+    font-size: 1em;
+    color: #687685; }
+
+.project .project__major {
+  border-radius: 5px;
+  background: #687685;
+  display: inline-block;
+  padding: 3px 10px 3px 10px;
+  color: white;
+  font-weight: normal; }
+
+/* new-project */
+.new-project {
+  padding: 20px;
+  font-family: 'Avenir',Helvetica,Arial,sans-serif; }
+  .new-project h1 {
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-family: 'Avenir',Helvetica,Arial,sans-serif; }
+  .new-project label {
+    /*padding-top: 30px;*/ }
+
+/* DiscoverProjects */
+.no-projects-here {
+  text-align: center; }
+
+.btn-add-new-project {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; }
+
+/* Navbar */
+/* See https://stackoverflow.com/questions/18529274/
+     change-navbar-color-in-twitter-bootstrap-3 */
+/* navbar */
+.navbar-default {
+  background-color: #0277bd;
+  border-color: #0277bd; }
+  .navbar-default .navbar-brand {
+    color: white; }
+  .navbar-default .navbar-nav li a {
+    color: white; }
+  .navbar-default .navbar-brand:hover {
+    color: #e0e0e0; }
+  .navbar-default .navbar-nav li a:hover {
+    color: #e0e0e0; }
+
+/* Title */
+/*.navbar-default .navbar-brand {
+      color: #777;
+  }
+  .navbar-default .navbar-brand:hover,
+  .navbar-default .navbar-brand:focus {
+      color: #5E5E5E;
+  }
+  */
+/* Link */
+/*.navbar-default .navbar-nav > li > a {
+      color: #777;
+  }
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+      color: #333;
+  }
+  .navbar-default .navbar-nav > .active > a,
+  .navbar-default .navbar-nav > .active > a:hover,
+  .navbar-default .navbar-nav > .active > a:focus {
+      color: #555;
+      background-color: #E7E7E7;
+  }
+  .navbar-default .navbar-nav > .open > a,
+  .navbar-default .navbar-nav > .open > a:hover,
+  .navbar-default .navbar-nav > .open > a:focus {
+      color: #555;
+      background-color: #D5D5D5;
+  }
+  */
+/* Caret */
+/*.navbar-default .navbar-nav > .dropdown > a .caret {
+      border-top-color: #777;
+      border-bottom-color: #777;
+  }
+  */
