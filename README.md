@@ -52,6 +52,15 @@ Create a Python virtual environment, install bower components, instantiate the d
     requirements.txt                Python package requirements
     runtime.txt                     Heroku specify Python version
 
+## Deploying to Heroku
+
+    $ git push heroku deploy-heroku:master
+
+Fun things to do:
+    
+    $ heroku run bash
+    $ heroku run python manage.py shell
+
 ## Helpful docs
 
 * Django REST Framework [website](http://www.django-rest-framework.org) and [GitHub](https://github.com/encode/django-rest-framework/tree/24791cb353d1924086b30abe2188280547d9a6c4); documentation leaves a lot of missing details so looking directly at code is sometimes necessary.
