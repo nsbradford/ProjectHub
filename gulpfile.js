@@ -34,7 +34,7 @@ gulp.task('serve', ['sass'], function () {
 });
 
 gulp.task('sass', function(){
-  return gulp.src('static/stylesheets/sass/**/*.scss')
+  return gulp.src('static/stylesheets/scss/**/*.scss')
     .pipe(sass())
     .on('error', sass.logError) 
     .pipe(gulp.dest('static/stylesheets/css'));
