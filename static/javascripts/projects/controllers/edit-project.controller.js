@@ -21,18 +21,17 @@
 
     vm.isUserOwnerOfProject = false
     vm.project = undefined
-
     vm.destroy = destroy;
     vm.update = update;
 
     activate();
+
 
     /**
      *
      */
     function userIsProjectOwner() {
       var account = Authentication.getAuthenticatedAccount()
-      console.log(account.username, vm.project.author.username)
       if (account === undefined) return false
       return account.username === vm.project.author.username
     }
@@ -43,8 +42,8 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function activate() {
-      var project_id = $routeParams.project_id.substr(1);
-      Projects.getById(project_id).then(projectsSuccessFn, projectsErrorFn);      
+      var projectID = $routeParams.projectID.substr(1);
+      Projects.getById(projectID).then(projectsSuccessFn, projectsErrorFn);      
 
       /**
       * @name projectSuccessFn
@@ -52,13 +51,11 @@
       */
       function projectsSuccessFn(data, status, headers, config) {
         vm.project = data.data;
-        console.log('found project')
         vm.isUserOwnerOfProject = userIsProjectOwner()
         if (!vm.isUserOwnerOfProject) {
           $location.url('/');
           Snackbar.error('You are not authorized to view this page.');
         }
-        else console.log('project-user match')
       }
 
       /**
@@ -78,7 +75,7 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function destroy() {
-      var confirmed = confirm('Are you sure you want to delete this project? This action can\'t be undone.');
+      const confirmed = confirm('Are you sure you want to delete this project? This action can\'t be undone.');
       if (confirmed) {
         Projects.deleteById(vm.project.id).then(projectSuccessFn, projectErrorFn);
       }

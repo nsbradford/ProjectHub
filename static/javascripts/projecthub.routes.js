@@ -38,11 +38,11 @@
       controller: 'ProfileSettingsController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/profiles/settings.html'
-    }).when('/projects/:project_id', {
+    }).when('/projects/:projectID', {
       controller: 'SingleProjectController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/projects/single-project.html'
-    }).when('/projects/:project_id/edit/', {
+    }).when('/projects/:projectID/edit/', {
       controller: 'EditProjectController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/projects/edit-project.html'

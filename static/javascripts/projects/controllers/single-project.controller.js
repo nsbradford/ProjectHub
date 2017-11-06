@@ -63,14 +63,14 @@
     * @memberOf projecthub.profiles.controllers.ProfileController
     */
     function activate() {
-      var project_id = $routeParams.project_id.substr(1);
+      var projectID = $routeParams.projectID.substr(1);
 
-      if (project_id === '') {
+      if (projectID === '') {
         Snackbar.error('No such project found')
         $location.url('/discover');
       }
       else {
-        Projects.getById(project_id).then(projectsSuccessFn, projectsErrorFn);
+        Projects.getById(projectID).then(projectsSuccessFn, projectsErrorFn);
       }
 
       // 
