@@ -30,7 +30,6 @@ gulp.task('serve', ['sass'], function () {
 
 
     gulp.watch('static/stylesheets/**/*.scss', ['sass', browserSync.reload]);
-    gulp.watch('static/stylesheets/*.css', ['sass', browserSync.reload]);
     gulp.watch('{authentication,projecthub,projects,static/javascripts,static/templates,templates}/**/*.{scss,js,py,html}', browserSync.reload);
 });
 
