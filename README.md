@@ -54,12 +54,25 @@ Create a Python virtual environment, install bower components, instantiate the d
 
 ## Deploying to Heroku
 
-    $ git push heroku deploy-heroku:master
+Make sure the `Procfile` points to `wsgi.py`, and `requirements.txt` is up to date. 
+
+    $ heroku login // authenticate
+
+We need both the python and node buildpacks:
+
+    $ heroku buildpacks:add --index 1 heroku/python
+    $ heroku buildpacks:add --index 1 heroku/nodejs
+
+Deployment occurs through git push:
+    
+    $ git push heroku master // deploy from our master branch to the Heroku master
+    $ git push heroku deploy-heroku:master // deploy from a local deployment branch to Heroku
 
 Fun things to do:
     
-    $ heroku run bash
-    $ heroku run python manage.py shell
+    $ heroku local web                  // locally test Heroku (very imperfect)
+    $ heroku run bash                   // run bash on one-off dyno
+    $ heroku run python manage.py shell // manage Django on one-off dyno
 
 ## Helpful docs
 
