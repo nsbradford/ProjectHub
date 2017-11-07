@@ -214,7 +214,22 @@ a {
     
     .project__author{
       text-align: right;
-    
+      
+      .fa {
+        color: $brand-primary;
+        padding-top: 5px;
+        padding-right: 15px;
+        font-size: 2em;
+        transition: opacity .1s ease-in-out, transform .1s ease-in-out; 
+        cursor: pointer;
+
+        &:hover, 
+        &:focus{
+          opacity: .7;
+          transform: scale(1.2);
+          cursor: pointer;
+        }
+      }
     }
     
     a.author {
@@ -222,12 +237,7 @@ a {
       text-align: right;
     }
     
-    .fa {
-      color: $brand-primary;
-      padding-top: 5px;
-      padding-right: 15px;
-      font-size: 1em;
-    }
+
     
     .project__required {
       font-weight:  bold;
