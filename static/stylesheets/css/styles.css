@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * styles.scss
  *
@@ -206,6 +207,8 @@ input.agreement-checkbox {
   color: white;
   font-weight: normal; }
 
+=======
+>>>>>>> Html Skeleton Finished
 /* new-project */
 .new-project {
   padding: 20px;
@@ -275,7 +278,13 @@ input.agreement-checkbox {
 */
 /* Caret */
 /*.navbar-default .navbar-nav > .dropdown > a .caret {
+<<<<<<< HEAD
     border-top-color: #777;
     border-bottom-color: #777;
 }
 */
+=======
+      border-top-color: #777;
+      border-bottom-color: #777;
+  }
+>>>>>>> Html Skeleton Finished
