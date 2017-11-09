@@ -40,7 +40,7 @@
     }
 
     function filterApply(item){
-      alert("You Clicked me!")
+      alert("You Clicked me!");
     }
   }
 })();

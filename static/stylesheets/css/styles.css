@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> CSS looks okay, not great
 /**
  * styles.scss
  *
@@ -8,6 +11,40 @@
  *
  *
  */
+<<<<<<< HEAD
+=======
+/**
+ * Discover.scss
+ * Styles the discover page and all components unique to it.
+ *
+ * @author Ben Bianchi
+ *
+ */
+.search-form .btn {
+  margin: 0;
+  height: 60px; }
+
+.search-form .no-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  margin-bottom: 20px;
+  width: 100%; }
+
+.search-form .search-input {
+  margin: 0;
+  height: 60px !important;
+  border: #0277bd solid;
+  border-width: 1px;
+  border-radius: 2px;
+  padding: 10px;
+  background-color: #f5f6f7;
+  max-width: 300px; }
+
+.inline {
+  display: inline; }
+
+>>>>>>> CSS looks okay, not great
 a {
   color: #0277bd; }
 
@@ -72,7 +109,11 @@ label {
   -o-background-size: cover; }
   .homepage .homepage-body {
     /*  height: 100%;
+<<<<<<< HEAD
     width: 100%;*/
+=======
+      width: 100%;*/
+>>>>>>> CSS looks okay, not great
     display: table-cell;
     /*position: relative;*/
     vertical-align: middle; }
@@ -85,7 +126,11 @@ label {
   .homepage h2 {
     color: #687685;
     font-weight: 300;
+<<<<<<< HEAD
     font-size: 3.5vh;
+=======
+    font-size: 34px;
+>>>>>>> CSS looks okay, not great
     padding-top: 30px;
     padding-bottom: 50px; }
 
@@ -156,6 +201,7 @@ input.agreement-checkbox {
   cursor: pointer; }
 
 /* Individual Project */
+<<<<<<< HEAD
 .edit-project {
   text-align: right; }
   .edit-project .fa {
@@ -170,6 +216,8 @@ input.agreement-checkbox {
       transform: scale(1.2);
       cursor: pointer; }
 
+=======
+>>>>>>> CSS looks okay, not great
 .project .project__meta {
   font-weight: bold;
   text-align: left;
@@ -186,6 +234,15 @@ input.agreement-checkbox {
   font-weight: bold;
   text-align: right; }
 
+<<<<<<< HEAD
+=======
+.project .fa {
+  color: #0277bd;
+  padding-top: 5px;
+  padding-right: 15px;
+  font-size: 1em; }
+
+>>>>>>> CSS looks okay, not great
 .project .project__required {
   font-weight: bold;
   font-size: 15px; }
@@ -207,8 +264,11 @@ input.agreement-checkbox {
   color: white;
   font-weight: normal; }
 
+<<<<<<< HEAD
 =======
 >>>>>>> Html Skeleton Finished
+=======
+>>>>>>> CSS looks okay, not great
 /* new-project */
 .new-project {
   padding: 20px;
@@ -218,8 +278,6 @@ input.agreement-checkbox {
     padding-bottom: 20px;
     padding-top: 20px;
     font-family: 'Avenir',Helvetica,Arial,sans-serif; }
-  .new-project label {
-    /*padding-top: 30px;*/ }
 
 /* DiscoverProjects */
 .no-projects-here {
@@ -287,4 +345,8 @@ input.agreement-checkbox {
       border-top-color: #777;
       border-bottom-color: #777;
   }
+<<<<<<< HEAD
 >>>>>>> Html Skeleton Finished
+=======
+  */
+>>>>>>> CSS looks okay, not great

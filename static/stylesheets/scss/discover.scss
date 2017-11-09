@@ -5,8 +5,36 @@
  * @author Ben Bianchi
  *
  */
-.search-form{
+
+ @import 'variables';
+
+ .search-form{
+
     .btn {
-        color:red;
+        margin: 0;
+        height:60px;
     }
+
+    .no-wrap{
+        display: flex;
+        flex-wrap: nowrap;
+        margin: 0;
+        margin-bottom: 20px;
+        width:100%;
+    }
+    .search-input{
+        margin:0;
+        height:60px !important;
+        border: $brand-primary solid;
+        border-width: 1px;
+        border-radius: 2px;
+        padding: 10px;
+        background-color: lighten($brand-secondary, 50);
+        max-width: 300px;
+    }
+}
+
+
+.inline{
+    display: inline;
 }

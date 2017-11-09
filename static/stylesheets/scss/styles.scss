@@ -323,48 +323,82 @@ input.agreement-checkbox {
     .navbar-brand:hover {
       color: #e0e0e0;
     }
-    
-    .navbar-nav li a:hover{ 
-      color: #e0e0e0;
-    }
-}
-
-
-/* Title */
-/*.navbar-default .navbar-brand {
-    color: #777;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-    color: #5E5E5E;
-}
-*/
-
-/* Link */
-/*.navbar-default .navbar-nav > li > a {
-    color: #777;
-}
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-    color: #333;
-}
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-    color: #555;
-    background-color: #E7E7E7;
-}
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-    color: #555;
-    background-color: #D5D5D5;
-}
-*/
-
-/* Caret */
-/*.navbar-default .navbar-nav > .dropdown > a .caret {
-    border-top-color: #777;
-    border-bottom-color: #777;
-}
-*/
+  }
+  
+  /* DiscoverProjects */
+  
+  .no-projects-here {
+    text-align: center;
+  }
+  
+  .btn-add-new-project {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  /* Navbar */
+  /* See https://stackoverflow.com/questions/18529274/
+     change-navbar-color-in-twitter-bootstrap-3 */
+  
+  /* navbar */
+  .navbar-default {
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+      .navbar-brand {
+        color: white;
+      }
+      
+      .navbar-nav li a{ 
+        color: white;
+      }
+      
+      .navbar-brand:hover {
+        color: #e0e0e0;
+      }
+      
+      .navbar-nav li a:hover{ 
+        color: #e0e0e0;
+      }
+  }
+  
+  
+  /* Title */
+  /*.navbar-default .navbar-brand {
+      color: #777;
+  }
+  .navbar-default .navbar-brand:hover,
+  .navbar-default .navbar-brand:focus {
+      color: #5E5E5E;
+  }
+  */
+  
+  /* Link */
+  /*.navbar-default .navbar-nav > li > a {
+      color: #777;
+  }
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+      color: #333;
+  }
+  .navbar-default .navbar-nav > .active > a,
+  .navbar-default .navbar-nav > .active > a:hover,
+  .navbar-default .navbar-nav > .active > a:focus {
+      color: #555;
+      background-color: #E7E7E7;
+  }
+  .navbar-default .navbar-nav > .open > a,
+  .navbar-default .navbar-nav > .open > a:hover,
+  .navbar-default .navbar-nav > .open > a:focus {
+      color: #555;
+      background-color: #D5D5D5;
+  }
+  */
+  
+  /* Caret */
+  /*.navbar-default .navbar-nav > .dropdown > a .caret {
+      border-top-color: #777;
+      border-bottom-color: #777;
+  }
+  */
+  
