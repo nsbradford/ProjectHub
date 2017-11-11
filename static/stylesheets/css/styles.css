@@ -71,7 +71,7 @@ label {
   -o-background-size: cover; }
   .homepage .homepage-body {
     /*  height: 100%;
-      width: 100%;*/
+    width: 100%;*/
     display: table-cell;
     /*position: relative;*/
     vertical-align: middle; }
@@ -155,6 +155,20 @@ input.agreement-checkbox {
   cursor: pointer; }
 
 /* Individual Project */
+.edit-project {
+  text-align: right; }
+  .edit-project .fa {
+    color: #0277bd;
+    padding-top: 5px;
+    padding-right: 15px;
+    font-size: 2em;
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+    cursor: pointer; }
+    .edit-project .fa:hover, .edit-project .fa:focus {
+      opacity: .7;
+      transform: scale(1.2);
+      cursor: pointer; }
+
 .project .project__meta {
   font-weight: bold;
   text-align: left;
@@ -170,12 +184,6 @@ input.agreement-checkbox {
 .project a.author {
   font-weight: bold;
   text-align: right; }
-
-.project .fa {
-  color: #0277bd;
-  padding-top: 5px;
-  padding-right: 15px;
-  font-size: 1em; }
 
 .project .project__required {
   font-weight: bold;
@@ -221,7 +229,7 @@ input.agreement-checkbox {
 
 /* Navbar */
 /* See https://stackoverflow.com/questions/18529274/
-     change-navbar-color-in-twitter-bootstrap-3 */
+   change-navbar-color-in-twitter-bootstrap-3 */
 /* navbar */
 .navbar-default {
   background-color: #0277bd;
@@ -237,37 +245,37 @@ input.agreement-checkbox {
 
 /* Title */
 /*.navbar-default .navbar-brand {
-      color: #777;
-  }
-  .navbar-default .navbar-brand:hover,
-  .navbar-default .navbar-brand:focus {
-      color: #5E5E5E;
-  }
-  */
+    color: #777;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+*/
 /* Link */
 /*.navbar-default .navbar-nav > li > a {
-      color: #777;
-  }
-  .navbar-default .navbar-nav > li > a:hover,
-  .navbar-default .navbar-nav > li > a:focus {
-      color: #333;
-  }
-  .navbar-default .navbar-nav > .active > a,
-  .navbar-default .navbar-nav > .active > a:hover,
-  .navbar-default .navbar-nav > .active > a:focus {
-      color: #555;
-      background-color: #E7E7E7;
-  }
-  .navbar-default .navbar-nav > .open > a,
-  .navbar-default .navbar-nav > .open > a:hover,
-  .navbar-default .navbar-nav > .open > a:focus {
-      color: #555;
-      background-color: #D5D5D5;
-  }
-  */
+    color: #777;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+*/
 /* Caret */
 /*.navbar-default .navbar-nav > .dropdown > a .caret {
-      border-top-color: #777;
-      border-bottom-color: #777;
-  }
-  */
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+*/
