@@ -16,8 +16,7 @@
   * @namespace SingleProjectController
   */
   function SingleProjectController($location, $routeParams, Projects, Profile, Snackbar, Authentication) {
-    var vm = this;
-
+    const vm = this;
     // vm.profile = undefined;
     vm.project = undefined
     vm.isUserOwnerOfProject = false

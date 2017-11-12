@@ -15,8 +15,7 @@
   * @namespace NewProjectController
   */
   function NewProjectController($rootScope, $scope, Authentication, Snackbar, Projects) {
-    var vm = this;
-
+    const vm = this;
     vm.submit = submit;
 
     /**

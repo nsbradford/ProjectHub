@@ -15,7 +15,7 @@
   * @namespace LoginController
   */
   function LoginController($location, $scope, Authentication) {
-    var vm = this;
+    const vm = this;
     vm.inputType = 'password';
     vm.login = login;
     vm.hideShowPassword = hideShowPassword;

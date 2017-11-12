@@ -17,8 +17,7 @@
   * @namespace EditProjectController
   */
   function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects) {
-    var vm = this;
-
+    const vm = this;
     vm.isUserOwnerOfProject = false
     vm.project = undefined
     vm.destroy = destroy;
