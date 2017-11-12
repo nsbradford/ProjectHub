@@ -30,12 +30,11 @@ gulp.task('serve', ['sass'], function () {
 
 
     gulp.watch('static/stylesheets/**/*.scss', ['sass', browserSync.reload]);
-    gulp.watch('static/stylesheets/*.css', ['sass', browserSync.reload]);
     gulp.watch('{authentication,projecthub,projects,static/javascripts,static/templates,templates}/**/*.{scss,js,py,html}', browserSync.reload);
 });
 
 gulp.task('sass', function(){
-  return gulp.src('static/stylesheets/sass/**/*.scss')
+  return gulp.src('static/stylesheets/scss/**/*.scss')
     .pipe(sass())
     .on('error', sass.logError) 
     .pipe(gulp.dest('static/stylesheets/css'));
