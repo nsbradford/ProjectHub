@@ -41,4 +41,4 @@ gulp.task('sass', function(){
 });
 
 
-gulp.task('default', ['serve','build']);
+gulp.task('default', ['build']);
