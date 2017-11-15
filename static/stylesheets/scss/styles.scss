@@ -12,347 +12,358 @@
 a {
     color: $brand-primary;
  }
-  
-  /* for styling particles.js */
-  .backdrop {
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    position: fixed; /* important for particles to work!!! */
-    top: 0;
-    z-index: -999;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-  }
-  
-  /* Homepage */
-  
-  html {
-    height: calc(100% - 40px);
-    width: 100%;
-  }
-  
-  
-  body {
-    height: calc(100% - 40px);
-    width: 100%;
-    font-family: 'Avenir',Helvetica,Arial,sans-serif;
-    color: #3B434C;
-    background-color: white;
-    font-size: 16px;
-  
-    h1 {
-      font-size: 40px;
-      color: #3B434C;
-      font-weight: 400;
-      letter-spacing: 2px;
-    }
-    p {
-      color: $brand-secondary;
-      font-size: 20px;
-      line-height: 35px;
-      margin-bottom: 20px;
-    }
-  }
-  
-  
-  label {
-    color: #3B434C;
-    font-weight: 500;
-  }
-  
-  .about-text {
-    margin-bottom: 40px;
-  }
-  
-  .main {
-    height: 100%;
-    width: 100%;
-  }
-  
-  .homepage {
-    display: table;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    text-align: center;
-    vertical-align: middle;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
 
-    .homepage-body {
-    /*  height: 100%;
-      width: 100%;*/
-      display: table-cell;
-      /*position: relative;*/
-      vertical-align: middle;
-    }
-    
-    h1 {
-      color: $brand-primary;
-      font-weight: 400;
-      font-size: 8.7vw;
-    }
-    
-    span {
-      color: $brand-secondary;
-    }
-    
-    h2 {
-      color: $brand-secondary;
-      font-weight: 300;
-      font-size: 3.5vh;
-      padding-top: 30px;
-      padding-bottom: 50px;
-    }
-    
+/* for styling particles.js */
+.backdrop {
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  position: fixed; /* important for particles to work!!! */
+  top: 0;
+  z-index: -999;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+/* Homepage */
+
+html {
+  height: calc(100% - 40px);
+  width: 100%;
+}
+
+
+body {
+  height: calc(100% - 40px);
+  width: 100%;
+  font-family: 'Avenir',Helvetica,Arial,sans-serif;
+  color: #3B434C;
+  background-color: white;
+  font-size: 16px;
+
+  h1 {
+    font-size: 40px;
+    color: #3B434C;
+    font-weight: 400;
+    letter-spacing: 2px;
+  }
+  p {
+    color: $brand-secondary;
+    font-size: 20px;
+    line-height: 35px;
+    margin-bottom: 20px;
+  }
+}
+
+
+label {
+  color: #3B434C;
+  font-weight: 500;
+}
+
+.about-text {
+  margin-bottom: 40px;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+}
+
+.homepage {
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+  .homepage-body {
+  /*  height: 100%;
+    width: 100%;*/
+    display: table-cell;
+    /*position: relative;*/
+    vertical-align: middle;
   }
   
-  .btn {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 20px;
-    box-shadow: none !important;
-    transition: opacity .2s ease-in-out, transform .2s ease-in-out; 
-    font-size: 16px;
-    font-weight: 700 !important;
-    letter-spacing: 3px;
-   
+  h1 {
+    color: $brand-primary;
+    font-weight: 400;
+    font-size: 8.7vw;
+  }
+  
+  span {
+    color: $brand-secondary;
+  }
+  
+  h2 {
+    color: $brand-secondary;
+    font-weight: 300;
+    font-size: 3.5vh;
+    padding-top: 30px;
+    padding-bottom: 50px;
+  }
+  
+}
+
+.btn {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 20px;
+  box-shadow: none !important;
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out; 
+  font-size: 16px;
+  font-weight: 700 !important;
+  letter-spacing: 3px;
+ 
+  &:hover, 
+  &:focus{
+    opacity: .7;
+    transform: scale(1.05);
+  }
+}
+
+
+.discover-button {
+  color: $brand-primary !important;
+  background-color: transparent !important;
+  border: 2px solid $brand-primary;
+}
+
+.register-button {
+  color: $brand-secondary !important;
+  background-color: transparent !important;
+  border: 2px solid $brand-secondary;
+}
+
+.red-button {
+  color: #d32323 !important;
+  background-color: transparent !important;
+  border: 2px solid #d32323;
+}
+
+/* /register */
+
+body .login-no-shadow {
+  box-shadow: none;
+}
+
+.form-control, .form-control:focus {
+  padding:10px;
+  height: 3em !important;
+  border-style: solid;
+  border-width: 1px !important;
+  border-color: #C5CBD2 !important;
+  border-radius: 3px !important;
+  margin-bottom: 25px;
+}
+
+.show-hide-password {
+  float: right; 
+  text-align: right
+}
+
+.form-text-title {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.error-span {
+  color:red;
+  font-style:italic
+}
+
+.agreement-label { 
+  font-weight: normal;
+  cursor: pointer;
+}
+
+input.agreement-checkbox {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+/* Individual Project */
+
+.edit-project {
+
+  text-align: right;
+
+  .fa {
+    color: $brand-primary;
+    padding-top: 5px;
+    padding-right: 15px;
+    font-size: 2em;
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out; 
+    cursor: pointer;
+
     &:hover, 
     &:focus{
       opacity: .7;
-      transform: scale(1.05);
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+  } 
+}
+
+.project {
+
+  .project__meta {
+    font-weight: bold;
+    text-align: left;
+    font-size: 20px;
+    padding-bottom: 19px;
+    
+    .project__content {
+      padding-bottom: 10px;
+      font-size: 15px;
     }
   }
   
-  
-  .discover-button {
-    color: $brand-primary !important;
-    background-color: transparent !important;
-    border: 2px solid $brand-primary;
+  .project__author{
+    text-align: right;
   }
   
-  .register-button {
-    color: $brand-secondary !important;
-    background-color: transparent !important;
-    border: 2px solid $brand-secondary;
+  a.author {
+    font-weight: bold;
+    text-align: right;
   }
   
-  .red-button {
-    color: #d32323 !important;
-    background-color: transparent !important;
-    border: 2px solid #d32323;
+  
+  .project__required {
+    font-weight:  bold;
+    font-size: 15px;
   }
   
-  /* /register */
-  
-  body .login-no-shadow {
-    box-shadow: none;
-  }
-  
-  .form-control, .form-control:focus {
-    padding:10px;
-    height: 3em !important;
-    border-style: solid;
-    border-width: 1px !important;
-    border-color: #C5CBD2 !important;
-    border-radius: 3px !important;
-    margin-bottom: 25px;
-  }
-  
-  .show-hide-password {
-    float: right; 
-    text-align: right
-  }
-  
-  .form-text-title {
-    text-align: center;
-    margin-top: 60px;
-    margin-bottom: 60px;
-  }
-  
-  .error-span {
-    color:red;
-    font-style:italic
-  }
-  
-  .agreement-label { 
+  .project__location {
+    margin-top: 10px;
     font-weight: normal;
-    cursor: pointer;
-  }
-  
-  input.agreement-checkbox {
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  
-  /* Individual Project */
-  
-  .project {
-  
-    .project__meta {
-      font-weight: bold;
-      text-align: left;
-      font-size: 20px;
-      padding-bottom: 19px;
-      
-      .project__content {
-        padding-bottom: 10px;
-        font-size: 15px;
-      }
-    }
-    
-    
-    .project__author{
-      text-align: right;
-    
-    }
-    
-    a.author {
-      font-weight: bold;
-      text-align: right;
-    }
-    
+    font-size: 15px;
+ 
     .fa {
-      color: $brand-primary;
-      padding-top: 5px;
-      padding-right: 15px;
+      padding-right: 10px;
       font-size: 1em;
-    }
-    
-    .project__required {
-      font-weight:  bold;
-      font-size: 15px;
-    }
-    
-    .project__location {
-      margin-top: 10px;
-      font-weight: normal;
-      font-size: 15px;
-   
-      .fa {
-        padding-right: 10px;
-        font-size: 1em;
-        color: $brand-secondary;
-      }
-    }
-    
-    
-    .project__major {
-      border-radius: 5px;
-      background: $brand-secondary;
-      display: inline-block;
-      padding: 3px 10px 3px 10px;
-      color: white;
-      font-weight: normal;
+      color: $brand-secondary;
     }
   }
-    
   
-  /* new-project */
-  
-  
-  .new-project {
-    padding: 20px;
-    font-family: 'Avenir',Helvetica,Arial,sans-serif;
-  
-    h1 {
-      text-align: center;
-      padding-bottom: 20px;
-      padding-top: 20px;
-      font-family: 'Avenir',Helvetica,Arial,sans-serif;
-    }
-    
-     label {
-      /*padding-top: 30px;*/
-    }
-    
-    
+  .project__major {
+    border-radius: 5px;
+    background: $brand-secondary;
+    display: inline-block;
+    padding: 3px 10px 3px 10px;
+    color: white;
+    font-weight: normal;
   }
+}
   
-  /* DiscoverProjects */
-  
-  .no-projects-here {
+
+/* new-project */
+
+
+.new-project {
+  padding: 20px;
+  font-family: 'Avenir',Helvetica,Arial,sans-serif;
+
+  h1 {
     text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-family: 'Avenir',Helvetica,Arial,sans-serif;
   }
   
-  .btn-add-new-project {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-  }
-  
-  /* Navbar */
-  /* See https://stackoverflow.com/questions/18529274/
-     change-navbar-color-in-twitter-bootstrap-3 */
-  
-  /* navbar */
-  .navbar-default {
-      background-color: $brand-primary;
-      border-color: $brand-primary;
-      .navbar-brand {
-        color: white;
-      }
-      
-      .navbar-nav li a{ 
-        color: white;
-      }
-      
-      .navbar-brand:hover {
-        color: #e0e0e0;
-      }
-      
-      .navbar-nav li a:hover{ 
-        color: #e0e0e0;
-      }
+   label {
+    /*padding-top: 30px;*/
   }
   
   
-  /* Title */
-  /*.navbar-default .navbar-brand {
-      color: #777;
-  }
-  .navbar-default .navbar-brand:hover,
-  .navbar-default .navbar-brand:focus {
-      color: #5E5E5E;
-  }
-  */
-  
-  /* Link */
-  /*.navbar-default .navbar-nav > li > a {
-      color: #777;
-  }
-  .navbar-default .navbar-nav > li > a:hover,
-  .navbar-default .navbar-nav > li > a:focus {
-      color: #333;
-  }
-  .navbar-default .navbar-nav > .active > a,
-  .navbar-default .navbar-nav > .active > a:hover,
-  .navbar-default .navbar-nav > .active > a:focus {
-      color: #555;
-      background-color: #E7E7E7;
-  }
-  .navbar-default .navbar-nav > .open > a,
-  .navbar-default .navbar-nav > .open > a:hover,
-  .navbar-default .navbar-nav > .open > a:focus {
-      color: #555;
-      background-color: #D5D5D5;
-  }
-  */
-  
-  /* Caret */
-  /*.navbar-default .navbar-nav > .dropdown > a .caret {
-      border-top-color: #777;
-      border-bottom-color: #777;
-  }
-  */
-  
+}
+
+/* DiscoverProjects */
+
+.no-projects-here {
+  text-align: center;
+}
+
+.btn-add-new-project {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Navbar */
+/* See https://stackoverflow.com/questions/18529274/
+   change-navbar-color-in-twitter-bootstrap-3 */
+
+/* navbar */
+.navbar-default {
+    background-color: $brand-primary;
+    border-color: $brand-primary;
+    .navbar-brand {
+      color: white;
+    }
+    
+    .navbar-nav li a{ 
+      color: white;
+    }
+    
+    .navbar-brand:hover {
+      color: #e0e0e0;
+    }
+    
+    .navbar-nav li a:hover{ 
+      color: #e0e0e0;
+    }
+}
+
+
+/* Title */
+/*.navbar-default .navbar-brand {
+    color: #777;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+*/
+
+/* Link */
+/*.navbar-default .navbar-nav > li > a {
+    color: #777;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+*/
+
+/* Caret */
+/*.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+*/

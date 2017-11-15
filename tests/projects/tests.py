@@ -153,7 +153,6 @@ class ProjectTests(APITestCase):
         self.assertEqual(len(Project.objects.all()), 2)
         get_response = self.client.get('/api/v1/accounts/' + self.username + '/projects/')
         self.assertEqual(get_response.status_code, status.HTTP_200_OK)
-        print get_response.data
         self.assertEqual(len(get_response.data), 2) # should return 2 projects
         sorted_projects = sorted(get_response.data, key=lambda x: x.get('title'))
         self.assertEqual(sorted_projects[0]['title'], self.title)

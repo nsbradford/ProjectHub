@@ -17,8 +17,7 @@
   *   TODO this algorithm needs to be reviewed.
   */
   function DiscoverProjectsController($scope) {
-    var vm = this;
-
+    const vm = this;
     vm.columns = [];
 
     activate();
