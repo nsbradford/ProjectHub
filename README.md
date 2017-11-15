@@ -52,6 +52,28 @@ Create a Python virtual environment, install bower components, instantiate the d
     requirements.txt                Python package requirements
     runtime.txt                     Heroku specify Python version
 
+## Deploying to Heroku
+
+Make sure the `Procfile` points to `wsgi.py`, and `requirements.txt` is up to date. 
+
+    $ heroku login // authenticate
+
+We need both the python and node buildpacks:
+
+    $ heroku buildpacks:add --index 1 heroku/python
+    $ heroku buildpacks:add --index 1 heroku/nodejs
+
+Deployment occurs through git push:
+    
+    $ git push heroku master // deploy from our master branch to the Heroku master
+    $ git push heroku deploy-heroku:master // deploy from a local deployment branch to Heroku
+
+Fun things to do:
+    
+    $ heroku local web                  // locally test Heroku (very imperfect)
+    $ heroku run bash                   // run bash on one-off dyno
+    $ heroku run python manage.py shell // manage Django on one-off dyno
+
 ## Helpful docs
 
 * Django REST Framework [website](http://www.django-rest-framework.org) and [GitHub](https://github.com/encode/django-rest-framework/tree/24791cb353d1924086b30abe2188280547d9a6c4); documentation leaves a lot of missing details so looking directly at code is sometimes necessary.
