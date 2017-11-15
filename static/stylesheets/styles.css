@@ -1,17 +1,9 @@
-/**
- * styles.scss
- *
- * @author Ben Bianchi
- *
- * Main file that is used to compile all scss into a css that is renderable in the browser.
- *
- *
- */
-@import 'variables';
+/* grey: #687685; */
+/* blue: #0277bd; */
 
 a {
-    color: $brand-primary;
- }
+  color: #0277bd;
+}
 
 /* for styling particles.js */
 .backdrop {
@@ -42,21 +34,21 @@ body {
   color: #3B434C;
   background-color: white;
   font-size: 16px;
-
-  h1 {
-    font-size: 40px;
-    color: #3B434C;
-    font-weight: 400;
-    letter-spacing: 2px;
-  }
-  p {
-    color: $brand-secondary;
-    font-size: 20px;
-    line-height: 35px;
-    margin-bottom: 20px;
-  }
 }
 
+body h1 {
+  font-size: 40px;
+  color: #3B434C;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+body p {
+  color: #687685;
+  font-size: 20px;
+  line-height: 35px;
+  margin-bottom: 20px;
+}
 
 label {
   color: #3B434C;
@@ -83,33 +75,32 @@ label {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+}
 
-  .homepage-body {
-  /*  height: 100%;
-    width: 100%;*/
-    display: table-cell;
-    /*position: relative;*/
-    vertical-align: middle;
-  }
-  
-  h1 {
-    color: $brand-primary;
-    font-weight: 400;
-    font-size: 8.7vw;
-  }
-  
-  span {
-    color: $brand-secondary;
-  }
-  
-  h2 {
-    color: $brand-secondary;
-    font-weight: 300;
-    font-size: 34px;
-    padding-top: 30px;
-    padding-bottom: 50px;
-  }
-  
+.homepage .homepage-body {
+/*  height: 100%;
+  width: 100%;*/
+  display: table-cell;
+  /*position: relative;*/
+  vertical-align: middle;
+}
+
+.homepage h1 {
+  color: #0277bd;
+  font-weight: 400;
+  font-size: 8.7vw;
+}
+
+.homepage span {
+  color: #687685;
+}
+
+.homepage h2 {
+  color: #687685;
+  font-weight: 300;
+  font-size: 34px;
+  padding-top: 30px;
+  padding-bottom: 50px;
 }
 
 .btn {
@@ -125,25 +116,24 @@ label {
   font-size: 16px;
   font-weight: 700 !important;
   letter-spacing: 3px;
- 
-  &:hover, 
-  &:focus{
-    opacity: .7;
-    transform: scale(1.05);
-  }
 }
 
+.btn:hover, 
+.btn:focus{
+  opacity: .7;
+  transform: scale(1.05);
+}
 
 .discover-button {
-  color: $brand-primary !important;
+  color: #0277bd !important;
   background-color: transparent !important;
-  border: 2px solid $brand-primary;
+  border: 2px solid #0277bd;
 }
 
 .register-button {
-  color: $brand-secondary !important;
+  color: #687685 !important;
   background-color: transparent !important;
-  border: 2px solid $brand-secondary;
+  border: 2px solid #687685;
 }
 
 .red-button {
@@ -197,78 +187,78 @@ input.agreement-checkbox {
 
 /* Individual Project */
 
-.edit-project {
-
-  text-align: right;
-
-  .fa {
-    color: $brand-primary;
-    padding-top: 5px;
-    padding-right: 15px;
-    font-size: 2em;
-    transition: opacity .1s ease-in-out, transform .1s ease-in-out; 
-    cursor: pointer;
-
-    &:hover, 
-    &:focus{
-      opacity: .7;
-      transform: scale(1.2);
-      cursor: pointer;
-    }
-  } 
-}
-
 .project {
 
-  .project__meta {
-    font-weight: bold;
-    text-align: left;
-    font-size: 20px;
-    padding-bottom: 19px;
-    
-    .project__content {
-      padding-bottom: 10px;
-      font-size: 15px;
-    }
-  }
-  
-  .project__author{
-    text-align: right;
-  }
-  
-  a.author {
-    font-weight: bold;
-    text-align: right;
-  }
-  
-  
-  .project__required {
-    font-weight:  bold;
-    font-size: 15px;
-  }
-  
-  .project__location {
-    margin-top: 10px;
-    font-weight: normal;
-    font-size: 15px;
- 
-    .fa {
-      padding-right: 10px;
-      font-size: 1em;
-      color: $brand-secondary;
-    }
-  }
-  
-  .project__major {
-    border-radius: 5px;
-    background: $brand-secondary;
-    display: inline-block;
-    padding: 3px 10px 3px 10px;
-    color: white;
-    font-weight: normal;
-  }
 }
-  
+
+.project .project__meta {
+  font-weight: bold;
+  text-align: left;
+  font-size: 20px;
+  padding-bottom: 19px;
+}
+
+.project .project__meta a:hover {
+}
+
+
+.project .project__content {
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+
+.project__author{
+  text-align: right;
+
+}
+
+.project__author a.author {
+  font-weight: bold;
+  text-align: right;
+}
+
+.project__author .fa {
+  color: #0277bd;
+  padding-top: 5px;
+  padding-right: 15px;
+  font-size: 2em;
+  transition: opacity .1s ease-in-out, transform .1s ease-in-out; 
+  cursor: pointer;
+}
+
+.project__author .fa:hover, 
+.project__author .fa:focus{
+  opacity: .7;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.project .project__required {
+  font-weight:  bold;
+  font-size: 15px;
+}
+
+.project .project__location {
+  margin-top: 10px;
+  font-weight: normal;
+  font-size: 15px;
+  /*color: #687685;*/
+}
+
+.project .project__location .fa {
+  padding-right: 10px;
+  font-size: 1em;
+  color: #687685;
+}
+
+.project .project__major {
+  border-radius: 5px;
+  background: #687685;
+  display: inline-block;
+  padding: 3px 10px 3px 10px;
+  color: white;
+  font-weight: normal;
+}
 
 /* new-project */
 
@@ -276,20 +266,19 @@ input.agreement-checkbox {
 .new-project {
   padding: 20px;
   font-family: 'Avenir',Helvetica,Arial,sans-serif;
-
-  h1 {
-    text-align: center;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    font-family: 'Avenir',Helvetica,Arial,sans-serif;
-  }
-  
-   label {
-    /*padding-top: 30px;*/
-  }
-  
-  
 }
+
+.new-project h1 {
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-family: 'Avenir',Helvetica,Arial,sans-serif;
+}
+
+.new-project label {
+  /*padding-top: 30px;*/
+}
+
 
 /* DiscoverProjects */
 
@@ -309,25 +298,25 @@ input.agreement-checkbox {
 
 /* navbar */
 .navbar-default {
-    background-color: $brand-primary;
-    border-color: $brand-primary;
-    .navbar-brand {
-      color: white;
-    }
-    
-    .navbar-nav li a{ 
-      color: white;
-    }
-    
-    .navbar-brand:hover {
-      color: #e0e0e0;
-    }
-    
-    .navbar-nav li a:hover{ 
-      color: #e0e0e0;
-    }
+    background-color: #0277bd;
+    border-color: #0277bd;
 }
 
+.navbar .navbar-brand {
+  color: white;
+}
+
+.navbar .navbar-nav li a{ 
+  color: white;
+}
+
+.navbar .navbar-brand:hover {
+  color: #e0e0e0;
+}
+
+.navbar .navbar-nav li a:hover{ 
+  color: #e0e0e0;
+}
 
 /* Title */
 /*.navbar-default .navbar-brand {

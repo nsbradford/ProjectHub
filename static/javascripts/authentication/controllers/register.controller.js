@@ -15,7 +15,7 @@
   * @namespace RegisterController
   */
   function RegisterController($location, $scope, Authentication, Snackbar) {
-    var vm = this;
+    const vm = this;
     vm.inputType = 'password';
     vm.missing_email = false;
     vm.missing_username = false;

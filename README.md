@@ -94,10 +94,10 @@ Fun things to do:
 * API ProjectViewSet and nested: 
     * GET (get all)   '/api/v1/projects/'
     * POST (create)   '/api/v1/projects/', project data
-    * PUT (update)    '/api/v1/projects/' + pk + '/', project data
+    * PUT (update)    '/api/v1/projects/' + id + '/', project data
     * GET (a user's)  '/api/v1/accounts/' + username + '/projects/'
-    * GET (get one)   '/api/v1/projects/' + pk + '/'
-    * DELETE          '/api/v1/projects/' + pk + '/'
+    * GET (get one)   '/api/v1/projects/' + id + '/'
+    * DELETE          '/api/v1/projects/' + id + '/'
 * API LoginView:      api/v1/auth/login/
 * API LogoutView:     api/v1/auth/logout/
 

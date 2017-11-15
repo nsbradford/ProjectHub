@@ -15,7 +15,7 @@
   * @namespace ProfileController
   */
   function ProfileController($location, $routeParams, Projects, Profile, Snackbar) {
-    var vm = this;
+    const vm = this;
 
     vm.profile = undefined;
     vm.projects = [];

@@ -15,8 +15,7 @@
   * @namespace IndexController
   */
   function IndexController($scope, Authentication, Projects, Snackbar) {
-    var vm = this;
-
+    const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.projects = [];
 

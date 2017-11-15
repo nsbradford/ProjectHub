@@ -19,12 +19,15 @@
     var Projects = {
       all: all,
       create: create,
-      get: get
+      get: get,
+      getById: getById,
+      deleteById: deleteById,
+      update: update
     };
 
-    return Projects;
+    const projectURL = '/api/v1/projects/'
 
-    ////////////////////
+    return Projects;
 
     /**
     * @name all
@@ -33,7 +36,7 @@
     * @memberOf projecthub.projects.services.Projects
     */
     function all() {
-      return $http.get('/api/v1/projects/');
+      return $http.get(projectURL);
     }
 
 
@@ -46,8 +49,7 @@
     * @memberOf projecthub.projects.services.Projects
     */
     function create(title, description, majors) {
-      // console.log(majors)
-      return $http.post('/api/v1/projects/', {
+      return $http.post(projectURL, {
         title: title,
         description: description,
         // majors: majors // TODO only handling a single major currently
@@ -64,6 +66,32 @@
      */
     function get(username) {
       return $http.get('/api/v1/accounts/' + username + '/projects/');
+    }
+
+    /**
+     * @name get
+     * @desc Get the Project of the given projectID
+     * @param {string} username The username to get Projects for
+     * @param {string} projectID The projectID to get
+     * @returns {Promise}
+     * @memberOf projecthub.projects.services.Projects
+     */
+    function getById(projectID) {
+      return $http.get(projectURL + projectID + '/');
+    }
+
+    /**
+     *
+     */
+    function deleteById(projectID) {
+      return $http.delete(projectURL + projectID + '/')
+    }
+
+    /**
+     *
+     */
+    function update(project) {
+      return $http.put(projectURL + project.id + '/', project);
     }
   }
 })();

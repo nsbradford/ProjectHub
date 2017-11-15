@@ -17,8 +17,7 @@
   * @namespace ProfileSettingsController
   */
   function ProfileSettingsController($location, $routeParams, Authentication, Profile, Snackbar) {
-    var vm = this;
-
+    const vm = this;
     vm.destroy = destroy;
     vm.update = update;
 
