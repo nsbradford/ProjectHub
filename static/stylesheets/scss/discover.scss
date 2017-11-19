@@ -7,34 +7,45 @@
  */
 
  @import 'variables';
+.search-pane {
+    padding-bottom: 10px;
+    
+    .search-form {
+        
+        div{
+            padding: 0;
+        }
+        .btn {
+            margin: 0;
+            height:60px;
+        }
 
- .search-form{
-
-    .btn {
-        margin: 0;
-        height:60px;
-    }
-
-    .no-wrap{
-        display: flex;
-        flex-wrap: nowrap;
-        margin: 0;
-        margin-bottom: 20px;
-        width:100%;
-    }
-    .search-input{
-        margin:0;
-        height:60px !important;
-        border: $brand-primary solid;
-        border-width: 1px;
-        border-radius: 2px;
-        padding: 10px;
-        background-color: lighten($brand-secondary, 50);
-        max-width: 300px;
+        .no-wrap{
+            display: flex;
+            flex-wrap: nowrap;
+            margin: 0;
+            margin-bottom: 20px;
+            width:100%;
+        }
+        .search-input{
+            margin:0;
+            padding: 0;
+            height:60px !important;
+            border: $brand-primary solid;
+            border-width: 1px;
+            border-radius: 2px;
+            padding: 10px;
+            background-color: lighten($brand-secondary, 50);
+            width: 100%;
+        }
     }
 }
 
-
 .inline{
     display: inline;
+}
+
+.majors-panel{
+    margin-left: 50px;
+    margin-right: 50px;
 }

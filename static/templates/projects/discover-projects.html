@@ -1,41 +1,12 @@
-
 <div class="row">
-  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-4 col-sm-offset-5 col-md-offset-5 col-lg-offset-4">
-      <form action="" method="POST" class="form-inline search-form" role="form">
-        <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 inline no-wrap">
-          <div class="form-group">
-            <label class="sr-only" for="">label</label>
-            <input class="search-input" id="" placeholder="Input field">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>        
-      </form>
+  <div ng-repeat="project in projects">
+    <div ng-show="projects.length" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <project project="project"></project>
+    </div>
+    <!-- Else -->
   </div>
 </div>
 
-<div class="row" ng-cloak>  
-  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
-    <div class="well">
-      <ul class="nav nav-pills nav-stacked">
-        <h3>Filter by Major</h3>
-        <li ng-click="vm.toggleFilter()" role="presentation" class="active"><a href="#">Computer Science</a></li>
-        <li role="presentation"><a href="#">Biomedical Engineering</a></li>
-        <li role="presentation"><a href="#">Underwater Basket Weaving</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="col-xs-12 col-sm-8 col-md-6 col-lg-5 col-lg-offset-1">
-    <div ng-repeat="project in projects">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <project project="project"></project>
-      </div>
-    </div>
-  </div>
-  
-  <div ng-hide="projects && projects.length">
-    <div class="col-sm-12 no-projects-here">
-      <em>There are no projects here.</em>
-    </div>
-  </div>
+<div ng-hide="projects.length" class="col-sm-12 no-projects-here">
+  <em>Ruh Roh, Raggy! Don't looks like any projects fit this criteria.</em>
 </div>

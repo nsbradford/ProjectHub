@@ -1,4 +1,32 @@
-<discover-projects projects="vm.projects" ng-show="vm.projects && vm.projects.length"></discover-projects>
+
+<div class="row">
+    <div class="col-xs-8 col-sm-6 col-md-6 col-lg-4 col-xs-offset-2 col-sm-offset-3 col-md-offset-3 col-lg-offset-4 search-pane">
+    <form action="" method="POST" class="form-inline search-form" role="form">
+       <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+         <input class="search-input" id="" placeholder="Input field">
+       </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <button type="submit" class="btn discover-button">Submit</button>  
+        </div>
+      </form>
+    </div>  
+  </div>
+</div>
+
+<div class="row" ng-cloak>  
+  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+    <div class="well majors-panel">
+      <ul class="nav nav-pills nav-stacked">
+        <h3>Filter by Major</h3>
+        <li ng-repeat="filter in vm.allFilters" ng-click="vm.toggleFilter(filter)" role="presentation" ng-class="{'active': filter.active }"><a href="#">{{filter.title}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <discover-projects projects="vm.filteredProjects"></discover-projects>
+  </div>
+  
 <a class="btn btn-primary btn-fab btn-raised mdi-content-add btn-add-new-project"
   href="javascript:void(0)"
   ng-show="vm.isAuthenticated"

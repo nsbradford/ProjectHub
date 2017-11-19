@@ -18,17 +18,14 @@
   */
   function DiscoverProjectsController($scope) {
     const vm = this;
-<<<<<<< HEAD
-    vm.columns = [];
-=======
 
+    /**
+     * This will not be static after movign forward within roadmap
+     */
     vm.projects = [];
     vm.toggleFilter = filterApply;
 
->>>>>>> Html Skeleton Finished
-
     activate();
-
 
     /**
     * @name activate
@@ -37,10 +34,6 @@
     */
     function activate() {
       vm.projects = $scope.projects;
-    }
-
-    function filterApply(item){
-      alert("You Clicked me!");
     }
   }
 })();
