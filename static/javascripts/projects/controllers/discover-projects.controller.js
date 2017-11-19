@@ -23,7 +23,6 @@
      * This will not be static after movign forward within roadmap
      */
     vm.projects = [];
-    vm.toggleFilter = filterApply;
 
     activate();
 
