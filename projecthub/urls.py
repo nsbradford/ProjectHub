@@ -12,6 +12,7 @@
 from django.conf.urls import patterns, url, include
 from projecthub.views import IndexView
 from rest_framework_nested import routers
+# from django.contrib import admin
 
 from authentication.views import AccountViewSet
 from authentication.views import LoginView
@@ -29,6 +30,7 @@ accounts_router.register(r'projects', AccountProjectsViewSet)
 
 urlpatterns = patterns(
     '',
+    # url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/v1/', include(accounts_router.urls)),
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
