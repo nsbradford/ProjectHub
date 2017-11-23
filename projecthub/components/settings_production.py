@@ -1,30 +1,56 @@
 """
-Django settings for projecthub project.
+    settings_production.py
 
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
+    Django settings for projecthub project.
 
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
+    For more information on this file, see
+    https://docs.djangoproject.com/en/1.7/topics/settings/
+
+    For the full list of settings and their values, see
+    https://docs.djangoproject.com/en/1.7/ref/settings/
+
+    Quick-start development settings - unsuitable for production
+    See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+    Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', None) #'$6(x*g_2g9l_*g8peb-@anl5^*8q!1w)k&e&2!i)t6$s8kia94'
+SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', True)
-
+DEBUG = os.environ.get('DEBUG', True) 
 TEMPLATE_DEBUG = DEBUG
+ALLOWED_HOSTS = ['.goprojecthub.com']
 
-ALLOWED_HOSTS = '.goprojecthub.com'
+# HTTPS configs
+
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+
+# mailgun configs
+
+# email with Mailgun
+
+# EMAIL_HOST = 'smtp.mailgun.org'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'postmaster@goprojecthub.com'
+# EMAIL_HOST_PASSWORD = 'SECRET_Password_use_python-decouple'
+# EMAIL_USE_TLS = True
+
+# Django: from which email addresses to send messages
+
+# DEFAULT_FROM_EMAIL = 
+# SERVER_EMAIL =
+
+# logging and notifications of server errors
+
+# LOGGING = []
+# ADMINS = [] # notified of 500 errors
+# MANAGERS = [] # notified of 404 errors
 
 
 # Application definition
@@ -121,7 +147,6 @@ ALLOWED_HOSTS = ['*']
 
 # change the user model from User to our custom Account
 AUTH_USER_MODEL = 'authentication.Account'
-
 
 
 # based on https://stackoverflow.com/questions/5739830/simple-log-to-file-example-for-django-1-3
