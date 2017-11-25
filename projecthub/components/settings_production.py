@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', True) 
+DEBUG = os.environ.get('DEBUG', False) 
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['.goprojecthub.com']
 
@@ -35,11 +35,11 @@ ALLOWED_HOSTS = ['.goprojecthub.com']
 
 # email with Mailgun
 
-# EMAIL_HOST = 'smtp.mailgun.org'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'postmaster@goprojecthub.com'
-# EMAIL_HOST_PASSWORD = 'SECRET_Password_use_python-decouple'
-# EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', None)
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
+EMAIL_USE_TLS = True
 
 # Django: from which email addresses to send messages
 
@@ -197,3 +197,12 @@ LOGGING = {
         },
     }
 }
+
+# TEST
+
+print "\nManual tests..."
+if not SECRET_KEY: print 'WARNING: SECRET_KEY not set'
+if not EMAIL_HOST_USER: print 'WARNING: EMAIL_HOST_USER not set'
+if not EMAIL_HOST_PASSWORD: print 'WARNING: EMAIL_HOST_PASSWORD not set'
+if DEBUG: print 'WARNING: running in DEBUG mode'
+print ''

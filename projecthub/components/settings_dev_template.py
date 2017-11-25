@@ -10,4 +10,7 @@ ALLOWED_HOSTS = []
 
 # TODO add database login info
 
-# TODO add Mailgun login info
+# Mailgun login info
+
+EMAIL_HOST_USER = 'postmaster@goprojecthub.com'
+EMAIL_HOST_PASSWORD = 'change_me'
