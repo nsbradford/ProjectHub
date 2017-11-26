@@ -14,3 +14,11 @@ ALLOWED_HOSTS = []
 
 EMAIL_HOST_USER = 'postmaster@goprojecthub.com'
 EMAIL_HOST_PASSWORD = 'change_me'
+
+
+# SSL: must disable when developing locally
+
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
