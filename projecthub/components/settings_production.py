@@ -62,6 +62,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
     'rest_framework',
     'compressor',
     'authentication',
@@ -147,6 +152,38 @@ ALLOWED_HOSTS = ['*']
 
 # change the user model from User to our custom Account
 AUTH_USER_MODEL = 'authentication.Account'
+
+
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+#     'allauth.account.auth_backends.AuthenticationBackends'
+# )
+
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#     'django.contrib.auth.context_processors.auth',
+#     'django.core.context_processors.debug',
+#     'django.core.context_processors.i18n',
+#     'django.core.context_processors.media',
+#     'django.core.context_processors.static',
+#     'django.core.context_processors.tz',
+#     'django.contrib.messages.context_processors.messages',
+#     'django.core.context_processors.request',
+#     'allauth.account.context_processors.account',
+#     'allauth.socialaccount.context_processors.socialaccount',
+# )
+
+# SITE_ID = 1
+
+# LOGIN_REDIRECT_URL = '/'
+# SOCIALACCOUNT_QUERY_EMAIL = True
+# SOCIALACCOUNT_PROVIDERS = {
+#     'facebook': {
+#         'SCOPE': ['email'],
+#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+#         'METHOD': 'oauth2',
+#         'VERIFIED_EMAIL': False
+#     }
+# }
 
 
 # based on https://stackoverflow.com/questions/5739830/simple-log-to-file-example-for-django-1-3
