@@ -1,15 +1,12 @@
 <div class="row" ng-cloak>
-  <div ng-repeat="column in vm.columns">
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-      <div ng-repeat="project in column">
-        <project project="project"></project>
-      </div>
+  <div ng-repeat="project in projects">
+    <div ng-show="projects.length" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <project project="project"></project>
     </div>
+    <!-- Else -->
   </div>
+</div>
 
-  <div ng-hide="vm.columns && vm.columns.length">
-    <div class="col-sm-12 no-projects-here">
-      <em>There are no projects here.</em>
-    </div>
-  </div>
+<div ng-hide="projects.length" class="col-sm-12 no-projects-here">
+  <em>Ruh Roh, Raggy! Don't looks like any projects fit this criteria.</em>
 </div>

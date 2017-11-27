@@ -30,6 +30,8 @@ staticfiles/
 
 # IDEs and editors
 /.idea
+/.vscode
+/virtualenv
 
 # misc
 /.sass-cache
