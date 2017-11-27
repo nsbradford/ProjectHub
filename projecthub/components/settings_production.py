@@ -33,8 +33,6 @@ SESSION_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# mailgun configs
-
 # email with Mailgun
 
 EMAIL_HOST = 'smtp.mailgun.org'
@@ -43,16 +41,20 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', None)
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
 EMAIL_USE_TLS = True
 
-# Django: from which email addresses to send messages
+# TODO Django: from which email addresses to send messages
 
 # DEFAULT_FROM_EMAIL = 
 # SERVER_EMAIL =
 
-# logging and notifications of server errors
+# TODO logging and notifications of server errors
 
 # LOGGING = []
 # ADMINS = [] # notified of 500 errors
 # MANAGERS = [] # notified of 404 errors
+
+# TODO: for django-allauth:
+#   AUTHENTICATION_BACKENDS, TEMPLATE_CONTEXT_PROCESSORS, SITE_ID, LOGIN_REDIRECT_URL,
+#   SOCIALACCOUNT_QUERY_EMAIL, SOCIALACCOUNT_PROVIDERS
 
 
 # Application definition
@@ -93,6 +95,8 @@ WSGI_APPLICATION = 'projecthub.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+
+# TODO switch from SQLite to Postgres
 
 import dj_database_url
 
@@ -181,38 +185,6 @@ ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'authentication.Account'
 
 
-# AUTHENTICATION_BACKENDS = (
-#     'django.contrib.auth.backends.ModelBackend',
-#     'allauth.account.auth_backends.AuthenticationBackends'
-# )
-
-# TEMPLATE_CONTEXT_PROCESSORS = (
-#     'django.contrib.auth.context_processors.auth',
-#     'django.core.context_processors.debug',
-#     'django.core.context_processors.i18n',
-#     'django.core.context_processors.media',
-#     'django.core.context_processors.static',
-#     'django.core.context_processors.tz',
-#     'django.contrib.messages.context_processors.messages',
-#     'django.core.context_processors.request',
-#     'allauth.account.context_processors.account',
-#     'allauth.socialaccount.context_processors.socialaccount',
-# )
-
-# SITE_ID = 1
-
-# LOGIN_REDIRECT_URL = '/'
-# SOCIALACCOUNT_QUERY_EMAIL = True
-# SOCIALACCOUNT_PROVIDERS = {
-#     'facebook': {
-#         'SCOPE': ['email'],
-#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-#         'METHOD': 'oauth2',
-#         'VERIFIED_EMAIL': False
-#     }
-# }
-
-
 # based on https://stackoverflow.com/questions/5739830/simple-log-to-file-example-for-django-1-3
 # TODO don't need both info and debug logs
 SITE_ROOT = '.'
@@ -264,7 +236,7 @@ LOGGING = {
 
 # TEST
 
-print "\nManual tests..."
+print "\nProduction env tests..."
 if not SECRET_KEY: print 'WARNING: SECRET_KEY not set'
 if not EMAIL_HOST_USER: print 'WARNING: EMAIL_HOST_USER not set'
 if not EMAIL_HOST_PASSWORD: print 'WARNING: EMAIL_HOST_PASSWORD not set'
