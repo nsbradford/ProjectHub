@@ -1,0 +1,37 @@
+/**
+ * Discover.scss
+ * Styles the discover page and all components unique to it.
+ *
+ * @author Ben Bianchi
+ *
+ */
+.search-pane {
+  padding-bottom: 10px; }
+  .search-pane .search-form div {
+    padding: 0; }
+  .search-pane .search-form .btn {
+    margin: 0;
+    height: 60px; }
+  .search-pane .search-form .no-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    margin-bottom: 20px;
+    width: 100%; }
+  .search-pane .search-form .search-input {
+    margin: 0;
+    padding: 0;
+    height: 60px !important;
+    border: #0277bd solid;
+    border-width: 1px;
+    border-radius: 2px;
+    padding: 10px;
+    background-color: #f5f6f7;
+    width: 100%; }
+
+.inline {
+  display: inline; }
+
+.majors-panel {
+  margin-left: 50px;
+  margin-right: 50px; }

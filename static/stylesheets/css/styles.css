@@ -7,6 +7,44 @@
  *
  *
  */
+/**
+ * Discover.scss
+ * Styles the discover page and all components unique to it.
+ *
+ * @author Ben Bianchi
+ *
+ */
+.search-pane {
+  padding-bottom: 10px; }
+  .search-pane .search-form div {
+    padding: 0; }
+  .search-pane .search-form .btn {
+    margin: 0;
+    height: 60px; }
+  .search-pane .search-form .no-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    margin-bottom: 20px;
+    width: 100%; }
+  .search-pane .search-form .search-input {
+    margin: 0;
+    padding: 0;
+    height: 60px !important;
+    border: #0277bd solid;
+    border-width: 1px;
+    border-radius: 2px;
+    padding: 10px;
+    background-color: #f5f6f7;
+    width: 100%; }
+
+.inline {
+  display: inline; }
+
+.majors-panel {
+  margin-left: 50px;
+  margin-right: 50px; }
+
 a {
   color: #0277bd; }
 
@@ -240,42 +278,65 @@ input.agreement-checkbox {
     color: white; }
   .navbar-default .navbar-brand:hover {
     color: #e0e0e0; }
+
+/* DiscoverProjects */
+.no-projects-here {
+  text-align: center; }
+
+.btn-add-new-project {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; }
+
+/* Navbar */
+/* See https://stackoverflow.com/questions/18529274/
+     change-navbar-color-in-twitter-bootstrap-3 */
+/* navbar */
+.navbar-default {
+  background-color: #0277bd;
+  border-color: #0277bd; }
+  .navbar-default .navbar-brand {
+    color: white; }
+  .navbar-default .navbar-nav li a {
+    color: white; }
+  .navbar-default .navbar-brand:hover {
+    color: #e0e0e0; }
   .navbar-default .navbar-nav li a:hover {
     color: #e0e0e0; }
 
 /* Title */
 /*.navbar-default .navbar-brand {
-    color: #777;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-    color: #5E5E5E;
-}
-*/
+      color: #777;
+  }
+  .navbar-default .navbar-brand:hover,
+  .navbar-default .navbar-brand:focus {
+      color: #5E5E5E;
+  }
+  */
 /* Link */
 /*.navbar-default .navbar-nav > li > a {
-    color: #777;
-}
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-    color: #333;
-}
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-    color: #555;
-    background-color: #E7E7E7;
-}
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-    color: #555;
-    background-color: #D5D5D5;
-}
-*/
+      color: #777;
+  }
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+      color: #333;
+  }
+  .navbar-default .navbar-nav > .active > a,
+  .navbar-default .navbar-nav > .active > a:hover,
+  .navbar-default .navbar-nav > .active > a:focus {
+      color: #555;
+      background-color: #E7E7E7;
+  }
+  .navbar-default .navbar-nav > .open > a,
+  .navbar-default .navbar-nav > .open > a:hover,
+  .navbar-default .navbar-nav > .open > a:focus {
+      color: #555;
+      background-color: #D5D5D5;
+  }
+  */
 /* Caret */
 /*.navbar-default .navbar-nav > .dropdown > a .caret {
-    border-top-color: #777;
-    border-bottom-color: #777;
-}
-*/
+      border-top-color: #777;
+      border-bottom-color: #777;
+  }
+  */
