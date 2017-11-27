@@ -17,7 +17,9 @@
   function IndexController($scope, Authentication, Projects, Snackbar) {
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
-    vm.allFilters = [{ title: "CS" }, { title: "ME" }, { title: "ECE" }]; // This will be removed soon.
+    vm.allFilters = [{ title: "CS" }, { title: "ME" }, { title: "ECE" }]; 
+    // This will be removed soon. We will be pulling the majors from the backend using angular.
+    // Until we have that endpoint, we will be using a static list.
     vm.toggleFilter = toggleFilter;
     vm.projects = [];
     vm.filteredProjects = [];

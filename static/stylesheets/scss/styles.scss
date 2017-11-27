@@ -220,6 +220,9 @@ input.agreement-checkbox {
 }
 
 .project {
+  border-bottom: $brand-secondary solid 1px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 
   .project__meta {
     font-weight: bold;
