@@ -9,7 +9,7 @@
         
 """
 
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 from projecthub.views import IndexView
 from rest_framework_nested import routers
 
@@ -27,11 +27,10 @@ accounts_router = routers.NestedSimpleRouter(
 )
 accounts_router.register(r'projects', AccountProjectsViewSet)
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/v1/', include(accounts_router.urls)),
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
     url('^.*$', IndexView.as_view(), name='index'),
-)
+]
