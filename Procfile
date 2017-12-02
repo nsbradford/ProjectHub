@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn projecthub.wsgi --log-file -
+web: newrelic-admin run-program gunicorn projecthub.wsgi --log-file -

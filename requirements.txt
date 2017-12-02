@@ -12,6 +12,7 @@ djangorestframework==3.7.3
 drf-nested-routers==0.90.0
 gunicorn==19.1.1
 idna==2.6
+newrelic==2.98.0.81
 oauthlib==2.0.6
 psycopg2==2.7.3.2
 python-openid==2.2.5
