@@ -38,7 +38,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         searchString = self.request.query_params.get("searchString", None)
         if searchString:
-            return Project.objects.filter(title__contains=searchString)
+            return Project.objects.filter(title__contains=searchString).order_by('-created_at')
         
         return Project.objects.order_by('-created_at')
 
