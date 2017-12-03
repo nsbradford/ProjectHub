@@ -63,11 +63,12 @@
         Snackbar.error(data.error);
       }
     }
+    
     /**
- * @name filterToggleCallback
- * @desc Function that is called when a user applies a filter.
- * 
- */
+     * @name filterToggleCallback
+     * @desc Function that is called when a user applies a filter.
+     * 
+     */
     function toggleFilter(filter) {
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
