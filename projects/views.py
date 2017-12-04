@@ -16,7 +16,8 @@ from projects.serializers import ProjectSerializer
 class ProjectViewSet(viewsets.ModelViewSet):
     """ Combined RESTful view for Project model. """
 
-    queryset = Project.objects.order_by('-created_at')
+    LAZYLOAD_TRANSACTION_LENGTH = 5
+
     serializer_class = ProjectSerializer
     lookup_field = 'pk'
 
@@ -36,11 +37,19 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return super(ProjectViewSet, self).perform_create(serializer)
 
     def get_queryset(self):
+<<<<<<< HEAD
         searchString = self.request.query_params.get("searchString", None)
         if searchString:
             return Project.objects.filter(title__contains=searchString).order_by('-created_at')
         
         return Project.objects.order_by('-created_at')
+=======
+        lastProjectIndex = self.request.query_params.get("lastProjectIndex", 0)
+
+        return Project.objects.order_by('-created_at')#[lastProjectIndex:LAZYLOAD_TRANSACTION_LENGTH]
+
+
+>>>>>>> Demo Ready, need to also pass in activated filters so that we get the next N projects that pass filters
 
 class AccountProjectsViewSet(viewsets.ViewSet):
     queryset = Project.objects.select_related('author').all()

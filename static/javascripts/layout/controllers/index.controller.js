@@ -15,6 +15,8 @@
   * @namespace IndexController
   */
   function IndexController($scope, Authentication, Projects, Snackbar) {
+    
+
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.allFilters = [{ title: "CS" }, { title: "ME" }, { title: "ECE" }]; 
@@ -24,7 +26,11 @@
     vm.submitSearch = submitSearch;
     vm.projects = [];
     vm.filteredProjects = [];
+<<<<<<< HEAD
     vm.searchString = null;
+=======
+    vm.lastProjectIndex = 0;
+>>>>>>> Demo Ready, need to also pass in activated filters so that we get the next N projects that pass filters
 
     activate();
 
@@ -36,29 +42,30 @@
     * @memberOf projecthub.layout.controllers.IndexController
     */
     function activate() {
-      Projects.all().then(projectsSuccessFn, projectsErrorFn);
+      Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
 
       // fetch the projects again on creation
       $scope.$on('project.created', function (event, data) {
         Projects.all().then(projectsSuccessFn, projectsErrorFn);
       });
 
-      /**
-      * @name projectsSuccessFn
-      * @desc Update projects array on view
-      */
-      function projectsSuccessFn(data, status, headers, config) {
-        vm.projects = data.data;
-        vm.filteredProjects = data.data;
-      }
+    }
+    /**
+    * @name projectsSuccessFn
+    * @desc Update projects array on view
+    */
+    function projectsSuccessFn(data, status, headers, config) {
+      vm.projects = data.data;
+      vm.filteredProjects = data.data;
+      vm.lastProjectIndex += data.data.length;
+    }
 
-      /**
-      * @name projectsErrorFn
-      * @desc Show snackbar with error
-      */
-      function projectsErrorFn(data, status, headers, config) {
-        Snackbar.error(data.error);
-      }
+    /**
+    * @name projectsErrorFn
+    * @desc Show snackbar with error
+    */
+    function projectsErrorFn(data, status, headers, config) {
+      Snackbar.error(data.error);
     }
     
     /**
@@ -112,6 +119,7 @@
     }
 
     /**
+<<<<<<< HEAD
      * @name submitSearch
      * @desc Perform a call to the server in order to recieve a search result list back
      * Attach Success and Failure callbacks, and finally apply all filters. 
@@ -152,5 +160,14 @@
       Snackbar.error(data.error);
     }
 
+=======
+     * @name lazyLoad
+     * @desc Perform a get request to the server that loads the 
+     * constant LAZY_LOAD_PROJECT_LENGTH amount of projects
+     */
+    function lazyLoad() {
+      Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsSuccessFn);
+    }
+>>>>>>> Demo Ready, need to also pass in activated filters so that we get the next N projects that pass filters
   }
 })();
