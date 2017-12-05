@@ -1,6 +1,5 @@
 <div class="row">
   <div class="col-sm-12">
-    <div class="well">
       <div class="project">
       
         <div class="project__meta">
@@ -17,15 +16,15 @@
             {{ project.major }}
           </div>
 
-          <div class="project__location">
+          <!-- <div class="project__location">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
             Worcester, MA
-          </div>
+          </div> -->
 
-          <div class="project__location">
+          <!-- <div class="project__location">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
             3 hours/week for 6 months
-          </div>
+          </div> -->
         </div>
 
         <div class="project__author">
@@ -35,14 +34,21 @@
             <i class="fa fa-pencil" aria-hidden="true"></i>
             <i ng-click="vm.deleteProject()" class="fa fa-trash-o" aria-hidden="true"></i>
           </div> -->
-
-          <a class="author" href="/+{{ project.author.username }}">
-            +{{ project.author.username }}
-          </a>
+          <div class="project-footer" >
+            <span class="pull-left">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              Created At {{ project.created_at | amCalendar:referenceTime:formats }}
+            </span>
+            
+            <span class="pull-right">
+              <a class="author" href="/+{{ project.author.username }}">
+              +{{ project.author.username }}
+            </a>
+          </span>
+          </div> 
 
         </div>
 
       </div>
-    </div>
   </div>
 </div>

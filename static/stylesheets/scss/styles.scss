@@ -117,6 +117,14 @@ label {
   
 }
 
+.pull-right {
+  right: 0px;
+}
+
+.pull-left {
+  left: 0px;
+}
+
 .btn {
   padding-left: 30px;
   padding-right: 30px;
@@ -225,6 +233,9 @@ input.agreement-checkbox {
 }
 
 .project {
+  border-bottom: $brand-secondary solid 1px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 
   .project__meta {
     font-weight: bold;
@@ -272,6 +283,12 @@ input.agreement-checkbox {
     padding: 3px 10px 3px 10px;
     color: white;
     font-weight: normal;
+  }
+
+  .project-footer {
+    margin-top: 10px;
+    padding-top: 10px;
+    height: 50px;
   }
 }
   
