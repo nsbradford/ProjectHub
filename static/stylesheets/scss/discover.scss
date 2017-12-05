@@ -46,6 +46,16 @@
 }
 
 .majors-panel{
-    margin-left: 50px;
+    margin-left: 20px;
     margin-right: 50px;
+    
+    .major-pills {
+        margin-left: 10px;
+        border-left: $brand-primary solid 1px;
+
+        .major-list-item {
+            padding-left: 10px;
+        }
+    }
+
 }
