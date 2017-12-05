@@ -17,32 +17,18 @@
   function NewProjectController($rootScope, $scope, Authentication, Snackbar, Projects) {
     const vm = this;
     vm.submit = submit;
+    vm.majors = '' // TODO bug: 'field may not be left blank'
 
     /**
-    * TODO: This is a trick to the project creation appear instant, by repopulating the list
-    * with the new project immediately. However, in some cases the request to the server
-    * might actually fail, leading to an error, or a user thinking a project was created
-    * when it really wasn't. It also makes the code a little more complex and harder
-    * to understand. For these reasons, this should be removed in final production.
     * @name submit
     * @desc Create a new Project
     * @memberOf projecthub.projects.controllers.NewProjectController
     */
     function submit() {
       var splitMajors = vm.majors.split(' ');
-      $rootScope.$broadcast('project.created', {
-        title: vm.title,
-        description: vm.description,
-        // majors: splitMajors,
-        major: vm.majors, // TODO: only handling a single major for now
-        author: {
-          username: Authentication.getAuthenticatedAccount().username
-        }
-      });
 
-      $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
       Projects.create(vm.title, vm.description, vm.majors).then(createProjectSuccessFn, createProjectErrorFn);
-
+      $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
 
       /**
       * @name createProjectSuccessFn
@@ -50,6 +36,7 @@
       */
       function createProjectSuccessFn(data, status, headers, config) {
         Snackbar.show('Success! Project created.');
+        $rootScope.$broadcast('project.created', {})
       }
 
 
