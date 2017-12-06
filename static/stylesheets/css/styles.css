@@ -96,6 +96,8 @@ label {
 
 .about-text {
   margin-bottom: 40px; }
+  .about-text p {
+    font-size: 18px; }
 
 .main {
   height: 100%;
@@ -175,12 +177,13 @@ body .login-no-shadow {
 
 .form-control, .form-control:focus {
   padding: 10px;
-  height: 3em !important;
+  min-height: 3em !important;
   border-style: solid;
   border-width: 1px !important;
   border-color: #C5CBD2 !important;
   border-radius: 3px !important;
-  margin-bottom: 25px; }
+  margin-bottom: 25px;
+  resize: vertical; }
 
 .show-hide-password {
   float: right;
