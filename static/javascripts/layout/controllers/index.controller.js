@@ -21,8 +21,10 @@
     // This will be removed soon. We will be pulling the majors from the backend using angular.
     // Until we have that endpoint, we will be using a static list.
     vm.toggleFilter = toggleFilter;
+    vm.submitSearch = submitSearch;
     vm.projects = [];
     vm.filteredProjects = [];
+    vm.searchString = null;
 
     activate();
 
@@ -108,5 +110,47 @@
         }        
       });
     }
+
+    /**
+     * @name submitSearch
+     * @desc Perform a call to the server in order to recieve a search result list back
+     * Attach Success and Failure callbacks, and finally apply all filters. 
+     * 
+     * @param {String} searchString The string we provide to the server to be used in a search.
+     */
+    function submitSearch(searchString) {
+      if (searchString) {
+        Projects.search(searchString).then(ProjectSearchSuccessCallback, ProjectSearchFailureCallback); 
+      } else {
+        Snackbar.error("Pleae provide something to search.");
+      }
+    }
+    
+    /**
+     * @name ProjectSearchSuccessCallback
+     * @desc Callback that is fired on a successful search event. Apples filters.
+     *
+     * @param {object} response the Response we get from the server 
+     * @param {object} status the status of the resposne we recieve. This will be used in lazyloader later...
+     * @param {object} headers the headers of the response
+     * @param {object} config the config of the response
+     */
+    function ProjectSearchSuccessCallback(response, status, headers, config) {
+      vm.projects = response.data;
+      filterProjects(); 
+    }
+
+    /**
+     *  
+     *
+     * @param {object} response the Response we get from the server 
+     * @param {object} status the status of the resposne we recieve. This will be used in lazyloader later...
+     * @param {object} headers the headers of the response
+     * @param {object} config the config of the response
+     */
+    function ProjectSearchFailureCallback(response, status, headers, config) {
+      Snackbar.error(data.error);
+    }
+
   }
 })();

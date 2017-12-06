@@ -35,7 +35,12 @@ class ProjectViewSet(viewsets.ModelViewSet):
         instance = serializer.save(author=self.request.user)
         return super(ProjectViewSet, self).perform_create(serializer)
 
-
+    def get_queryset(self):
+        searchString = self.request.query_params.get("searchString", None)
+        if searchString:
+            return Project.objects.filter(title__contains=searchString).order_by('-created_at')
+        
+        return Project.objects.order_by('-created_at')
 
 class AccountProjectsViewSet(viewsets.ViewSet):
     queryset = Project.objects.select_related('author').all()
