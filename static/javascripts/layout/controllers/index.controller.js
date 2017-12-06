@@ -55,8 +55,8 @@
     * @desc Update projects array on view
     */
     function projectsSuccessFn(data, status, headers, config) {
-      vm.projects = data.data;
-      vm.filteredProjects = data.data;
+      vm.projects = vm.projects.concat(data.data);
+      vm.filteredProjects = vm.filteredProjects.concat(data.data);
       vm.lastProjectIndex += data.data.length;
     }
 
