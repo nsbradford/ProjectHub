@@ -30,20 +30,15 @@
     * @name activate
     * @desc Actions to be performed when this controller is instantiated.
     *   On project.created or project.created.error, update the projects
-    *   array to reflect the changes. On successful add, we actually
-    *   add the project before receiving confirmation to avoid waiting for
-    *   another API response, increasing the perceived speed.
+    *   array to reflect the changes.
     * @memberOf projecthub.layout.controllers.IndexController
     */
     function activate() {
       Projects.all().then(projectsSuccessFn, projectsErrorFn);
 
-      $scope.$on('project.created', function (event, project) {
-        vm.projects.unshift(project);
-      });
-
-      $scope.$on('project.created.error', function () {
-        vm.projects.shift();
+      // fetch the projects again on creation
+      $scope.$on('project.created', function (event, data) {
+        Projects.all().then(projectsSuccessFn, projectsErrorFn);
       });
 
       /**
