@@ -12,12 +12,18 @@ const ngAnnotate = require('gulp-ng-annotate');
 const uglify = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
 const sass        = require('gulp-sass');
+const gutil = require('gulp-util');
+const babel = require('gulp-babel');
+
 
 
 gulp.task('build', function () {
   return gulp.src('static/javascripts/**/*.js')
     .pipe(ngAnnotate())
-    .pipe(uglify())
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(uglify().on('error', gutil.log))
     .pipe(gulp.dest('dist/static/javascripts/'));
 });
 
