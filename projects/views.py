@@ -46,7 +46,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
 =======
         lastProjectIndex = self.request.query_params.get("lastProjectIndex", 0)
 
-        return Project.objects.order_by('-created_at')#[lastProjectIndex:LAZYLOAD_TRANSACTION_LENGTH]
+        return Project.objects.order_by('-created_at')[lastProjectIndex:self.LAZYLOAD_TRANSACTION_LENGTH]
 
 
 >>>>>>> Demo Ready, need to also pass in activated filters so that we get the next N projects that pass filters

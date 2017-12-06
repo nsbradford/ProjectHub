@@ -121,7 +121,13 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function isAuthenticated() {
-      return !!$cookies.authenticatedAccount;
+      const isAuth = !!$cookies.authenticatedAccount;
+
+      if (!isAuth) {
+        this.logout();
+      }
+
+      return isAuth;
     }
 
     /**
