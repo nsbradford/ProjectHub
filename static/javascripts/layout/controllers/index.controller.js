@@ -56,13 +56,27 @@
     * @desc Update projects array on view
     */
     function projectsSuccessFn(data, status, headers, config) {
+      
+      /**
+       * No Content -- Tell the controller that we can no longer lazyload,
+       * Do not add anything to the the project list
+       */
+      if ( data.status == 204) {
+        vm.canLoadMoreProjects = false;
+        return;
+      }
+
+      /**
+       * Partial content -- Tell controller, no more lazyloading
+       * Go ahead and add to the project lists
+       */
+      if (data.status == 206) {
+        vm.canLoadMoreProjects = false;
+      }
       vm.projects = vm.projects.concat(data.data);
       vm.filteredProjects = vm.filteredProjects.concat(data.data);
       vm.lastProjectIndex += data.data.length;
       
-      if (data.status == 206 || data.status == 204) {
-        vm.canLoadMoreProjects = false;
-      }
     }
 
     /**
@@ -149,6 +163,7 @@
      */
     function ProjectSearchSuccessCallback(response, status, headers, config) {
       vm.projects = response.data;
+      vm.canLoadMoreProjects = true;
       filterProjects(); 
     }
 
@@ -170,7 +185,7 @@
      */
     function lazyLoad() {
       if (vm.canLoadMoreProjects) {
-        Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsSuccessFn);
+        Projects.load(vm.lastProjectIndex, vm.searchString).then(projectsSuccessFn, projectsSuccessFn);
       }
     }
   }

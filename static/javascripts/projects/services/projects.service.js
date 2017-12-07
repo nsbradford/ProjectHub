@@ -35,11 +35,15 @@
     * @desc Gets n amount of projects
     *
     * @param int transactionStartIndex how many projects to load.
+    * @param string searchString the string we are searching for (could also be nothing)
     * @returns {Promise}
     * @memberOf projecthub.projects.services.Projects
     */
-    function load(transactionStartIndex) {
-      return $http.get(projectURL + "?lastProjectIndex=" + transactionStartIndex);
+    function load(transactionStartIndex, searchString) {
+      if (searchString == undefined) {
+        searchString = "";
+      }
+      return $http.get(projectURL + "?lastProjectIndex=" + transactionStartIndex + "&searchString=" + encodeURIComponent(searchString));
     }
 
 
