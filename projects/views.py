@@ -19,7 +19,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     LAZYLOAD_TRANSACTION_LENGTH = 5
 
-    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     lookup_field = 'pk'
 
@@ -38,25 +37,19 @@ class ProjectViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
         return super(ProjectViewSet, self).perform_create(serializer)
 
-<<<<<<< HEAD
     def get_queryset(self):
-<<<<<<< HEAD
         searchString = self.request.query_params.get("searchString", None)
         if searchString:
-            return Project.objects.filter(title__contains=searchString).order_by('-created_at')
-        
-        return Project.objects.order_by('-created_at')
-=======
-        lastProjectIndex = self.request.query_params.get("lastProjectIndex", 0)
+            return Project.objects.filter(
+                title__contains=searchString).order_by('-created_at')
+        return Project.objects.all() 
 
-        return Project.objects.order_by('-created_at')[lastProjectIndex:self.LAZYLOAD_TRANSACTION_LENGTH]
-
-=======
     # @list_route()
     def list(self, request, pk=None):
         last_project_index = int(
                 request.query_params.get("lastProjectIndex", 0))
-        num_project = self.queryset.count()
+        queryset = self.get_queryset()
+        num_project = queryset.count()
         
         #   Case 1, we have used returned all of the projects
         #   In this case, return nothing and a status notifying the user
@@ -70,7 +63,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         #   Return the projects but also notify the user that that's all folks
         if last_project_index + self.LAZYLOAD_TRANSACTION_LENGTH > num_project:
             rest_of_projects = num_project % self.LAZYLOAD_TRANSACTION_LENGTH
-            serializer = self.get_serializer(self.queryset[
+            serializer = self.get_serializer(queryset[
                             last_project_index:last_project_index +
                             rest_of_projects], many=True)
             
@@ -79,14 +72,12 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
         #   Otherwise, the normal use case -- send back N amount of projects.
         else:
-            serializer = self.get_serializer(self.queryset[
+            serializer = self.get_serializer(queryset[
                         last_project_index:self.LAZYLOAD_TRANSACTION_LENGTH],
                         many=True)
             
             return Response(serializer.data)
->>>>>>> Demo Ready
 
->>>>>>> Demo Ready, need to also pass in activated filters so that we get the next N projects that pass filters
 
 class AccountProjectsViewSet(viewsets.ViewSet):
     queryset = Project.objects.select_related('author').all()
