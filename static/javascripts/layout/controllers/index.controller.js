@@ -24,13 +24,12 @@
     // Until we have that endpoint, we will be using a static list.
     vm.toggleFilter = toggleFilter;
     vm.submitSearch = submitSearch;
+    vm.lazyLoad = lazyLoad;
     vm.projects = [];
     vm.filteredProjects = [];
-<<<<<<< HEAD
     vm.searchString = null;
-=======
     vm.lastProjectIndex = 0;
->>>>>>> Demo Ready, need to also pass in activated filters so that we get the next N projects that pass filters
+    vm.canLoadMoreProjects = true;
 
     activate();
 
@@ -43,10 +42,12 @@
     */
     function activate() {
       Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
+      $scope.$on('project.created', function (event, project) {
+        vm.projects.unshift(project);
+      });
 
-      // fetch the projects again on creation
-      $scope.$on('project.created', function (event, data) {
-        Projects.all().then(projectsSuccessFn, projectsErrorFn);
+      $scope.$on('project.created.error', function () {
+        vm.projects.shift();
       });
 
     }
@@ -58,6 +59,10 @@
       vm.projects = vm.projects.concat(data.data);
       vm.filteredProjects = vm.filteredProjects.concat(data.data);
       vm.lastProjectIndex += data.data.length;
+      
+      if (data.status == 206 || data.status == 204) {
+        vm.canLoadMoreProjects = false;
+      }
     }
 
     /**
@@ -119,7 +124,6 @@
     }
 
     /**
-<<<<<<< HEAD
      * @name submitSearch
      * @desc Perform a call to the server in order to recieve a search result list back
      * Attach Success and Failure callbacks, and finally apply all filters. 
@@ -159,15 +163,15 @@
     function ProjectSearchFailureCallback(response, status, headers, config) {
       Snackbar.error(data.error);
     }
-
-=======
+    /**
      * @name lazyLoad
      * @desc Perform a get request to the server that loads the 
      * constant LAZY_LOAD_PROJECT_LENGTH amount of projects
      */
     function lazyLoad() {
-      Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsSuccessFn);
+      if (vm.canLoadMoreProjects) {
+        Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsSuccessFn);
+      }
     }
->>>>>>> Demo Ready, need to also pass in activated filters so that we get the next N projects that pass filters
   }
 })();
