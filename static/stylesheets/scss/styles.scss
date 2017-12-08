@@ -214,6 +214,25 @@ input.agreement-checkbox {
   
 }
 
+.profile-panel{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+    padding: 30px;
+    border: $brand-secondary solid 1px;
+    border-radius: 10px;
+    
+    .major-pills {
+        margin-left: 10px;
+        border-left: $brand-primary solid 1px;
+
+        .major-list-item {
+            padding-left: 10px;
+        }
+    }
+
+}
+
 
 /* Individual Project */
 
