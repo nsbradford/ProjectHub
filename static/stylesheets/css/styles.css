@@ -42,8 +42,13 @@
   display: inline; }
 
 .majors-panel {
-  margin-left: 50px;
+  margin-left: 20px;
   margin-right: 50px; }
+  .majors-panel .major-pills {
+    margin-left: 10px;
+    border-left: #0277bd solid 1px; }
+    .majors-panel .major-pills .major-list-item {
+      padding-left: 10px; }
 
 a {
   color: #0277bd; }
@@ -91,6 +96,8 @@ label {
 
 .about-text {
   margin-bottom: 40px; }
+  .about-text p {
+    font-size: 18px; }
 
 .main {
   height: 100%;
@@ -125,6 +132,12 @@ label {
     font-size: 3.5vh;
     padding-top: 30px;
     padding-bottom: 50px; }
+
+.pull-right {
+  right: 0px; }
+
+.pull-left {
+  left: 0px; }
 
 .btn {
   padding-left: 30px;
@@ -164,12 +177,13 @@ body .login-no-shadow {
 
 .form-control, .form-control:focus {
   padding: 10px;
-  height: 3em !important;
+  min-height: 3em !important;
   border-style: solid;
   border-width: 1px !important;
   border-color: #C5CBD2 !important;
   border-radius: 3px !important;
-  margin-bottom: 25px; }
+  margin-bottom: 25px;
+  resize: vertical; }
 
 .show-hide-password {
   float: right;
@@ -207,42 +221,45 @@ input.agreement-checkbox {
       transform: scale(1.2);
       cursor: pointer; }
 
-.project .project__meta {
-  font-weight: bold;
-  text-align: left;
-  font-size: 20px;
-  padding-bottom: 19px; }
-  .project .project__meta .project__content {
-    padding-bottom: 10px;
+.project {
+  border-bottom: #687685 solid 1px;
+  padding-bottom: 10px;
+  padding-top: 10px; }
+  .project .project__meta {
+    font-weight: bold;
+    text-align: left;
+    font-size: 20px;
+    padding-bottom: 19px; }
+    .project .project__meta .project__content {
+      padding-bottom: 10px;
+      font-size: 15px; }
+  .project .project__author {
+    text-align: right; }
+  .project a.author {
+    font-weight: bold;
+    text-align: right; }
+  .project .project__required {
+    font-weight: bold;
     font-size: 15px; }
-
-.project .project__author {
-  text-align: right; }
-
-.project a.author {
-  font-weight: bold;
-  text-align: right; }
-
-.project .project__required {
-  font-weight: bold;
-  font-size: 15px; }
-
-.project .project__location {
-  margin-top: 10px;
-  font-weight: normal;
-  font-size: 15px; }
-  .project .project__location .fa {
-    padding-right: 10px;
-    font-size: 1em;
-    color: #687685; }
-
-.project .project__major {
-  border-radius: 5px;
-  background: #687685;
-  display: inline-block;
-  padding: 3px 10px 3px 10px;
-  color: white;
-  font-weight: normal; }
+  .project .project__location {
+    margin-top: 10px;
+    font-weight: normal;
+    font-size: 15px; }
+    .project .project__location .fa {
+      padding-right: 10px;
+      font-size: 1em;
+      color: #687685; }
+  .project .project__major {
+    border-radius: 5px;
+    background: #687685;
+    display: inline-block;
+    padding: 3px 10px 3px 10px;
+    color: white;
+    font-weight: normal; }
+  .project .project-footer {
+    margin-top: 10px;
+    padding-top: 10px;
+    height: 50px; }
 
 /* new-project */
 .new-project {

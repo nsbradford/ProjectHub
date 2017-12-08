@@ -1,24 +1,24 @@
 
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4 search-pane">
-    <div class="form-inline search-form" role="form">
+    <form class="form-inline search-form" role="form">
        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-         <input disabled class="search-input" id="" placeholder="Search Functionality Not Implemented Yet...">
+         <input class="search-input" id="" ng-model="vm.searchString" ng-value="vm.searchSring" placeholder="Search here for projects...">
        </div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-          <button disabled type="submit" class="btn discover-button">	<i class="fa fa-search" aria-hidden="true" ng-click="vm.editProject()"></i></button>  
+          <button ng-click="vm.submitSearch(vm.searchString)" class="btn discover-button">	<i class="fa fa-search" aria-hidden="true"></i></button>  
         </div>
       </div>
-    </div>  
+    </form>  
   </div>
 </div>
 
 <div class="row" ng-cloak>  
   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-    <div class="well majors-panel">
-      <ul class="nav nav-pills nav-stacked">
-        <h3>Filter by Major</h3>
-        <li ng-repeat="filter in vm.allFilters" ng-click="vm.toggleFilter(filter)" role="presentation" ng-class="{'active': filter.active }"><a href="#">{{filter.title}}</a></li>
+    <div class="majors-panel">
+      <h3>Filter by Major</h3>
+      <ul class="nav nav-pills nav-stacked major-pills">
+        <li class="major-list-item" ng-repeat="filter in vm.allFilters" ng-click="vm.toggleFilter(filter)" role="presentation" ng-class="{'active': filter.active }"><a href="#">{{filter.title}}</a></li>
       </ul>
     </div>
   </div>

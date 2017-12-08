@@ -66,6 +66,10 @@ label {
 
 .about-text {
   margin-bottom: 40px;
+
+  p {
+    font-size: 18px;
+  }
 }
 
 .main {
@@ -111,6 +115,14 @@ label {
     padding-bottom: 50px;
   }
   
+}
+
+.pull-right {
+  right: 0px;
+}
+
+.pull-left {
+  left: 0px;
 }
 
 .btn {
@@ -161,12 +173,13 @@ body .login-no-shadow {
 
 .form-control, .form-control:focus {
   padding:10px;
-  height: 3em !important;
+  min-height: 3em !important;
   border-style: solid;
   border-width: 1px !important;
   border-color: #C5CBD2 !important;
   border-radius: 3px !important;
   margin-bottom: 25px;
+  resize: vertical;
 }
 
 .show-hide-password {
@@ -226,6 +239,9 @@ input.agreement-checkbox {
 }
 
 .project {
+  border-bottom: $brand-secondary solid 1px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 
   .project__meta {
     font-weight: bold;
@@ -273,6 +289,12 @@ input.agreement-checkbox {
     padding: 3px 10px 3px 10px;
     color: white;
     font-weight: normal;
+  }
+
+  .project-footer {
+    margin-top: 10px;
+    padding-top: 10px;
+    height: 50px;
   }
 }
   

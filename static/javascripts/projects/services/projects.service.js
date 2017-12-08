@@ -22,10 +22,11 @@
       get: get,
       getById: getById,
       deleteById: deleteById,
+      search: search,
       update: update
     };
 
-    const projectURL = '/api/v1/projects/'
+    const projectURL = '/api/v1/projects/';
 
     return Projects;
 
@@ -92,6 +93,18 @@
      */
     function update(project) {
       return $http.put(projectURL + project.id + '/', project);
+    }
+
+    /**
+     * @name search
+     * @desc api call to search all projects's fields for a given string.
+     * 
+     * @param {String} searchString string that will be used in a server-side search of projects.
+     * 
+     * @returns {array} an array of all projects that contain the searchString within their fields.
+     */
+    function search(searchString) {
+      return $http.get(projectURL + "?searchString=" + encodeURIComponent(searchString));
     }
   }
 })();

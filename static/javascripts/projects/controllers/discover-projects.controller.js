@@ -6,7 +6,7 @@
   'use strict';
 
   angular
-    .module('projecthub.projects.controllers')
+    .module('projecthub.projects.controllers', ['angularMoment'])
     .controller('DiscoverProjectsController', DiscoverProjectsController);
 
   DiscoverProjectsController.$inject = ['$scope'];
@@ -33,6 +33,7 @@
     */
     function activate() {
       vm.projects = $scope.projects;
+      
     }
   }
 })();
