@@ -199,7 +199,7 @@ body .login-no-shadow {
 }
 
 .agreement-label { 
-  font-weight: normal;
+  font-weight: 200;
   cursor: pointer;
 }
 
@@ -215,12 +215,14 @@ input.agreement-checkbox {
 }
 
 .profile-panel{
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 40px;
-    padding: 30px;
     border: $brand-secondary solid 1px;
     border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 30px;
+    margin-top: 20px;
+
     
     .major-pills {
         margin-left: 10px;
@@ -259,8 +261,8 @@ input.agreement-checkbox {
 
 .project {
   border-bottom: $brand-secondary solid 1px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 40px;
+  padding-top: 40px;
 
   .project__meta {
     font-weight: bold;
@@ -303,10 +305,10 @@ input.agreement-checkbox {
   
   .project__major {
     border-radius: 5px;
-    background: $brand-secondary;
+    background: $brand-light;
     display: inline-block;
     padding: 3px 10px 3px 10px;
-    color: white;
+    color: $brand-royal;
     font-weight: normal;
   }
 
