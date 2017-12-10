@@ -56,7 +56,6 @@
       */
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
-        console.log("profileSuccess")
         vm.isUserOwnerOfProject = userIsProjectOwner()
       }
 
