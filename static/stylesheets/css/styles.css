@@ -250,6 +250,8 @@ input.agreement-checkbox {
     text-align: left;
     font-size: 20px;
     padding-bottom: 19px; }
+    .project .project__meta a {
+      font-size: 24px; }
     .project .project__meta .project__content {
       padding-bottom: 10px;
       font-size: 15px; }

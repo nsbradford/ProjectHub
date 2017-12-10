@@ -11,8 +11,8 @@
 @import 'discover';
 
 a {
-    color: $brand-primary;
- }
+  color: $brand-primary;
+}
 
 /* for styling particles.js */
 .backdrop {
@@ -264,12 +264,17 @@ input.agreement-checkbox {
   padding-bottom: 40px;
   padding-top: 40px;
 
+
   .project__meta {
     font-weight: bold;
     text-align: left;
     font-size: 20px;
     padding-bottom: 19px;
     
+    a {
+      font-size: 24px;
+    }
+
     .project__content {
       padding-bottom: 10px;
       font-size: 15px;
