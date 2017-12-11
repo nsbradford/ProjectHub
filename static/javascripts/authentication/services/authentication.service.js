@@ -43,11 +43,13 @@
     * @returns {Promise}
     * @memberOf projecthub.authentication.services.Authentication
     */
-    function register(email, password, username) {
+    function register(email, password, username, firstname, lastname) {
       return $http.post('/api/v1/accounts/', {
         username: username,
         password: password,
-        email: email
+        email: email,
+        first_name: firstname,
+        last_name: lastname
       }).then(registerSuccessFn, registerErrorFn);
 
       /**

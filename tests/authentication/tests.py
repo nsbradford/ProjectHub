@@ -24,6 +24,8 @@ class APIAccountTests(APITestCase):
     """ RESTful API tests for Account. """
 
     email = 'johndoe@gmail.com'
+    first_name = 'John'
+    last_name = 'Doe'
     username = 'johndoe'
     tagline = 'This is the tagline for John Doe #1'
     tagline_update = 'This is the tagline for John Doe #2'
@@ -33,6 +35,8 @@ class APIAccountTests(APITestCase):
                     'email': email, 
                     'username': username, 
                     'password': password,
+                    'first_name': first_name,
+                    'last_name': last_name,
                     'tagline': tagline
                 }
     update_data_password_update = {  
@@ -40,12 +44,16 @@ class APIAccountTests(APITestCase):
                     'username': username,
                     'tagline': tagline_update,
                     'password': password_update,
+                    'first_name': first_name,
+                    'last_name': last_name,
                     'confirm_password': password_update 
                 }
     update_data_tagline = {  
                     'email': email, 
                     'username': username,
                     'tagline': tagline_update,
+                    'first_name': first_name,
+                    'last_name': last_name,
                     'password': password_update, # TODO shouldn't need to supply this field
                     'confirm_password': password_update # TODO shouldn't need to supply this field
                 }
@@ -53,12 +61,15 @@ class APIAccountTests(APITestCase):
                     'email': email, 
                     'username': username,
                     'tagline': tagline_update,
+                    'first_name': first_name,
+                    'last_name': last_name,
                     'password': '1',
                     'confirm_password': '2'
                 }
-    incomplete_data = {  
+    incomplete_data = {  #missing password and last_name
                     'email': email, 
-                    'username': username
+                    'username': username,
+                    'first_name': first_name
                 }
     url = '/api/v1/accounts/'
     url_username = url + username + '/'
@@ -78,6 +89,8 @@ class APIAccountTests(APITestCase):
         new_account = Account.objects.get()
         self.assertEqual(new_account.email, self.email)
         self.assertEqual(new_account.username, self.username)
+        self.assertEqual(new_account.first_name, self.first_name)
+        self.assertEqual(new_account.last_name, self.last_name)
         return new_account
 
     # Tests

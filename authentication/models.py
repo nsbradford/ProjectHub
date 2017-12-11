@@ -27,8 +27,15 @@ class AccountManager(BaseUserManager):
         # TODO can add username to the normal arguments
         if not kwargs.get('username'):
             raise ValueError('Users must have a valid username.')
+        if not kwargs.get('first_name'):
+            raise ValueError('Users must have a valid first_name.')
+        if not kwargs.get('last_name'):
+            raise ValueError('Users must have a valid last_name.')
         account = self.model(
-            email=self.normalize_email(email), username=kwargs.get('username')
+            email=self.normalize_email(email),
+            username=kwargs.get('username'),
+            first_name=kwargs.get('first_name'),
+            last_name=kwargs.get('last_name')
         )
         account.set_password(password)
         account.save()
@@ -68,7 +75,7 @@ class Account(AbstractBaseUser):
 
     objects = AccountManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     def __unicode__(self):
         """ Overrides default to provide a more helpful description. """

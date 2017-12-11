@@ -73,6 +73,8 @@ class AccountSerializer(serializers.ModelSerializer):
             """
             instance.username = validated_data.get('username', instance.username)
             instance.tagline = validated_data.get('tagline', instance.tagline)
+            instance.first_name = validated_data.get('first_name', instance.first_name)
+            instance.last_name = validated_data.get('last_name', instance.last_name)
             instance.save()
 
             password = validated_data.get('password', None)
