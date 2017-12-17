@@ -42,7 +42,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         if searchString:
             return Project.objects.filter(
                 title__contains=searchString).order_by('-created_at')
-        return Project.objects.all() 
+        return Project.objects.all().order_by('-created_at')
 
     # @list_route()
     def list(self, request, pk=None):
@@ -50,14 +50,14 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 request.query_params.get("lastProjectIndex", 0))
         queryset = self.get_queryset()
         num_project = queryset.count()
-        
+
         #   Case 1, we have used returned all of the projects
         #   In this case, return nothing and a status notifying the user
         #   That there is nothing more to return
         if last_project_index >= num_project:
             serializer = self.get_serializer(None, many=True)
             return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
-        
+
         #   If we are asked to return more projects than we have, but we
         #   Have not reported all of the projects yet, then go ahead and
         #   Return the projects but also notify the user that that's all folks
@@ -66,8 +66,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset[
                             last_project_index:last_project_index +
                             rest_of_projects], many=True)
-            
-            return Response(serializer.data, 
+
+            return Response(serializer.data,
                             status=status.HTTP_206_PARTIAL_CONTENT)
 
         #   Otherwise, the normal use case -- send back N amount of projects.
@@ -75,7 +75,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset[
                         last_project_index:self.LAZYLOAD_TRANSACTION_LENGTH],
                         many=True)
-            
+
             return Response(serializer.data)
 
 
