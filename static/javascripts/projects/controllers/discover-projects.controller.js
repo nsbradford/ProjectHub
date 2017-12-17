@@ -33,7 +33,7 @@
     */
     function activate() {
       vm.projects = $scope.projects;
-      
+
     }
   }
 })();

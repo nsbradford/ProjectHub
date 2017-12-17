@@ -12,9 +12,9 @@ from rest_framework.exceptions import PermissionDenied
 
 from django.shortcuts import get_object_or_404
 
-from projects.models import Project
 from projects.permissions import IsAuthorOfProject, IsEmailActivated
-from projects.serializers import ProjectSerializer
+from projects.models import Project, Major
+from projects.serializers import ProjectSerializer, MajorSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -95,4 +95,13 @@ class AccountProjectsViewSet(viewsets.ViewSet):
     def list(self, request, account_username=None):
         queryset = self.queryset.filter(author__username=account_username)
         serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
+
+class MajorViewSet(viewsets.ViewSet):
+    queryset = Major.objects.all()
+    serializer_class = MajorSerializer
+
+    def list(self, request):
+        serializer = self.serializer_class(self.queryset, many=True)
         return Response(serializer.data)

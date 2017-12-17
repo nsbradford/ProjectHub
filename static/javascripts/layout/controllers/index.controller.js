@@ -9,19 +9,15 @@
     .module('projecthub.layout.controllers')
     .controller('IndexController', IndexController);
 
-  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile'];
+  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors'];
 
   /**
   * @namespace IndexController
   */
-  function IndexController($scope, Authentication, Projects, Snackbar, Profile) {
-    
-
+  function IndexController($scope, Authentication, Projects, Snackbar, Profile, Majors) {
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
-    vm.profile = undefined;
-    vm.isActivated = false;
-    vm.allFilters = [{ title: "CS" }, { title: "ME" }, { title: "ECE" }]; 
+    vm.allFilters = [];
     // This will be removed soon. We will be pulling the majors from the backend using angular.
     // Until we have that endpoint, we will be using a static list.
     vm.toggleFilter = toggleFilter;
@@ -32,6 +28,12 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
+
+    $scope.$on('project.created', function (event, data) {
+      vm.projects = [data].concat(vm.projects);
+      filterProjects();
+      vm.lastProjectIndex += 1;
+    });
 
     activate();
 
@@ -44,18 +46,32 @@
     */
     function activate() {
       Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
-      $scope.$on('project.created', function (event, project) {
-        vm.projects.unshift(project);
-      });
+      Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
+      // fetch the projects again on creation
 
-      $scope.$on('project.created.error', function () {
-        vm.projects.shift();
-      });
+      /**
+       * @name MajorSuccessCallback
+       * @desc This function is called when a call to the Majors service
+       * returns successfully.
+       *
+       * @param {object} response The response from the server
+       */
+      function MajorsSuccessCallback(response) {
+        vm.allFilters = response.data;
+      }
 
-      const account = Authentication.getAuthenticatedAccount();
-      if (account){
-        Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
-      }      
+      /**
+       * @name MajorsfailureCallback
+       * @desc Function that is calle when the majors service fails to proivde a list of
+       * majors
+       */
+      function MajorsFailureCallback() {
+        Snackbar.error("Unable to get majors. Please refresh the page.");
+      }
+
+
+      const username = Authentication.getAuthenticatedAccount().username;
+      Profile.get(username).then(profileSuccessFn, profileErrorFn);
 
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
@@ -71,7 +87,7 @@
     * @desc Update projects array on view
     */
     function projectsSuccessFn(data, status, headers, config) {
-      
+
       /**
        * No Content -- Tell the controller that we can no longer lazyload,
        * Do not add anything to the the project list
@@ -91,7 +107,7 @@
       vm.projects = vm.projects.concat(data.data);
       vm.filteredProjects = vm.filteredProjects.concat(data.data);
       vm.lastProjectIndex += data.data.length;
-      
+
     }
 
     /**
@@ -101,11 +117,11 @@
     function projectsErrorFn(data, status, headers, config) {
       Snackbar.error(data.error);
     }
-    
+
     /**
      * @name filterToggleCallback
      * @desc Function that is called when a user applies a filter.
-     * 
+     *
      */
     function toggleFilter(filter) {
       // Filter out the curent applied filter,
@@ -113,7 +129,7 @@
       vm.allFilters.filter(function (f) {
         return filter.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
-      
+
       filterProjects();
     }
 
@@ -140,52 +156,54 @@
       vm.filteredProjects = vm.projects.filter(function (project) {
 
         /**
-         * Normally I would use another functional JS component, but we can get 
+         * Normally I would use another functional JS component, but we can get
          * more efficiency if we use a traditional for loop. We cant achieve
          * short circuits using the functional components.
          */
         for (let i = 0; i < activeFilters.length; i++ ) {
-          if (project.major === activeFilters[i].title) {
-            return true;
-          }
-        }        
+          return project.majors.some(function(currentMajor) {
+            debugger
+            if (currentMajor === activeFilters[i].title) {
+              return true;
+            }
+        });
+        }
       });
     }
 
     /**
      * @name submitSearch
      * @desc Perform a call to the server in order to recieve a search result list back
-     * Attach Success and Failure callbacks, and finally apply all filters. 
-     * 
+     * Attach Success and Failure callbacks, and finally apply all filters.
+     *
      * @param {String} searchString The string we provide to the server to be used in a search.
      */
     function submitSearch(searchString) {
       if (searchString) {
-        Projects.search(searchString).then(ProjectSearchSuccessCallback, ProjectSearchFailureCallback); 
+        Projects.search(searchString).then(ProjectSearchSuccessCallback, ProjectSearchFailureCallback);
       } else {
         Snackbar.error("Pleae provide something to search.");
       }
     }
-    
+
     /**
      * @name ProjectSearchSuccessCallback
      * @desc Callback that is fired on a successful search event. Apples filters.
      *
-     * @param {object} response the Response we get from the server 
+     * @param {object} response the Response we get from the server
      * @param {object} status the status of the resposne we recieve. This will be used in lazyloader later...
      * @param {object} headers the headers of the response
      * @param {object} config the config of the response
      */
     function ProjectSearchSuccessCallback(response, status, headers, config) {
       vm.projects = response.data;
-      vm.canLoadMoreProjects = true;
-      filterProjects(); 
+      filterProjects();
     }
 
     /**
-     *  
      *
-     * @param {object} response the Response we get from the server 
+     *
+     * @param {object} response the Response we get from the server
      * @param {object} status the status of the resposne we recieve. This will be used in lazyloader later...
      * @param {object} headers the headers of the response
      * @param {object} config the config of the response
@@ -195,7 +213,7 @@
     }
     /**
      * @name lazyLoad
-     * @desc Perform a get request to the server that loads the 
+     * @desc Perform a get request to the server that loads the
      * constant LAZY_LOAD_PROJECT_LENGTH amount of projects
      */
     function lazyLoad() {

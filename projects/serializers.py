@@ -19,8 +19,8 @@ class ProjectSerializer(serializers.ModelSerializer):
     """ Serialize Project for use with RESTful API.
         When serializing, we want to include all of the author's information
             (a nested relationship). Set to read_only so there are no updates
-            to the Account, and required=False so we can set the author 
-            automatically (this means we also need to add 'author' to 
+            to the Account, and required=False so we can set the author
+            automatically (this means we also need to add 'author' to
             the validation exclusions)
         TODO: only serialize essential Account data; unnecessary to send all.
     """
@@ -50,13 +50,34 @@ class ProjectSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Must supply password.')
         return data
 
-    def list(self):
-        print "hey"
-        super.list()
+    class Meta:
+        """ Meta class configuring serializer. """
+        model = Project
+        fields = ('id', 'author', 'title', 'description', 'created_at',
+                        'updated_at', 'majors')
+        read_only_fields = ('id', 'created_at', 'updated_at')
 
     def get_validation_exclusions(self, *args, **kwargs):
         """ Add 'author' to validation exclusions, because we'll be setting it
-                automatically. 
+                automatically.
         """
         exclusions = super(ProjectSerializer, self).get_validation_exclusions()
         return exclusions + ['author']
+
+
+class MajorSerializer(serializers.ModelSerializer):
+    """Serializer for Majors for use in a RESTful API"""
+
+    class Meta:
+        model = Major
+        fields = ('id', 'title')
+        read_only_fields = ('id', 'title')
+
+    def validate(self, data):
+        """ Perform object-level validtion on all data.
+            titles shouldn't be null.
+        """
+        if data.title is None:
+            raise serializers.ValidationError('Major\'s must have a title.')
+
+        return data
