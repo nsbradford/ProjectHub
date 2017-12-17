@@ -55,8 +55,8 @@
     .majors-panel .major-pills .major-list-item {
       padding-left: 10px; }
 
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important; }
+.multiselect-container {
+  background: white; }
 
 a {
   color: #0277bd; }

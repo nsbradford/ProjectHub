@@ -9,9 +9,9 @@
  @import 'variables';
 .search-pane {
     padding-bottom: 10px;
-    
+
     .search-form {
-        
+
         div{
             padding: 0;
         }
@@ -53,7 +53,7 @@
     margin-bottom: 10px;
     padding: 40px;
     margin-top: 10px;
-    
+
     .major-pills {
         margin-left: 10px;
         border-left: $brand-primary solid 1px;
@@ -63,4 +63,8 @@
         }
     }
 
+}
+
+.multiselect-container{
+    background: white;
 }
