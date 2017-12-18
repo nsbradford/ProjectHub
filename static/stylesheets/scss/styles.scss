@@ -214,6 +214,26 @@ input.agreement-checkbox {
   
 }
 
+.profile__header {
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: $brand-light-grey;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  a {
+    font-size: 16px;
+  }
+}
+
 .profile-panel{
     border: $brand-secondary solid 1px;
     border-radius: 10px;
