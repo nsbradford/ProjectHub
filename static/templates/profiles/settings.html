@@ -5,6 +5,19 @@
     <div class="well login-no-shadow" ng-show="vm.profile">
       
       <form role="form" class="settings" ng-submit="vm.update()">
+
+        <!-- TODO -->
+
+        <div class="form-group">
+          <label for="settings__first_name">First name</label>
+          <input type="text" class="form-control" id="settings__first_name" ng-model="vm.profile.first_name" placeholder="" />
+        </div>
+
+        <div class="form-group">
+          <label for="settings__first_name">Last name</label>
+          <input type="text" class="form-control" id="settings__first_name" ng-model="vm.profile.last_name" placeholder="" />
+        </div>
+
         <div class="form-group">
           <label for="settings__email">Email</label>
           <input type="text" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="ex. john@example.com" />
