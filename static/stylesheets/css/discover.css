@@ -33,8 +33,13 @@
   display: inline; }
 
 .majors-panel {
-  margin-left: 20px;
-  margin-right: 50px; }
+  border: #687685 solid 1px;
+  border-radius: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 10px;
+  padding: 40px;
+  margin-top: 10px; }
   .majors-panel .major-pills {
     margin-left: 10px;
     border-left: #0277bd solid 1px; }

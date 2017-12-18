@@ -9,18 +9,35 @@
     .module('projecthub.profiles.controllers')
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['$location', '$routeParams', 'Projects', 'Profile', 'Snackbar'];
+  ProfileController.$inject = ['$location', '$routeParams', 'Projects', 'Profile', 'Snackbar', 'Authentication'];
 
   /**
   * @namespace ProfileController
   */
-  function ProfileController($location, $routeParams, Projects, Profile, Snackbar) {
+  function ProfileController($location, $routeParams, Projects, Profile, Snackbar, Authentication) {
     const vm = this;
 
     vm.profile = undefined;
     vm.projects = [];
+    vm.isUserOwnerOfProject = false
+    vm.viewSettings = viewSettings
 
     activate();
+
+    function userIsProjectOwner() {
+      var account = Authentication.getAuthenticatedAccount()
+      if (account === undefined) return false
+      return account.username === vm.profile.username
+    }
+
+    function viewSettings() {
+      if (!userIsProjectOwner()) {
+        alert('You\'re not allowed to view this page.')
+      }
+      else {
+        $location.url('/' + vm.profile.username + '/settings/');
+      }
+    }
 
     /**
     * @name activate
@@ -39,6 +56,7 @@
       */
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
+        vm.isUserOwnerOfProject = userIsProjectOwner()
       }
 
 

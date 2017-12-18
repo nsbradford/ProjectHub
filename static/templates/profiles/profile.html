@@ -1,8 +1,35 @@
-<div class="profile" ng-show="vm.profile">
-  <div class="jumbotron profile__header">
-    <h1 class="profile__username">+{{ vm.profile.username }}</h1>
-    <p class="profile__tagline">{{ vm.profile.tagline }}</p>
+<div class="row" ng-cloak>  
+	<!-- <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div> -->
+
+  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
+	<div class="profile profile-panel profile__header" ng-show="vm.profile">
+
+	  	<div class="profile__header">
+
+			<h1 class="profile__username">@{{ vm.profile.username }}</h1>
+			<br>
+			<p class="profile__tagline">{{ vm.profile.tagline }}</p>
+			<a href='mailto:{{ vm.profile.email }}'>{{ vm.profile.email }}</a>
+
+		</div>
+
+		<div class="edit-project" ng-show="vm.isUserOwnerOfProject">
+			<i class="fa fa-3x fa-cog" aria-hidden="true" ng-click="vm.viewSettings()"></i>
+		</div>
+
+	</div>
   </div>
 
-  <discover-projects projects="vm.projects"></discover-projects>
+
+  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<discover-projects projects="vm.projects"></discover-projects>
+  </div>
 </div>
+
+
+
+<!-- 
+		<div class="edit-project" ng-show="vm.isUserOwnerOfProject" >
+			<i class="fa fa-3x fa-pencil" aria-hidden="true" ng-click="vm.editProject()"></i>
+		</div>
+-->
