@@ -42,8 +42,13 @@
   display: inline; }
 
 .majors-panel {
-  margin-left: 20px;
-  margin-right: 50px; }
+  border: #687685 solid 1px;
+  border-radius: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 10px;
+  padding: 40px;
+  margin-top: 10px; }
   .majors-panel .major-pills {
     margin-left: 10px;
     border-left: #0277bd solid 1px; }
@@ -199,12 +204,27 @@ body .login-no-shadow {
   font-style: italic; }
 
 .agreement-label {
-  font-weight: normal;
+  font-weight: 200;
   cursor: pointer; }
 
 input.agreement-checkbox {
   margin-right: 10px;
   cursor: pointer; }
+
+/* Profile */
+.profile-panel {
+  border: #687685 solid 1px;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 30px;
+  margin-top: 20px; }
+  .profile-panel .major-pills {
+    margin-left: 10px;
+    border-left: #0277bd solid 1px; }
+    .profile-panel .major-pills .major-list-item {
+      padding-left: 10px; }
 
 /* Individual Project */
 .edit-project {
@@ -223,13 +243,15 @@ input.agreement-checkbox {
 
 .project {
   border-bottom: #687685 solid 1px;
-  padding-bottom: 10px;
-  padding-top: 10px; }
+  padding-bottom: 40px;
+  padding-top: 40px; }
   .project .project__meta {
     font-weight: bold;
     text-align: left;
     font-size: 20px;
     padding-bottom: 19px; }
+    .project .project__meta a {
+      font-size: 24px; }
     .project .project__meta .project__content {
       padding-bottom: 10px;
       font-size: 15px; }
@@ -251,10 +273,10 @@ input.agreement-checkbox {
       color: #687685; }
   .project .project__major {
     border-radius: 5px;
-    background: #687685;
+    background: #d6e6ff;
     display: inline-block;
     padding: 3px 10px 3px 10px;
-    color: white;
+    color: #5e81ba;
     font-weight: normal; }
   .project .project-footer {
     margin-top: 10px;

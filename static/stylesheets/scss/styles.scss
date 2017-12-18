@@ -11,8 +11,8 @@
 @import 'discover';
 
 a {
-    color: $brand-primary;
- }
+  color: $brand-primary;
+}
 
 /* for styling particles.js */
 .backdrop {
@@ -199,13 +199,40 @@ body .login-no-shadow {
 }
 
 .agreement-label { 
-  font-weight: normal;
+  font-weight: 200;
   cursor: pointer;
 }
 
 input.agreement-checkbox {
   margin-right: 10px;
   cursor: pointer;
+}
+
+/* Profile */
+
+.profile {
+  
+}
+
+.profile-panel{
+    border: $brand-secondary solid 1px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 30px;
+    margin-top: 20px;
+
+    
+    .major-pills {
+        margin-left: 10px;
+        border-left: $brand-primary solid 1px;
+
+        .major-list-item {
+            padding-left: 10px;
+        }
+    }
+
 }
 
 
@@ -234,8 +261,9 @@ input.agreement-checkbox {
 
 .project {
   border-bottom: $brand-secondary solid 1px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+
 
   .project__meta {
     font-weight: bold;
@@ -243,6 +271,10 @@ input.agreement-checkbox {
     font-size: 20px;
     padding-bottom: 19px;
     
+    a {
+      font-size: 24px;
+    }
+
     .project__content {
       padding-bottom: 10px;
       font-size: 15px;
@@ -278,10 +310,10 @@ input.agreement-checkbox {
   
   .project__major {
     border-radius: 5px;
-    background: $brand-secondary;
+    background: $brand-light;
     display: inline-block;
     padding: 3px 10px 3px 10px;
-    color: white;
+    color: $brand-royal;
     font-weight: normal;
   }
 

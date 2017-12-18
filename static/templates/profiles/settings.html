@@ -35,6 +35,8 @@
           <textarea class="form-control" id="settings__tagline" ng-model="vm.profile.tagline" placeholder="ex. Computer Science student @ WPI who loves front-end design!" />
         </div>
 
+        <h4 class="text-center"><a href='/+{{vm.profile.username}}'>View profile</a></h4>
+
         <div class="form-group text-center">
           <button type="submit" class="btn discover-button">Update</button>
           <button type="button" class="btn red-button" ng-click="vm.destroy()">Delete Account</button>

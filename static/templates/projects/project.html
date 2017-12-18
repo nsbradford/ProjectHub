@@ -8,6 +8,7 @@
 
         <div class="project__content">
           {{ project.description }}
+          <br><br>
         </div>
 
         <div class="project__required">
@@ -37,12 +38,12 @@
           <div class="project-footer" >
             <span class="pull-left">
               <i class="fa fa-calendar" aria-hidden="true"></i>
-              Created At {{ project.created_at | amCalendar:referenceTime:formats }}
+              Created {{ project.created_at | amCalendar:referenceTime:formats }}
             </span>
             
             <span class="pull-right">
               <a class="author" href="/+{{ project.author.username }}">
-              +{{ project.author.username }}
+              @{{ project.author.username }}
             </a>
           </span>
           </div> 
