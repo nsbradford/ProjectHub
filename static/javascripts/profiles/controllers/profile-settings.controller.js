@@ -21,6 +21,10 @@
     vm.destroy = destroy;
     vm.update = update;
 
+    vm.missing_email = false;
+    vm.missing_firstname = false;
+    vm.missing_lastname = false;
+
     activate();
 
 
@@ -106,7 +110,16 @@
     * @memberOf projecthub.profiles.controllers.ProfileSettingsController
     */
     function update() {
-      Profile.update(vm.profile).then(profileSuccessFn, profileErrorFn);
+      vm.missing_email = !vm.profile.email ? true : false;
+      vm.missing_firstname = !vm.profile.first_name ? true : false;
+      vm.missing_lastname = !vm.profile.last_name ? true : false;
+
+      if (vm.profile.email && vm.profile.first_name && vm.profile.last_name) {
+        Profile.update(vm.profile).then(profileSuccessFn, profileErrorFn);
+      }
+      else {
+        Snackbar.error('Must complete required fields.');
+      }
 
       /**
       * @name profileSuccessFn

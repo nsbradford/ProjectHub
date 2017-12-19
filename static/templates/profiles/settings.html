@@ -10,16 +10,19 @@
 
         <div class="form-group">
           <label for="settings__first_name">First name</label>
+          <span ng-show='vm.missing_firstname' class='error-span'> required</span>
           <input type="text" class="form-control" id="settings__first_name" ng-model="vm.profile.first_name" placeholder="" />
         </div>
 
         <div class="form-group">
-          <label for="settings__first_name">Last name</label>
-          <input type="text" class="form-control" id="settings__first_name" ng-model="vm.profile.last_name" placeholder="" />
+          <label for="settings__last_name">Last name</label>
+          <span ng-show='vm.missing_lastname' class='error-span'> required</span>
+          <input type="text" class="form-control" id="settings__last_name" ng-model="vm.profile.last_name" placeholder="" />
         </div>
 
         <div class="form-group">
           <label for="settings__email">Email</label>
+          <span ng-show='vm.missing_email' class='error-span'> required</span>
           <input type="text" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="" />
         </div>
 
