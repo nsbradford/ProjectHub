@@ -18,7 +18,7 @@
     const vm = this;
     vm.logout = logout;
     vm.isAuthenticated = Authentication.isAuthenticated();
-    
+
     /**
     * @name logout
     * @desc Log the user out

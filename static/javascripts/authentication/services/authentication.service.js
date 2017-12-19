@@ -29,7 +29,7 @@
       setAuthenticatedAccount: setAuthenticatedAccount,
       unauthenticate: unauthenticate,
     };
-
+    debugger
     return Authentication;
 
     /* Begin functions */
@@ -96,7 +96,7 @@
        * @desc Log "Epic failure!" to the console
        */
       function loginErrorFn(data, status, headers, config) {
-        Snackbar.error('The username/password combination you entered was invalid.');        
+        Snackbar.error('The username/password combination you entered was invalid.');
       }
     }
 
@@ -107,11 +107,11 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function getAuthenticatedAccount() {
-      if (!$cookies.authenticatedAccount) {
+      if (!$cookies.get("authenticatedAccounted")) {
         return;
       }
 
-      return JSON.parse($cookies.authenticatedAccount);
+      return JSON.parse($cookies.get("authenticatedAccount"));
     }
 
     /**
@@ -121,7 +121,7 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function isAuthenticated() {
-      return !!$cookies.authenticatedAccount;
+      return !!$cookies.get("authenticatedAccount");
     }
 
     /**
@@ -132,7 +132,11 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function setAuthenticatedAccount(account) {
-      $cookies.authenticatedAccount = JSON.stringify(account);
+      const expireDate = new Date();
+      expireDate.setDate(expireDate.getDate() + 1);
+      $cookies.put('authenticatedAccount', JSON.stringify(account), {'expires': expireDate});
+      console.log( $cookies.get('authenticatedAccount') );
+      debugger
     }
 
     /**
@@ -142,7 +146,7 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function unauthenticate() {
-      delete $cookies.authenticatedAccount;
+      $cookies.remove("authenticatedAccount");
     }
 
     /**
