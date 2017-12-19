@@ -71,6 +71,14 @@ class APIAccountTests(APITestCase):
                     'username': username,
                     'first_name': first_name
                 }
+    no_name_data = {  #last_name is blank
+                    'email': email, 
+                    'username': username,
+                    'first_name': first_name,
+                    'last_name': '',
+                    'password': password_update, # TODO shouldn't need to supply this field
+                    'confirm_password': password_update # TODO shouldn't need to supply this field
+                }
     url = '/api/v1/accounts/'
     url_username = url + username + '/'
 
@@ -149,6 +157,22 @@ class APIAccountTests(APITestCase):
         self.assertEqual(Account.objects.count(), 1)
         updated_account = Account.objects.get()
         self.assertEqual(updated_account.tagline, self.tagline_update)
+
+
+    def test_API_udpate_account_name_cannot_be_empty(self):
+        """ User cannot update their name to be empty.
+            Use update_response.content to see response.
+
+            TODO still requires both PASSWORD and CONFIRM to be provided for it to work,
+                for some reason, though it doesn't when using the web interface.
+        """
+        self.setup_account()
+        self.client.login(email=self.email, password=self.password)
+        update_response = self.client.put(self.url_username, self.no_name_data)
+        self.assertEqual(update_response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Account.objects.count(), 1)
+        updated_account = Account.objects.get()
+        self.assertEqual(updated_account.last_name, self.last_name)
 
 
     # def test_API_udpate_account_password(self):
