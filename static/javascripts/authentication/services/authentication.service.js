@@ -16,6 +16,12 @@
   * @returns {Factory}
   */
   function Authentication($cookies, $http, Snackbar) {
+
+    /**
+     * The Hash key for the account cookie.
+     */
+    const COOKIE_KEY = "authenticatedAccount";
+
     /**
     * @name Authentication
     * @desc The Factory to be returned
@@ -29,7 +35,6 @@
       setAuthenticatedAccount: setAuthenticatedAccount,
       unauthenticate: unauthenticate,
     };
-    debugger
     return Authentication;
 
     /* Begin functions */
@@ -107,11 +112,11 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function getAuthenticatedAccount() {
-      if (!$cookies.get("authenticatedAccounted")) {
+      if (!$cookies.get(COOKIE_KEY)) {
         return;
       }
 
-      return JSON.parse($cookies.get("authenticatedAccount"));
+      return JSON.parse($cookies.get(COOKIE_KEY));
     }
 
     /**
@@ -121,7 +126,7 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function isAuthenticated() {
-      return !!$cookies.get("authenticatedAccount");
+      return !!$cookies.get(COOKIE_KEY);
     }
 
     /**
@@ -134,9 +139,7 @@
     function setAuthenticatedAccount(account) {
       const expireDate = new Date();
       expireDate.setDate(expireDate.getDate() + 1);
-      $cookies.put('authenticatedAccount', JSON.stringify(account), {'expires': expireDate});
-      console.log( $cookies.get('authenticatedAccount') );
-      debugger
+      $cookies.put(COOKIE_KEY, JSON.stringify(account), {'expires': expireDate});
     }
 
     /**
@@ -146,7 +149,7 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function unauthenticate() {
-      $cookies.remove("authenticatedAccount");
+      $cookies.remove(COOKIE_KEY);
     }
 
     /**
@@ -174,7 +177,7 @@
        * @desc Inform user that something went wrong during logout.
        */
       function logoutErrorFn(data, status, headers, config) {
-        Snackbar.error('Something went wrong during Logout.')
+        Snackbar.error('Something went wrong during Logout.');
       }
     }
 
