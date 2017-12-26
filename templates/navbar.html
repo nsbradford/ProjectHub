@@ -10,7 +10,7 @@
       <a class="navbar-brand" href="/">ProjectHub <i>beta</i></a>
     </div> <!-- ./navbar-header -->
 
-    <div class="collapse navbar-collapse" id="not-google-plus-nav">
+    <div class="collapse navbar-collapse" id="not-google-plus-nav" ng-cloak>
       <ul class="nav navbar-nav pull-right">
           <li ng-show="vm.isAuthenticated"><a href="/+{{ user.username }}">+{{ user.username }}</a></li>
           <li ng-show="vm.isAuthenticated"><a href="/discover">Discover</a></li>
