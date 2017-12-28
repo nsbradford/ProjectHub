@@ -100,11 +100,8 @@ WSGI_APPLICATION = 'projecthub.wsgi.application'
 
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-    )
-}
+DATABASES = {}
+DATABASES['default'] =  dj_database_url.config()
 
 
 LANGUAGE_CODE = 'en-us'
@@ -240,5 +237,6 @@ print "\nProduction env tests..."
 if not SECRET_KEY: print 'WARNING: SECRET_KEY not set'
 if not EMAIL_HOST_USER: print 'WARNING: EMAIL_HOST_USER not set'
 if not EMAIL_HOST_PASSWORD: print 'WARNING: EMAIL_HOST_PASSWORD not set'
+if not DATABASE_URL: print 'WARNING: DATABASE_URL not set'
 if DEBUG: print 'WARNING: running in DEBUG mode'
 print ''
