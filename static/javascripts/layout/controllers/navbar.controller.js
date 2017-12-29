@@ -17,6 +17,7 @@
   function NavbarController($scope, Authentication) {
     const vm = this;
     vm.logout = logout;
+    vm.isAuthenticated = Authentication.isAuthenticated();
 
     /**
     * @name logout

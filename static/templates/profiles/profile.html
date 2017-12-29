@@ -6,10 +6,15 @@
 
 	  	<div class="profile__header">
 
-			<h1 class="profile__username">@{{ vm.profile.username }}</h1>
+			<h1 class="profile__username">{{ vm.profile.first_name }} {{ vm.profile.last_name }}</h1>
+			<h2 class="profile__username">@{{ vm.profile.username }}</h2>
+			
 			<br>
 			<p class="profile__tagline">{{ vm.profile.tagline }}</p>
-			<a href='mailto:{{ vm.profile.email }}'>{{ vm.profile.email }}</a>
+			<a href='mailto:{{ vm.profile.email }}'>
+				<i class="fa fa-envelope" aria-hidden="true"></i>
+				{{ vm.profile.email }}
+			</a>
 
 		</div>
 
@@ -25,11 +30,3 @@
 		<discover-projects projects="vm.projects"></discover-projects>
   </div>
 </div>
-
-
-
-<!-- 
-		<div class="edit-project" ng-show="vm.isUserOwnerOfProject" >
-			<i class="fa fa-3x fa-pencil" aria-hidden="true" ng-click="vm.editProject()"></i>
-		</div>
--->

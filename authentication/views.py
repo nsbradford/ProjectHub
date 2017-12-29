@@ -37,9 +37,9 @@ class AccountViewSet(viewsets.ModelViewSet):
         return (permissions.IsAuthenticated(), IsAccountOwner(),)
 
     def create(self, request):
-        """ Checks if data is valid, and creates a new Account. 
+        """ Checks if data is valid, and creates a new Account.
             We override this because the default create() would store
-                passwords in plaintext, which we get around with 
+                passwords in plaintext, which we get around with
                 Account.objects.create_user().
         """
         serializer = self.serializer_class(data=request.data)
@@ -57,12 +57,12 @@ class LoginView(views.APIView):
     """ View for logins. APIView is specifically for AJAX requests. """
 
     def post(self, request, format=None):
-        """ Log in by POST. The Django authenticate() performs email/pass 
+        """ Log in by POST. The Django authenticate() performs email/pass
                 lookup and will return None if no matching user is found.
             Return HTTP_401_UNAUTHORIZED if failed,
                 serialized Account if successful.
         """
-        data = json.loads(request.body)
+        data = request.data
         email = data.get('email', None)
         password = data.get('password', None)
         account = authenticate(email=email, password=password)
@@ -85,7 +85,7 @@ class LoginView(views.APIView):
 
 
 class LogoutView(views.APIView):
-    """ View for logouts. APIView is specifically for AJAX requests. 
+    """ View for logouts. APIView is specifically for AJAX requests.
         Only authenticated users should be able to logout.
     """
     permission_classes = (permissions.IsAuthenticated,)
