@@ -237,6 +237,5 @@ print "\nProduction env tests..."
 if not SECRET_KEY: print 'WARNING: SECRET_KEY not set'
 if not EMAIL_HOST_USER: print 'WARNING: EMAIL_HOST_USER not set'
 if not EMAIL_HOST_PASSWORD: print 'WARNING: EMAIL_HOST_PASSWORD not set'
-if not DATABASE_URL: print 'WARNING: DATABASE_URL not set'
 if DEBUG: print 'WARNING: running in DEBUG mode'
 print ''
