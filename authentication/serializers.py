@@ -43,7 +43,7 @@ class AccountSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        """ Defines metadata for our serializer to operate on. 
+        """ Defines metadata for our serializer to operate on.
             Set 'model', 'fields', and 'read_only_fields' for it to work.
                 Fields such as 'is_superuser' should not be visible to client.
         """
@@ -61,10 +61,10 @@ class AccountSerializer(serializers.ModelSerializer):
 
 
         def update(self, instance, validated_data):
-            """ Update username and tagline if present. 
+            """ Update username and tagline if present.
                 If updating password, validate that both password entries match,
                     and then update the session authorization given the new
-                    password (so they don't have to login again). 
+                    password (so they don't have to login again).
                     User.set_password(raw_password) handles secure salting/hashing.
                 TODO password validation: should enforce minimum length,
                     lowercase and uppercase letters, disallowed insecure strings
@@ -74,7 +74,7 @@ class AccountSerializer(serializers.ModelSerializer):
                 Args:
                     instance (Account): object to update
                     validated_data (dict): JSON data for updated fields
-                Returns: 
+                Returns:
                     instance (Account): updated object
             """
             instance.username = validated_data.get('username', instance.username)

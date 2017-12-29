@@ -55,6 +55,9 @@
     .majors-panel .major-pills .major-list-item {
       padding-left: 10px; }
 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important; }
+
 a {
   color: #0277bd; }
 

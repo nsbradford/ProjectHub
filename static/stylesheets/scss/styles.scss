@@ -10,6 +10,11 @@
 @import 'variables';
 @import 'discover';
 
+ 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important; 
+}
+
 a {
   color: $brand-primary;
 }
@@ -479,4 +484,3 @@ input.agreement-checkbox {
       border-bottom-color: #777;
   }
   */
-  
