@@ -9,7 +9,7 @@
     ]);
 
   angular
-    .module('projecthub.projects.controllers', []);
+    .module('projecthub.projects.controllers', ['ngSanitize']);
 
   angular
     .module('projecthub.projects.directives', ['ngDialog']);
