@@ -33,6 +33,12 @@ class AccountSerializer(serializers.ModelSerializer):
         if 'password' in data and 'confirm_password' in data:
             if data['password'] != data['confirm_password']:
                 raise serializers.ValidationError('Updated passwords must match.')
+
+        if 'first_name' not in data or not data['first_name']:
+            raise serializers.ValidationError('Must supply first name.')
+        if 'last_name' not in data or not data['last_name']:
+            raise serializers.ValidationError('Must supply last name.')
+
         return data
 
 
@@ -73,6 +79,8 @@ class AccountSerializer(serializers.ModelSerializer):
             """
             instance.username = validated_data.get('username', instance.username)
             instance.tagline = validated_data.get('tagline', instance.tagline)
+            instance.first_name = validated_data.get('first_name', instance.first_name)
+            instance.last_name = validated_data.get('last_name', instance.last_name)
             instance.save()
 
             password = validated_data.get('password', None)

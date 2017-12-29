@@ -92,6 +92,8 @@ body {
     color: #3B434C;
     font-weight: 400;
     letter-spacing: 2px; }
+  body h1, body h2, body h3, body h4 {
+    font-family: 'Avenir',Helvetica,Arial,sans-serif; }
   body p {
     color: #687685;
     font-size: 20px;
@@ -215,6 +217,20 @@ input.agreement-checkbox {
   cursor: pointer; }
 
 /* Profile */
+.profile__header h1 {
+  font-size: 30px; }
+
+.profile__header h2 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #c3c3c3; }
+
+.profile__header p {
+  font-size: 16px; }
+
+.profile__header a {
+  font-size: 16px; }
+
 .profile-panel {
   border: #687685 solid 1px;
   border-radius: 10px;

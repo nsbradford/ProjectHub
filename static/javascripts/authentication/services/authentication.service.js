@@ -45,14 +45,18 @@
     * @param {string} email The email entered by the user
     * @param {string} password The password entered by the user
     * @param {string} username The username entered by the user
+    * @param {string} firstname The first name of the new user
+    * @param {string} lastname The last name of the new user
     * @returns {Promise}
     * @memberOf projecthub.authentication.services.Authentication
     */
-    function register(email, password, username) {
+    function register(email, password, username, firstname, lastname) {
       return $http.post('/api/v1/accounts/', {
         username: username,
         password: password,
-        email: email
+        email: email,
+        first_name: firstname,
+        last_name: lastname
       }).then(registerSuccessFn, registerErrorFn);
 
       /**

@@ -55,12 +55,16 @@ body {
     font-weight: 400;
     letter-spacing: 2px;
   }
+  h1, h2, h3, h4 {
+    font-family: 'Avenir',Helvetica,Arial,sans-serif;
+  }
   p {
     color: $brand-secondary;
     font-size: 20px;
     line-height: 35px;
     margin-bottom: 20px;
   }
+
 }
 
 
@@ -217,6 +221,26 @@ input.agreement-checkbox {
 
 .profile {
   
+}
+
+.profile__header {
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: $brand-light-grey;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  a {
+    font-size: 16px;
+  }
 }
 
 .profile-panel{
