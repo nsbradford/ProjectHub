@@ -22,7 +22,7 @@ SECURE_SSL_REDIRECT = False
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
-# Postgres
+# Postgres - if you want to run a local Postgres server to be more like the Prod environment
 DATABASES = {} 
 # DATABASES['default'] = dj_database_url.config('postgres://USERNAME:PASSWORD@HOSTADDRESS:HOSTPORT/DATABASENAME')
 # DATABASES = {
