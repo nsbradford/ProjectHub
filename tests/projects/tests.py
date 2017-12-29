@@ -19,6 +19,8 @@ class ProjectTests(APITestCase):
 
     email = 'johndoe@gmail.com'
     username = 'johndoe'
+    first_name = 'John'
+    last_name = 'Doe'
     password = 'password123'
     author = 'myauthor'
     title = 'mytitle'
@@ -31,6 +33,8 @@ class ProjectTests(APITestCase):
                 'email': email, 
                 'username': username, 
                 'password': password,
+                'first_name': first_name,
+                'last_name': last_name,
                 'tagline': tagline
             }
     project_data = {
