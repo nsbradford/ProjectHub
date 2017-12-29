@@ -21,5 +21,8 @@
     "angular-moment": "^1.1.0",
     "moment": "^2.19.2",
     "angular-sanitize": "1.5.5"
+  }  ,
+  "resolutions": {
+    "angular": "~1.4.x"
   }
 }
