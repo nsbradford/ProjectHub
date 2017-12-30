@@ -9,12 +9,12 @@
     .module('projecthub.profiles.controllers')
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['$location', '$routeParams', 'Projects', 'Profile', 'Snackbar', 'Authentication'];
+  ProfileController.$inject = ['$location', '$routeParams', 'Projects', 'Profile', 'Snackbar', 'Authentication', '$sanitize'];
 
   /**
   * @namespace ProfileController
   */
-  function ProfileController($location, $routeParams, Projects, Profile, Snackbar, Authentication) {
+  function ProfileController($location, $routeParams, Projects, Profile, Snackbar, Authentication, $sanitize) {
     const vm = this;
 
     vm.profile = undefined;

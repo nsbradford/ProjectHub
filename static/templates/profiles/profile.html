@@ -10,7 +10,9 @@
 			<h2 class="profile__username">@{{ vm.profile.username }}</h2>
 			
 			<br>
-			<p class="profile__tagline">{{ vm.profile.tagline }}</p>
+			<!-- <p class="profile__tagline" ng-bind-html>{{ vm.profile.tagline }} | linky</p> -->
+			<p class="profile__tagline" ng-bind-html="vm.profile.tagline | linky"></p>
+
 			<a href='mailto:{{ vm.profile.email }}'>
 				<i class="fa fa-envelope" aria-hidden="true"></i>
 				{{ vm.profile.email }}

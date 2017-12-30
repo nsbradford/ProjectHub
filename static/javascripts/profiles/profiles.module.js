@@ -8,7 +8,7 @@
     ]);
 
   angular
-    .module('projecthub.profiles.controllers', []);
+    .module('projecthub.profiles.controllers', ['ngSanitize']);
 
   angular
     .module('projecthub.profiles.services', []);

@@ -6,10 +6,7 @@
             <a href="/projects/+{{project.id}}">{{ project.title }}</a>
         </div>
 
-        <div class="project__content">
-          {{ project.description }}
-          <br><br>
-        </div>
+        <div class="project__content" ng-bind-html="project.description | linky"><br><br></div>
 
         <div class="project__required">
           Major: 
@@ -43,7 +40,7 @@
             
             <span class="pull-right">
               by <a class="author" href="/+{{ project.author.username }}">
-                @{{ project.author.first_name }} {{ project.author.last_name }}
+                {{ project.author.first_name }} {{ project.author.last_name }}
               </a>
             </span>
           </div> 

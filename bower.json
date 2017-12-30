@@ -9,16 +9,17 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.0",
-    "angular-route": "~1.4.0",
-    "angular-cookies": "~1.4.0",
     "bootstrap": "~3.3.0",
     "bootstrap-material-design": "~0.1.5",
     "jquery": "~2.1.1",
+    "angular": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-sanitize": "~1.5.0",
+    "angular-moment": "^1.1.0",
+    "moment": "^2.19.2",
     "ngDialog": "~0.3.3",
     "underscore": "~1.7.0",
-    "particles.js": "^2.0.0",
-    "angular-moment": "^1.1.0",
-    "moment": "^2.19.2"
+    "particles.js": "^2.0.0"
   }
 }
