@@ -14,6 +14,7 @@ import logging
 log = logging.getLogger('projecthub')
 log.debug('!!!!!!')
 
+
 class ProjectSerializer(serializers.ModelSerializer):
     """ Serialize Project for use with RESTful API.
         When serializing, we want to include all of the author's information
@@ -23,6 +24,12 @@ class ProjectSerializer(serializers.ModelSerializer):
             the validation exclusions)
         TODO: only serialize essential Account data; unnecessary to send all.
     """
+
+    class Meta:
+        """ Meta class configuring serializer. """
+        model = Project
+        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at', 'major')
+        read_only_fields = ('id', 'created_at', 'updated_at')
 
     author = AccountSerializer(read_only=True, required=False)
     # majors = serializers.SlugRelatedField(
@@ -39,19 +46,13 @@ class ProjectSerializer(serializers.ModelSerializer):
         valid_majors = set('CS, RBE')
         majors = set(data['major'])
         log.debug('valid: {}\t actual: {}'.format(valid_majors, majors))
-        if False: # TODO finish validating the list of majors
+        if False:   # TODO finish validating the list of majors
             raise serializers.ValidationError('Must supply password.')
         return data
 
-
-
-    class Meta:
-        """ Meta class configuring serializer. """
-        model = Project
-        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at', 'major')
-        read_only_fields = ('id', 'created_at', 'updated_at')
-
-
+    def list(self):
+        print "hey"
+        super.list()
 
     def get_validation_exclusions(self, *args, **kwargs):
         """ Add 'author' to validation exclusions, because we'll be setting it

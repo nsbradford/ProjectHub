@@ -21,7 +21,7 @@ from projects.views import AccountProjectsViewSet, ProjectViewSet
 
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
-router.register(r'projects', ProjectViewSet)
+router.register(r'projects', ProjectViewSet, 'Project')
 accounts_router = routers.NestedSimpleRouter(
     router, r'accounts', lookup='account'
 )
