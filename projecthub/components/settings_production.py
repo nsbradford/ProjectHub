@@ -100,11 +100,8 @@ WSGI_APPLICATION = 'projecthub.wsgi.application'
 
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-    )
-}
+DATABASES = {}
+DATABASES['default'] =  dj_database_url.config()
 
 
 LANGUAGE_CODE = 'en-us'
