@@ -70,10 +70,10 @@ class ProjectViewSet(viewsets.ModelViewSet):
             return Response(serializer.data,
                             status=status.HTTP_206_PARTIAL_CONTENT)
 
-        #   Otherwise, the normal use case -- send back N amount of projects.
+        #   Otherwise, the normal use case -- send back N amount of projects. (Return HTTP_200)
         else:
             serializer = self.get_serializer(queryset[
-                        last_project_index:self.LAZYLOAD_TRANSACTION_LENGTH],
+                        last_project_index:last_project_index + self.LAZYLOAD_TRANSACTION_LENGTH],
                         many=True)
 
             return Response(serializer.data)
