@@ -17,7 +17,7 @@
   */
   function Projects($http) {
     var Projects = {
-      all: all,
+      load: load,
       create: create,
       get: get,
       getById: getById,
@@ -31,13 +31,19 @@
     return Projects;
 
     /**
-    * @name all
-    * @desc Get all Projects
+    * @name load
+    * @desc Gets n amount of projects
+    *
+    * @param int transactionStartIndex how many projects to load.
+    * @param string searchString the string we are searching for (could also be nothing)
     * @returns {Promise}
     * @memberOf projecthub.projects.services.Projects
     */
-    function all() {
-      return $http.get(projectURL);
+    function load(transactionStartIndex, searchString) {
+      if (searchString == undefined) {
+        searchString = "";
+      }
+      return $http.get(projectURL + "?lastProjectIndex=" + transactionStartIndex + "&searchString=" + encodeURIComponent(searchString));
     }
 
 
@@ -85,7 +91,7 @@
      *
      */
     function deleteById(projectID) {
-      return $http.delete(projectURL + projectID + '/')
+      return $http.delete(projectURL + projectID + '/');
     }
 
     /**

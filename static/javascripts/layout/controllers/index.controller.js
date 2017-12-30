@@ -15,6 +15,8 @@
   * @namespace IndexController
   */
   function IndexController($scope, Authentication, Projects, Snackbar) {
+    
+
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.allFilters = [{ title: "CS" }, { title: "ME" }, { title: "ECE" }]; 
@@ -22,9 +24,12 @@
     // Until we have that endpoint, we will be using a static list.
     vm.toggleFilter = toggleFilter;
     vm.submitSearch = submitSearch;
+    vm.lazyLoad = lazyLoad;
     vm.projects = [];
     vm.filteredProjects = [];
     vm.searchString = null;
+    vm.lastProjectIndex = 0;
+    vm.canLoadMoreProjects = true;
 
     activate();
 
@@ -36,29 +41,50 @@
     * @memberOf projecthub.layout.controllers.IndexController
     */
     function activate() {
-      Projects.all().then(projectsSuccessFn, projectsErrorFn);
-
-      // fetch the projects again on creation
-      $scope.$on('project.created', function (event, data) {
-        Projects.all().then(projectsSuccessFn, projectsErrorFn);
+      Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
+      $scope.$on('project.created', function (event, project) {
+        vm.projects.unshift(project);
       });
 
+      $scope.$on('project.created.error', function () {
+        vm.projects.shift();
+      });
+
+    }
+    /**
+    * @name projectsSuccessFn
+    * @desc Update projects array on view
+    */
+    function projectsSuccessFn(data, status, headers, config) {
+      
       /**
-      * @name projectsSuccessFn
-      * @desc Update projects array on view
-      */
-      function projectsSuccessFn(data, status, headers, config) {
-        vm.projects = data.data;
-        vm.filteredProjects = data.data;
+       * No Content -- Tell the controller that we can no longer lazyload,
+       * Do not add anything to the the project list
+       */
+      if ( data.status == 204) {
+        vm.canLoadMoreProjects = false;
+        return;
       }
 
       /**
-      * @name projectsErrorFn
-      * @desc Show snackbar with error
-      */
-      function projectsErrorFn(data, status, headers, config) {
-        Snackbar.error(data.error);
+       * Partial content -- Tell controller, no more lazyloading
+       * Go ahead and add to the project lists
+       */
+      if (data.status == 206) {
+        vm.canLoadMoreProjects = false;
       }
+      vm.projects = vm.projects.concat(data.data);
+      vm.filteredProjects = vm.filteredProjects.concat(data.data);
+      vm.lastProjectIndex += data.data.length;
+      
+    }
+
+    /**
+    * @name projectsErrorFn
+    * @desc Show snackbar with error
+    */
+    function projectsErrorFn(data, status, headers, config) {
+      Snackbar.error(data.error);
     }
     
     /**
@@ -137,6 +163,7 @@
      */
     function ProjectSearchSuccessCallback(response, status, headers, config) {
       vm.projects = response.data;
+      vm.canLoadMoreProjects = true;
       filterProjects(); 
     }
 
@@ -151,6 +178,15 @@
     function ProjectSearchFailureCallback(response, status, headers, config) {
       Snackbar.error(data.error);
     }
-
+    /**
+     * @name lazyLoad
+     * @desc Perform a get request to the server that loads the 
+     * constant LAZY_LOAD_PROJECT_LENGTH amount of projects
+     */
+    function lazyLoad() {
+      if (vm.canLoadMoreProjects) {
+        Projects.load(vm.lastProjectIndex, vm.searchString).then(projectsSuccessFn, projectsSuccessFn);
+      }
+    }
   }
 })();
