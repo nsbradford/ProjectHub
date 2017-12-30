@@ -16,6 +16,12 @@
   * @returns {Factory}
   */
   function Authentication($cookies, $http, Snackbar) {
+
+    /**
+     * The Hash key for the account cookie.
+     */
+    const COOKIE_KEY = "authenticatedAccount";
+
     /**
     * @name Authentication
     * @desc The Factory to be returned
@@ -29,7 +35,6 @@
       setAuthenticatedAccount: setAuthenticatedAccount,
       unauthenticate: unauthenticate,
     };
-
     return Authentication;
 
     /* Begin functions */
@@ -40,14 +45,18 @@
     * @param {string} email The email entered by the user
     * @param {string} password The password entered by the user
     * @param {string} username The username entered by the user
+    * @param {string} firstname The first name of the new user
+    * @param {string} lastname The last name of the new user
     * @returns {Promise}
     * @memberOf projecthub.authentication.services.Authentication
     */
-    function register(email, password, username) {
+    function register(email, password, username, firstname, lastname) {
       return $http.post('/api/v1/accounts/', {
         username: username,
         password: password,
-        email: email
+        email: email,
+        first_name: firstname,
+        last_name: lastname
       }).then(registerSuccessFn, registerErrorFn);
 
       /**
@@ -96,7 +105,7 @@
        * @desc Log "Epic failure!" to the console
        */
       function loginErrorFn(data, status, headers, config) {
-        Snackbar.error('The username/password combination you entered was invalid.');        
+        Snackbar.error('The username/password combination you entered was invalid.');
       }
     }
 
@@ -107,11 +116,11 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function getAuthenticatedAccount() {
-      if (!$cookies.authenticatedAccount) {
+      if (!$cookies.get(COOKIE_KEY)) {
         return;
       }
 
-      return JSON.parse($cookies.authenticatedAccount);
+      return JSON.parse($cookies.get(COOKIE_KEY));
     }
 
     /**
@@ -121,13 +130,7 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function isAuthenticated() {
-      const isAuth = !!$cookies.authenticatedAccount;
-
-      if (!isAuth) {
-        this.logout();
-      }
-
-      return isAuth;
+      return !!$cookies.get(COOKIE_KEY);
     }
 
     /**
@@ -138,7 +141,9 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function setAuthenticatedAccount(account) {
-      $cookies.authenticatedAccount = JSON.stringify(account);
+      const expireDate = new Date();
+      expireDate.setDate(expireDate.getDate() + 1);
+      $cookies.put(COOKIE_KEY, JSON.stringify(account), {'expires': expireDate});
     }
 
     /**
@@ -148,7 +153,7 @@
      * @memberOf projecthub.authentication.services.Authentication
      */
     function unauthenticate() {
-      delete $cookies.authenticatedAccount;
+      $cookies.remove(COOKIE_KEY);
     }
 
     /**
@@ -176,7 +181,7 @@
        * @desc Inform user that something went wrong during logout.
        */
       function logoutErrorFn(data, status, headers, config) {
-        Snackbar.error('Something went wrong during Logout.')
+        Snackbar.error('Something went wrong during Logout.');
       }
     }
 

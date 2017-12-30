@@ -5,9 +5,25 @@
     <div class="well login-no-shadow" ng-show="vm.profile">
       
       <form role="form" class="settings" ng-submit="vm.update()">
+
+        <!-- TODO -->
+
+        <div class="form-group">
+          <label for="settings__first_name">First name</label>
+          <span ng-show='vm.missing_firstname' class='error-span'> required</span>
+          <input type="text" class="form-control" id="settings__first_name" ng-model="vm.profile.first_name" placeholder="" />
+        </div>
+
+        <div class="form-group">
+          <label for="settings__last_name">Last name</label>
+          <span ng-show='vm.missing_lastname' class='error-span'> required</span>
+          <input type="text" class="form-control" id="settings__last_name" ng-model="vm.profile.last_name" placeholder="" />
+        </div>
+
         <div class="form-group">
           <label for="settings__email">Email</label>
-          <input type="text" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="ex. john@example.com" />
+          <span ng-show='vm.missing_email' class='error-span'> required</span>
+          <input type="text" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="" />
         </div>
 
         <!-- <div class="form-group">
@@ -27,12 +43,12 @@
 
         <div class="form-group">
           <label for="settings__username">Username</label>
-          <input type="text" class="form-control" id="settings__username" ng-model="vm.profile.username" placeholder="ex. notgoogleplus" />
+          <input disabled type="text" class="form-control" id="settings__username" ng-model="vm.profile.username" placeholder="" />
         </div>
 
         <div class="form-group">
           <label for="settings__tagline">Tagline</label>
-          <textarea class="form-control" id="settings__tagline" ng-model="vm.profile.tagline" placeholder="ex. Computer Science student @ WPI who loves front-end design!" />
+          <textarea class="form-control" id="settings__tagline" ng-model="vm.profile.tagline" placeholder="" />
         </div>
 
         <h4 class="text-center"><a href='/+{{vm.profile.username}}'>View profile</a></h4>
