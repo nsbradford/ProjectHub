@@ -81,6 +81,23 @@ class APIAccountTests(APITestCase):
                 }
     url = '/api/v1/accounts/'
     url_username = url + username + '/'
+    # url = '/rest-auth/registration/'
+
+
+    # rest-auth tests
+
+    # def test_send_email(self):
+    #     from django.core import mail
+    #     mail.send_mail(
+    #         subject='Subject here',
+    #         message='Here is the message.',
+    #         from_email='from@example.com',
+    #         recipient_list=['nsbradford@gmail.com'],
+    #         fail_silently=False,
+    #     )
+    #     print 'sent email'
+    #     assert len(mail.outbox) == 1
+    #     self.assertEqual(mail.outbox[0].subject, 'Subject here')
 
 
     # Helpers

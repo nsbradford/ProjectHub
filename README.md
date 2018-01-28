@@ -1,5 +1,29 @@
 # ProjectHub
 
+Visit us at https://www.goprojecthub.com
+
+## About
+
+### Why ProjectHub?
+
+https://www.goprojecthub.com/about
+
+ProjectHub started in 2017 to connect collaborators on all kinds of projects: startups, academic projects, research, and more.
+
+Currently, students or professors trying to find interesting work or recruit teammates are limited to spamming large email aliases and hoping for the best. That's terrible for everyone; you're inundated with irrelevant material, and there's no searchable centralized repository for when you decide to go looking.
+
+Instead, ProjectHub provides a simple, generic, and flexible platform where anyone can search for projects or collaborators.
+
+### Our plan
+
+Short-term, this site provides a service to the WPI community for all kinds of projects, including both students and professors. The Dean's office, Department Heads, some Trustees, and others are on board and excited about this. Long-term, we'll be expanding other other schools to build a valuable network of collaborators. 
+
+### Recruitment
+
+https://www.goprojecthub.com/projects/+4
+
+We're looking for additional developers - we use {Heroku, Django, Angular} but no prior experience necessary - all you'll need to do is complete the Django+Angular tutorials and you'll be ready to go in a couple hours.
+
 ## Installation
 
 Create a Python virtual environment, install bower components, instantiate the database, and start the dev server.

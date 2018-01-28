@@ -17,6 +17,7 @@ from authentication.views import AccountViewSet
 from authentication.views import LoginView
 from authentication.views import LogoutView
 from projects.views import AccountProjectsViewSet, ProjectViewSet
+import rest_auth
 
 
 router = routers.SimpleRouter()
@@ -33,4 +34,6 @@ urlpatterns = [
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
     url('^.*$', IndexView.as_view(), name='index'),
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
 ]

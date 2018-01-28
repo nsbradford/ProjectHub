@@ -37,13 +37,17 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', None)
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
 EMAIL_USE_TLS = True
+
+ANYMAIL = {
+    "MAILGUN_API_KEY": os.environ.get('MAILGUN_API_KEY', None),
+    "MAILGUN_SENDER_DOMAIN": 'goprojecthub.com',
+}
 
 # TODO Django: from which email addresses to send messages
 
-# DEFAULT_FROM_EMAIL = 
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"  # or sendgrid.EmailBackend, or...
+DEFAULT_FROM_EMAIL = 'testpostmaster@goprojecthub.com'
 # SERVER_EMAIL =
 
 # TODO logging and notifications of server errors
@@ -67,14 +71,18 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.facebook',
     'rest_framework',
+    'rest_framework.authtoken',
     'compressor',
     'authentication',
     'projects',
+    'rest_auth',
+    'rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'anymail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -235,7 +243,7 @@ LOGGING = {
 
 print "\nProduction env tests..."
 if not SECRET_KEY: print 'WARNING: SECRET_KEY not set'
-if not EMAIL_HOST_USER: print 'WARNING: EMAIL_HOST_USER not set'
-if not EMAIL_HOST_PASSWORD: print 'WARNING: EMAIL_HOST_PASSWORD not set'
+# if not EMAIL_HOST_USER: print 'WARNING: EMAIL_HOST_USER not set'
+# if not EMAIL_HOST_PASSWORD: print 'WARNING: EMAIL_HOST_PASSWORD not set'
 if DEBUG: print 'WARNING: running in DEBUG mode'
 print ''

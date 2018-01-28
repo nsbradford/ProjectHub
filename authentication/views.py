@@ -15,6 +15,8 @@ from authentication.models import Account
 from authentication.permissions import IsAccountOwner
 from authentication.serializers import AccountSerializer
 
+from django.core import mail
+
 
 class AccountViewSet(viewsets.ModelViewSet):
     """ Combined RESTful view for Account model. """
@@ -45,6 +47,15 @@ class AccountViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             Account.objects.create_user(**serializer.validated_data)
+            mail.send_mail(
+                subject='ProjectHub.com: New Account Created',
+                message=('Created with this data: @' + request.data['username'] + ', ' + 
+                    request.data['email'] + ', ' + 
+                    request.data['first_name'] + ' ' + request.data['last_name']),
+                from_email='postmaster@goprojecthub.com',
+                recipient_list=['nsbradford@gmail.com'],
+                fail_silently=False,
+            )
             return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
         return Response({
             'status': 'Bad request',
