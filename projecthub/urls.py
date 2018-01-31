@@ -13,9 +13,7 @@ from django.conf.urls import url, include
 from projecthub.views import IndexView
 from rest_framework_nested import routers
 
-from authentication.views import AccountViewSet
-from authentication.views import LoginView
-from authentication.views import LogoutView
+from authentication.views import AccountViewSet, LoginView, LogoutView, ActivateAccountView
 from projects.views import AccountProjectsViewSet, ProjectViewSet
 import rest_auth
 
@@ -33,7 +31,6 @@ urlpatterns = [
     url(r'^api/v1/', include(accounts_router.urls)),
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^api/v1/auth/activate/$', ActivateAccountView.as_view(), name='activate'),
     url('^.*$', IndexView.as_view(), name='index'),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
 ]

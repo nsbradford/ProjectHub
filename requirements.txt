@@ -11,6 +11,7 @@ django-compressor==2.2
 django-registration==2.3
 django-rest-auth==0.9.3
 django-rest-framework==0.1.0
+django-simple-email-confirmation==0.23
 django-split-settings==0.2.5
 djangorestframework==3.7.3
 drf-nested-routers==0.90.0

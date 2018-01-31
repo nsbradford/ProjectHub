@@ -40,15 +40,20 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 ANYMAIL = {
-    "MAILGUN_API_KEY": os.environ.get('MAILGUN_API_KEY', None),
-    "MAILGUN_SENDER_DOMAIN": 'goprojecthub.com',
+    'MAILGUN_API_KEY': os.environ.get('MAILGUN_API_KEY', None),
+    'MAILGUN_SENDER_DOMAIN': 'goprojecthub.com',
 }
 
-# TODO Django: from which email addresses to send messages
 
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"  # or sendgrid.EmailBackend, or...
-DEFAULT_FROM_EMAIL = 'testpostmaster@goprojecthub.com'
-# SERVER_EMAIL =
+EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+DEFAULT_FROM_EMAIL = 'postmaster@goprojecthub.com'
+
+# rest-auth
+
+# REST_AUTH_SERIALIZERS = {
+#     'LOGIN_SERIALIZER': 'authentication.serializers.AccountSerializer',
+#     # 'TOKEN_SERIALIZER': 'path.to.custom.TokenSerializer',
+# }
 
 # TODO logging and notifications of server errors
 
@@ -76,12 +81,13 @@ INSTALLED_APPS = (
     'compressor',
     'authentication',
     'projects',
-    'rest_auth',
-    'rest_auth.registration',
+    # 'rest_auth',
+    # 'rest_auth.registration',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'simple_email_confirmation',
     'anymail',
 )
 

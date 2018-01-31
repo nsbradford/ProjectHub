@@ -10,6 +10,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 
+from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+
 
 class AccountManager(BaseUserManager):
     """ A custom Manager is required when creating a custom user model. """
@@ -39,6 +43,29 @@ class AccountManager(BaseUserManager):
         )
         account.set_password(password)
         account.save()
+
+        email_to_send_to = 'nsbradford@gmail.com'
+        # send_mail(
+        #     subject='ProjectHub: Confirm account creation',
+        #     message=('We received a request to create an account for %s. \
+        #         Use the following token to confirm: %s' % (email, account.confirmation_key)),
+        #     from_email='postmaster@goprojecthub.com',
+        #     recipient_list=[email_to_send_to],
+        #     fail_silently=False,
+        # )
+        msg_html = render_to_string('email-confirm-account.html', {'key': account.confirmation_key})
+        send_mail(
+            subject='ProjectHub: Confirm your account',
+            message=('We received a request to create an account for %s. \
+                Use the following token to confirm: %s' % (email, account.confirmation_key)),
+            from_email='postmaster@goprojecthub.com',
+            recipient_list=[email_to_send_to],
+            html_message = msg_html,
+            fail_silently=False,
+        )
+
+        print '\nKEY: %s' % account.confirmation_key, account.is_confirmed
+
         return account
 
     def create_superuser(self, email, password, **kwargs):
@@ -49,7 +76,7 @@ class AccountManager(BaseUserManager):
         return account
 
 
-class Account(AbstractBaseUser):
+class Account(SimpleEmailConfirmationUserMixin, AbstractBaseUser):
     """ Extend the AbstractBaseUser so that we can add custom properties while retaining
             benefits of session manaagement, password hashing, etc. 
         NOTE: in order for django to switch to using our custom class for superusers, must

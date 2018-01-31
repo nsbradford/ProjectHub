@@ -99,6 +99,8 @@ class APIAccountTests(APITestCase):
     #     assert len(mail.outbox) == 1
     #     self.assertEqual(mail.outbox[0].subject, 'Subject here')
 
+    def test_account_activation(self):
+        pass
 
     # Helpers
 
