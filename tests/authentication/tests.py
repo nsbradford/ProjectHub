@@ -104,24 +104,24 @@ class APIAccountTests(APITestCase):
     def test_account_activation_bad_key(self):
         self.setup_account()
         bad_token = 'asdf1234'
-        get_response = self.client.get(self.url_activate % bad_token)
-        self.assertEqual(get_response.status_code, status.HTTP_400_BAD_REQUEST)
+        post_response = self.client.post(self.url_activate % bad_token)
+        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
     def test_account_activation_good_key(self):
         new_account = self.setup_account()
         good_token = new_account.get_confirmation_key()
-        get_response = self.client.get(self.url_activate % good_token)
-        self.assertEqual(get_response.status_code, status.HTTP_202_ACCEPTED)
+        post_response = self.client.post(self.url_activate % good_token)
+        self.assertEqual(post_response.status_code, status.HTTP_202_ACCEPTED)
         self.assertEqual(True, new_account.is_confirmed)
 
 
     def test_account_activation_already_activated(self):
         new_account = self.setup_account()
         good_token = new_account.get_confirmation_key()
-        get_response = self.client.get(self.url_activate % good_token)
-        get_response = self.client.get(self.url_activate % good_token)
-        self.assertEqual(get_response.status_code, status.HTTP_400_BAD_REQUEST)
+        post_response = self.client.post(self.url_activate % good_token)
+        post_response = self.client.post(self.url_activate % good_token)
+        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(True, new_account.is_confirmed)
 
 

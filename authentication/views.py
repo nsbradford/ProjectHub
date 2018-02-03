@@ -118,7 +118,7 @@ class ActivateAccountView(views.APIView):
     """ View for activating an account given its token. """
 
 
-    def get(self, request, key, format=None):
+    def post(self, request, key, format=None):
         """ Authorize the user with that key.
                 1) Check if the key is associated with an email
                 2) If so, check if email has a User (should always be true)
