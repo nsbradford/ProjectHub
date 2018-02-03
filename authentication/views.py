@@ -16,6 +16,8 @@ from authentication.permissions import IsAccountOwner
 from authentication.serializers import AccountSerializer
 
 from django.core import mail
+from simple_email_confirmation.models import EmailAddress
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class AccountViewSet(viewsets.ModelViewSet):
@@ -115,29 +117,24 @@ def activateView(request, key):
 class ActivateAccountView(views.APIView):
     """ View for activating an account given its token. """
 
-    # def get_queryset(self):
-    #     """ allow rest api to filter by submissions """
-    #     queryset = Account.objects.all()
-    #     key = self.request.query_params.get('activation_key', None)
-    #     if key is not None:
-    #         queryset = queryset.filter(confirmatino_key=key)
-    #     return queryset
 
     def get(self, request, key, format=None):
         print 'received request to activate account'
+        print 'Request had key:' + key
+
+        try:
+            email = EmailAddress.objects.get(key=key)
+        except ObjectDoesNotExist:
+            error_msg = 'Did not find an account with activation_key=' + key
+            print error_msg
+            return Response({
+                    'status': 'Unauthorized',
+                    'message': error_msg
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        print email
+        account = Account.objects.get(email=email)
+        print 'Found an account associated with that ID, has email: ' + account.email
+        account.confirm_email(user.confirmation_key)
+        print "account.is_confirmed: " + account.is_confirmed
         return Response(status=status.HTTP_202_ACCEPTED)
-        # key = self.kwargs.get('activation_key')
-        # print 'Request had key:' + key
-        # account = Account.objects.get(confirmation_key=key)
-        # if account is not None:
-        #     print 'Found an account associated with that ID, has email: ' + account.email
-        #     account.confirm_email(user.confirmation_key)
-        #     print "account.is_confirmed: " + account.is_confirmed
-        #     return Response(status=status.HTTP_202_ACCEPTED)
-        # else:
-        #     error_msg = 'Did not find an account with activation_key=' + key
-        #     print error_msg
-        #     return Response({
-        #             'status': 'Unauthorized',
-        #             'message': error_msg
-        #         }, status=status.HTTP_400_BAD_REQUEST)
