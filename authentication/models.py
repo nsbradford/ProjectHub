@@ -45,14 +45,6 @@ class AccountManager(BaseUserManager):
         account.save()
 
         email_to_send_to = 'nsbradford@gmail.com'
-        # send_mail(
-        #     subject='ProjectHub: Confirm account creation',
-        #     message=('We received a request to create an account for %s. \
-        #         Use the following token to confirm: %s' % (email, account.confirmation_key)),
-        #     from_email='postmaster@goprojecthub.com',
-        #     recipient_list=[email_to_send_to],
-        #     fail_silently=False,
-        # )
         msg_html = render_to_string('email-confirm-account.html', {'key': account.confirmation_key})
         send_mail(
             subject='ProjectHub: Confirm your account',

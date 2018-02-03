@@ -49,15 +49,15 @@ class AccountViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             Account.objects.create_user(**serializer.validated_data)
-            mail.send_mail(
-                subject='ProjectHub.com: New Account Created',
-                message=('Created with this data: @' + request.data['username'] + ', ' + 
-                    request.data['email'] + ', ' + 
-                    request.data['first_name'] + ' ' + request.data['last_name']),
-                from_email='postmaster@goprojecthub.com',
-                recipient_list=['nsbradford@gmail.com'],
-                fail_silently=False,
-            )
+            # mail.send_mail(
+            #     subject='ProjectHub.com: New Account Created',
+            #     message=('Created with this data: @' + request.data['username'] + ', ' + 
+            #         request.data['email'] + ', ' + 
+            #         request.data['first_name'] + ' ' + request.data['last_name']),
+            #     from_email='postmaster@goprojecthub.com',
+            #     recipient_list=['nsbradford@gmail.com'],
+            #     fail_silently=False,
+            # )
             return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
         return Response({
             'status': 'Bad request',
@@ -149,5 +149,8 @@ class ActivateAccountView(views.APIView):
                     'message': 'This account is already confirmed.'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
+
+
         account.confirm_email(key)
+        print 'confirmed account!', key
         return Response(status=status.HTTP_202_ACCEPTED)

@@ -12,4 +12,5 @@
 
   angular
     .module('projecthub.authentication.services', ['ngCookies']);
+
 })();
