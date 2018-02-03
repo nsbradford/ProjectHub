@@ -89,6 +89,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
     'simple_email_confirmation',
     'anymail',
+    'django_nose'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -244,6 +245,11 @@ LOGGING = {
         },
     }
 }
+
+# Django testing with Nose
+TEST_RUNNER = "django_nose.NoseTestSuiteRunner"
+NOSE_ARGS = ['--nocapture',
+             '--nologcapture',]
 
 # TEST
 

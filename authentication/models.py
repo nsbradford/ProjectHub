@@ -64,7 +64,7 @@ class AccountManager(BaseUserManager):
             fail_silently=False,
         )
 
-        print '\nKEY: %s' % account.confirmation_key, account.is_confirmed
+        # print '\nKEY: %s' % account.confirmation_key, account.is_confirmed
 
         return account
 

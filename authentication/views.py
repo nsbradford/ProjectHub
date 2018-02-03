@@ -109,12 +109,18 @@ class LogoutView(views.APIView):
 class ActivateAccountView(views.APIView):
     """ View for activating an account given its token. """
 
-    def post(self, request, format=None):
-        data = request.data
-        print 'received request to activate account with token: ' + data.get['token']
-        email = data.get['email']
-        token = data.get['token']
-        account = Accounts.objects.get(email=email)
-        # if account is not None and token
-        account.confirm_email(user.confirmation_key)
-        print "account.is_confirmed: " + account.is_confirmed
+    def get(self, activation_id, format=None):
+        print 'received request to activate account with key: ' + activation_id
+        account = Accounts.objects.get(confirmation_key=activation_id)
+        if account is not None:
+            print 'Found an account associated with that ID, has email: ' + account.email
+            account.confirm_email(user.confirmation_key)
+            print "account.is_confirmed: " + account.is_confirmed
+            return Response(status=status.HTTP_202_ACCEPTED)
+        else:
+            error_msg = 'Did not find an account with activation_key=' + activation_id
+            print error_msg
+            return Response({
+                    'status': 'Unauthorized',
+                    'message': error_msg
+                }, status=status.HTTP_400_BAD_REQUEST)
