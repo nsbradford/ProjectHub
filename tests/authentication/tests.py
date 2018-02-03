@@ -100,12 +100,12 @@ class APIAccountTests(APITestCase):
     #     self.assertEqual(mail.outbox[0].subject, 'Subject here')
 
     def test_account_activation(self):
-        setup_account()
-        url = '/api/v1/auth/activate/'
-        bad_token = 'XXXX' 
-        url_bad = url + bad_token + '/'
-        print 'Sending: ' + url_bad
-        get_response = self.client.post(url_bad)
+        self.setup_account()
+        url = '/api/v2/auth/activate/2/'#?key=asdfasdf/'
+        # bad_token = 'XXXX' 
+        # url_bad = url + bad_token
+        print 'Sending: ' + url
+        get_response = self.client.get(url)
         self.assertEqual(get_response.status_code, status.HTTP_400_BAD_REQUEST)
 
     # Helpers
