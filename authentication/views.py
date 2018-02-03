@@ -119,22 +119,35 @@ class ActivateAccountView(views.APIView):
 
 
     def get(self, request, key, format=None):
-        print 'received request to activate account'
-        print 'Request had key:' + key
+        """ Authorize the user with that key.
+                1) Check if the key is associated with an email
+                2) If so, check if email has a User (should always be true)
+                3) If so, check if User is currently not confirmed
+                4) If so, confirm that User's account
+        """
 
         try:
-            email = EmailAddress.objects.get(key=key)
+            email_address = EmailAddress.objects.get(key=key)
         except ObjectDoesNotExist:
-            error_msg = 'Did not find an account with activation_key=' + key
-            print error_msg
             return Response({
-                    'status': 'Unauthorized',
-                    'message': error_msg
+                    'status': 'Bad Request',
+                    'message': 'No account is associated with that key.'
                 }, status=status.HTTP_400_BAD_REQUEST)
         
-        print email
-        account = Account.objects.get(email=email)
-        print 'Found an account associated with that ID, has email: ' + account.email
-        account.confirm_email(user.confirmation_key)
-        print "account.is_confirmed: " + account.is_confirmed
+        try:
+            email = email_address.email
+            account = Account.objects.get(email=email)
+        except ObjectDoesNotExist:
+            return Response({
+                    'status': 'Internal Server error',
+                    'message': 'Something went during account confirmation.'
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        if account.is_confirmed:
+            return Response({
+                    'status': 'Redundant request',
+                    'message': 'This account is already confirmed.'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+        account.confirm_email(key)
         return Response(status=status.HTTP_202_ACCEPTED)

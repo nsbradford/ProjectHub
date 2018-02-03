@@ -81,6 +81,7 @@ class APIAccountTests(APITestCase):
                 }
     url = '/api/v1/accounts/'
     url_username = url + username + '/'
+    url_activate = '/api/v1/auth/activate/%s/'
     # url = '/rest-auth/registration/'
 
 
@@ -99,14 +100,30 @@ class APIAccountTests(APITestCase):
     #     assert len(mail.outbox) == 1
     #     self.assertEqual(mail.outbox[0].subject, 'Subject here')
 
-    def test_account_activation(self):
+
+    def test_account_activation_bad_key(self):
         self.setup_account()
-        url = '/api/v2/auth/activate/2/'#?key=asdfasdf/'
-        # bad_token = 'XXXX' 
-        # url_bad = url + bad_token
-        print 'Sending: ' + url
-        get_response = self.client.get(url)
+        bad_token = 'asdf1234'
+        get_response = self.client.get(self.url_activate % bad_token)
         self.assertEqual(get_response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+    def test_account_activation_good_key(self):
+        new_account = self.setup_account()
+        good_token = new_account.get_confirmation_key()
+        get_response = self.client.get(self.url_activate % good_token)
+        self.assertEqual(get_response.status_code, status.HTTP_202_ACCEPTED)
+        self.assertEqual(True, new_account.is_confirmed)
+
+
+    def test_account_activation_already_activated(self):
+        new_account = self.setup_account()
+        good_token = new_account.get_confirmation_key()
+        get_response = self.client.get(self.url_activate % good_token)
+        get_response = self.client.get(self.url_activate % good_token)
+        self.assertEqual(get_response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(True, new_account.is_confirmed)
+
 
     # Helpers
 

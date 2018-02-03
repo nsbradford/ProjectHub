@@ -33,12 +33,6 @@ urlpatterns = [
     url(r'^api/v1/', include(accounts_router.urls)),
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
-    # url(r'^api/v1/auth/activate/(?P<key>.*)/$', ActivateAccountView.as_view(), name='activate'),
-    url(r'^api/v2/auth/activate/(?P<key>\d+)/$', ActivateAccountView.as_view(), name='activate')
-    # url('^.*$', IndexView.as_view(), name='index'),
-
-
-    # url(r'^activate/(?P<activation_key>[-:\w]+)/$',
-    #     views.ActivationView.as_view(),
-    #     name='registration_activate'),
+    url(r'^api/v1/auth/activate/(?P<key>\w+)/$', ActivateAccountView.as_view(), name='activate'),
+    url('^.*$', IndexView.as_view(), name='index'),
 ]
