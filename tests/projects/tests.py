@@ -290,7 +290,6 @@ class ProjectTests(APITestCase):
         self.assertEquals(response_json.get('description'), self.existing_project_payload.get('description'))
         self.assertEquals(response_json.get('majors'), self.existing_project_payload.get('majors'))
 
-
     def test_get_all_projects_by_user(self):
         """
         Anyone can see an aggregated list of all of a single user's projects
