@@ -29,7 +29,7 @@ from projects.views import AccountProjectsViewSet, ProjectViewSet, MajorViewSet
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
 router.register(r'majors', MajorViewSet)
-router.register(r'projects', ProjectViewSet)
+router.register(r'projects', ProjectViewSet, base_name='Project')
 accounts_router = routers.NestedSimpleRouter(
     router, r'accounts', lookup='account'
 )
