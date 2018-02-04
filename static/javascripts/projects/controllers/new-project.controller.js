@@ -17,7 +17,8 @@
   function NewProjectController($rootScope, $scope, Authentication, Snackbar, Projects) {
     const vm = this;
     vm.submit = submit;
-    vm.majors = '' // TODO bug: 'field may not be left blank'
+    vm.majors = null;
+    vm.allMajors = $scope.ngDialogData;
 
     /**
     * @name submit
@@ -25,7 +26,7 @@
     * @memberOf projecthub.projects.controllers.NewProjectController
     */
     function submit() {
-      var splitMajors = vm.majors.split(' ');
+      console.log(vm.majors);
 
       Projects.create(vm.title, vm.description, vm.majors).then(createProjectSuccessFn, createProjectErrorFn);
       $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
@@ -36,7 +37,7 @@
       */
       function createProjectSuccessFn(data, status, headers, config) {
         Snackbar.show('Success! Project created.');
-        $rootScope.$broadcast('project.created', {})
+        $rootScope.$broadcast('project.created', {});
       }
 
 

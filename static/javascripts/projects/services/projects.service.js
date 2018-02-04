@@ -59,8 +59,7 @@
       return $http.post(projectURL, {
         title: title,
         description: description,
-        // majors: majors // TODO only handling a single major currently
-        major: majors 
+        majors: majors
       });
     }
 
@@ -104,9 +103,9 @@
     /**
      * @name search
      * @desc api call to search all projects's fields for a given string.
-     * 
+     *
      * @param {String} searchString string that will be used in a server-side search of projects.
-     * 
+     *
      * @returns {array} an array of all projects that contain the searchString within their fields.
      */
     function search(searchString) {

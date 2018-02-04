@@ -32,22 +32,26 @@ class ProjectSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'created_at', 'updated_at')
 
     author = AccountSerializer(read_only=True, required=False)
-    # majors = serializers.SlugRelatedField(
-    #         many=True,
-    #         slug_field='title',
-    #         queryset=Major.objects.all()
-    #     )
+    majors = serializers.SlugRelatedField(
+            many=True,
+            slug_field='title',
+            queryset=Major.objects.all()
+        )
 
     def validate(self, data):
         """ Perform object-level validation on all the data. Called automatically
                 as part of is_valid(). As per documentation, must return data
                 or raise serializers.ValidationError
         """
-        valid_majors = set('CS, RBE')
-        majors = set(data['major'])
-        log.debug('valid: {}\t actual: {}'.format(valid_majors, majors))
-        if False:   # TODO finish validating the list of majors
-            raise serializers.ValidationError('Must supply password.')
+        valid_majors = Major.objects.all()
+
+        majors = set(data['majors'])
+
+        # The following line is the most `pythonic` way to see if we have any
+        # majors that are not real majors.
+        if any(major not in valid_majors for major in majors):
+            log.error('Major not found - {}'.format(major.title))
+            raise serializers.ValidationError('Major(s) not found.')
         return data
 
     class Meta:

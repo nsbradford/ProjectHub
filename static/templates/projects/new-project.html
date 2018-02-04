@@ -2,31 +2,33 @@
   <h1>New Project</h1>
   <div class="form-group">
 
-    <label for="project__title">Title</label> 
-    <textarea class="form-control" 
-              id="project__title" 
-              rows="3" 
-              placeholder="'Algorithmic trading with Python'" 
+    <label for="project__title">Title</label>
+    <textarea class="form-control"
+              id="project__title"
+              rows="3"
+              placeholder="'Algorithmic trading with Python'"
               ng-model="vm.title">
     </textarea>
-    
-    <label for="project__description">Description</label> 
-    <textarea class="form-control" 
-              id="project__description" 
-              rows="3" 
-              placeholder="'This is your big chance to get rich!'" 
+
+    <label for="project__description">Description</label>
+    <textarea class="form-control"
+              id="project__description"
+              rows="3"
+              placeholder="'This is your big chance to get rich!'"
               ng-model="vm.description">
     </textarea>
 
     <label for="project__majors">Majors</label> <br>
 <!--     <input type="checkbox" name="majors" value="CS">CS <br>
     <input type="checkbox" name="vehicle" value="RBE">RBE -->
-    <textarea class="form-control" 
-              id="project__majors" 
-              rows="3" 
-              placeholder="'CS'" 
+    <select class="form-control"
+              id="project__majors"
+              multiple
+              rows="3"
+              placeholder="'CS'"
               ng-model="vm.majors">
-    </textarea>
+              <option ng-repeat="major in vm.allMajors" ng-value="{{major.title}}">{{major.title}}</option>
+    </select>
 
   </div>
 
