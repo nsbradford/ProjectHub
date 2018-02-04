@@ -20,6 +20,7 @@
     const vm = this;
     vm.destroy = destroy;
     vm.update = update;
+    vm.resendConfirmation = resendConfirmation
 
     vm.missing_email = false;
     vm.missing_firstname = false;
@@ -145,7 +146,8 @@
 
 
     function resendConfirmation() {
-      Authentication.resendConfirmation(vm.profile).then(resendSuccessFn, resendErrorFn);
+      console.log('controller hit');
+      Authentication.resendConfirmation(vm.profile.email).then(resendSuccessFn, resendErrorFn);
 
       /**
       * @name resendSuccessFn

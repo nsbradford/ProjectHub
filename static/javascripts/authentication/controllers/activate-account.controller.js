@@ -9,12 +9,12 @@
     .module('projecthub.authentication.controllers')
     .controller('ActivateAccountController', ActivateAccountController);
 
-  ActivateAccountController.$inject = ['$location', '$scope', '$routeParams', 'Authentication'];
+  ActivateAccountController.$inject = ['$location', '$scope', '$routeParams', 'Snackbar', 'Authentication'];
 
   /**
   * @namespace ActivateAccountController
   */
-  function ActivateAccountController($location, $scope, $routeParams, Authentication) {
+  function ActivateAccountController($location, $scope, $routeParams, Snackbar, Authentication) {
     const vm = this;
 
     activate();
@@ -25,7 +25,7 @@
     * @memberOf projecthub.authentication.controllers.ActivateAccountController
     */
     function activate() {
-      // todo logic for making sure the user logs in, for extra security
+      // TODO logic for making sure the user logs in when activating, for extra security
       if (Authentication.isAuthenticated()) {
         
       }
@@ -37,10 +37,12 @@
 
       function activateSuccessFn(data, status, headers, config) {
         Snackbar.show('Congrats! Your account was confirmed - you\'re ready to post!.');
+        $location.url('/discover');
       }
 
       function activateErrorFn(data, status, headers, config) {
         Snackbar.error('Something went wrong during account confirmation.');
+        $location.url('/');
       }
 
     }

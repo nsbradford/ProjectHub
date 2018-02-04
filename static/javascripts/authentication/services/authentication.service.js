@@ -35,6 +35,7 @@
       setAuthenticatedAccount: setAuthenticatedAccount,
       unauthenticate: unauthenticate,
       activateAccount: activateAccount,
+      resendConfirmation: resendConfirmation,
     };
     return Authentication;
 
@@ -187,14 +188,14 @@
     }
 
     function activateAccount(key) {
-      return $http.post('/api/v1/auth/activate/' + key)
+      return $http.post('/api/v1/auth/activate/' + key);
     }
 
-    function resendConfirmation(username) {
+    function resendConfirmation(email) {
       return $http.post('/api/v1/auth/resend/', {
         email: email,
-      })
+      });
     }
-    
+
   }
 })();
