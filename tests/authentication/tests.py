@@ -84,60 +84,8 @@ class APIAccountTests(APITestCase):
     url_activate = '/api/v1/auth/activate/%s'
     url_resend_email = '/api/v1/auth/resend/'
     json_email = {'email': email}
+    json_email_bad = {'email': 'fake@gmail.com'}
 
-
-    # rest-auth tests
-
-    # def test_send_email(self):
-    #     from django.core import mail
-    #     mail.send_mail(
-    #         subject='Subject here',
-    #         message='Here is the message.',
-    #         from_email='from@example.com',
-    #         recipient_list=['nsbradford@gmail.com'],
-    #         fail_silently=False,
-    #     )
-    #     print 'sent email'
-    #     assert len(mail.outbox) == 1
-    #     self.assertEqual(mail.outbox[0].subject, 'Subject here')
-
-
-    def test_account_activation_bad_key(self):
-        self.setup_account()
-        bad_token = 'asdf1234'
-        post_response = self.client.post(self.url_activate % bad_token)
-        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
-
-
-    def test_account_activation_good_key(self):
-        new_account = self.setup_account()
-        good_token = new_account.get_confirmation_key()
-        post_response = self.client.post(self.url_activate % good_token)
-        self.assertEqual(post_response.status_code, status.HTTP_202_ACCEPTED)
-        self.assertEqual(True, new_account.is_confirmed)
-
-
-    def test_account_activation_already_activated(self):
-        new_account = self.setup_account()
-        good_token = new_account.get_confirmation_key()
-        post_response = self.client.post(self.url_activate % good_token)
-        post_response = self.client.post(self.url_activate % good_token)
-        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(True, new_account.is_confirmed)
-
-
-    def test_resend_email_authenticated(self):
-        new_account = self.setup_account()
-        self.assertEqual(False, new_account.is_confirmed)
-        post_response = self.client.post(self.url_resend_email, self.json_email, format='json')
-        self.assertEqual(post_response.status_code, status.HTTP_202_ACCEPTED)
-        
-
-    def test_resend_email_not_authenticated(self):
-        pass
-
-    def test_resend_email_already_activatd(self):
-        pass
 
     # Helpers
 
@@ -158,6 +106,8 @@ class APIAccountTests(APITestCase):
         return new_account
 
     # Tests
+
+    # basic account tests
 
     def test_API_create_account(self):
         """ Test account creation and deletion. """
@@ -282,3 +232,71 @@ class APIAccountTests(APITestCase):
         delete_response = self.client.delete(self.url_username)
         self.assertEqual(delete_response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Account.objects.count(), 0)
+
+
+    # email activation
+
+    def test_account_activation_bad_key(self):
+        self.setup_account()
+        bad_token = 'asdf1234'
+        post_response = self.client.post(self.url_activate % bad_token)
+        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+    def test_account_activation_good_key(self):
+        new_account = self.setup_account()
+        good_token = new_account.get_confirmation_key()
+        post_response = self.client.post(self.url_activate % good_token)
+        self.assertEqual(post_response.status_code, status.HTTP_202_ACCEPTED)
+        self.assertEqual(True, new_account.is_confirmed)
+
+
+    def test_account_activation_already_activated(self):
+        new_account = self.setup_account()
+        good_token = new_account.get_confirmation_key()
+        post_response = self.client.post(self.url_activate % good_token)
+        post_response = self.client.post(self.url_activate % good_token)
+        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(True, new_account.is_confirmed)
+
+    # resend activation email
+
+    def test_resend_email_authenticated(self):
+        new_account = self.setup_account()
+        self.assertEqual(False, new_account.is_confirmed)
+        self.client.login(email=self.email, password=self.password)
+        post_response = self.client.post(self.url_resend_email, self.json_email, format='json')
+        self.assertEqual(post_response.status_code, status.HTTP_202_ACCEPTED)
+        
+
+    def test_resend_email_not_logged_in(self):
+        new_account = self.setup_account()
+        self.assertEqual(False, new_account.is_confirmed)
+        post_response = self.client.post(self.url_resend_email, self.json_email, format='json')
+        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+    def test_resend_email_logged_in_but_wrong_email(self):
+        new_account = self.setup_account()
+        self.assertEqual(False, new_account.is_confirmed)
+        self.client.login(email=self.email, password=self.password)
+        post_response = self.client.post(self.url_resend_email, self.json_email_bad, format='json')
+        self.assertEqual(post_response.status_code, status.HTTP_403_FORBIDDEN)        
+
+
+    def test_resend_email_already_activated(self):
+        pass
+
+
+    # def test_send_email(self):
+    #     from django.core import mail
+    #     mail.send_mail(
+    #         subject='Subject here',
+    #         message='Here is the message.',
+    #         from_email='from@example.com',
+    #         recipient_list=['nsbradford@gmail.com'],
+    #         fail_silently=False,
+    #     )
+    #     print 'sent email'
+    #     assert len(mail.outbox) == 1
+    #     self.assertEqual(mail.outbox[0].subject, 'Subject here')

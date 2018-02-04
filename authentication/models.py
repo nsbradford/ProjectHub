@@ -119,5 +119,4 @@ class Account(SimpleEmailConfirmationUserMixin, AbstractBaseUser):
         return self.first_name
 
     def resend_confirmation_email(self):
-        print 'resending the email'
         send_confirmation_email(self.email, self.confirmation_key)

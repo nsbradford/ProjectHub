@@ -111,14 +111,24 @@ class LogoutView(views.APIView):
 class ResendEmailView(views.APIView):
 
     def post(self, request, format=None):
+        current_user = request.user
         data = request.data
         email = data.get('email', None)
-        # password = data.get('password', None)
-        # account = authenticate(email=email, password=password)
-        account = Account.objects.get(email=email)
-        account.resend_confirmation_email()
-        # print 'Received request with', data
-        return Response(status=status.HTTP_202_ACCEPTED)
+        if not request.user.is_authenticated():
+            return Response({
+                    'status': 'Bad Request',
+                    'message': 'Must be logged in to resend email.'
+                }, status=status.HTTP_400_BAD_REQUEST)
+        elif request.user.email != email:
+            return Response({
+                    'status': 'Bad Request',
+                    'message': 'Attempted to resend email to a different account.'
+                }, status=status.HTTP_403_FORBIDDEN)            
+        else:
+            account = Account.objects.get(email=email)
+            account.resend_confirmation_email()
+            return Response(status=status.HTTP_202_ACCEPTED)
+
 
 
 class ActivateAccountView(views.APIView):
