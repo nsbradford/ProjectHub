@@ -10,13 +10,13 @@
     .controller('EditProjectController', EditProjectController);
 
   EditProjectController.$inject = [
-    '$location', '$routeParams', 'Authentication', 'Snackbar', 'Projects'
+    '$location', '$routeParams', 'Authentication', 'Snackbar', 'Projects', 'Majors'
   ];
 
   /**
   * @namespace EditProjectController
   */
-  function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects) {
+  function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects, Majors) {
     const vm = this;
     vm.isUserOwnerOfProject = false
     vm.project = undefined
@@ -42,8 +42,8 @@
     */
     function activate() {
       var projectID = $routeParams.projectID.substr(1);
-      Projects.getById(projectID).then(projectsSuccessFn, projectsErrorFn);      
-
+      Projects.getById(projectID).then(projectsSuccessFn, projectsErrorFn);
+      Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
       /**
       * @name projectSuccessFn
       * @desc Update `project` for view
@@ -56,6 +56,27 @@
           Snackbar.error('You are not authorized to view this page.');
         }
       }
+
+      /**
+     * @name MajorSuccessCallback
+     * @desc This function is called when a call to the Majors service
+     * returns successfully.
+     *
+     * @param {object} response The response from the server
+     */
+    function MajorsSuccessCallback(response) {
+      vm.allMajors = response.data;
+    }
+
+    /**
+     * @name MajorsfailureCallback
+     * @desc Function that is calle when the majors service fails to proivde a list of
+     * majors
+     */
+    function MajorsFailureCallback() {
+        Snackbar.error("Unable to get majors. Please refresh the page.");
+    }
+
 
       /**
       * @name projectErrorFn

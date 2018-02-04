@@ -82,6 +82,7 @@
         Snackbar.error('Error loading profile, please refresh.');
       }
     }
+
     /**
     * @name projectsSuccessFn
     * @desc Update projects array on view
@@ -92,7 +93,7 @@
        * No Content -- Tell the controller that we can no longer lazyload,
        * Do not add anything to the the project list
        */
-      if ( data.status == 204) {
+      if (data.status == 204) {
         vm.canLoadMoreProjects = false;
         return;
       }
@@ -162,7 +163,6 @@
          */
         for (let i = 0; i < activeFilters.length; i++ ) {
           return project.majors.some(function(currentMajor) {
-            debugger
             if (currentMajor === activeFilters[i].title) {
               return true;
             }
