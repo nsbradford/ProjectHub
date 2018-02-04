@@ -15,6 +15,22 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 
+def send_confirmation_email(email, key):
+    proper_url = 'https://www.goprojecthub.com/activate/%s' % key
+    msg_html = render_to_string('email-confirm-account.html', {'proper_url': proper_url})
+    msg_text = ('We received a request to create an account for %s. \
+            Use the following token link confirm: %s' % (email, proper_url))
+
+    send_mail(
+        subject='ProjectHub: Confirm your account',
+        message=msg_text,
+        from_email='postmaster@goprojecthub.com',
+        recipient_list=[email],
+        html_message = msg_html,
+        fail_silently=False,
+    )
+
+
 class AccountManager(BaseUserManager):
     """ A custom Manager is required when creating a custom user model. """
 
@@ -44,17 +60,7 @@ class AccountManager(BaseUserManager):
         account.set_password(password)
         account.save()
 
-        email_to_send_to = 'nsbradford@gmail.com'
-        msg_html = render_to_string('email-confirm-account.html', {'key': account.confirmation_key})
-        send_mail(
-            subject='ProjectHub: Confirm your account',
-            message=('We received a request to create an account for %s. \
-                Use the following token to confirm: %s' % (email, account.confirmation_key)),
-            from_email='postmaster@goprojecthub.com',
-            recipient_list=[email_to_send_to],
-            html_message = msg_html,
-            fail_silently=False,
-        )
+        send_confirmation_email(email, account.confirmation_key)
 
         # print '\nKEY: %s' % account.confirmation_key, account.is_confirmed
 
@@ -92,6 +98,10 @@ class Account(SimpleEmailConfirmationUserMixin, AbstractBaseUser):
     updated_at = models.DateTimeField(auto_now=True)
     is_admin = models.BooleanField(default=False)
 
+    # self.is_confirmed property will check if this user's email is confirmed
+    # Check https://github.com/mfogel/django-simple-email-confirmation
+    #       /blob/develop/simple_email_confirmation/models.py
+
     objects = AccountManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
@@ -107,3 +117,7 @@ class Account(SimpleEmailConfirmationUserMixin, AbstractBaseUser):
     def get_short_name(self):
         """ Django convention that should be included, but currently unused. """
         return self.first_name
+
+    def resend_confirmation_email(self):
+        print 'resending the email'
+        send_confirmation_email(self.email, self.confirmation_key)

@@ -81,8 +81,9 @@ class APIAccountTests(APITestCase):
                 }
     url = '/api/v1/accounts/'
     url_username = url + username + '/'
-    url_activate = '/api/v1/auth/activate/%s/'
-    # url = '/rest-auth/registration/'
+    url_activate = '/api/v1/auth/activate/%s'
+    url_resend_email = '/api/v1/auth/resend/'
+    json_email = {'email': email}
 
 
     # rest-auth tests
@@ -125,6 +126,19 @@ class APIAccountTests(APITestCase):
         self.assertEqual(True, new_account.is_confirmed)
 
 
+    def test_resend_email_authenticated(self):
+        new_account = self.setup_account()
+        self.assertEqual(False, new_account.is_confirmed)
+        post_response = self.client.post(self.url_resend_email, self.json_email, format='json')
+        self.assertEqual(post_response.status_code, status.HTTP_202_ACCEPTED)
+        
+
+    def test_resend_email_not_authenticated(self):
+        pass
+
+    def test_resend_email_already_activatd(self):
+        pass
+
     # Helpers
 
     def setup_account(self):
@@ -166,7 +180,7 @@ class APIAccountTests(APITestCase):
         """
         self.setup_account()
         get_response = self.client.get(self.url_username)
-        self.assertEqual(len(get_response.data), 8)
+        self.assertEqual(len(get_response.data), 9)
         self.assertEqual(get_response.data['email'], self.email)
         self.assertEqual(get_response.data['username'], self.username)
         self.assertIn('created_at', get_response.data)
@@ -174,6 +188,7 @@ class APIAccountTests(APITestCase):
         self.assertIn('first_name', get_response.data)
         self.assertIn('last_name', get_response.data)
         self.assertIn('tagline', get_response.data)
+        self.assertIn('is_email_confirmed', get_response.data)
         self.assertNotIn('password', get_response.data)
 
 

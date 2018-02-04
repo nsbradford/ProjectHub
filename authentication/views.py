@@ -108,15 +108,21 @@ class LogoutView(views.APIView):
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
 
+class ResendEmailView(views.APIView):
 
-def activateView(request, key):
-    print 'Received!!'
-    from rest_framework import status
-    return Response(status=status.HTTP_202_ACCEPTED)
+    def post(self, request, format=None):
+        data = request.data
+        email = data.get('email', None)
+        # password = data.get('password', None)
+        # account = authenticate(email=email, password=password)
+        account = Account.objects.get(email=email)
+        account.resend_confirmation_email()
+        # print 'Received request with', data
+        return Response(status=status.HTTP_202_ACCEPTED)
+
 
 class ActivateAccountView(views.APIView):
     """ View for activating an account given its token. """
-
 
     def post(self, request, key, format=None):
         """ Authorize the user with that key.
@@ -125,13 +131,12 @@ class ActivateAccountView(views.APIView):
                 3) If so, check if User is currently not confirmed
                 4) If so, confirm that User's account
         """
-
         try:
             email_address = EmailAddress.objects.get(key=key)
         except ObjectDoesNotExist:
             return Response({
                     'status': 'Bad Request',
-                    'message': 'No account is associated with that key.'
+                    'message': 'No account is associated with key ' + key
                 }, status=status.HTTP_400_BAD_REQUEST)
         
         try:
@@ -149,8 +154,5 @@ class ActivateAccountView(views.APIView):
                     'message': 'This account is already confirmed.'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
-
-
         account.confirm_email(key)
-        print 'confirmed account!', key
         return Response(status=status.HTTP_202_ACCEPTED)

@@ -25,6 +25,8 @@
     vm.missing_firstname = false;
     vm.missing_lastname = false;
 
+    vm.is_confirmed = false;
+
     activate();
 
 
@@ -36,6 +38,7 @@
     function activate() {
       var authenticatedAccount = Authentication.getAuthenticatedAccount();
       var username = $routeParams.username.substr(1);
+      
 
       // Redirect if not logged in
       if (!authenticatedAccount) {
@@ -57,6 +60,7 @@
       */
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
+        vm.is_confirmed = vm.profile['is_email_confirmed']
       }
 
       /**
@@ -136,6 +140,27 @@
       */
       function profileErrorFn(data, status, headers, config) {
         Snackbar.error(data.error);
+      }
+    }
+
+
+    function resendConfirmation() {
+      Authentication.resendConfirmation(vm.profile).then(resendSuccessFn, resendErrorFn);
+
+      /**
+      * @name resendSuccessFn
+      * @desc Show success snackbar
+      */
+      function resendSuccessFn(data, status, headers, config) {
+        Snackbar.show('Email has been sent.');
+      }
+
+      /**
+      * @name resendErrorFn
+      * @desc Show error snackbar
+      */
+      function resendErrorFn(data, status, headers, config) {
+        Snackbar.error("There was an error sending the email: " + data.error);
       }
     }
   }

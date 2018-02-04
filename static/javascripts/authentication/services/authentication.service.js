@@ -188,18 +188,13 @@
 
     function activateAccount(key) {
       return $http.post('/api/v1/auth/activate/' + key)
-        .then(activateSuccessFn, activateErrorFn)
-
-      function activateSuccessFn(data, status, headers, config) {
-        Snackbar.show('Congrats! Your account was confirmed - you\'re ready to post!.');
-        // window.location = '/discover';
-      }
-
-      function activateErrorFn(data, status, headers, config) {
-        Snackbar.show('Something went wrong during account confirmation.');
-        // window.location = '/';
-      }
     }
 
+    function resendConfirmation(username) {
+      return $http.post('/api/v1/auth/resend/', {
+        email: email,
+      })
+    }
+    
   }
 })();

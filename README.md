@@ -129,4 +129,5 @@ Fun things to do:
 	* DELETE          '/api/v1/projects/' + id + '/'
 * API LoginView:      api/v1/auth/login/
 * API LogoutView:     api/v1/auth/logout/
+* API ActivateAccount api/v1/auth/activate/ + key
 
