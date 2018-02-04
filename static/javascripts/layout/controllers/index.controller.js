@@ -84,9 +84,9 @@
     }
 
     /**
-    * @name projectsSuccessFn
-    * @desc Update projects array on view
-    */
+     * @name projectsSuccessFn
+     * @desc Update projects array on view
+     */
     function projectsSuccessFn(data, status, headers, config) {
 
       /**
@@ -201,7 +201,8 @@
     }
 
     /**
-     *
+     * @name ProjectSearchFailureCallback
+     * @desc Handler for when a search goes wrong
      *
      * @param {object} response the Response we get from the server
      * @param {object} status the status of the resposne we recieve. This will be used in lazyloader later...
