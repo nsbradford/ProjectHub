@@ -17,3 +17,14 @@ class IsAuthorOfProject(permissions.BasePermission):
             return project.author == request.user
         return False
 
+
+class IsEmailActivated(permissions.BasePermission):
+    """ Basic permission checks returns true if the request has an Account
+            and it has its email confirmed.
+    """
+    def has_object_permission(self, request, view, project):
+        print '\n\tChecking IsEmailActivated\n'
+        if request.user:
+            print '\t\t : \t', request.user.is_confirmed
+            return request.user.is_confirmed
+        return False
