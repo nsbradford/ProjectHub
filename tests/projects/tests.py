@@ -94,11 +94,12 @@ class ProjectTests(APITestCase):
         self.assertEqual(new_project.major, self.major)
 
 
-    def setup_account_and_project(self):
+    def setup_account_and_project(self, activate=True):
         """ """
         self.assertEqual(Account.objects.count(), 0)
         new_account = self.setup_account()
-        self.activate_account(new_account)
+        if activate:
+            self.activate_account(new_account)
         self.client.login(email=self.email, password=self.password)
         self.setup_project(new_account)
         return new_account
@@ -150,11 +151,6 @@ class ProjectTests(APITestCase):
         new_project = Project.objects.get()
         self.assertEqual(new_project.title, self.new_title)
         self.assertEqual(new_project.description, self.new_description)
-    
-    
-    def test_update_project_different_user(self):
-        """ Users cannot update the projects of a different user. """
-        pass # TODO
 
 
     def test_get_single_project(self):

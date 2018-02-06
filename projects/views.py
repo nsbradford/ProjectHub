@@ -26,31 +26,23 @@ class ProjectViewSet(viewsets.ModelViewSet):
     lookup_field = 'pk'
 
 
-    def get_object(self):
-        print 'in get_object'
-        obj = get_object_or_404(self.get_queryset(), pk=self.kwargs[self.lookup_field])
-        self.check_object_permissions(self.request, obj)
-        return obj
-
     def get_permissions(self):
         """ We allow anyone to use requests in SAFE_METHODS (GET, HEAD, OPTIONS).
                 Otherwise, require authentication and authorization.
         """
-        print '\tIn get_permissions'
         if self.request.method in permissions.SAFE_METHODS:
-            print '\tits safe'
             return (permissions.AllowAny(),)
-        print '\tits not safe'
         # may be able to use IsAuthenticatedOrReadOnly to simplify things
         return (permissions.IsAuthenticated(), IsAuthorOfProject(), IsEmailActivated(),)
+
 
     def perform_create(self, serializer):
         """ Automatically add the current Account as the author
                 of the project.
         """
+        # TODO ideally this would be handled with built-in permissions classes
         if not self.request.user.is_confirmed:
             raise PermissionDenied(detail='Only users with confirmed emails may create projects.')
-        # TODO We have to check here if user is author of project and email is activated
         serializer.save(author=self.request.user)
         return super(ProjectViewSet, self).perform_create(serializer)
 
