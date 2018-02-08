@@ -32,7 +32,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
         """
         if self.request.method in permissions.SAFE_METHODS:
             return (permissions.AllowAny(),)
-        # may be able to use IsAuthenticatedOrReadOnly to simplify things
         return (permissions.IsAuthenticated(), IsAuthorOfProject(), IsEmailActivated(),)
 
 
@@ -53,7 +52,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 title__contains=searchString).order_by('-created_at')
         return Project.objects.all().order_by('-created_at')
 
-    # @list_route()
+
+    # @list_route() # TODO why is this commented out?
     def list(self, request, pk=None):
         last_project_index = int(
                 request.query_params.get("lastProjectIndex", 0))
@@ -88,6 +88,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
 
 
+
 class AccountProjectsViewSet(viewsets.ViewSet):
     queryset = Project.objects.select_related('author').all()
     serializer_class = ProjectSerializer
@@ -95,5 +96,4 @@ class AccountProjectsViewSet(viewsets.ViewSet):
     def list(self, request, account_username=None):
         queryset = self.queryset.filter(author__username=account_username)
         serializer = self.serializer_class(queryset, many=True)
-
         return Response(serializer.data)
