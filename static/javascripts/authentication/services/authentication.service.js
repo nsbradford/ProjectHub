@@ -121,7 +121,6 @@
       if (!$cookies.get(COOKIE_KEY)) {
         return;
       }
-
       return JSON.parse($cookies.get(COOKIE_KEY));
     }
 
