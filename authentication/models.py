@@ -59,11 +59,7 @@ class AccountManager(BaseUserManager):
         )
         account.set_password(password)
         account.save()
-
         send_confirmation_email(email, account.confirmation_key)
-
-        # print '\nKEY: %s' % account.confirmation_key, account.is_confirmed
-
         return account
 
     def create_superuser(self, email, password, **kwargs):

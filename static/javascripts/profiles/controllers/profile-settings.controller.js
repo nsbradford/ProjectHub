@@ -146,7 +146,6 @@
 
 
     function resendConfirmation() {
-      console.log('controller hit');
       Authentication.resendConfirmation(vm.profile.email).then(resendSuccessFn, resendErrorFn);
 
       /**

@@ -273,19 +273,18 @@ class APIAccountTests(APITestCase):
         new_account = self.setup_account()
         self.assertEqual(False, new_account.is_confirmed)
         post_response = self.client.post(self.url_resend_email, self.json_email, format='json')
-        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
-
-
-    def test_resend_email_logged_in_but_wrong_email(self):
-        new_account = self.setup_account()
-        self.assertEqual(False, new_account.is_confirmed)
-        self.client.login(email=self.email, password=self.password)
-        post_response = self.client.post(self.url_resend_email, self.json_email_bad, format='json')
-        self.assertEqual(post_response.status_code, status.HTTP_403_FORBIDDEN)        
+        self.assertEqual(post_response.status_code, status.HTTP_403_FORBIDDEN)
 
 
     def test_resend_email_already_activated(self):
-        pass
+        new_account = self.setup_account()
+        good_token = new_account.get_confirmation_key()
+        self.client.post(self.url_activate % good_token)
+        self.assertEqual(True, new_account.is_confirmed)
+
+        self.client.login(email=self.email, password=self.password)
+        post_response = self.client.post(self.url_resend_email, self.json_email, format='json')
+        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
     # def test_send_email(self):

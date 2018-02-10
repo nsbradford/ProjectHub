@@ -49,15 +49,6 @@ class AccountViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             Account.objects.create_user(**serializer.validated_data)
-            # mail.send_mail(
-            #     subject='ProjectHub.com: New Account Created',
-            #     message=('Created with this data: @' + request.data['username'] + ', ' + 
-            #         request.data['email'] + ', ' + 
-            #         request.data['first_name'] + ' ' + request.data['last_name']),
-            #     from_email='postmaster@goprojecthub.com',
-            #     recipient_list=['nsbradford@gmail.com'],
-            #     fail_silently=False,
-            # )
             return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
         return Response({
             'status': 'Bad request',
@@ -112,20 +103,18 @@ class ResendEmailView(views.APIView):
 
     def post(self, request, format=None):
         current_user = request.user
-        data = request.data
-        email = data.get('email', None)
-        if not request.user.is_authenticated():
+        if not current_user.is_authenticated():
             return Response({
-                    'status': 'Bad Request',
+                    'status': 'Forbidden',
                     'message': 'Must be logged in to resend email.'
-                }, status=status.HTTP_400_BAD_REQUEST)
-        elif request.user.email != email:
+                }, status=status.HTTP_403_FORBIDDEN)
+        elif Account.objects.get(email=current_user.email).is_confirmed:
             return Response({
                     'status': 'Bad Request',
-                    'message': 'Attempted to resend email to a different account.'
-                }, status=status.HTTP_403_FORBIDDEN)            
+                    'message': 'Trying to send a confirmation email to an already activated account.'
+                }, status=status.HTTP_400_BAD_REQUEST)            
         else:
-            account = Account.objects.get(email=email)
+            account = Account.objects.get(email=current_user.email)
             account.resend_confirmation_email()
             return Response(status=status.HTTP_202_ACCEPTED)
 
