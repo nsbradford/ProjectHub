@@ -26,9 +26,6 @@
     */
     function activate() {
       // TODO logic for making sure the user logs in when activating, for extra security
-      if (Authentication.isAuthenticated()) {
-        
-      }
 
       var key = $routeParams.key;
 

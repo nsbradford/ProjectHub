@@ -84,7 +84,6 @@ class APIAccountTests(APITestCase):
     url_activate = '/api/v1/auth/activate/%s'
     url_resend_email = '/api/v1/auth/resend/'
     json_email = {'email': email}
-    json_email_bad = {'email': 'fake@gmail.com'}
 
 
     # Helpers
@@ -287,15 +286,14 @@ class APIAccountTests(APITestCase):
         self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
-    # def test_send_email(self):
-    #     from django.core import mail
-    #     mail.send_mail(
-    #         subject='Subject here',
-    #         message='Here is the message.',
-    #         from_email='from@example.com',
-    #         recipient_list=['nsbradford@gmail.com'],
-    #         fail_silently=False,
-    #     )
-    #     print 'sent email'
-    #     assert len(mail.outbox) == 1
-    #     self.assertEqual(mail.outbox[0].subject, 'Subject here')
+    def test_send_email(self):
+        from django.core import mail
+        mail.send_mail(
+            subject='Subject here',
+            message='Here is the message.',
+            from_email='from@example.com',
+            recipient_list=['nsbradford@gmail.com'],
+            fail_silently=False,
+        )
+        assert len(mail.outbox) == 1
+        self.assertEqual(mail.outbox[0].subject, 'Subject here')

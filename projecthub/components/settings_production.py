@@ -48,23 +48,11 @@ ANYMAIL = {
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 DEFAULT_FROM_EMAIL = 'postmaster@goprojecthub.com'
 
-# rest-auth
-
-# REST_AUTH_SERIALIZERS = {
-#     'LOGIN_SERIALIZER': 'authentication.serializers.AccountSerializer',
-#     # 'TOKEN_SERIALIZER': 'path.to.custom.TokenSerializer',
-# }
-
 # TODO logging and notifications of server errors
 
 # LOGGING = []
 # ADMINS = [] # notified of 500 errors
 # MANAGERS = [] # notified of 404 errors
-
-# TODO: for django-allauth:
-#   AUTHENTICATION_BACKENDS, TEMPLATE_CONTEXT_PROCESSORS, SITE_ID, LOGIN_REDIRECT_URL,
-#   SOCIALACCOUNT_QUERY_EMAIL, SOCIALACCOUNT_PROVIDERS
-
 
 # Application definition
 
@@ -81,8 +69,6 @@ INSTALLED_APPS = (
     'compressor',
     'authentication',
     'projects',
-    # 'rest_auth',
-    # 'rest_auth.registration',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -181,12 +167,6 @@ TEMPLATES = [
 ]
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-    )
-}
-
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -255,7 +235,6 @@ NOSE_ARGS = ['--nocapture',
 
 print "\nProduction env tests..."
 if not SECRET_KEY: print 'WARNING: SECRET_KEY not set'
-# if not EMAIL_HOST_USER: print 'WARNING: EMAIL_HOST_USER not set'
-# if not EMAIL_HOST_PASSWORD: print 'WARNING: EMAIL_HOST_PASSWORD not set'
+if not ANYMAIL['MAILGUN_API_KEY']: print 'WARNING: MAILGUN_API_KEY not set'
 if DEBUG: print 'WARNING: running in DEBUG mode'
 print ''

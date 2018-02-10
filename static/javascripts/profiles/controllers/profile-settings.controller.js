@@ -61,7 +61,7 @@
       */
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
-        vm.is_confirmed = vm.profile['is_email_confirmed']
+        vm.is_confirmed = vm.profile.is_email_confirmed
       }
 
       /**
@@ -161,7 +161,7 @@
       * @desc Show error snackbar
       */
       function resendErrorFn(data, status, headers, config) {
-        Snackbar.error("There was an error sending the email: " + data.error);
+        Snackbar.error("There was an error sending the email, please try again.");
       }
     }
   }
