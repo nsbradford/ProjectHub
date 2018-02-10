@@ -16,7 +16,7 @@ from rest_framework_nested import routers
 from authentication.views import AccountViewSet, LoginView, LogoutView
 from authentication.views import ActivateAccountView, ResendEmailView
 from projects.views import AccountProjectsViewSet, ProjectViewSet
-import rest_auth
+
 
 
 router = routers.SimpleRouter()
