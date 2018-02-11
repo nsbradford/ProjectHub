@@ -20,7 +20,7 @@
     * @desc The factory to be returned
     * @memberOf projecthub.profiles.services.Profile
     */
-    var Profile = {
+    const Profile = {
       destroy: destroy,
       get: get,
       update: update,

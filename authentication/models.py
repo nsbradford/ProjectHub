@@ -14,17 +14,18 @@ from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
+from django.conf import settings
+
 
 def send_confirmation_email(email, key):
     proper_url = 'https://www.goprojecthub.com/activate/%s' % key
     msg_html = render_to_string('email-confirm-account.html', {'proper_url': proper_url})
     msg_text = ('We received a request to create an account for %s. \
             Use the following token link confirm: %s' % (email, proper_url))
-
     send_mail(
         subject='ProjectHub: Confirm your account',
         message=msg_text,
-        from_email='postmaster@goprojecthub.com',
+        from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[email],
         html_message = msg_html,
         fail_silently=False,

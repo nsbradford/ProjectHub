@@ -100,8 +100,14 @@ class LogoutView(views.APIView):
 
 
 class ResendEmailView(views.APIView):
+    """ View for resending the confirmation email for a user."""
 
     def post(self, request, format=None):
+        """ Resend an email to the currently authenticated user.
+                1) Check that the user is authenticated
+                2) If so, check that the user hasn't already been activated
+                3) If so, re-send the email.
+        """
         current_user = request.user
         if not current_user.is_authenticated():
             return Response({

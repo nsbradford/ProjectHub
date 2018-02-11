@@ -57,7 +57,7 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = ('id', 'email', 'username', 'created_at', 'updated_at',
                     'first_name', 'last_name', 'tagline', 'password', 'is_email_confirmed')
                     # 'new_password', 'confirm_password',)
-        read_only_fields = ('created_at', 'updated_at', )
+        read_only_fields = ('created_at', 'updated_at',)
 
 
 

@@ -52,7 +52,7 @@
         vm.projects.shift();
       });
 
-      const username = Authentication.getAuthenticatedAccount().username
+      const username = Authentication.getAuthenticatedAccount().username;
       Profile.get(username).then(profileSuccessFn, profileErrorFn);
 
       function profileSuccessFn(data, status, headers, config) {
