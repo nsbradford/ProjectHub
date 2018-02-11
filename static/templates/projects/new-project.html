@@ -24,10 +24,10 @@
     <select class="form-control"
               id="project__majors"
               multiple
-              rows="3"
+              rows="5"
               placeholder="'CS'"
               ng-model="vm.majors">
-              <option ng-repeat="major in vm.allMajors" ng-value="{{major.title}}">{{major.title}}</option>
+              <option ng-repeat="major in vm.allMajors" ng-value="major.title">{{major.title}}</option>
     </select>
 
   </div>

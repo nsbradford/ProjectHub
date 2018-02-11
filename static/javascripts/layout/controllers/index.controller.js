@@ -29,6 +29,9 @@
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
 
+    /**
+     * We ask to filter on project creation, this function should stay outside the activate function
+     */
     $scope.$on('project.created', function (event, data) {
       vm.projects = [data].concat(vm.projects);
       filterProjects();
@@ -47,7 +50,6 @@
     function activate() {
       Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
       Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
-      // fetch the projects again on creation
 
       /**
        * @name MajorSuccessCallback

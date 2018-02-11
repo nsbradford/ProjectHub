@@ -26,8 +26,6 @@
     * @memberOf projecthub.projects.controllers.NewProjectController
     */
     function submit() {
-      console.log(vm.majors);
-
       Projects.create(vm.title, vm.description, vm.majors).then(createProjectSuccessFn, createProjectErrorFn);
       $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
 
@@ -37,7 +35,7 @@
       */
       function createProjectSuccessFn(data, status, headers, config) {
         Snackbar.show('Success! Project created.');
-        $rootScope.$broadcast('project.created', {});
+        $rootScope.$broadcast('project.created', data.data);
       }
 
 
