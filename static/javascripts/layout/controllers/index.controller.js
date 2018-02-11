@@ -144,6 +144,8 @@
       // Retrieve all filters that are active.
       const activeFilters = vm.allFilters.filter(function (f) {
         return f.active;
+      }).map(function(activeMajors){
+        return activeMajors.title;
       });
       /*
       * If we dont have any filters that are applied.
@@ -162,15 +164,12 @@
          * more efficiency if we use a traditional for loop. We cant achieve
          * short circuits using the functional components.
          */
-        for (let i = 0; i < activeFilters.length; i++ ) {
-          return project.majors.some(function(currentMajor) {
-            if (currentMajor === activeFilters[i].title) {
-              return true;
-            }
+        return activeFilters.every(function(filter){
+          return (project.majors.indexOf(filter) > -1);
         });
-        }
-      });
-    }
+
+    });
+  }
 
     /**
      * @name submitSearch
