@@ -20,7 +20,7 @@
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.profile = undefined;
-    vm.isActivated = undefined;
+    vm.isActivated = false;
     vm.allFilters = [{ title: "CS" }, { title: "ME" }, { title: "ECE" }]; 
     // This will be removed soon. We will be pulling the majors from the backend using angular.
     // Until we have that endpoint, we will be using a static list.
@@ -52,8 +52,10 @@
         vm.projects.shift();
       });
 
-      const username = Authentication.getAuthenticatedAccount().username;
-      Profile.get(username).then(profileSuccessFn, profileErrorFn);
+      const account = Authentication.getAuthenticatedAccount();
+      if (account){
+        Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
+      }      
 
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
