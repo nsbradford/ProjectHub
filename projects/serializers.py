@@ -28,7 +28,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         """ Meta class configuring serializer. """
         model = Project
-        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at', 'major')
+        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at')
         read_only_fields = ('id', 'created_at', 'updated_at')
 
     author = AccountSerializer(read_only=True, required=False)
