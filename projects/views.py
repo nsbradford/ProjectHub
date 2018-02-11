@@ -53,7 +53,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return Project.objects.all().order_by('-created_at')
 
 
-    # @list_route() # TODO why is this commented out?
     def list(self, request, pk=None):
         last_project_index = int(
                 request.query_params.get("lastProjectIndex", 0))
