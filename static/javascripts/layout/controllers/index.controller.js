@@ -52,8 +52,10 @@
         vm.projects.shift();
       });
 
-      const username = Authentication.getAuthenticatedAccount().username;
-      Profile.get(username).then(profileSuccessFn, profileErrorFn);
+      const account = Authentication.getAuthenticatedAccount();
+      if (account){
+        Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
+      }      
 
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
