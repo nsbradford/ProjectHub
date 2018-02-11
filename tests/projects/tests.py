@@ -49,6 +49,13 @@ class ProjectTests(APITestCase):
     }
     accounts_url = '/api/v1/accounts/'
     project_url = '/api/v1/projects/'
+    url_activate = '/api/v1/auth/activate/%s'
+
+
+    def activate_account(self, new_account):
+        good_token = new_account.get_confirmation_key()
+        post_response = self.client.post(self.url_activate % good_token)
+        self.assertEqual(post_response.status_code, status.HTTP_202_ACCEPTED)
 
 
     @staticmethod
@@ -87,10 +94,12 @@ class ProjectTests(APITestCase):
         self.assertEqual(new_project.major, self.major)
 
 
-    def setup_account_and_project(self):
+    def setup_account_and_project(self, activate=True):
         """ """
         self.assertEqual(Account.objects.count(), 0)
         new_account = self.setup_account()
+        if activate:
+            self.activate_account(new_account)
         self.client.login(email=self.email, password=self.password)
         self.setup_project(new_account)
         return new_account
@@ -98,6 +107,14 @@ class ProjectTests(APITestCase):
 
     def test_create_project_must_be_authenticated(self):
         """ Ensure we get 403 FORBIDDEN when posting while unauthenticated. """
+        response = self.client.post(self.project_url, self.project_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+    def test_create_project_must_be_activated(self):
+        """ Get 403 Forbidden if posting from an account without an activated email."""
+        self.setup_account()
+        self.client.login(email=self.email, password=self.password)
         response = self.client.post(self.project_url, self.project_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
@@ -134,7 +151,7 @@ class ProjectTests(APITestCase):
         new_project = Project.objects.get()
         self.assertEqual(new_project.title, self.new_title)
         self.assertEqual(new_project.description, self.new_description)
-        
+
 
     def test_get_single_project(self):
         """ GET a single project by author and project name. """

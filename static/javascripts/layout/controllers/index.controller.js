@@ -9,16 +9,18 @@
     .module('projecthub.layout.controllers')
     .controller('IndexController', IndexController);
 
-  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar'];
+  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile'];
 
   /**
   * @namespace IndexController
   */
-  function IndexController($scope, Authentication, Projects, Snackbar) {
+  function IndexController($scope, Authentication, Projects, Snackbar, Profile) {
     
 
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
+    vm.profile = undefined;
+    vm.isActivated = undefined;
     vm.allFilters = [{ title: "CS" }, { title: "ME" }, { title: "ECE" }]; 
     // This will be removed soon. We will be pulling the majors from the backend using angular.
     // Until we have that endpoint, we will be using a static list.
@@ -50,6 +52,17 @@
         vm.projects.shift();
       });
 
+      const username = Authentication.getAuthenticatedAccount().username;
+      Profile.get(username).then(profileSuccessFn, profileErrorFn);
+
+      function profileSuccessFn(data, status, headers, config) {
+        vm.profile = data.data;
+        vm.isActivated = vm.profile.is_email_confirmed;
+      }
+
+      function profileErrorFn(data, status, headers, config) {
+        Snackbar.error('Error loading profile, please refresh.');
+      }
     }
     /**
     * @name projectsSuccessFn

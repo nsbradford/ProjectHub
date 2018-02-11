@@ -37,25 +37,22 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', None)
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
 EMAIL_USE_TLS = True
 
-# TODO Django: from which email addresses to send messages
+ANYMAIL = {
+    'MAILGUN_API_KEY': os.environ.get('MAILGUN_API_KEY', None),
+    'MAILGUN_SENDER_DOMAIN': 'goprojecthub.com',
+}
 
-# DEFAULT_FROM_EMAIL = 
-# SERVER_EMAIL =
+
+EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+DEFAULT_FROM_EMAIL = 'postmaster@goprojecthub.com'
 
 # TODO logging and notifications of server errors
 
 # LOGGING = []
 # ADMINS = [] # notified of 500 errors
 # MANAGERS = [] # notified of 404 errors
-
-# TODO: for django-allauth:
-#   AUTHENTICATION_BACKENDS, TEMPLATE_CONTEXT_PROCESSORS, SITE_ID, LOGIN_REDIRECT_URL,
-#   SOCIALACCOUNT_QUERY_EMAIL, SOCIALACCOUNT_PROVIDERS
-
 
 # Application definition
 
@@ -67,14 +64,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.facebook',
     'rest_framework',
     'compressor',
     'authentication',
     'projects',
+    'simple_email_confirmation',
+    'anymail',
+    'django_nose'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -166,12 +162,6 @@ TEMPLATES = [
 ]
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-    )
-}
-
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -231,11 +221,15 @@ LOGGING = {
     }
 }
 
+# Django testing with Nose
+TEST_RUNNER = "django_nose.NoseTestSuiteRunner"
+NOSE_ARGS = ['--nocapture',
+             '--nologcapture',]
+
 # TEST
 
 print "\nProduction env tests..."
 if not SECRET_KEY: print 'WARNING: SECRET_KEY not set'
-if not EMAIL_HOST_USER: print 'WARNING: EMAIL_HOST_USER not set'
-if not EMAIL_HOST_PASSWORD: print 'WARNING: EMAIL_HOST_PASSWORD not set'
+if not ANYMAIL['MAILGUN_API_KEY']: print 'WARNING: MAILGUN_API_KEY not set'
 if DEBUG: print 'WARNING: running in DEBUG mode'
 print ''

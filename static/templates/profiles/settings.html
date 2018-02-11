@@ -6,7 +6,12 @@
       
       <form role="form" class="settings" ng-submit="vm.update()">
 
-        <!-- TODO -->
+        <div class="text-center" ng-hide="vm.is_confirmed">
+          <h4>You haven't activated your account yet.</h4>
+          <button type="button" class="btn discover-button" ng-click="vm.resendConfirmation()">Re-send  email</button>
+        </div>
+
+        <br><br>
 
         <div class="form-group">
           <label for="settings__first_name">First name</label>
@@ -23,7 +28,7 @@
         <div class="form-group">
           <label for="settings__email">Email</label>
           <span ng-show='vm.missing_email' class='error-span'> required</span>
-          <input type="text" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="" />
+          <input disabled type="text" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="" />
         </div>
 
         <!-- <div class="form-group">
@@ -58,6 +63,7 @@
           <button type="button" class="btn red-button" ng-click="vm.destroy()">Delete Account</button>
         </div>
       </form>
+
     </div>
   </div>
 </div>

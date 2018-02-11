@@ -34,6 +34,8 @@
       isAuthenticated: isAuthenticated,
       setAuthenticatedAccount: setAuthenticatedAccount,
       unauthenticate: unauthenticate,
+      activateAccount: activateAccount,
+      resendConfirmation: resendConfirmation,
     };
     return Authentication;
 
@@ -119,7 +121,6 @@
       if (!$cookies.get(COOKIE_KEY)) {
         return;
       }
-
       return JSON.parse($cookies.get(COOKIE_KEY));
     }
 
@@ -183,6 +184,16 @@
       function logoutErrorFn(data, status, headers, config) {
         Snackbar.error('Something went wrong during Logout.');
       }
+    }
+
+    function activateAccount(key) {
+      return $http.post('/api/v1/auth/activate/' + key);
+    }
+
+    function resendConfirmation(email) {
+      return $http.post('/api/v1/auth/resend/', {
+        email: email,
+      });
     }
 
   }

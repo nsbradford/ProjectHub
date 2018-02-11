@@ -9,21 +9,21 @@
     .module('projecthub.profiles.services')
     .factory('Profile', Profile);
 
-  Profile.$inject = ['$http'];
+  Profile.$inject = ['$http', 'Authentication'];
 
   /**
   * @namespace Profile
   */
-  function Profile($http) {
+  function Profile($http, Authentication) {
     /**
     * @name Profile
     * @desc The factory to be returned
     * @memberOf projecthub.profiles.services.Profile
     */
-    var Profile = {
+    const Profile = {
       destroy: destroy,
       get: get,
-      update: update
+      update: update,
     };
 
     return Profile;

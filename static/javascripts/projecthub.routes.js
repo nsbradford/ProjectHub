@@ -46,6 +46,10 @@
       controller: 'EditProjectController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/projects/edit-project.html'
+    }).when('/activate/:key/', {
+      controller: 'ActivateAccountController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/authentication/activate-account.html'
     }).otherwise('/');
   }
 })();

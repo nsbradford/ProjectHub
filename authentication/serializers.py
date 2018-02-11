@@ -20,6 +20,8 @@ class AccountSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False, allow_blank=True)
     # new_password = serializers.CharField(write_only=True, required=False, allow_blank=True)
     # confirm_password = serializers.CharField(write_only=True, required=False, allow_blank=True)
+    is_email_confirmed = serializers.ReadOnlyField(source='is_confirmed')
+
 
     def validate(self, data):
         """ Perform object-level validation on all the data. Called automatically
@@ -39,6 +41,9 @@ class AccountSerializer(serializers.ModelSerializer):
         if 'last_name' not in data or not data['last_name']:
             raise serializers.ValidationError('Must supply last name.')
 
+        if 'is_email_confirmed' in data:
+            raise serializers.ValidationError('Must use Key API to change email confirmation.')
+
         return data
 
 
@@ -50,9 +55,10 @@ class AccountSerializer(serializers.ModelSerializer):
 
         model = Account
         fields = ('id', 'email', 'username', 'created_at', 'updated_at',
-                    'first_name', 'last_name', 'tagline', 'password',)
+                    'first_name', 'last_name', 'tagline', 'password', 'is_email_confirmed')
                     # 'new_password', 'confirm_password',)
         read_only_fields = ('created_at', 'updated_at',)
+
 
 
         def create(self, validated_data):
