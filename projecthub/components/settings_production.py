@@ -39,7 +39,6 @@ EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-<<<<<<< HEAD
 ANYMAIL = {
     'MAILGUN_API_KEY': os.environ.get('MAILGUN_API_KEY', None),
     'MAILGUN_SENDER_DOMAIN': 'goprojecthub.com',
@@ -48,7 +47,6 @@ ANYMAIL = {
 
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 DEFAULT_FROM_EMAIL = 'postmaster@goprojecthub.com'
-=======
 FIXTURE_DIRS = (
    os.path.join(BASE_DIR, 'fixtures'),
 )
@@ -57,7 +55,6 @@ FIXTURE_DIRS = (
 
 # DEFAULT_FROM_EMAIL =
 # SERVER_EMAIL =
->>>>>>> Adding Majors to models, and loading majors into SQL
 
 # TODO logging and notifications of server errors
 

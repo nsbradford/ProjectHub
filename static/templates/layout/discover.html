@@ -46,13 +46,12 @@
   href="javascript:void(0)"
   ng-show="vm.isActivated"
   ng-dialog="/static/templates/projects/new-project.html"
-<<<<<<< HEAD
-  ng-dialog-controller="NewProjectController as vm">
+  ng-dialog-controller="NewProjectController as vm"
+  ng-dialog-data="{{vm.allFilters}}"></a>
 
 <a class="btn btn-primary btn-fab btn-raised mdi-content-add btn-add-new-project"
   href="javascript:void(0)"
   ng-hide="vm.isActivated"
-  ng-dialog="/static/templates/projects/must-be-activated.html"></a>
+  ng-dialog="/static/templates/projects/must-be-activated.html"
   ng-dialog-controller="NewProjectController as vm"
-  ng-dialog-data="{{vm.allFilters}}"
   ></a>

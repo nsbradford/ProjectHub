@@ -13,17 +13,14 @@ from django.conf.urls import url, include
 from projecthub.views import IndexView
 from rest_framework_nested import routers
 
-<<<<<<< HEAD
-from authentication.views import AccountViewSet, LoginView, LogoutView
-from authentication.views import ActivateAccountView, ResendEmailView
-from projects.views import AccountProjectsViewSet, ProjectViewSet
-=======
-from authentication.views import AccountViewSet
-from authentication.views import LoginView
-from authentication.views import LogoutView
+from authentication.views import (
+    AccountViewSet,
+    LoginView,
+    LogoutView,
+    ActivateAccountView,
+    ResendEmailView
+)
 from projects.views import AccountProjectsViewSet, ProjectViewSet, MajorViewSet
->>>>>>> Adding Majors to models, and loading majors into SQL
-
 
 
 router = routers.SimpleRouter()

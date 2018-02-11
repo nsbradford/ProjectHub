@@ -84,18 +84,17 @@
         Snackbar.error('Error loading profile, please refresh.');
       }
     }
-
     /**
-     * @name projectsSuccessFn
-     * @desc Update projects array on view
-     */
+    * @name projectsSuccessFn
+    * @desc Update projects array on view
+    */
     function projectsSuccessFn(data, status, headers, config) {
 
       /**
        * No Content -- Tell the controller that we can no longer lazyload,
        * Do not add anything to the the project list
        */
-      if (data.status == 204) {
+      if ( data.status == 204) {
         vm.canLoadMoreProjects = false;
         return;
       }
@@ -203,8 +202,7 @@
     }
 
     /**
-     * @name ProjectSearchFailureCallback
-     * @desc Handler for when a search goes wrong
+     *
      *
      * @param {object} response the Response we get from the server
      * @param {object} status the status of the resposne we recieve. This will be used in lazyloader later...

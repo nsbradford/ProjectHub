@@ -19,7 +19,6 @@
     vm.submit = submit;
     vm.majors = null;
     vm.allMajors = $scope.ngDialogData;
-
     /**
     * @name submit
     * @desc Create a new Project
