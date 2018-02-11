@@ -8,30 +8,24 @@
 
         <div class="form-group">
           <label for="project__title">Title</label>
-          <input type="text" class="form-control" id="project__title" ng-model="vm.project.title" placeholder="ex. john@example.com" />
+          <input type="text" class="form-control" id="project__title" ng-model="vm.project.title" placeholder="ex. john@example.com"
+          />
         </div>
 
         <div class="form-group">
           <label for="project__description">Description</label>
           <textarea type="text" class="form-control" id="project__description" ng-model="vm.project.description" />
         </div>
-<div class="form-group">
-  <select class="form-control"
-  id="project__majors"
-  multiple
-  rows="3"
-  placeholder="'CS'"
-  ng-model="vm.project.majors">
-  <option ng-repeat="major in vm.allMajors" ng-value="major.title">{{major.title}}</option>
-</select>
-</div>
         <div class="form-group">
-          <label for="settings__tagline">Tagline</label>
-          <textarea class="form-control" id="settings__tagline" ng-model="vm.profile.tagline" placeholder="ex. Computer Science student @ WPI who loves front-end design!" />
+          <select class="form-control" id="project__majors" multiple rows="3" placeholder="'CS'" ng-model="vm.project.majors">
+            <option ng-repeat="major in vm.allMajors" ng-value="major.title">{{major.title}}</option>
+          </select>
         </div>
 
         <div class="form-group text-center">
-          <h4><a href='/projects/+{{vm.project.id}}/'>View project</a></h4>
+          <h4>
+            <a href='/projects/+{{vm.project.id}}/'>View project</a>
+          </h4>
           <button type="submit" class="btn discover-button">Update</button>
           <button type="button" class="btn red-button" ng-click="vm.destroy()">Delete Project</button>
         </div>
