@@ -8,7 +8,11 @@
 
         <div class="form-group">
           <label for="login__email">Email</label>
-          <input type="text" class="form-control round-boxed" id="login__email" ng-model="vm.email"/>
+          <text-input
+            model="vm.email"
+            on-clear="vm.clearEmail"
+            >
+          </text-input>
         </div>
 
         <div class="form-group">
@@ -19,7 +23,11 @@
             <label class="agreement-label" for="checkbox">Show password</label>
           </span>
 
-          <input type="{{vm.inputType}}" class="form-control round-boxed" id="login__password" ng-model="vm.password"/>
+          <text-input
+            type="vm.inputType"
+            model="vm.password"
+            on-clear="vm.clearPassword"
+          />
         </div>
 
         <div class="form-group text-center">

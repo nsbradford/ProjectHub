@@ -194,7 +194,7 @@
      * @name clearSearch
      * @desc Remove the words
      */
-    function clearSearch() {
+    function clearSearch(event) {
       vm.lastProjectIndex = 0;
       vm.searchString = '';
 

@@ -18,6 +18,9 @@
     const vm = this;
     vm.inputType = 'password';
     vm.login = login;
+
+    vm.clearEmail = this.clearEmail;
+    vm.clearPassword = this.clearPassword;
     vm.hideShowPassword = hideShowPassword;
 
     activate();
@@ -34,6 +37,26 @@
       }
     }
 
+    /**
+     * @name clearEmail
+     * @desc clear the current typed email.
+     *
+     * @param {event} event
+     */
+    function clearEmail(event) {
+      event.preventDefault();
+      vm.email = '';
+    }
+    /**
+     * @name clearPassword
+     * @desc clear the current typed password.
+     *
+     * @param {event} event
+     */
+    function clearPassword(event) {
+      event.preventDefault();
+      vm.password = '';
+    }
     /**
     * @name login
     * @desc Log the user in

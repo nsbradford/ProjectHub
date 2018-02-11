@@ -12,7 +12,8 @@
                 placeHolder: '=',
                 onClear: '=',
                 onChange: '=',
-                model: '='
+                model: '=',
+                type: "="
             },
             templateUrl: '/static/templates/common/components/textinput.html'
         });
