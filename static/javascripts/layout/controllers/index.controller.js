@@ -28,6 +28,7 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
+    vm.clearSearch = clearSearch;
 
     /**
      * We ask to filter on project creation, this function should stay outside the activate function
@@ -75,7 +76,7 @@
       const account = Authentication.getAuthenticatedAccount();
       if (account){
         Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
-      }  
+      }
 
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
@@ -166,12 +167,13 @@
          * more efficiency if we use a traditional for loop. We cant achieve
          * short circuits using the functional components.
          */
-        return activeFilters.every(function(filter){
-          return (project.majors.indexOf(filter) > -1);
-        });
-
-    });
-  }
+        for (let i = 0; i < activeFilters.length; i++ ) {
+          if (project.major === activeFilters[i].title) {
+            return true;
+          }
+        }
+      });
+    }
 
     /**
      * @name submitSearch
@@ -186,6 +188,17 @@
       } else {
         Snackbar.error("Pleae provide something to search.");
       }
+    }
+
+    /**
+     * @name clearSearch
+     * @desc Remove the words
+     */
+    function clearSearch() {
+      vm.lastProjectIndex = 0;
+      vm.searchString = '';
+
+      Projects.load(vm.lastProjectIndex).then(ProjectSearchSuccessCallback, ProjectSearchFailureCallback)
     }
 
     /**

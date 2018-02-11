@@ -1,0 +1,27 @@
+@import 'variables.scss';
+
+.projecthub-text-input-container {
+    white-space: nowrap;
+
+    .projecthub-text-input {
+        margin:0;
+        padding: 0;
+        height:60px !important;
+        border: $brand-primary solid;
+        border-width: 1px;
+        border-radius: 2px;
+        padding: 10px;
+        background-color: lighten($brand-secondary, 50);
+        width: 100%;
+    }
+    .input-clear-button {
+        background: transparent;
+        position: absolute;
+        border: none;
+        color: $brand-primary;
+        right: 15px;
+        width: 30px;
+        height: 60px;
+        outline: none;
+    }
+}

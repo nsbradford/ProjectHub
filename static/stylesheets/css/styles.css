@@ -55,6 +55,28 @@
     .majors-panel .major-pills .major-list-item {
       padding-left: 10px; }
 
+.projecthub-text-input-container {
+  white-space: nowrap; }
+  .projecthub-text-input-container .projecthub-text-input {
+    margin: 0;
+    padding: 0;
+    height: 60px !important;
+    border: #0277bd solid;
+    border-width: 1px;
+    border-radius: 2px;
+    padding: 10px;
+    background-color: #f5f6f7;
+    width: 100%; }
+  .projecthub-text-input-container .input-clear-button {
+    background: transparent;
+    position: absolute;
+    border: none;
+    color: #0277bd;
+    right: 15px;
+    width: 30px;
+    height: 60px;
+    outline: none; }
+
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }
 
