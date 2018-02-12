@@ -11,7 +11,7 @@ from authentication.models import Account
 
 
 class Major(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=60)
 
     def __unicode__(self):
         return self.title
