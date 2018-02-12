@@ -271,9 +271,9 @@ input.agreement-checkbox {
     padding-bottom: 19px; }
     .project .project__meta a {
       font-size: 24px; }
-    .project .project__meta .project__content {
-      padding-bottom: 10px;
-      font-size: 15px; }
+  .project .project__content {
+    padding-bottom: 20px;
+    font-size: 15px; }
   .project .project__author {
     text-align: right; }
   .project a.author {

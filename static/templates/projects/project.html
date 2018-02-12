@@ -6,10 +6,10 @@
             <a href="/projects/+{{project.id}}">{{ project.title }}</a>
         </div>
 
-        <div class="project__content" ng-bind-html="project.description | linky"><br><br></div>
-
+        <div class="project__content" ng-bind-html="project.description | linky"></div>
+        
         <div class="project__required">
-          Major(s):
+          Major(s)!!!:
           <div ng-repeat="major in project.majors" class="project__major">
             {{ major }}
           </div>
@@ -40,7 +40,7 @@
 
             <span class="pull-right">
               <a class="author" href="/+{{ project.author.username }}">
-              @{{ project.author.username }}
+              {{ project.author.first_name }} {{ project.author.last_name }}
             </a>
           </span>
           </div>
