@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False) 
+DEBUG = os.environ.get('DEBUG', False)
 # TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['.goprojecthub.com']
 
@@ -47,6 +47,14 @@ ANYMAIL = {
 
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 DEFAULT_FROM_EMAIL = 'postmaster@goprojecthub.com'
+FIXTURE_DIRS = (
+   os.path.join(BASE_DIR, 'fixtures'),
+)
+
+# TODO Django: from which email addresses to send messages
+
+# DEFAULT_FROM_EMAIL =
+# SERVER_EMAIL =
 
 # TODO logging and notifications of server errors
 

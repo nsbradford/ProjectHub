@@ -16,7 +16,7 @@ Instead, ProjectHub provides a simple, generic, and flexible platform where anyo
 
 ### Our plan
 
-Short-term, this site provides a service to the WPI community for all kinds of projects, including both students and professors. The Dean's office, Department Heads, some Trustees, and others are on board and excited about this. Long-term, we'll be expanding other other schools to build a valuable network of collaborators. 
+Short-term, this site provides a service to the WPI community for all kinds of projects, including both students and professors. The Dean's office, Department Heads, some Trustees, and others are on board and excited about this. Long-term, we'll be expanding other other schools to build a valuable network of collaborators.
 
 ### Recruitment
 
@@ -27,16 +27,17 @@ We're looking for additional developers - we use {Heroku, Django, Angular} but n
 ## Installation
 
 Create a Python virtual environment, install bower components, instantiate the database, and start the dev server.
-  
-    $ virtualenv env
-    $ source env/bin/activate
-    $ pip install -r requirements.txt
-    $ npm install -g bower
-    $ npm install
-    $ bower install
-    $ python manage.py migrate
-    $ python manage.py runserver
-
+```bash
+  $ virtualenv env
+  $ source env/bin/activate
+  $ pip install -r requirements.txt
+  $ npm install -g bower
+  $ npm install
+  $ bower install
+  $ python manage.py migrate
+  $ python manage.py loaddata majors
+  $ python manage.py runserver
+```
 For it to fully work, you'll need to define your own `components/settings_dev.py` file based off `components/settings_dev_template.py` with sensitive data (SECRET_KEY, database/email passwords, etc.) that you don't want committed to source control.
 
 ## Structure Overview
@@ -83,7 +84,7 @@ For it to fully work, you'll need to define your own `components/settings_dev.py
 
 ## Deploying to Heroku
 
-Make sure the `Procfile` points to `wsgi.py`, and `requirements.txt` is up to date. 
+Make sure the `Procfile` points to `wsgi.py`, and `requirements.txt` is up to date.
 
     $ heroku login // authenticate
 
@@ -93,12 +94,12 @@ We need both the python and node buildpacks:
     $ heroku buildpacks:add --index 1 heroku/nodejs
 
 Deployment occurs through git push:
-    
+
     $ git push heroku master // deploy from our master branch to the Heroku master
     $ git push heroku deploy-heroku:master // deploy from a local deployment branch to Heroku
 
 Fun things to do:
-    
+
     $ heroku local web                  // locally test Heroku (very imperfect)
     $ heroku run bash                   // run bash on one-off dyno
     $ heroku run python manage.py shell // manage Django on one-off dyno
@@ -114,19 +115,21 @@ Fun things to do:
     * PUT (update)    '/api/v1/accounts/' + profile.username + '/', profile data
     * GET             '/api/v1/accounts/' + username + '/'
     * DELETE          '/api/v1/accounts/' + profile.username + '/'
-* API ProjectViewSet and nested: 
+* API MajorVieSet
+	* GET (get all)   '/api/v1/majors'
+* API ProjectViewSet and nested:
     * GET (get all)   '/api/v1/projects/'
     * POST (create)   '/api/v1/projects/', project data
     * PUT (update)    '/api/v1/projects/' + id + '/', project data
     * GET (a user's)  '/api/v1/accounts/' + username + '/projects/'
     * GET (get one)   '/api/v1/projects/' + id + '/'
     * DELETE          '/api/v1/projects/' + id + '/'
-* API LoginView:      
+* API LoginView:
     * POST              'api/v1/auth/login/'
-* API LogoutView:       
+* API LogoutView:
     * POST              'api/v1/auth/logout/'
 * API ActivateAccount
-    * POST              'api/v1/auth/activate/' + key  
+    * POST              'api/v1/auth/activate/' + key
 * API ResendEmail
     * POST              'api/v1/auth/resend/'
 

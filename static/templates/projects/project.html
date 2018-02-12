@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-12">
       <div class="project">
-      
+
         <div class="project__meta">
             <a href="/projects/+{{project.id}}">{{ project.title }}</a>
         </div>
@@ -9,9 +9,9 @@
         <div class="project__content" ng-bind-html="project.description | linky"><br><br></div>
 
         <div class="project__required">
-          Major: 
-          <div class="project__major">
-            {{ project.major }}
+          Major(s):
+          <div ng-repeat="major in project.majors" class="project__major">
+            {{ major }}
           </div>
 
           <!-- <div class="project__location">
@@ -37,13 +37,13 @@
               <i class="fa fa-calendar" aria-hidden="true"></i>
               Created {{ project.created_at | amCalendar:referenceTime:formats }}
             </span>
-            
+
             <span class="pull-right">
-              by <a class="author" href="/+{{ project.author.username }}">
-                {{ project.author.first_name }} {{ project.author.last_name }}
-              </a>
-            </span>
-          </div> 
+              <a class="author" href="/+{{ project.author.username }}">
+              @{{ project.author.username }}
+            </a>
+          </span>
+          </div>
 
         </div>
 

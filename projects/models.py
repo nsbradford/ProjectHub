@@ -18,18 +18,18 @@ class Major(models.Model):
 
     class Meta:
         ordering = ('title',)
-    
+
 
 
 class Project(models.Model):
-    """ 
-    TODO: ForeignKey for Many to One, and ManyToManyField 
+    """
+    TODO: ForeignKey for Many to One, and ManyToManyField
         projectAuthor: The creator of the project. Many to one
         projectName: The title of the Project
         projectTagLine: A short, one sentence description of the project
         projectDescription: a detailed summary of the project
         projectMajor: the majors that are needed by the project
-        projectSkills: the skills that are needed 
+        projectSkills: the skills that are needed
         postDate: the day that the project was created
         projectBeginDate: the date the project will be started
         projectEndDate: the date the project will end.
@@ -38,9 +38,8 @@ class Project(models.Model):
     author = models.ForeignKey(Account)
     title = models.CharField(max_length=40)
     description = models.TextField()
-    # majors = models.ManyToManyField(Major)
-    major = models.CharField(max_length=40, default='N/A')
-    
+    majors = models.ManyToManyField(Major, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

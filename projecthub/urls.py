@@ -3,25 +3,30 @@
     Nicholas S. Bradford
     8-12-17
 
-    Links Django URLs to Views. 
+    Links Django URLs to Views.
     Routers allow for cleaner code and nesting.
     The nested account router allows for the API to get all a user's projects.
-        
+
 """
 
 from django.conf.urls import url, include
 from projecthub.views import IndexView
 from rest_framework_nested import routers
 
-from authentication.views import AccountViewSet, LoginView, LogoutView
-from authentication.views import ActivateAccountView, ResendEmailView
-from projects.views import AccountProjectsViewSet, ProjectViewSet
-
+from authentication.views import (
+    AccountViewSet,
+    LoginView,
+    LogoutView,
+    ActivateAccountView,
+    ResendEmailView
+)
+from projects.views import AccountProjectsViewSet, ProjectViewSet, MajorViewSet
 
 
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
-router.register(r'projects', ProjectViewSet, 'Project')
+router.register(r'majors', MajorViewSet)
+router.register(r'projects', ProjectViewSet, base_name='Project')
 accounts_router = routers.NestedSimpleRouter(
     router, r'accounts', lookup='account'
 )

@@ -7,6 +7,7 @@
       'projecthub.routes',
       'projecthub.authentication',
       'projecthub.layout',
+      'projecthub.majors',
       'projecthub.projects',
       'projecthub.profiles',
       'projecthub.utils',

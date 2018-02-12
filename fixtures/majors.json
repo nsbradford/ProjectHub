@@ -1,0 +1,188 @@
+[
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Actuarial Mathematics"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Aerospace Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Applied Physics"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Architectural Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Biochemistry"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Bioinformatics & Computational Biology"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Biology & Biotechnology"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Biomedical Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Business"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Chemical Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Chemistry"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Civil Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Computer Science"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Economic Science"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Electrical & Computer Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Environmental & Sustainability Studies"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Environmental Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Humanities & Arts"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Industrial Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Interactive Media & Game Development"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "International & Global Studies"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Liberal Arts & Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Management Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Management Information Systems"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Mathematical Sciences"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Mechanical Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Physics"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Psychological Science"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Robotics Engineering"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Society, Technology, & Policy"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
+            "title": "Writing (Professional)"
+        }
+    }
+]
