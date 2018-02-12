@@ -16,29 +16,29 @@ class Migration(migrations.Migration):
             model_name='project',
             name='major',
         ),
-        migrations.AddField(
-            model_name='project',
-            name='dateRangeBegin',
-            field=models.DateField(blank=True, default=None),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='project',
-            name='dateRangeEnd',
-            field=models.DateField(blank=True, default=None),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='project',
-            name='duration',
-            field=models.IntegerField(blank=True, default=None),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='project',
-            name='location',
-            field=models.TextField(default=b'N/A'),
-        ),
+        # migrations.AddField(
+        #     model_name='project',
+        #     name='dateRangeBegin',
+        #     field=models.DateField(blank=True, default=None),
+        #     preserve_default=False,
+        # ),
+        # migrations.AddField(
+        #     model_name='project',
+        #     name='dateRangeEnd',
+        #     field=models.DateField(blank=True, default=None),
+        #     preserve_default=False,
+        # ),
+        # migrations.AddField(
+        #     model_name='project',
+        #     name='duration',
+        #     field=models.IntegerField(blank=True, default=None),
+        #     preserve_default=False,
+        # ),
+        # migrations.AddField(
+        #     model_name='project',
+        #     name='location',
+        #     field=models.TextField(default=b'N/A'),
+        # ),
         migrations.AddField(
             model_name='project',
             name='majors',

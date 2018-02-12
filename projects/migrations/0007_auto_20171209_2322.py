@@ -12,22 +12,22 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='project',
-            name='dateRangeBegin',
-        ),
-        migrations.RemoveField(
-            model_name='project',
-            name='dateRangeEnd',
-        ),
-        migrations.RemoveField(
-            model_name='project',
-            name='duration',
-        ),
-        migrations.RemoveField(
-            model_name='project',
-            name='location',
-        ),
+        # migrations.RemoveField(
+        #     model_name='project',
+        #     name='dateRangeBegin',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='project',
+        #     name='dateRangeEnd',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='project',
+        #     name='duration',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='project',
+        #     name='location',
+        # ),
         migrations.RemoveField(
             model_name='project',
             name='majors',
