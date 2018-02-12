@@ -1,6 +1,22 @@
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 projecthub-text-input-container">
-    <input type="{{$ctrl.type}}" ng-model="$ctrl.model" class="projecthub-text-input" id="" placeholder="{{$ctrl.placeHolder}}">
-    <button ng-show='$ctrl.model' class="input-clear-button" ng-click="$ctrl.onClear($event)">
-        <i class="fa fa-close" />
-    </button>
+<div
+    class="projecthub-text-input-container form-group">
+    <div class="row">
+        <label for="{{$ctrl.id}}">{{$ctrl.label}}</label>
+        <span ng-show='$ctrl.error' class='error-span'> {{$ctrl.error}}</span>
+    </div>
+    <div class="row">
+
+        <div ng-class="{ 'col-xs-12 col-sm-12 col-md-12 col-lg-12': !$ctrl.ctaIcon, 'col-xs-10 col-sm-10 col-md-10 col-lg-10': $ctrl.ctaIcon }">
+            <input ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" id="{{$ctrl.id}}" ng-model="$ctrl.model" class="projecthub-text-input" placeholder="{{$ctrl.placeHolder}}">
+            <button type="button" ng-click="$ctrl.onClear($event)" ng-show='$ctrl.model && !$ctrl.disabled' class="input-clear-button">
+                <i class="fa fa-close" />
+            </button>
+        </div>
+        <div ng-show="$ctrl.ctaIcon" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <button ng-submit="" ng-click="$ctrl.onClick($ctrl.model)" class="btn discover-button">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
 </div>
+

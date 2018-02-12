@@ -13,7 +13,13 @@
                 onClear: '=',
                 onChange: '=',
                 model: '=',
-                type: "="
+                type: "=",
+                label: "=",
+                id: "=",
+                error: "=",
+                ctaIcon: "=",
+                onClick: "=",
+                disabled: "="
             },
             templateUrl: '/static/templates/common/components/textinput.html'
         });

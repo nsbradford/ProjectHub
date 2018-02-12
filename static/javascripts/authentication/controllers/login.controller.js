@@ -19,8 +19,8 @@
     vm.inputType = 'password';
     vm.login = login;
 
-    vm.clearEmail = this.clearEmail;
-    vm.clearPassword = this.clearPassword;
+    vm.clearEmail = clearEmail;
+    vm.clearPassword = clearPassword;
     vm.hideShowPassword = hideShowPassword;
 
     activate();

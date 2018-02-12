@@ -4,43 +4,66 @@
 
     <div class="well login-no-shadow">
       <form role="form" ng-submit="vm.register()">
-        <div class="form-group">
-          <label for="register__email">Email</label>
-          <span ng-show='vm.missing_email' class='error-span'> required</span>
-          <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="" ng-blur="vm.checkForApprovedDomainAndDisplayDialog()"/>
-        </div>
+          <text-input
+            error="vm.missing_email"
+            id="'email-input'"
+            label="'Email'"
+            model="vm.email"
+            on-clear="vm.clearEmail"
+          ></text-input>
 
-        <div class="form-group">
-          <label for="register__username">Username</label>
-          <span ng-show='vm.missing_username' class='error-span'> required</span>
-          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="" />
-        </div>
+          <text-input
+            error="vm.missing_usernmae"
+            id="'username-input'"
+            label="'Username'"
+            type="'text'"
+            model="vm.username"
+            on-clear="vm.clearUsername"
+          ></text-input>
 
-        <div class="form-group">
-          <label for="register__firstname">First name</label>
-          <span ng-show='vm.missing_firstname' class='error-span'> required</span>
-          <input type="text" class="form-control" id="register__firstname" ng-model="vm.firstname" placeholder="" />
-        </div>
+          <text-input
+            error="vm.missing_firstname"
+            id="'firstname-label'"
+            label="'First Name'"
+            type="'text'"
+            model='vm.firstname'
+            on-clear="vm.clearFirstname"
+          >
+          </text-input>
 
-        <div class="form-group">
-          <label for="register__lastname">Last name</label>
-          <span ng-show='vm.missing_lastname' class='error-span'> required</span>
-          <input type="text" class="form-control" id="register__lastname" ng-model="vm.lastname" placeholder="" />
-        </div>
+          <text-input
+            error="vm.missing_lastname"
+            id="'lastname-input'"
+            label="'Last Name'"
+            type="'text'"
+            model="vm.lastname"
+            on-clear="vm.clearLastname"
+          >
+          </text-input>
 
-        <div class="form-group">
-          <label for="register__password">Password</label>
-          <span ng-show='vm.missing_password' class='error-span'> required</span>
-        
+          <div class="row">
           <span class="show-hide-password">
             <input type="checkbox" class="agreement-checkbox" id="checkbox" tabindex="-1" ng-model="passwordCheckbox" ng-click="vm.hideShowPassword()" />
             <label class="agreement-label" for="checkbox">Show password</label>
           </span>
+          </div>
 
+<<<<<<< HEAD
           <input type="{{vm.inputType}}" class="form-control" id="register__password" ng-model="vm.password" placeholder="" />
         </div>
-        
+
         <br>
+=======
+          <text-input
+            error="vm.mising_password"
+            id="'password-input'"
+            label="'Password'"
+            type="vm.inputType"
+            model="vm.password"
+            place-holder="'8+ characters and numbers'"
+            on-clear="vm.clearPassword">
+          </text-input>
+>>>>>>> Text Input has completely replaced all native html inputs
 
         <div class="form-group">
           <input type="checkbox" class="agreement-checkbox" id="register__agreement" ng-model="vm.agreement">

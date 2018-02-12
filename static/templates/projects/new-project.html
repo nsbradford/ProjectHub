@@ -2,24 +2,27 @@
   <h1>New Project</h1>
   <div class="form-group">
 
-    <label for="project__title">Title</label>
-    <textarea class="form-control"
-              id="project__title"
-              rows="3"
-              placeholder="'Algorithmic trading with Python'"
-              ng-model="vm.title">
-    </textarea>
+    <text-input
+      error='vm.missing_title'
+      id="'title-input'"
+      label="'Title'"
+      place-holder="'Algorithmic trading with Python'"
+      model="vm.title"
+      on-clear="vm.clearTitle"
+    ></text-input>
 
-    <label for="project__description">Description</label>
-    <textarea class="form-control"
-              id="project__description"
-              rows="3"
-              placeholder="'This is your big chance to get rich!'"
-              ng-model="vm.description">
-    </textarea>
+    <text-input
+      error='vm.missing_description'
+      id="'description-input'"
+      label="'Description'"
+      place-holder="'This is your big chance to get rich!'"
+      model="vm.description"
+      on-clear="vm.clearDescription"
+    ></text-input>
 
-    <label for="project__majors">Majors</label> <br>
-<!--     <input type="checkbox" name="majors" value="CS">CS <br>
+    <label for="project__majors">Majors</label>
+    <br>
+    <!--     <input type="checkbox" name="majors" value="CS">CS <br>
     <input type="checkbox" name="vehicle" value="RBE">RBE -->
     <select class="form-control"
               id="project__majors"

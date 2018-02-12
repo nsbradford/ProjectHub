@@ -27,6 +27,12 @@
     vm.hideShowPassword = hideShowPassword;
     vm.checkForApprovedDomainAndDisplayDialog = checkForApprovedDomainAndDisplayDialog;
 
+    vm.clearEmail = clearEmail;
+    vm.clearUsername = clearUsername;
+    vm.clearFirstname = clearFirstname;
+    vm.clearLastName = clearLastName;
+    vm.clearPassword = clearPassword;
+
     activate();
 
     /**
@@ -98,12 +104,12 @@
     * @memberOf projecthub.authentication.controllers.RegisterController
     */
     function register() {
-      vm.missing_email = !vm.email ? true : false;
-      vm.missing_password = !vm.password ? true : false;
-      vm.missing_username = !vm.username ? true : false;
-      vm.missing_firstname = !vm.firstname ? true : false;
-      vm.missing_lastname = !vm.lastname ? true : false;
-      vm.missing_agreement = !vm.agreement ? true : false;
+      vm.missing_email = !vm.email ? 'Email Address is Required' : '';
+      vm.missing_password = !vm.password ? 'Password is Required ' : '';
+      vm.missing_username = !vm.username ? 'Username is Required' : '';
+      vm.missing_firstname = !vm.firstname ? 'First Name is Required' : '';
+      vm.missing_lastname = !vm.lastname ? 'Last Name is Required' : '';
+      vm.missing_agreement = !vm.agreement ? 'You must agree to the terms to continue' : '';
 
       if (vm.email && vm.password && vm.username && vm.firstname && vm.lastname && vm.agreement) {
         const isApproved = checkForApprovedDomainAndDisplayDialog();
@@ -123,6 +129,61 @@
       else {
         vm.inputType = 'password';
       }
+    }
+
+    /**
+     * @name clearEmail
+     * @desc clears the email control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearEmail(event) {
+      event.preventDefault();
+      vm.email = '';
+    }
+
+    /**
+     * @name clearUsername
+     * @desc clears the username control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearUsername(event) {
+      event.preventDefault();
+      vm.username = '';
+    }
+
+    /**
+     * @name clearFirstname
+     * @desc clears the firstname control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearFirstname(event) {
+      event.preventDefault();
+      vm.firstname = '';
+    }
+
+    /**
+     * @name clearLastName
+     * @desc clears the lastname control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearLastName(event) {
+      event.preventDefault();
+      vm.lastname = '';
+    }
+
+    /**
+     * @name clearPassword
+     * @desc clears the password control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearPassword(event) {
+      event.preventDefault();
+      vm.password = '';
     }
   }
 })();

@@ -6,16 +6,26 @@
 
       <form role="form" class="settings" ng-submit="vm.update()">
 
-        <div class="form-group">
-          <label for="project__title">Title</label>
-          <input type="text" class="form-control" id="project__title" ng-model="vm.project.title" placeholder="ex. john@example.com"
-          />
-        </div>
+        <text-input
+          error='vm.missing_title'
+          id="'title-input'"
+          label="'Title'"
+          place-holder="'Algorithmic trading with Python'"
+          model="vm.project.title"
+          on-clear="vm.clearTitle"
+        ></text-input>
 
-        <div class="form-group">
-          <label for="project__description">Description</label>
-          <textarea type="text" class="form-control" id="project__description" ng-model="vm.project.description" />
-        </div>
+        <text-input
+          error='vm.missing_description'
+          id="'description-input'"
+          label="'Description'"
+          place-holder="'This is your big chance to get rich!'"
+          model="vm.project.description"
+          on-clear="vm.clearDescription"id
+        ></text-input>
+
+
+
         <div class="form-group">
           <select class="form-control" id="project__majors" multiple rows="3" placeholder="'CS'" ng-model="vm.project.majors">
             <option ng-repeat="major in vm.allMajors" ng-value="major.title">{{major.title}}</option>

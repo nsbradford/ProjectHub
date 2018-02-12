@@ -20,13 +20,19 @@
     const vm = this;
     vm.destroy = destroy;
     vm.update = update;
-    vm.resendConfirmation = resendConfirmation
+    vm.resendConfirmation = resendConfirmation;
 
     vm.missing_email = false;
     vm.missing_firstname = false;
     vm.missing_lastname = false;
 
     vm.is_confirmed = false;
+
+    vm.clearEmail = clearEmail;
+    vm.clearUsername = clearUsername;
+    vm.clearFirstname = clearFirstname;
+    vm.clearLastName = clearLastName;
+    vm.clearTagline = clearTagline;
 
     activate();
 
@@ -39,7 +45,7 @@
     function activate() {
       var authenticatedAccount = Authentication.getAuthenticatedAccount();
       var username = $routeParams.username.substr(1);
-      
+
 
       // Redirect if not logged in
       if (!authenticatedAccount) {
@@ -163,6 +169,61 @@
       function resendErrorFn(data, status, headers, config) {
         Snackbar.error("There was an error sending the email, please try again.");
       }
+    }
+
+    /**
+     * @name clearEmail
+     * @desc clears the email control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearEmail(event) {
+      event.preventDefault();
+      vm.email = '';
+    }
+
+    /**
+     * @name clearUsername
+     * @desc clears the username control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearUsername(event) {
+      event.preventDefault();
+      vm.username = '';
+    }
+
+    /**
+     * @name clearFirstname
+     * @desc clears the firstname control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearFirstname(event) {
+      event.preventDefault();
+      vm.firstname = '';
+    }
+
+    /**
+     * @name clearLastName
+     * @desc clears the lastname control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearLastName(event) {
+      event.preventDefault();
+      vm.lastname = '';
+    }
+
+    /**
+     * @name clearTagline
+     * @desc clears the tagline control.
+     *
+     * @param {event} event the click we are going to prevent submitting anything
+     */
+    function clearTagline(event) {
+      event.preventDefault();
+      vm.profle.tagline = '';
     }
   }
 })();

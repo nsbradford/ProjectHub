@@ -23,8 +23,21 @@
     vm.destroy = destroy;
     vm.update = update;
 
+    vm.clearTitle = clearTitle;
+    vm.clearDescription = clearDescription;
+
     activate();
 
+
+    function clearTitle(event) {
+      event.preventDefault();
+      vm.project.title = "";
+    }
+
+    function clearDescription(event) {
+      event.preventDefault();
+      vm.project.description = "";
+    }
 
     /**
      *
