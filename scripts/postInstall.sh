@@ -4,4 +4,4 @@
 ./node_modules/gulp/bin/gulp.js
 
 #source ./env/bin/activate
-./manage.py loaddata majors
+# ./manage.py loaddata majors
