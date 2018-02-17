@@ -28,6 +28,7 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
+    vm.isMajorMultiSelectOpen = false;
     vm.clearSearch = clearSearch;
 
     /**
@@ -234,6 +235,10 @@
     function lazyLoad() {
       if (vm.canLoadMoreProjects) {
         Projects.load(vm.lastProjectIndex, vm.searchString).then(projectsSuccessFn, projectsSuccessFn);
+      }
+
+      function toggleShow() {
+        vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen ;
       }
     }
   }

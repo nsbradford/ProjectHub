@@ -19,3 +19,19 @@
     width: 30px;
     height: 60px;
     outline: none; }
+
+.project-hub-multi-select-list {
+  list-style: none;
+  overflow-y: scroll;
+  max-height: 300px;
+  padding: 20px;
+  border-radius: 11px; }
+  .project-hub-multi-select-list .projecthub-multi-select-option {
+    height: 50px;
+    padding-top: 15px;
+    margin-bottom: 5px;
+    color: #0277bd;
+    background: white; }
+    .project-hub-multi-select-list .projecthub-multi-select-option.active {
+      color: #d6e6ff;
+      background: #0277bd; }

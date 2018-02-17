@@ -1,1 +1,31 @@
-<button>Hello me bruddah</button>
+<text-input
+    place-holder="'Select Options'"
+    model="vm.selected"
+    onClick="$ctrl.onClick"
+    id="'major_multiselect'"
+
+    ctaIcon="'angle-down'">
+</text-input>
+<div>
+    <ul
+      class="project-hub-multi-select-list"
+      ng-show="$ctrl.isActive"
+    >
+        <li
+          class="projecthub-multi-select-option"
+          ng-repeat="option in $ctrl.options"
+          ng-click="$ctrl.onClick(option)"
+          ng-class="{'active': option.active }"
+        >
+
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+              {{option.title}}
+          </div>
+
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <i ng-class="{'fa fa-check': option.active }"></i>
+          </div>
+
+        </li>
+    </ul>
+</div>
