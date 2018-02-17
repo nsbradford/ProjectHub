@@ -29,6 +29,7 @@
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
     vm.isMajorMultiSelectOpen = false;
+    vm.toggleShowMultiSelect = toggleShowMultiSelect;
     vm.clearSearch = clearSearch;
 
     /**
@@ -136,6 +137,11 @@
         return filter.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
 
+      vm.selected = vm.allFilters.filter( function (filter){
+        return filter.active;
+      }).map(function(filter){
+        return filter.title;
+      }).join(', ');
       filterProjects();
     }
 
@@ -237,9 +243,9 @@
         Projects.load(vm.lastProjectIndex, vm.searchString).then(projectsSuccessFn, projectsSuccessFn);
       }
 
-      function toggleShow() {
-        vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen ;
-      }
     }
+        function toggleShowMultiSelect() {
+          vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen ;
+        }
   }
 })();

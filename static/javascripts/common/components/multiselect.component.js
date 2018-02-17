@@ -11,6 +11,9 @@
             bindings: {
                 placeHolder: '=',
                 onClear: '=',
+                onChange: '=',
+                onClick: '=',
+                onActivate: '=',
                 isActive: '=',
                 options: '=',
                 selected: '='

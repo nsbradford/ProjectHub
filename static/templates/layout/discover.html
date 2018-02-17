@@ -29,6 +29,9 @@
       <h3>Filter by Major</h3>
       <multiselect
         options="vm.allFilters"
+        selected="vm.selected"
+        is-active="vm.isMajorMultiSelectOpen"
+        on-activate="vm.toggleShowMultiSelect"
         on-click="vm.toggleFilter"
       ></multiselect>
       <!-- <ul class="nav nav-pills nav-stacked major-pills"> -->
