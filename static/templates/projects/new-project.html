@@ -24,15 +24,14 @@
     <br>
     <!--     <input type="checkbox" name="majors" value="CS">CS <br>
     <input type="checkbox" name="vehicle" value="RBE">RBE -->
-    <select class="form-control"
-              id="project__majors"
-              multiple
-              rows="5"
-              placeholder="'CS'"
-              ng-model="vm.majors">
-              <option ng-repeat="major in vm.allMajors" ng-value="major.title">{{major.title}}</option>
-    </select>
-
+      <multiselect
+        options="vm.allMajors"
+        selected="vm.selected"
+        is-active="vm.isMajorMultiSelectOpen"
+        on-activate="vm.toggleShowMultiSelect"
+        on-click="vm.toggleFilter"
+        on-clear="vm.clearMajors"
+      ></multiselect>
   </div>
 
   <div class="form-group text-center">

@@ -1,7 +1,9 @@
 <text-input
     place-holder="'Select Options'"
     model="$ctrl.selected"
+    read-only="true"
     ng-click="$ctrl.onActivate()"
+    on-clear='$ctrl.onClear'
     id="'major_multiselect'"
     ctaIcon="'angle-down'">
 </text-input>

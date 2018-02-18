@@ -15,6 +15,7 @@
                 model: '=',
                 type: "=",
                 label: "=",
+                readOnly: "=",
                 id: "=",
                 error: "=",
                 ctaIcon: "=",

@@ -18,14 +18,63 @@
     const vm = this;
     vm.submit = submit;
     vm.majors = null;
+    vm.clearTitle = clearTitle;
+    vm.clearMajors = clearMajors;
+
+    vm.clearDescription = clearDescription;
     vm.allMajors = $scope.ngDialogData;
+    vm.toggleFilter = toggleFilter;
+
+    function clearTitle($event) {
+      $event.preventDefault();
+      vm.title = '';
+    }
+    function clearDescription($event) {
+      $event.preventDefault();
+      vm.description = '';
+    }
+
+     function clearMajors($event) {
+      $event.preventDefault();
+      vm.selected = '';
+      vm.allMajors.map(function (major) {
+        major.active = false;
+      });
+  }
+
+   /**
+     * @name filterToggleCallback
+     * @desc Function that is called when a user applies a filter.
+     *
+     */
+    function toggleFilter(filter) {
+      // Filter out the curent applied filter,
+      // and toggl its 'active' state.
+      vm.allMajors.filter(function (f) {
+        return filter.title === f.title;
+      }).map(function (f) { return f.active = !f.active; });
+
+      vm.selected = vm.allMajors.filter(function (filter) {
+        return filter.active;
+      }).map(function (filter) {
+        return filter.title;
+      }).join(', ');
+    }
+
     /**
     * @name submit
     * @desc Create a new Project
     * @memberOf projecthub.projects.controllers.NewProjectController
     */
     function submit() {
-      Projects.create(vm.title, vm.description, vm.majors).then(createProjectSuccessFn, createProjectErrorFn);
+
+      const majors = vm.allMajors.filter( function(filter) {
+        return filter.active;
+      }).map(function(major){
+        return major.title;
+      });
+
+      Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
       $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
 
       /**

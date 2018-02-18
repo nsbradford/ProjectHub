@@ -5,12 +5,12 @@
 
     .projecthub-text-input {
         margin:0;
-        padding: 0;
+        padding-left: 2.5%;
+        padding-right: calc(10px + 10%);
         height:60px !important;
         border: $brand-primary solid;
         border-width: 1px;
         border-radius: 2px;
-        padding: 10px;
         background-color: lighten($brand-secondary, 50);
         width: 100%;
     }

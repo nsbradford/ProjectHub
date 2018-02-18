@@ -13,11 +13,39 @@
                 onClear: '=',
                 onChange: '=',
                 onClick: '=',
+                onClear: '=',
                 onActivate: '=',
-                isActive: '=',
                 options: '=',
-                selected: '='
+                selected: '=',
             },
-            templateUrl: '/static/templates/common/components/multiselect.html'
+            bindToController: {
+                isActive: '='
+            },
+
+            templateUrl: '/static/templates/common/components/multiselect.html',
+            controller: function ($document, $scope, $element, $attrs) {
+                const $ctrl = this;
+
+                $ctrl.isActive = false;
+
+                $document.bind('click', function (event) {
+                    /**
+                     * If a click is fired,
+                     *  lets check to see that something under THIS multiselect was clicked, and that we are open
+                     */
+                    if ($ctrl.isActive == true) {
+                        if ($($element).has(event.target).length == 0) {
+                            $ctrl.isActive = false;
+                            $scope.$apply();
+                        }
+                    }
+                    else {
+                        if ($($element).has(event.target).length > 0) {
+                            $ctrl.isActive = true;
+                            $scope.$apply();
+                        }
+                    }
+                });
+            }
         });
 })();

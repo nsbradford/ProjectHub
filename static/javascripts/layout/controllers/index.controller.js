@@ -9,12 +9,12 @@
     .module('projecthub.layout.controllers')
     .controller('IndexController', IndexController);
 
-  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors'];
+  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors', '$document'];
 
   /**
   * @namespace IndexController
   */
-  function IndexController($scope, Authentication, Projects, Snackbar, Profile, Majors) {
+  function IndexController($scope, Authentication, Projects, Snackbar, Profile, Majors, $document) {
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.allFilters = [];
@@ -28,6 +28,7 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
+    vm.clearFilteringPanel = clearFilteringPanel;
     vm.isMajorMultiSelectOpen = false;
     vm.toggleShowMultiSelect = toggleShowMultiSelect;
     vm.clearSearch = clearSearch;
@@ -40,6 +41,7 @@
       filterProjects();
       vm.lastProjectIndex += 1;
     });
+
 
     activate();
 
@@ -76,7 +78,7 @@
 
 
       const account = Authentication.getAuthenticatedAccount();
-      if (account){
+      if (account) {
         Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
       }
 
@@ -99,7 +101,7 @@
        * No Content -- Tell the controller that we can no longer lazyload,
        * Do not add anything to the the project list
        */
-      if ( data.status == 204) {
+      if (data.status == 204) {
         vm.canLoadMoreProjects = false;
         return;
       }
@@ -137,9 +139,9 @@
         return filter.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
 
-      vm.selected = vm.allFilters.filter( function (filter){
+      vm.selected = vm.allFilters.filter(function (filter) {
         return filter.active;
-      }).map(function(filter){
+      }).map(function (filter) {
         return filter.title;
       }).join(', ');
       filterProjects();
@@ -154,7 +156,7 @@
       // Retrieve all filters that are active.
       const activeFilters = vm.allFilters.filter(function (f) {
         return f.active;
-      }).map(function(activeMajors){
+      }).map(function (activeMajors) {
         return activeMajors.title;
       });
       /*
@@ -168,17 +170,14 @@
         return;
       }
       vm.filteredProjects = vm.projects.filter(function (project) {
-
         /**
          * Normally I would use another functional JS component, but we can get
          * more efficiency if we use a traditional for loop. We cant achieve
          * short circuits using the functional components.
          */
-        for (let i = 0; i < activeFilters.length; i++ ) {
-          if (project.major === activeFilters[i].title) {
-            return true;
-          }
-        }
+        return activeFilters.every(function (filter) {
+          return (project.majors.indexOf(filter) > -1);
+        });
       });
     }
 
@@ -244,8 +243,24 @@
       }
 
     }
-        function toggleShowMultiSelect() {
-          vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen ;
-        }
+    function toggleShowMultiSelect() {
+      vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen;
+    }
+
+
+    /**
+     * @name clearFilteringPanel
+     * @desc the callback fired when a use hits the c
+     */
+    function clearFilteringPanel() {
+      vm.selected = '';
+      vm.allFilters.map(function (filter) {
+        return filter.active = false;
+      });
+
+      vm.filteredProjects = vm.projects;
+
+    }
+
   }
 })();

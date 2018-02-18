@@ -5,9 +5,8 @@
         <span ng-show='$ctrl.error' class='error-span'> {{$ctrl.error}}</span>
     </div>
     <div class="row">
-
         <div ng-class="{ 'col-xs-12 col-sm-12 col-md-12 col-lg-12': !$ctrl.ctaIcon, 'col-xs-10 col-sm-10 col-md-10 col-lg-10': $ctrl.ctaIcon }">
-            <input ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" id="{{$ctrl.id}}" ng-model="$ctrl.model" class="projecthub-text-input" placeholder="{{$ctrl.placeHolder}}">
+            <input ng-readonly="$ctrl.readOnly" ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" id="{{$ctrl.id}}" ng-model="$ctrl.model" class="projecthub-text-input" placeholder="{{$ctrl.placeHolder}}">
             <button type="button" ng-click="$ctrl.onClear($event)" ng-show='$ctrl.model && !$ctrl.disabled' class="input-clear-button">
                 <i class="fa fa-close" />
             </button>
@@ -19,4 +18,3 @@
         </div>
     </div>
 </div>
-

@@ -29,6 +29,7 @@
       <h3>Filter by Major</h3>
       <multiselect
         options="vm.allFilters"
+        on-clear='vm.clearFilteringPanel'
         selected="vm.selected"
         is-active="vm.isMajorMultiSelectOpen"
         on-activate="vm.toggleShowMultiSelect"
