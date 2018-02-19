@@ -244,6 +244,7 @@
 
     }
     function toggleShowMultiSelect() {
+      debugger
       vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen;
     }
 
