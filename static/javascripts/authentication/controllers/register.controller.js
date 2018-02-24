@@ -9,12 +9,12 @@
     .module('projecthub.authentication.controllers')
     .controller('RegisterController', RegisterController);
 
-  RegisterController.$inject = ['$location', '$scope', 'Authentication', 'Snackbar'];
+  RegisterController.$inject = ['$location', '$scope', 'Authentication', 'Snackbar', 'ngDialog'];
 
   /**
   * @namespace RegisterController
   */
-  function RegisterController($location, $scope, Authentication, Snackbar) {
+  function RegisterController($location, $scope, Authentication, Snackbar, ngDialog) {
     const vm = this;
     vm.inputType = 'password';
     vm.missing_email = false;
@@ -25,6 +25,7 @@
     vm.missing_agreement = false;
     vm.register = register;
     vm.hideShowPassword = hideShowPassword;
+    vm.checkForApprovedDomainAndDisplayDialog = checkForApprovedDomainAndDisplayDialog;
 
     activate();
 
@@ -41,6 +42,57 @@
     }
 
     /**
+     * @name isApprovedDomain
+     * @desc Return true if the email ends in one of the approved domains.
+     * @param {string} email The email to check.
+     * @memberOf projecthub.authentication.controllers.RegisterController
+     */
+    function isApprovedDomain(email) {
+      const approvedDomains = ['wpi.edu'];
+      let answer = false;
+      for (let domain of approvedDomains) {
+        if (email.endsWith(domain)) {
+          answer = true;
+        }
+      }
+      return answer;
+    }
+
+    /**
+     * @name checkForApprovedDomainAndDisplayDialog
+     * @desc Check if the email domain is approved.
+     *    If so, display the dialog.
+     *    Return true if approved.
+     * @memberOf projecthub.authentication.controllers.RegisterController
+     */
+    function checkForApprovedDomainAndDisplayDialog() {
+      const isApproved = vm.email ? isApprovedDomain(vm.email) : false
+      if (! isApproved) {
+        displayUnapprovedDomainDialog()
+      }
+      return isApproved;
+    }
+
+    /**
+     * @name displayUnapprovedDomainDialog
+     * @desc Display a dialog explaining that the input email was unapproved.
+     * @memberOf projecthub.authentication.controllers.RegisterController
+     */
+    function displayUnapprovedDomainDialog() {
+      ngDialog.open({ 
+        template: ` 
+          <div class="text-center">
+            We're only accepting <b>wpi.edu</b> emails at this time.
+            <br><br>
+            If you have any questions, please reach out to 
+            <a href='mailto:support@goprojecthub.com'>support</a>.
+          </div>
+        `, 
+        plain: true,
+      });
+    }
+
+    /**
     * @name register
     * @desc Register a new user
     * @memberOf projecthub.authentication.controllers.RegisterController
@@ -54,7 +106,10 @@
       vm.missing_agreement = !vm.agreement ? true : false;
 
       if (vm.email && vm.password && vm.username && vm.firstname && vm.lastname && vm.agreement) {
-        Authentication.register(vm.email, vm.password, vm.username, vm.firstname, vm.lastname);
+        const isApproved = checkForApprovedDomainAndDisplayDialog();
+        if (isApproved) {
+          Authentication.register(vm.email, vm.password, vm.username, vm.firstname, vm.lastname);
+        }
       }
       else {
         Snackbar.error('Must complete required fields.');
