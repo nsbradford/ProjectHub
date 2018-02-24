@@ -11,13 +11,13 @@ from authentication.models import Account
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('title',)
 
 
 
@@ -50,7 +50,7 @@ class Project(models.Model):
     title = models.CharField(max_length=40)
     description = models.TextField()
     majors = models.ManyToManyField(Major, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True, default=[])
+    tags = models.ManyToManyField(Tag, blank=True) #default=[]
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

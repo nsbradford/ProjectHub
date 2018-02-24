@@ -11,7 +11,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from authentication.models import Account
-from projects.models import Project
+from projects.models import Project, Major, Tag
 from projects import views
 
 
@@ -25,8 +25,8 @@ class ProjectTests(APITestCase):
     author = 'myauthor'
     title = 'mytitle'
     description = 'mydescription'
-    majors = []
-    tags = []
+    majors = ['Underwater Basket Weaving', 'Computer Science']
+    tags = ['Academic', 'Startup']
     tagline = 'This is the tagline for John Doe #1'
     new_title = title + '-edited!'
     new_description = description + '-edited!'
@@ -83,24 +83,30 @@ class ProjectTests(APITestCase):
 
     def setup_project(self, new_account, data_modifier=''):
         """ """
-
         # TODO setup of Tags and Majors
-        # Major.objects.create(title='Underwater Basket Weaving')
+        major1 = Major.objects.create(title='Underwater Basket Weaving')
+        major2 = Major.objects.create(title='Computer Science')
+        major_queryset = [major1, major2]
+
+        tag1 = Tag.objects.create(title='Academic')
+        tag2 = Tag.objects.create(title='Startup')
+        tag_queryset = [tag1, tag2]
+
+        self.assertEqual(Major.objects.count(), 2)
 
         previous_n_projects = Project.objects.count()
         self.assertEqual(Account.objects.count(), 1)
         modified_project_data = dict(self.project_data)
         modified_project_data['title'] = modified_project_data['title'] + data_modifier
         response = self.client.post(self.project_url, modified_project_data, format='json')
-
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Project.objects.count(), previous_n_projects + 1)
         new_project = Project.objects.last()
         self.assertEqual(new_project.author, new_account)
         self.assertEqual(new_project.title, self.title + data_modifier)
         self.assertEqual(new_project.description, self.description)
-        self.assertQuerysetEqual(new_project.majors.all(), self.majors, ordered=False)
-        self.assertQuerysetEqual(new_project.tags.all(), self.tags, ordered=False)
+        self.assertQuerysetEqual(new_project.majors.all(), map(repr, major_queryset), ordered=False)
+        self.assertQuerysetEqual(new_project.tags.all(), map(repr, tag_queryset), ordered=False)
 
 
     def setup_account_and_project(self, activate=True):

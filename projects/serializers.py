@@ -37,8 +37,8 @@ class ProjectSerializer(serializers.ModelSerializer):
     )
     tags = serializers.SlugRelatedField(
         many=True,
-        slug_field='name',
-        queryset=Major.objects.all()
+        slug_field='title',
+        queryset=Tag.objects.all()
     )
 
 
@@ -93,14 +93,14 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ('id', 'name')
-        read_only_fields = ('id', 'name')
+        fields = ('id', 'title')
+        read_only_fields = ('id', 'title')
 
 
     def validate(self, data):
         """ Perform object-level validtion on all data.
-            Name shouldn't be null.
+            title shouldn't be null.
         """
-        if data.name is None:
-            raise serializers.ValidationError('Tags must have a name.')
+        if data.title is None:
+            raise serializers.ValidationError('Tags must have a title.')
         return data

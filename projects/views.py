@@ -43,10 +43,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
         if not self.request.user.is_confirmed:
             raise PermissionDenied(detail='Only users with confirmed emails may create projects.')
 
-        import logging
-        logger = logging.getLogger()
-        logging.error(self.request.user.username)
-
         serializer.save(author=self.request.user)
         return super(ProjectViewSet, self).perform_create(serializer)
 
