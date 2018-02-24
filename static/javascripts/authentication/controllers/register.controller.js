@@ -25,6 +25,7 @@
     vm.missing_agreement = false;
     vm.register = register;
     vm.hideShowPassword = hideShowPassword;
+    vm.checkWpiOnly = checkWpiOnly;
 
     activate();
 
@@ -37,6 +38,12 @@
       // If the user is authenticated, they should not be here.
       if (Authentication.isAuthenticated()) {
         $location.url('/');
+      }
+    }
+
+    function checkWpiOnly() {
+      if (! vm.email.endsWith('wpi.edu')){
+        wpiOnly()
       }
     }
 
