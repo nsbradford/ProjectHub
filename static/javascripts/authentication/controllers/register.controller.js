@@ -9,12 +9,12 @@
     .module('projecthub.authentication.controllers')
     .controller('RegisterController', RegisterController);
 
-  RegisterController.$inject = ['$location', '$scope', 'Authentication', 'Snackbar'];
+  RegisterController.$inject = ['$location', '$scope', 'Authentication', 'Snackbar', 'ngDialog'];
 
   /**
   * @namespace RegisterController
   */
-  function RegisterController($location, $scope, Authentication, Snackbar) {
+  function RegisterController($location, $scope, Authentication, Snackbar, ngDialog) {
     const vm = this;
     vm.inputType = 'password';
     vm.missing_email = false;
@@ -40,6 +40,21 @@
       }
     }
 
+    function wpiOnly() {
+      ngDialog.open({ 
+        template: ` 
+          <div class="text-center">
+            We're only accepting <b>wpi.edu</b> emails at this time.
+            <br><br>
+            If you have any questions, please reach out to 
+            <a href='mailto:support@goprojecthub.com'>support</a>.
+          </div>
+        `, 
+        plain: true,
+        // className: 'ngdialog-theme-default' 
+      });
+    }
+
     /**
     * @name register
     * @desc Register a new user
@@ -54,7 +69,12 @@
       vm.missing_agreement = !vm.agreement ? true : false;
 
       if (vm.email && vm.password && vm.username && vm.firstname && vm.lastname && vm.agreement) {
-        Authentication.register(vm.email, vm.password, vm.username, vm.firstname, vm.lastname);
+        if (vm.email.endsWith('wpi.edu')){
+          Authentication.register(vm.email, vm.password, vm.username, vm.firstname, vm.lastname);
+        }
+        else {
+          wpiOnly();
+        }
       }
       else {
         Snackbar.error('Must complete required fields.');
