@@ -180,8 +180,8 @@ class ProjectTests(APITestCase):
         self.assertEqual(get_response.data['description'], self.description)
         self.assertIn('created_at', get_response.data)
         self.assertIn('updated_at', get_response.data)
-        self.assertQuerysetEqual(get_response.data['majors'], self.majors, ordered=False)
-        self.assertQuerysetEqual(get_response.data['tags'], self.tags, ordered=False)
+        self.assertEqual(sorted(get_response.data['majors']), sorted(map(unicode, self.majors)))
+        self.assertEqual(sorted(get_response.data['tags']), sorted(map(unicode, self.tags)))
 
 
     def test_get_all_projects_by_user(self):
