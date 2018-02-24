@@ -41,6 +41,16 @@ Create a Python virtual environment, install bower components, instantiate the d
 ```
 For it to fully work, you'll need to define your own `components/settings_dev.py` file based off `components/settings_dev_template.py` with sensitive data (SECRET_KEY, database/email passwords, etc.) that you don't want committed to source control.
 
+## Testing
+
+Run all Django tests:
+
+    $ ./manage.py test
+
+Run a specific test class or function:
+
+    $ ./manage.py test tests.projects.tests:ProjectTests.test_create_project
+
 ## Structure Overview
 
     /authentication                 Django backend for Account and permissions

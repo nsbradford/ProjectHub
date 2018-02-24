@@ -26,6 +26,7 @@ class ProjectTests(APITestCase):
     title = 'mytitle'
     description = 'mydescription'
     majors = []
+    tags = []
     tagline = 'This is the tagline for John Doe #1'
     new_title = title + '-edited!'
     new_description = description + '-edited!'
@@ -40,12 +41,14 @@ class ProjectTests(APITestCase):
     project_data = {
         'title': title,
         'description': description,
-        'majors': []
+        'majors': majors,
+        'tags': tags
     }
     project_data_edited = {
         'title': new_title,
         'description': new_description,
-        'majors': []
+        'majors': majors,
+        'tags': tags
     }
     accounts_url = '/api/v1/accounts/'
     project_url = '/api/v1/projects/'
@@ -80,18 +83,24 @@ class ProjectTests(APITestCase):
 
     def setup_project(self, new_account, data_modifier=''):
         """ """
+
+        # TODO setup of Tags and Majors
+        # Major.objects.create(title='Underwater Basket Weaving')
+
         previous_n_projects = Project.objects.count()
         self.assertEqual(Account.objects.count(), 1)
         modified_project_data = dict(self.project_data)
         modified_project_data['title'] = modified_project_data['title'] + data_modifier
         response = self.client.post(self.project_url, modified_project_data, format='json')
+
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Project.objects.count(), previous_n_projects + 1)
         new_project = Project.objects.last()
         self.assertEqual(new_project.author, new_account)
         self.assertEqual(new_project.title, self.title + data_modifier)
         self.assertEqual(new_project.description, self.description)
-        # self.assertEqual(new_project.majors.all(), self.majors)
+        self.assertQuerysetEqual(new_project.majors.all(), self.majors, ordered=False)
+        self.assertQuerysetEqual(new_project.tags.all(), self.tags, ordered=False)
 
 
     def setup_account_and_project(self, activate=True):
@@ -159,13 +168,14 @@ class ProjectTests(APITestCase):
         self.assertEqual(len(Project.objects.all()), 1)
         get_response = self.client.get(ProjectTests.make_project_url(new_account))
         self.assertEqual(get_response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(get_response.data), 7)
+        self.assertEqual(len(get_response.data), 8)
         self.assertEqual(get_response.data['author']['username'], self.username)
         self.assertEqual(get_response.data['title'], self.title)
         self.assertEqual(get_response.data['description'], self.description)
-        # self.assertEqual(get_response.data['major'], self.major)
         self.assertIn('created_at', get_response.data)
         self.assertIn('updated_at', get_response.data)
+        self.assertQuerysetEqual(get_response.data['majors'], self.majors, ordered=False)
+        self.assertQuerysetEqual(get_response.data['tags'], self.tags, ordered=False)
 
 
     def test_get_all_projects_by_user(self):

@@ -14,7 +14,7 @@ from django.shortcuts import get_object_or_404
 
 from projects.permissions import IsAuthorOfProject, IsEmailActivated
 from projects.models import Project, Major, Tag
-from projects.serializers import ProjectSerializer, MajorSerializer#, TagSerializer
+from projects.serializers import ProjectSerializer, MajorSerializer, TagSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -114,11 +114,11 @@ class MajorViewSet(viewsets.ViewSet):
 
 
 
-# class TagViewSet(viewsets.ViewSet):
-#     queryset = Tag.objects.all()
-#     serializer_class = TagSerializer
+class TagViewSet(viewsets.ViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
 
-#     def list(self, request):
-#         serializer = self.serializer_class(self.queryset, many=True)
-#         return Response(serializer.data)
+    def list(self, request):
+        serializer = self.serializer_class(self.queryset, many=True)
+        return Response(serializer.data)
 

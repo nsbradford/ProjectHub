@@ -8,11 +8,7 @@
 from rest_framework import serializers
 
 from authentication.serializers import AccountSerializer
-from projects.models import Project, Major#, Tag
-
-# import logging
-# log = logging.getLogger('projecthub')
-# log.debug('!!!!!!')
+from projects.models import Project, Major, Tag
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -28,20 +24,22 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         """ Meta class configuring serializer. """
         model = Project
-        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at')
+        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at',
+                         'majors', 'tags')
         read_only_fields = ('id', 'created_at', 'updated_at')
 
-        author = AccountSerializer(read_only=True, required=False)
-        majors = serializers.SlugRelatedField(
-            many=True,
-            slug_field='title',
-            queryset=Major.objects.all()
-        )
-        # tags = serializers.SlugRelatedField(
-        #     many=True,
-        #     slug_field='name',
-        #     queryset=Major.objects.all()
-        # )
+
+    author = AccountSerializer(read_only=True, required=False)
+    majors = serializers.SlugRelatedField(
+        many=True,
+        slug_field='title',
+        queryset=Major.objects.all()
+    )
+    tags = serializers.SlugRelatedField(
+        many=True,
+        slug_field='name',
+        queryset=Major.objects.all()
+    )
 
 
     def validate(self, data):
@@ -49,10 +47,6 @@ class ProjectSerializer(serializers.ModelSerializer):
                 as part of is_valid(). As per documentation, must return data
                 or raise serializers.ValidationError
         """
-        import logging
-        logger = logging.getLogger()
-        logging.error(data['author'])
-
         valid_majors = Major.objects.all()
 
         majors = set(data['majors'])
@@ -64,12 +58,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Major(s) not found.')
         return data
 
-    # class Meta:
-    #     """ Meta class configuring serializer. """
-    #     model = Project
-    #     fields = ('id', 'author', 'title', 'description', 'created_at',
-    #                     'updated_at', 'majors')
-    #     read_only_fields = ('id', 'created_at', 'updated_at')
 
     def get_validation_exclusions(self, *args, **kwargs):
         """ Add 'author' to validation exclusions, because we'll be setting it
@@ -99,20 +87,20 @@ class MajorSerializer(serializers.ModelSerializer):
 
 
 
-# class TagSerializer(serializers.ModelSerializer):
-#     """Serializer for Majors for use in a RESTful API"""
+class TagSerializer(serializers.ModelSerializer):
+    """Serializer for Majors for use in a RESTful API"""
 
 
-#     class Meta:
-#         model = Tag
-#         fields = ('id', 'name')
-#         read_only_fields = ('id', 'name')
+    class Meta:
+        model = Tag
+        fields = ('id', 'name')
+        read_only_fields = ('id', 'name')
 
 
-#     def validate(self, data):
-#         """ Perform object-level validtion on all data.
-#             Name shouldn't be null.
-#         """
-#         if data.name is None:
-#             raise serializers.ValidationError('Tags must have a name.')
-#         return data
+    def validate(self, data):
+        """ Perform object-level validtion on all data.
+            Name shouldn't be null.
+        """
+        if data.name is None:
+            raise serializers.ValidationError('Tags must have a name.')
+        return data
