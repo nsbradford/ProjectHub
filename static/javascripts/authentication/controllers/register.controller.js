@@ -42,12 +42,14 @@
     }
 
     function checkWpiOnly() {
-      if (! vm.email.endsWith('wpi.edu')){
-        wpiOnly()
+      const isWpiEmail = vm.email ? vm.email.endsWith('wpi.edu') : false
+      if (! isWpiEmail){
+        wpiOnlyNotification()
       }
+      return isWpiEmail;
     }
 
-    function wpiOnly() {
+    function wpiOnlyNotification() {
       ngDialog.open({ 
         template: ` 
           <div class="text-center">
@@ -58,7 +60,6 @@
           </div>
         `, 
         plain: true,
-        // className: 'ngdialog-theme-default' 
       });
     }
 
@@ -76,11 +77,9 @@
       vm.missing_agreement = !vm.agreement ? true : false;
 
       if (vm.email && vm.password && vm.username && vm.firstname && vm.lastname && vm.agreement) {
-        if (vm.email.endsWith('wpi.edu')){
+        const isWpiEmail = checkWpiOnly()
+        if (isWpiEmail) {
           Authentication.register(vm.email, vm.password, vm.username, vm.firstname, vm.lastname);
-        }
-        else {
-          wpiOnly();
         }
       }
       else {
