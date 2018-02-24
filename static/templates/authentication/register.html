@@ -7,7 +7,7 @@
         <div class="form-group">
           <label for="register__email">Email</label>
           <span ng-show='vm.missing_email' class='error-span'> required</span>
-          <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="" />
+          <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="" ng-blur="vm.checkForApprovedDomainAndDisplayDialog()"/>
         </div>
 
         <div class="form-group">
@@ -37,7 +37,7 @@
             <label class="agreement-label" for="checkbox">Show password</label>
           </span>
 
-          <input type="{{vm.inputType}}" class="form-control" id="register__password" ng-model="vm.password" placeholder="8+ characters and numbers" />
+          <input type="{{vm.inputType}}" class="form-control" id="register__password" ng-model="vm.password" placeholder="" />
         </div>
         
         <br>
@@ -45,7 +45,7 @@
         <div class="form-group">
           <input type="checkbox" class="agreement-checkbox" id="register__agreement" ng-model="vm.agreement">
           <label class="agreement-label" for="register__agreement">
-            I accept the <a href="/policies/terms-of-service">Terms of Use</a>.
+            I accept the <a href="/policies/terms-of-service" target="_blank" tabindex="-1">Terms of Use</a>.
           </label>
           <span ng-show='vm.missing_agreement' class='error-span'> required</span>
         </div>

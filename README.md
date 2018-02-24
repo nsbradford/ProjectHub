@@ -93,9 +93,16 @@ We need both the python and node buildpacks:
     $ heroku buildpacks:add --index 1 heroku/python
     $ heroku buildpacks:add --index 1 heroku/nodejs
 
-Deployment occurs through git push:
+Deployment occurs through git push and then approving the Heroku pipeline promotion of Staging -> Production.
 
-    $ git push heroku master // deploy from our master branch to the Heroku master
+    $ git push staging master // push to staging
+
+You can deploy directly to production if you want to live dangerously:
+
+    $ git push heroku master // force deploy from our master branch to the Heroku master
+
+Or extra sketchy, push a branch other than Master:
+
     $ git push heroku deploy-heroku:master // deploy from a local deployment branch to Heroku
 
 Fun things to do:
