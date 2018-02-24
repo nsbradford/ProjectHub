@@ -110,6 +110,7 @@ Fun things to do:
     $ heroku local web                  // locally test Heroku (very imperfect)
     $ heroku run bash                   // run bash on one-off dyno
     $ heroku run python manage.py shell // manage Django on one-off dyno
+    $ heroku run bash --remote staging  // run in staging instead of production
 
 ## Helpful docs
 
