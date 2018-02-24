@@ -8,7 +8,7 @@
 from rest_framework import serializers
 
 from authentication.serializers import AccountSerializer
-from projects.models import Project, Major, Tag
+from projects.models import Project, Major#, Tag
 
 # import logging
 # log = logging.getLogger('projecthub')
@@ -37,11 +37,11 @@ class ProjectSerializer(serializers.ModelSerializer):
             slug_field='title',
             queryset=Major.objects.all()
         )
-        tags = serializers.SlugRelatedField(
-            many=True,
-            slug_field='name',
-            queryset=Major.objects.all()
-        )
+        # tags = serializers.SlugRelatedField(
+        #     many=True,
+        #     slug_field='name',
+        #     queryset=Major.objects.all()
+        # )
 
 
     def validate(self, data):
@@ -49,6 +49,10 @@ class ProjectSerializer(serializers.ModelSerializer):
                 as part of is_valid(). As per documentation, must return data
                 or raise serializers.ValidationError
         """
+        import logging
+        logger = logging.getLogger()
+        logging.error(data['author'])
+
         valid_majors = Major.objects.all()
 
         majors = set(data['majors'])
@@ -95,20 +99,20 @@ class MajorSerializer(serializers.ModelSerializer):
 
 
 
-class TagSerializer(serializers.ModelSerializer):
-    """Serializer for Majors for use in a RESTful API"""
+# class TagSerializer(serializers.ModelSerializer):
+#     """Serializer for Majors for use in a RESTful API"""
 
 
-    class Meta:
-        model = Tag
-        fields = ('id', 'name')
-        read_only_fields = ('id', 'name')
+#     class Meta:
+#         model = Tag
+#         fields = ('id', 'name')
+#         read_only_fields = ('id', 'name')
 
 
-    def validate(self, data):
-        """ Perform object-level validtion on all data.
-            Name shouldn't be null.
-        """
-        if data.name is None:
-            raise serializers.ValidationError('Tags must have a name.')
-        return data
+#     def validate(self, data):
+#         """ Perform object-level validtion on all data.
+#             Name shouldn't be null.
+#         """
+#         if data.name is None:
+#             raise serializers.ValidationError('Tags must have a name.')
+#         return data
