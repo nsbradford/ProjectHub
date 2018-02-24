@@ -1,0 +1,44 @@
+[
+    {
+        "model": "projects.Tag",
+        "fields": {
+            "name": "Other"
+        }
+    },
+    {
+        "model": "projects.Tag",
+        "fields": {
+            "name": "Startup"
+        }
+    },
+    {
+        "model": "projects.Tag",
+        "fields": {
+            "name": "Research"
+        }
+    },
+    {
+        "model": "projects.Tag",
+        "fields": {
+            "name": "Hobby"
+        }
+    },
+    {
+        "model": "projects.Tag",
+        "fields": {
+            "name": "Academic"
+        }
+    },
+    {
+        "model": "projects.Tag",
+        "fields": {
+            "name": "MQP"
+        }
+    },
+    {
+        "model": "projects.Tag",
+        "fields": {
+            "name": "IQP"
+        }
+    },
+]

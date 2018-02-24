@@ -36,6 +36,7 @@ Create a Python virtual environment, install bower components, instantiate the d
   $ bower install
   $ python manage.py migrate
   $ python manage.py loaddata majors
+  $ python manage.py loaddata tags
   $ python manage.py runserver
 ```
 For it to fully work, you'll need to define your own `components/settings_dev.py` file based off `components/settings_dev_template.py` with sensitive data (SECRET_KEY, database/email passwords, etc.) that you don't want committed to source control.
