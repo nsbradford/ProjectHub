@@ -17,7 +17,7 @@ from projects import views
 
 class ProjectTests(APITestCase):
 
-    email = 'johndoe@gmail.com'
+    email = 'johndoe@wpi.edu'
     username = 'johndoe'
     first_name = 'John'
     last_name = 'Doe'

@@ -23,14 +23,14 @@ from authentication.models import Account
 class APIAccountTests(APITestCase):
     """ RESTful API tests for Account. """
 
-    email = 'johndoe@gmail.com'
+    email = 'johndoe@wpi.edu'
     first_name = 'John'
     last_name = 'Doe'
     username = 'johndoe'
     tagline = 'This is the tagline for John Doe #1'
     tagline_update = 'This is the tagline for John Doe #2'
     password = 'password123'
-    password_update = 'new_password123'
+    password_update = 'new_password123'    
     setup_data = {  
                     'email': email, 
                     'username': username, 
@@ -79,6 +79,15 @@ class APIAccountTests(APITestCase):
                     'password': password_update, # TODO shouldn't need to supply this field
                     'confirm_password': password_update # TODO shouldn't need to supply this field
                 }
+    setup_bad_domain_data = {  
+                    'email': 'johndoe@gmail.com', 
+                    'username': username, 
+                    'password': password,
+                    'first_name': first_name,
+                    'last_name': last_name,
+                    'tagline': tagline
+                }
+
     url = '/api/v1/accounts/'
     url_username = url + username + '/'
     url_activate = '/api/v1/auth/activate/%s'
@@ -297,3 +306,11 @@ class APIAccountTests(APITestCase):
         )
         assert len(mail.outbox) == 1
         self.assertEqual(mail.outbox[0].subject, 'Subject here')
+
+
+    def test_setup_unapproved_domain_failure(self):
+        """ Users can only create an account with an approved domain email. """
+        self.assertEqual(Account.objects.count(), 0)
+        post_response = self.client.post(self.url, self.setup_bad_domain_data, format='json') 
+        self.assertEqual(post_response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Account.objects.count(), 0)

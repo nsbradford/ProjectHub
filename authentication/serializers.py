@@ -22,6 +22,15 @@ class AccountSerializer(serializers.ModelSerializer):
     # confirm_password = serializers.CharField(write_only=True, required=False, allow_blank=True)
     is_email_confirmed = serializers.ReadOnlyField(source='is_confirmed')
 
+    approved_domains = ['wpi.edu']
+
+    def is_approved_email_domain(self, email):
+        answer = False
+        for domain in self.approved_domains:
+            if email.endswith(domain):
+                answer = True
+        return answer
+
 
     def validate(self, data):
         """ Perform object-level validation on all the data. Called automatically
@@ -30,6 +39,10 @@ class AccountSerializer(serializers.ModelSerializer):
         """
         # if 'password' in data and 'confirm_password' not in data:
         #     raise serializers.ValidationError('Password is required.')
+
+        if not self.is_approved_email_domain(data['email']):
+            raise serializers.ValidationError('Email address must be from an approved domain.')
+
         if 'password' not in data and 'confirm_password' in data:
             raise serializers.ValidationError('Must supply password.')
         if 'password' in data and 'confirm_password' in data:

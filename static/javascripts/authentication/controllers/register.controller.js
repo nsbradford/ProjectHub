@@ -25,7 +25,7 @@
     vm.missing_agreement = false;
     vm.register = register;
     vm.hideShowPassword = hideShowPassword;
-    vm.checkWpiOnly = checkWpiOnly;
+    vm.checkForApprovedDomainAndDisplayDialog = checkForApprovedDomainAndDisplayDialog;
 
     activate();
 
@@ -41,15 +41,38 @@
       }
     }
 
-    function checkWpiOnly() {
-      const isWpiEmail = vm.email ? vm.email.endsWith('wpi.edu') : false
-      if (! isWpiEmail){
-        wpiOnlyNotification()
+    /**
+     * Return true if the email ends in one of the approved domains.
+     * @email The email string to check.
+     */
+    function isApprovedDomain(email) {
+      const approvedDomains = ['wpi.edu'];
+      let answer = false;
+      for (let domain of approvedDomains) {
+        if (email.endsWith(domain)) {
+          answer = true;
+        }
       }
-      return isWpiEmail;
+      return answer;
     }
 
-    function wpiOnlyNotification() {
+    /**
+     * Check if the email domain is approved.
+     * If so, display the dialog.
+     * Return true if approved.
+     */
+    function checkForApprovedDomainAndDisplayDialog() {
+      const isApproved = vm.email ? isApprovedDomain(vm.email) : false
+      if (! isApproved) {
+        displayUnapprovedDomainDialog()
+      }
+      return isApproved;
+    }
+
+    /**
+     * Display a dialog explaining that the input email was unapproved.
+     */
+    function displayUnapprovedDomainDialog() {
       ngDialog.open({ 
         template: ` 
           <div class="text-center">
@@ -77,8 +100,8 @@
       vm.missing_agreement = !vm.agreement ? true : false;
 
       if (vm.email && vm.password && vm.username && vm.firstname && vm.lastname && vm.agreement) {
-        const isWpiEmail = checkWpiOnly()
-        if (isWpiEmail) {
+        const isApproved = checkForApprovedDomainAndDisplayDialog();
+        if (isApproved) {
           Authentication.register(vm.email, vm.password, vm.username, vm.firstname, vm.lastname);
         }
       }
