@@ -50,7 +50,7 @@ class Project(models.Model):
     title = models.CharField(max_length=40)
     description = models.TextField()
     majors = models.ManyToManyField(Major, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    # tags = models.ManyToManyField(Tag, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
