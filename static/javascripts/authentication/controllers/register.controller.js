@@ -42,8 +42,10 @@
     }
 
     /**
-     * Return true if the email ends in one of the approved domains.
-     * @email The email string to check.
+     * @name isApprovedDomain
+     * @desc Return true if the email ends in one of the approved domains.
+     * @param {string} email The email to check.
+     * @memberOf projecthub.authentication.controllers.RegisterController
      */
     function isApprovedDomain(email) {
       const approvedDomains = ['wpi.edu'];
@@ -57,9 +59,11 @@
     }
 
     /**
-     * Check if the email domain is approved.
-     * If so, display the dialog.
-     * Return true if approved.
+     * @name checkForApprovedDomainAndDisplayDialog
+     * @desc Check if the email domain is approved.
+     *    If so, display the dialog.
+     *    Return true if approved.
+     * @memberOf projecthub.authentication.controllers.RegisterController
      */
     function checkForApprovedDomainAndDisplayDialog() {
       const isApproved = vm.email ? isApprovedDomain(vm.email) : false
@@ -70,7 +74,9 @@
     }
 
     /**
-     * Display a dialog explaining that the input email was unapproved.
+     * @name displayUnapprovedDomainDialog
+     * @desc Display a dialog explaining that the input email was unapproved.
+     * @memberOf projecthub.authentication.controllers.RegisterController
      */
     function displayUnapprovedDomainDialog() {
       ngDialog.open({ 

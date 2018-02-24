@@ -25,6 +25,12 @@ class AccountSerializer(serializers.ModelSerializer):
     approved_domains = ['wpi.edu']
 
     def is_approved_email_domain(self, email):
+        """ Returns true if email ends in an approved domain.
+            Args:
+                email: String
+            Returns:
+                Boolean
+        """
         answer = False
         for domain in self.approved_domains:
             if email.endswith(domain):
