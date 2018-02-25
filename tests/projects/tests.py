@@ -81,16 +81,16 @@ class ProjectTests(APITestCase):
         return new_account
 
 
-    def setup_project(self, new_account, data_modifier=''):
+    def setup_project(self, new_account, data_modifier='', create_data=True):
         """ """
-        # TODO setup of Tags and Majors
-        major1 = Major.objects.create(title='Underwater Basket Weaving')
-        major2 = Major.objects.create(title='Computer Science')
-        major_queryset = [major1, major2]
-
-        tag1 = Tag.objects.create(title='Academic')
-        tag2 = Tag.objects.create(title='Startup')
-        tag_queryset = [tag1, tag2]
+        if create_data:
+            major1 = Major.objects.create(title='Underwater Basket Weaving')
+            major2 = Major.objects.create(title='Computer Science')
+            tag1 = Tag.objects.create(title='Academic')
+            tag2 = Tag.objects.create(title='Startup')
+        
+        major_queryset = Major.objects.all() #[major1, major2]
+        tag_queryset = Tag.objects.all() #[tag1, tag2]    
 
         self.assertEqual(Major.objects.count(), 2)
 
@@ -129,6 +129,15 @@ class ProjectTests(APITestCase):
     def test_create_project_must_be_activated(self):
         """ Get 403 Forbidden if posting from an account without an activated email."""
         self.setup_account()
+
+        major1 = Major.objects.create(title='Underwater Basket Weaving')
+        major2 = Major.objects.create(title='Computer Science')
+        major_queryset = [major1, major2]
+
+        tag1 = Tag.objects.create(title='Academic')
+        tag2 = Tag.objects.create(title='Startup')
+        tag_queryset = [tag1, tag2]
+
         self.client.login(email=self.email, password=self.password)
         response = self.client.post(self.project_url, self.project_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -186,7 +195,7 @@ class ProjectTests(APITestCase):
 
     def test_get_all_projects_by_user(self):
         new_account = self.setup_account_and_project()
-        self.setup_project(new_account, '-appendtext')
+        self.setup_project(new_account, '-appendtext', create_data=False)
         self.assertEqual(len(Project.objects.all()), 2)
         get_response = self.client.get('/api/v1/accounts/' + self.username + '/projects/')
         self.assertEqual(get_response.status_code, status.HTTP_200_OK)
