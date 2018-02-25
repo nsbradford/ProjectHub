@@ -17,21 +17,41 @@ from projects import views
 
 class MajorTests(APITestCase):
 
+    major_url = '/api/v1/majors/'
+    majors = [u'Underwater Basket Weaving', u'Computer Science']
+
+    def setUp(self):
+        Major.objects.create(title='Underwater Basket Weaving')
+        Major.objects.create(title='Computer Science')
+
     def test_get_all_majors(self):
-        pass
+        get_response = self.client.get(self.major_url)
+        self.assertEqual(get_response.status_code, status.HTTP_200_OK)
+        formatted_response = map(lambda x: x['title'], get_response.data)
+        self.assertEqual(sorted(formatted_response), sorted(self.majors))
+
 
 
 class TagTests(APITestCase):
 
-    def test_get_all_tags(self):
-        pass
+    tag_url = '/api/v1/tags/'
+    tags = [u'Academic', u'Startup']
 
+    def setUp(self):
+        Tag.objects.create(title='Academic')
+        Tag.objects.create(title='Startup')
+
+    def test_get_all_tags(self):
+        get_response = self.client.get(self.tag_url)
+        self.assertEqual(get_response.status_code, status.HTTP_200_OK)
+        formatted_response = map(lambda x: x['title'], get_response.data)
+        self.assertEqual(sorted(formatted_response), sorted(self.tags))
 
 
 class ProjectTests(APITestCase):
 
-    majors = ['Underwater Basket Weaving', 'Computer Science']
-    tags = ['Academic', 'Startup']
+    majors = [u'Underwater Basket Weaving', u'Computer Science']
+    tags = [u'Academic', u'Startup']
 
     setup_data = {
                 'email': 'johndoe@wpi.edu',
@@ -177,11 +197,11 @@ class ProjectTests(APITestCase):
         self.assertEqual(get_response.data['title'], self.project_data['title'])
         self.assertEqual(
             sorted(get_response.data['majors']), 
-            sorted(map(unicode, self.majors))
+            sorted(self.majors)
         )
         self.assertEqual(
             sorted(get_response.data['tags']), 
-            sorted(map(unicode, self.tags))
+            sorted(self.tags)
         )
 
 
