@@ -222,15 +222,6 @@ class ProjectTests(APITestCase):
         self.assertEqual(put_response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-#     def login_wrong(self):
-#         """
-#         Reusable function for logging in as the wrong user
-#         """
-#         self.client.login(
-#             email=self.user_wrong_payload.get('email'),
-#             password=self.user_wrong_payload.get('password')
-#         )
-
     # test DESTROY
 
     def test_delete_project(self):
@@ -251,23 +242,15 @@ class ProjectTests(APITestCase):
         response = self.client.delete(ProjectTests.make_project_url(new_project))
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-#     def test_delete_project_successfully(self):
-#         """
-#         User's who own a project should be allowed to delete it
-#         """
-#         self.login_correct()
-#         response = self.client.delete(ProjectTests.get_existing_project_url())
-#         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-#         self.assertEqual(len(Project.objects.all()), 0)
 
-
-#     def test_delete_project_wrong_user_fail(self):
-#         """
-#         Other users cannot delete another user's project
-#         """
-#         self.login_wrong()
-#         response = self.client.delete(ProjectTests.get_existing_project_url())
-#         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+    def test_delete_project_fails_for_wrong_user(self):
+        """ Can't delete the project of another user. """
+        new_account = Account.objects.last()
+        new_project = self.setup_project(new_account)
+        self.setup_account(payload=self.bad_user)
+        self.login(payload=self.bad_user)
+        response = self.client.delete(ProjectTests.make_project_url(new_project))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
 
