@@ -56,8 +56,8 @@ class ProjectTests(APITestCase):
 
 
     @staticmethod
-    def make_project_url(account):
-        return ProjectTests.project_url + str(account.pk) + '/'
+    def make_project_url(project):
+        return ProjectTests.project_url + str(project.pk) + '/'
 
 
     # def setUp(self):
@@ -152,25 +152,12 @@ class ProjectTests(APITestCase):
 
 
     def activate_login_and_setup_project(self):
-        """ """
+        """ Activate account, login, and setup a new project. """
         new_account = Account.objects.get()
         self.activate_account(new_account)
         self.login()
         self.setup_project(new_account)
         return new_account
-
-
-    def test_create_project_must_be_authenticated(self):
-        """ Ensure we get 403 FORBIDDEN when posting while unauthenticated. """
-        response = self.client.post(self.project_url, self.project_data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-
-    def test_create_project_must_be_activated(self):
-        """ Get 403 Forbidden if posting from an account without an activated email."""
-        self.client.login(email=self.setup_data['email'], password=self.setup_data['password'])
-        response = self.client.post(self.project_url, self.project_data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
     def test_create_project(self):
@@ -181,20 +168,34 @@ class ProjectTests(APITestCase):
         self.create_project(new_account)
 
 
-    def test_delete_project_must_be_authenticated(self):
+    def test_create_project_fails_when_not_authenticated(self):
+        """ Ensure we get 403 FORBIDDEN when posting while unauthenticated. """
+        response = self.client.post(self.project_url, self.project_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+    def test_create_project_fails_when_not_activated(self):
+        """ Get 403 Forbidden if posting from an account without an activated email."""
+        self.client.login(email=self.setup_data['email'], password=self.setup_data['password'])
+        response = self.client.post(self.project_url, self.project_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+    def test_delete_project_fails_when_not_authenticated(self):
         """ Can't delete a project when not signed in. """
-        new_account = self.activate_login_and_setup_project()
+        self.activate_login_and_setup_project()
+        new_project = Project.objects.last()
         self.client.logout()
-        response = self.client.delete(ProjectTests.make_project_url(new_account))
+        response = self.client.delete(ProjectTests.make_project_url(new_project))
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
     def test_delete_project(self):
         """ DELETE a single project. """
         self.activate_login_and_setup_project()
-        new_account = Account.objects.get()
+        new_project = Project.objects.last()
         self.assertEqual(len(Project.objects.all()), 1)
-        response = self.client.delete(ProjectTests.make_project_url(new_account))
+        response = self.client.delete(ProjectTests.make_project_url(new_project))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(len(Project.objects.all()), 0)
 
@@ -202,9 +203,9 @@ class ProjectTests(APITestCase):
     def test_update_project(self):
         """ PUT to edit a project. """
         self.activate_login_and_setup_project()
-        new_account = Account.objects.get()
+        new_project = Project.objects.last()
         self.assertEqual(len(Project.objects.all()), 1)
-        get_response = self.client.put(ProjectTests.make_project_url(new_account),
+        get_response = self.client.put(ProjectTests.make_project_url(new_project),
                             self.project_data_edited, format='json')
         self.assertEqual(get_response.status_code, status.HTTP_200_OK)
         new_project = Project.objects.get()
@@ -215,9 +216,9 @@ class ProjectTests(APITestCase):
     def test_get_single_project(self):
         """ GET a single project by author and project name. """
         self.activate_login_and_setup_project()
-        new_account = Account.objects.get()
+        new_project = Project.objects.last()
         self.assertEqual(len(Project.objects.all()), 1)
-        get_response = self.client.get(ProjectTests.make_project_url(new_account))
+        get_response = self.client.get(ProjectTests.make_project_url(new_project))
         self.assertEqual(get_response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(len(get_response.data), 8)
