@@ -8,6 +8,7 @@
       'projecthub.authentication',
       'projecthub.layout',
       'projecthub.majors',
+      'projecthub.tags',
       'projecthub.projects',
       'projecthub.profiles',
       'projecthub.utils',

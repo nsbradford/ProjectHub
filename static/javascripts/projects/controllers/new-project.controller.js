@@ -17,15 +17,17 @@
   function NewProjectController($rootScope, $scope, Authentication, Snackbar, Projects) {
     const vm = this;
     vm.submit = submit;
-    vm.majors = null;
+    vm.majors = [];
+    vm.tags = [];
     vm.allMajors = $scope.ngDialogData;
+
     /**
     * @name submit
     * @desc Create a new Project
     * @memberOf projecthub.projects.controllers.NewProjectController
     */
     function submit() {
-      Projects.create(vm.title, vm.description, vm.majors).then(createProjectSuccessFn, createProjectErrorFn);
+      Projects.create(vm.title, vm.description, vm.majors, vm.tags).then(createProjectSuccessFn, createProjectErrorFn);
       $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
 
       /**

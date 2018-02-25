@@ -20,12 +20,13 @@ from authentication.views import (
     ActivateAccountView,
     ResendEmailView
 )
-from projects.views import AccountProjectsViewSet, ProjectViewSet, MajorViewSet
+from projects.views import AccountProjectsViewSet, ProjectViewSet, MajorViewSet, TagViewSet
 
 
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
 router.register(r'majors', MajorViewSet)
+router.register(r'tags', TagViewSet)
 router.register(r'projects', ProjectViewSet, base_name='Project')
 accounts_router = routers.NestedSimpleRouter(
     router, r'accounts', lookup='account'

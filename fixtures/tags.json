@@ -2,43 +2,49 @@
     {
         "model": "projects.Tag",
         "fields": {
-            "name": "Other"
+            "title": "Other"
         }
     },
     {
         "model": "projects.Tag",
         "fields": {
-            "name": "Startup"
+            "title": "Startup"
         }
     },
     {
         "model": "projects.Tag",
         "fields": {
-            "name": "Research"
+            "title": "Research"
         }
     },
     {
         "model": "projects.Tag",
         "fields": {
-            "name": "Hobby"
+            "title": "Hobby"
         }
     },
     {
         "model": "projects.Tag",
         "fields": {
-            "name": "Academic"
+            "title": "Academic"
         }
     },
     {
         "model": "projects.Tag",
         "fields": {
-            "name": "MQP"
+            "title": "Student Organization"
         }
     },
     {
         "model": "projects.Tag",
         "fields": {
-            "name": "IQP"
+            "title": "MQP"
         }
     },
+    {
+        "model": "projects.Tag",
+        "fields": {
+            "title": "IQP"
+        }
+    }
 ]

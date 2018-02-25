@@ -20,9 +20,9 @@
   function Majors($http) {
     var Majors = {
       all: all,
-      create: create,
-      deleteById: deleteById,
-      update: update
+      // create: create,
+      // deleteById: deleteById,
+      // update: update
     };
 
     const majorURL = '/api/v1/majors/';
@@ -31,9 +31,9 @@
 
     /**
     * @name all
-    * @desc Get all Projects
+    * @desc Get all Majors
     * @returns {Promise}
-    * @memberOf projecthub.projects.services.Projects
+    * @memberOf projecthub.majors.services.Majors
     */
     function all() {
       return $http.get(majorURL);
@@ -48,11 +48,11 @@
     * @returns {Promise}
     * @memberOf projecthub.projects.services.Projects
     */
-    function create(title, description, majors) {
-      return $http.post(projectURL, {
-        title: title,
-      });
-    }
+    // function create(title, description, majors) {
+    //   return $http.post(projectURL, {
+    //     title: title,
+    //   });
+    // }
 
     /**
      * @name get
@@ -62,22 +62,22 @@
      * @returns {Promise}
      * @memberOf projecthub.projects.services.Projects
      */
-    function getById(projectID) {
-      return $http.get(projectURL + projectID + '/');
-    }
+    // function getById(projectID) {
+    //   return $http.get(projectURL + projectID + '/');
+    // }
 
     /**
      *
      */
-    function deleteById(projectID) {
-      return $http.delete(projectURL + projectID + '/');
-    }
+    // function deleteById(projectID) {
+    //   return $http.delete(projectURL + projectID + '/');
+    // }
 
     /**
      *
      */
-    function update(project) {
-      return $http.put(projectURL + project.id + '/', project);
-    }
+    // function update(project) {
+    //   return $http.put(projectURL + project.id + '/', project);
+    // }
   }
 })();

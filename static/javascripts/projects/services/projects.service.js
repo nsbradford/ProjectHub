@@ -55,11 +55,12 @@
     * @returns {Promise}
     * @memberOf projecthub.projects.services.Projects
     */
-    function create(title, description, majors) {
+    function create(title, description, majors, tags) {
       return $http.post(projectURL, {
         title: title,
         description: description,
-        majors: majors
+        majors: majors,
+        tags: tags
       });
     }
 
