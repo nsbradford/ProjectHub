@@ -15,21 +15,24 @@ from projects.models import Project, Major, Tag
 from projects import views
 
 
+class MajorTests(APITestCase):
+
+    def test_get_all_majors(self):
+        pass
+
+
+class TagTests(APITestCase):
+
+    def test_get_all_tags(self):
+        pass
+
+
+
 class ProjectTests(APITestCase):
 
-    # email = 'johndoe@wpi.edu'
-    # username = 'johndoe'
-    # first_name = 'John'
-    # last_name = 'Doe'
-    # password = 'password123'
-    author = 'myauthor'
-    title = 'mytitle'
-    description = 'mydescription'
-    # majors = ['Underwater Basket Weaving', 'Computer Science']
+    majors = ['Underwater Basket Weaving', 'Computer Science']
     tags = ['Academic', 'Startup']
-    # tagline = 'This is the tagline for John Doe #1'
-    new_title = title + '-edited!'
-    new_description = description + '-edited!'
+
     setup_data = {
                 'email': 'johndoe@wpi.edu',
                 'username': 'johndoe',
@@ -47,15 +50,15 @@ class ProjectTests(APITestCase):
                 'tagline': 'I am evil'
             }
     project_data = {
-        'title': title,
-        'description': description,
-        'majors': ['Underwater Basket Weaving', 'Computer Science'],
+        'title': 'mytitle',
+        'description': 'mydescription',
+        'majors': majors,
         'tags': tags
     }
     project_data_edited = {
-        'title': new_title,
-        'description': new_description,
-        'majors': ['Underwater Basket Weaving', 'Computer Science'],
+        'title': 'mytitle' + '-edited!',
+        'description': 'mydescription' + '-edited!',
+        'majors': majors,
         'tags': tags
     }
     accounts_url = '/api/v1/accounts/'
@@ -98,7 +101,7 @@ class ProjectTests(APITestCase):
 
 
 
-    def setup_project(self, new_account, data_modifier='', create_data=True):
+    def setup_project(self, new_account):
         """ Create a new project. """
 
         project = Project.objects.create(
@@ -111,19 +114,17 @@ class ProjectTests(APITestCase):
         return project
 
 
-    def create_project(self, new_account, data_modifier='', create_data=True):
+    def create_project(self, new_account, payload):
         """ Create a new project and confirm the fields are set correct. """
         previous_n_projects = Project.objects.count()
         self.assertEqual(Account.objects.count(), 1)
-        modified_project_data = dict(self.project_data)
-        modified_project_data['title'] += data_modifier
-        response = self.client.post(self.project_url, modified_project_data, format='json')
+        response = self.client.post(self.project_url, payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Project.objects.count(), previous_n_projects + 1)
         new_project = Project.objects.last()
         self.assertEqual(new_project.author, new_account)
-        self.assertEqual(new_project.title, self.title + data_modifier)
-        self.assertEqual(new_project.description, self.description)
+        self.assertEqual(new_project.title, payload['title'])
+        self.assertEqual(new_project.description, payload['description'])
         self.assertQuerysetEqual(new_project.majors.all(), map(repr, Major.objects.all()), ordered=False)
         self.assertQuerysetEqual(new_project.tags.all(), map(repr, Tag.objects.all()), ordered=False)
 
@@ -144,7 +145,7 @@ class ProjectTests(APITestCase):
         new_account = Account.objects.last()
         self.activate_account(new_account)
         self.login()
-        self.create_project(new_account)
+        self.create_project(new_account, payload=self.project_data)
 
 
     def test_create_project_fails_when_not_authenticated(self):
@@ -173,10 +174,10 @@ class ProjectTests(APITestCase):
         # could do this with json.loads(response.content) as well
         self.assertEqual(len(get_response.data), 8)
         self.assertEqual(get_response.data['author']['username'], self.setup_data['username'])
-        self.assertEqual(get_response.data['title'], self.title)
+        self.assertEqual(get_response.data['title'], self.project_data['title'])
         self.assertEqual(
             sorted(get_response.data['majors']), 
-            sorted(map(unicode, self.project_data['majors']))
+            sorted(map(unicode, self.majors))
         )
         self.assertEqual(
             sorted(get_response.data['tags']), 
@@ -187,14 +188,14 @@ class ProjectTests(APITestCase):
     def test_get_all_projects_by_user(self):
         self.activate_login_and_setup_project()
         new_account = Account.objects.last()
-        self.create_project(new_account, '-appendtext', create_data=False)
+        self.create_project(new_account, payload=self.project_data_edited)
         self.assertEqual(len(Project.objects.all()), 2)
         get_response = self.client.get('/api/v1/accounts/' + self.setup_data['username'] + '/projects/')
         self.assertEqual(get_response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(get_response.data), 2)
         sorted_projects = sorted(get_response.data, key=lambda x: x.get('title'))
-        self.assertEqual(sorted_projects[0]['title'], self.title)
-        self.assertEqual(sorted_projects[1]['title'], self.title + '-appendtext')
+        self.assertEqual(sorted_projects[0]['title'], self.project_data['title'])
+        self.assertEqual(sorted_projects[1]['title'], self.project_data_edited['title'])
 
 
     # test UPDATE
@@ -208,8 +209,8 @@ class ProjectTests(APITestCase):
                             self.project_data_edited, format='json')
         self.assertEqual(get_response.status_code, status.HTTP_200_OK)
         new_project = Project.objects.last()
-        self.assertEqual(new_project.title, self.new_title)
-        self.assertEqual(new_project.description, self.new_description)
+        self.assertEqual(new_project.title, self.project_data_edited['title'])
+        self.assertEqual(new_project.description, self.project_data_edited['description'])
 
 
     def test_update_project_fails_for_wrong_user(self):
