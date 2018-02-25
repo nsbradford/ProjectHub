@@ -13,6 +13,7 @@
         border-radius: 2px;
         background-color: lighten($brand-secondary, 50);
         width: 100%;
+        cursor: inherit;
         // font-size: 14px;
     }
     .input-clear-button {
@@ -29,6 +30,7 @@
 
 .multiselect-container {
     min-width: 300px;
+    cursor: pointer;
 
         .project-hub-multi-select-list{
         list-style: none;
@@ -39,16 +41,18 @@
         border-radius: 11px;
 
         .projecthub-multi-select-option{
-            height: 65px;
+            height: 45px;
+            // display: table-cell;
+            vertical-align: middle;
             font-size: 15px;
-            padding-top: 15px;
+            // padding: 2px;
             margin-bottom: 5px;
             color: $brand-primary;
             background: white;
-
             &.active {
-                color: $brand-light;
-                background: $brand-primary;
+                i {
+                    color: $brand-primary;
+                }
             }
         }
     }

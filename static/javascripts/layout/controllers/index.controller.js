@@ -114,7 +114,7 @@
         vm.canLoadMoreProjects = false;
       }
       vm.projects = vm.projects.concat(data.data);
-      vm.filteredProjects = vm.filteredProjects.concat(data.data);
+      filterProjects();
       vm.lastProjectIndex += data.data.length;
 
     }

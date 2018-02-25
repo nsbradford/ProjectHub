@@ -1,6 +1,6 @@
 <div class="multiselect-container">
     <text-input
-      place-holder="'Select Options'"
+      place-holder="'Click To Select'"
       model="$ctrl.selected"
       read-only="true"
       ng-click="$ctrl.onActivate()"
@@ -20,7 +20,7 @@
             ng-class="{'active': option.active }"
           >
 
-            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 projecthub-multi-select-option-content">
                 {{option.title}}
             </div>
 

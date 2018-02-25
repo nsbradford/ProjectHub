@@ -1,6 +1,6 @@
 <div
     class="projecthub-text-input-container form-group">
-    <div class="row">
+    <div class="row" ng-if="$ctrl.label">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <label for="{{$ctrl.id}}">{{$ctrl.label}}</label>
             <span ng-show='$ctrl.error' class='error-span'> {{$ctrl.error}}</span>

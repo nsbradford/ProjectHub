@@ -42,36 +42,34 @@
           </text-input>
 
           <div class="row">
-          <span class="show-hide-password">
-            <input type="checkbox" class="agreement-checkbox" id="checkbox" tabindex="-1" ng-model="passwordCheckbox" ng-click="vm.hideShowPassword()" />
-            <label class="agreement-label" for="checkbox">Show password</label>
-          </span>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <label>Password</label>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <span class="show-hide-password">
+                <input type="checkbox" class="agreement-checkbox" id="checkbox" tabindex="-1" ng-model="passwordCheckbox" ng-click="vm.hideShowPassword()" />
+                <label class="agreement-label" for="checkbox">Show password</label>
+              </span>
+            </div>
           </div>
 
-<<<<<<< HEAD
-          <input type="{{vm.inputType}}" class="form-control" id="register__password" ng-model="vm.password" placeholder="" />
-        </div>
-
-        <br>
-=======
           <text-input
             error="vm.mising_password"
             id="'password-input'"
-            label="'Password'"
             type="vm.inputType"
             model="vm.password"
             place-holder="'8+ characters and numbers'"
             on-clear="vm.clearPassword">
           </text-input>
->>>>>>> Text Input has completely replaced all native html inputs
 
-        <div class="form-group">
-          <input type="checkbox" class="agreement-checkbox" id="register__agreement" ng-model="vm.agreement">
-          <label class="agreement-label" for="register__agreement">
-            I accept the <a href="/policies/terms-of-service" target="_blank" tabindex="-1">Terms of Use</a>.
-          </label>
-          <span ng-show='vm.missing_agreement' class='error-span'> required</span>
-        </div>
+          <div class="form-group">
+            <input type="checkbox" class="agreement-checkbox" id="register__agreement" ng-model="vm.agreement">
+            <label class="agreement-label" for="register__agreement">
+              I accept the <a href="/policies/terms-of-service" target="_blank" tabindex="-1">Terms of Use</a>.
+            </label>
+            <span ng-show='vm.missing_agreement' class='error-span'> required</span>
+          </div>
 
         <div class="form-group text-center">
           <button type="submit" class="btn discover-button">Register</button>
