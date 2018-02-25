@@ -13,6 +13,7 @@
         border-radius: 2px;
         background-color: lighten($brand-secondary, 50);
         width: 100%;
+        // font-size: 14px;
     }
     .input-clear-button {
         background: transparent;
@@ -26,23 +27,29 @@
     }
 }
 
-.project-hub-multi-select-list{
-    list-style: none;
-    overflow-y: scroll;
-    max-height: 300px;
-    padding: 20px;
-    border-radius: 11px;
+.multiselect-container {
+    min-width: 300px;
 
-    .projecthub-multi-select-option{
-        height: 50px;
-        padding-top: 15px;
-        margin-bottom: 5px;
-        color: $brand-primary;
-        background: white;
+        .project-hub-multi-select-list{
+        list-style: none;
+        overflow-y: scroll;
+        max-height: 300px;
+        min-width: 300px;
+        padding: 20px;
+        border-radius: 11px;
 
-        &.active {
-            color: $brand-light;
-            background: $brand-primary;
+        .projecthub-multi-select-option{
+            height: 65px;
+            font-size: 15px;
+            padding-top: 15px;
+            margin-bottom: 5px;
+            color: $brand-primary;
+            background: white;
+
+            &.active {
+                color: $brand-light;
+                background: $brand-primary;
+            }
         }
     }
 }
