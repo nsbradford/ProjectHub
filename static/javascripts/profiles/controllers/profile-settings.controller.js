@@ -20,7 +20,7 @@
     const vm = this;
     vm.destroy = destroy;
     vm.update = update;
-    vm.resendConfirmation = resendConfirmation;
+    vm.resendConfirmation = resendConfirmation
 
     vm.missing_email = false;
     vm.missing_firstname = false;

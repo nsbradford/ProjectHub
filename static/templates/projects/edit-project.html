@@ -24,13 +24,14 @@
           on-clear="vm.clearDescription"id
         ></text-input>
 
-
-
         <div class="form-group">
-          <select class="form-control" id="project__majors" multiple rows="3" placeholder="'CS'" ng-model="vm.project.majors">
-            <option ng-repeat="major in vm.allMajors" ng-value="major.title">{{major.title}}</option>
-          </select>
-        </div>
+          <multiselect
+            options="vm.allMajors"
+            selected="vm.selected"
+            on-click="vm.toggleFilter"
+            on-clear="vm.clearMajors"
+          ></multiselect>
+
 
         <div class="form-group text-center">
           <h4>

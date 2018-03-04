@@ -13,7 +13,7 @@
   */
   function config($routeProvider) {
     $routeProvider.when('/register', {
-      controller: 'RegisterController', 
+      controller: 'RegisterController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/authentication/register.html'
     }).when('/about', {
@@ -26,6 +26,10 @@
       controller: 'IndexController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/layout/discover.html',
+    }).when('/new-project', {
+      controller: 'NewProjectController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/projects/new-project.html'
     }).when('/login', {
       controller: 'LoginController',
       controllerAs: 'vm',

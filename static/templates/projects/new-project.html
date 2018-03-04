@@ -1,42 +1,53 @@
 <form class="new-project" role="form" ng-submit="vm.submit()">
   <h1>New Project</h1>
-  <div class="form-group">
+  <div class="container">
 
-    <text-input
-      error='vm.missing_title'
-      id="'title-input'"
-      label="'Title'"
-      place-holder="'Algorithmic trading with Python'"
-      model="vm.title"
-      on-clear="vm.clearTitle"
-    ></text-input>
+    <div class="
+    col-xs-offset-0 col-xs-12
+    col-sm-offset-2 col-sm-8
+    col-md-offset-3 col-md-6
+    col-lg-offset-4 col-lg-4">
 
-    <text-input
-      error='vm.missing_description'
-      id="'description-input'"
-      label="'Description'"
-      place-holder="'This is your big chance to get rich!'"
-      model="vm.description"
-      on-clear="vm.clearDescription"
-    ></text-input>
+    <div class="form-group">
 
-    <label for="project__majors">Majors</label>
-    <br>
-    <!--     <input type="checkbox" name="majors" value="CS">CS <br>
-    <input type="checkbox" name="vehicle" value="RBE">RBE -->
-      <multiselect
-        options="vm.allMajors"
-        selected="vm.selected"
-        is-active="vm.isMajorMultiSelectOpen"
-        on-activate="vm.toggleShowMultiSelect"
-        on-click="vm.toggleFilter"
-        on-clear="vm.clearMajors"
-      ></multiselect>
-  </div>
+      <text-input
+        error='vm.missing_title'
+        id="'title-input'"
+        label="'Title'"
+        place-holder="'Algorithmic trading with Python'"
+        model="vm.title"
+        on-clear="vm.clearTitle"
+      ></text-input>
 
-  <div class="form-group text-center">
-    <button type="submit" class="btn discover-button">
-      Create
-    </button>
+      <text-input
+        error='vm.missing_description'
+        id="'description-input'"
+        label="'Description'"
+        place-holder="'This is your big chance to get rich!'"
+        model="vm.description"
+        on-clear="vm.clearDescription"
+      ></text-input>
+
+      <label for="project__majors">Majors</label>
+      <br>
+      <!--     <input type="checkbox" name="majors" value="CS">CS <br>
+      <input type="checkbox" name="vehicle" value="RBE">RBE -->
+        <multiselect
+          options="vm.allMajors"
+          selected="vm.selected"
+          is-active="vm.isMajorMultiSelectOpen"
+          on-activate="vm.toggleShowMultiSelect"
+          on-click="vm.toggleFilter"
+          on-clear="vm.clearMajors"
+        ></multiselect>
+    </div>
+
+    <div class="form-group text-center">
+      <button type="submit" class="btn discover-button">
+        Create
+      </button>
+    </div>
+    </div>
+
   </div>
 </form>
