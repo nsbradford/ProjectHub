@@ -11,6 +11,7 @@
             bindings: {
                 placeHolder: '=',
                 onClear: '=',
+                label: '=',
                 onChange: '=',
                 onClick: '=',
                 onClear: '=',
