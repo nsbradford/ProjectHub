@@ -187,7 +187,5 @@ ENV/
 # mkdocs documentation
 /site
 
-# css files
-static/stylesheets/css/
 # End of https://www.gitignore.io/api/macos,django,python,angular
 

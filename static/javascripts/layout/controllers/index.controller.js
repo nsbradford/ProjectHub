@@ -241,12 +241,15 @@
       if (vm.canLoadMoreProjects) {
         Projects.load(vm.lastProjectIndex, vm.searchString).then(projectsSuccessFn, projectsSuccessFn);
       }
-
     }
+
+    /**
+     * @name toggleShowMultiSelect
+     * @desc Toggles the display state of the multiselect.
+     */
     function toggleShowMultiSelect() {
       vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen;
     }
-
 
     /**
      * @name clearFilteringPanel
