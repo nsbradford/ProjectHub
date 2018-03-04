@@ -32,16 +32,22 @@
 .inline {
   display: inline; }
 
-.majors-panel {
-  border: #687685 solid 1px;
-  border-radius: 10px;
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 10px;
-  padding: 40px;
-  margin-top: 10px; }
-  .majors-panel .major-pills {
-    margin-left: 10px;
-    border-left: #0277bd solid 1px; }
-    .majors-panel .major-pills .major-list-item {
-      padding-left: 10px; }
+.major-panel-container {
+  z-index: 9999; }
+  .major-panel-container .majors-panel {
+    border: #687685 solid 1px;
+    min-width: 350px;
+    border-radius: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 40px;
+    padding-bottom: 10px;
+    margin-top: 10px; }
+    .major-panel-container .majors-panel .major-pills {
+      margin-left: 10px;
+      border-left: #0277bd solid 1px; }
+      .major-panel-container .majors-panel .major-pills .major-list-item {
+        padding-left: 10px; }

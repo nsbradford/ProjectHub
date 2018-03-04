@@ -15,6 +15,11 @@
         width: 100%;
         cursor: inherit;
         // font-size: 14px;
+        &.disabled {
+            cursor: not-allowed;
+            border: dashed;
+            border-width: 1px;
+        }
     }
     .input-clear-button {
         background: transparent;
