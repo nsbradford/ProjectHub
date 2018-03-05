@@ -7,11 +7,12 @@
  */
 
  @import 'variables';
+
 .search-pane {
     padding-bottom: 10px;
-    
+
     .search-form {
-        
+
         div{
             padding: 0;
         }
@@ -45,22 +46,32 @@
     display: inline;
 }
 
-.majors-panel{
-    border: $brand-secondary solid 1px;
-    border-radius: 10px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 10px;
-    padding: 40px;
-    margin-top: 10px;
-    
-    .major-pills {
-        margin-left: 10px;
-        border-left: $brand-primary solid 1px;
+.major-panel-container {
+    z-index: 9999; // This z index is needed so that our jquery onclick listeners work on
+                   // Smaller Screens
 
-        .major-list-item {
-            padding-left: 10px;
-        }
+    .majors-panel{
+        border: $brand-secondary solid 1px;
+        min-width: 350px;
+        border-radius: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 40px;
+        padding-bottom: 10px;
+
+        margin-top: 10px;
+
+        .major-pills {
+            margin-left: 10px;
+            border-left: $brand-primary solid 1px;
+
+            .major-list-item {
+                padding-left: 10px;
+            }
+            }
+
     }
-
 }

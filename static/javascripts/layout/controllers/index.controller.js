@@ -9,12 +9,12 @@
     .module('projecthub.layout.controllers')
     .controller('IndexController', IndexController);
 
-  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors'];
+  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors', '$document'];
 
   /**
   * @namespace IndexController
   */
-  function IndexController($scope, Authentication, Projects, Snackbar, Profile, Majors) {
+  function IndexController($scope, Authentication, Projects, Snackbar, Profile, Majors, $document) {
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.allFilters = [];
@@ -28,6 +28,10 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
+    vm.clearFilteringPanel = clearFilteringPanel;
+    vm.isMajorMultiSelectOpen = false;
+    vm.toggleShowMultiSelect = toggleShowMultiSelect;
+    vm.clearSearch = clearSearch;
 
     /**
      * We ask to filter on project creation, this function should stay outside the activate function
@@ -37,6 +41,7 @@
       filterProjects();
       vm.lastProjectIndex += 1;
     });
+
 
     activate();
 
@@ -73,9 +78,9 @@
 
 
       const account = Authentication.getAuthenticatedAccount();
-      if (account){
+      if (account) {
         Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
-      }  
+      }
 
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
@@ -96,7 +101,7 @@
        * No Content -- Tell the controller that we can no longer lazyload,
        * Do not add anything to the the project list
        */
-      if ( data.status == 204) {
+      if (data.status == 204) {
         vm.canLoadMoreProjects = false;
         return;
       }
@@ -109,7 +114,7 @@
         vm.canLoadMoreProjects = false;
       }
       vm.projects = vm.projects.concat(data.data);
-      vm.filteredProjects = vm.filteredProjects.concat(data.data);
+      filterProjects();
       vm.lastProjectIndex += data.data.length;
 
     }
@@ -134,6 +139,11 @@
         return filter.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
 
+      vm.selected = vm.allFilters.filter(function (filter) {
+        return filter.active;
+      }).map(function (filter) {
+        return filter.title;
+      }).join(', ');
       filterProjects();
     }
 
@@ -146,7 +156,7 @@
       // Retrieve all filters that are active.
       const activeFilters = vm.allFilters.filter(function (f) {
         return f.active;
-      }).map(function(activeMajors){
+      }).map(function (activeMajors) {
         return activeMajors.title;
       });
       /*
@@ -160,18 +170,16 @@
         return;
       }
       vm.filteredProjects = vm.projects.filter(function (project) {
-
         /**
          * Normally I would use another functional JS component, but we can get
          * more efficiency if we use a traditional for loop. We cant achieve
          * short circuits using the functional components.
          */
-        return activeFilters.every(function(filter){
+        return activeFilters.every(function (filter) {
           return (project.majors.indexOf(filter) > -1);
         });
-
-    });
-  }
+      });
+    }
 
     /**
      * @name submitSearch
@@ -186,6 +194,17 @@
       } else {
         Snackbar.error("Pleae provide something to search.");
       }
+    }
+
+    /**
+     * @name clearSearch
+     * @desc Remove the words
+     */
+    function clearSearch(event) {
+      vm.lastProjectIndex = 0;
+      vm.searchString = '';
+
+      Projects.load(vm.lastProjectIndex).then(ProjectSearchSuccessCallback, ProjectSearchFailureCallback)
     }
 
     /**
@@ -223,5 +242,28 @@
         Projects.load(vm.lastProjectIndex, vm.searchString).then(projectsSuccessFn, projectsSuccessFn);
       }
     }
+
+    /**
+     * @name toggleShowMultiSelect
+     * @desc Toggles the display state of the multiselect.
+     */
+    function toggleShowMultiSelect() {
+      vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen;
+    }
+
+    /**
+     * @name clearFilteringPanel
+     * @desc the callback fired when a use hits the c
+     */
+    function clearFilteringPanel() {
+      vm.selected = '';
+      vm.allFilters.map(function (filter) {
+        return filter.active = false;
+      });
+
+      vm.filteredProjects = vm.projects;
+
+    }
+
   }
 })();
