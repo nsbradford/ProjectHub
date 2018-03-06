@@ -31,6 +31,12 @@
 
   <div class="main col-xs-12 ng-view"></div>
 
-  
+  <a class="btn btn-primary btn-fab btn-raised mdi-content-add btn-add-new-project"
+  href="javascript:void(0)"
+  ng-hide="vm.isActivated"
+  ng-dialog="/static/templates/projects/must-be-activated.html"
+  ng-dialog-controller="NewProjectController as vm"
+  ></a>
+
 </body>
 </html>
