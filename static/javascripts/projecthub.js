@@ -4,6 +4,7 @@
   angular
     .module('projecthub', [
       'projecthub.config',
+      'projecthub.common',
       'projecthub.routes',
       'projecthub.authentication',
       'projecthub.layout',

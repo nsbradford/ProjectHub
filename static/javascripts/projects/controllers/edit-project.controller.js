@@ -23,8 +23,23 @@
     vm.destroy = destroy;
     vm.update = update;
 
+    vm.clearMajors = clearMajors;
+    vm.toggleFilter = toggleFilter;
+    vm.clearTitle = clearTitle;
+    vm.clearDescription = clearDescription;
+
     activate();
 
+
+    function clearTitle(event) {
+      event.preventDefault();
+      vm.project.title = "";
+    }
+
+    function clearDescription(event) {
+      event.preventDefault();
+      vm.project.description = "";
+    }
 
     /**
      *
@@ -43,7 +58,7 @@
     function activate() {
       var projectID = $routeParams.projectID.substr(1);
       Projects.getById(projectID).then(projectsSuccessFn, projectsErrorFn);
-      Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
+
       /**
       * @name projectSuccessFn
       * @desc Update `project` for view
@@ -55,17 +70,30 @@
           $location.url('/');
           Snackbar.error('You are not authorized to view this page.');
         }
+
+        /**
+         * Sending an ajax request to fetch majors is contingent on us loading the project.
+         */
+        Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
       }
 
       /**
      * @name MajorSuccessCallback
      * @desc This function is called when a call to the Majors service
-     * returns successfully.
+     * returns successfully. We must then coalesce what majors are already selected into this payload.
      *
      * @param {object} response The response from the server
      */
     function MajorsSuccessCallback(response) {
       vm.allMajors = response.data;
+
+        vm.project.majors.forEach(function(selectedMajor) {
+          vm.allMajors.find(function (major) {
+            return major.title == selectedMajor;
+          }).active = true;
+        });
+
+        updateTextBox();
     }
 
     /**
@@ -88,6 +116,47 @@
       }
     }
 
+    /**
+     * @name clearMajors
+     * @desc Clears the Majors multiselect, by changing th actual model.
+     *
+     * @param {event} event the event emitted by the clear click
+     */
+     function clearMajors($event) {
+      $event.preventDefault();
+      vm.selected = '';
+      vm.allMajors.map(function (major) {
+        major.active = false;
+      });
+      }
+
+   /**
+     * @name filterToggleCallback
+     * @desc Function that is called when a user applies a filter.
+     *
+     */
+    function toggleFilter(filter) {
+      // Filter out the curent applied filter,
+      // and toggl its 'active' state.
+      vm.allMajors.filter(function (f) {
+        return filter.title === f.title;
+      }).map(function (f) { return f.active = !f.active; });
+
+      updateTextBox();
+    }
+
+    /**
+     * @name updateTextBox
+     * @desc Concantenates all selected majors and seperates them by a comma
+     *
+     */
+    function updateTextBox() {
+      vm.selected = vm.allMajors.filter(function (filter) {
+        return filter.active;
+      }).map(function (filter) {
+        return filter.title;
+      }).join(', ');
+    }
 
     /**
     * @name destroy
@@ -128,6 +197,12 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function update() {
+      vm.project.majors = vm.allMajors.filter(function(major){
+        return major.active;
+       }).map(function(selectedMajor) {
+          return selectedMajor.title;
+      });
+
       Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
 
       /**

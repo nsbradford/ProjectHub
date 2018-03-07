@@ -9,10 +9,11 @@
  */
 @import 'variables';
 @import 'discover';
+@import 'components';
 
- 
+
 [ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important; 
+  display: none !important;
 }
 
 a {
@@ -105,17 +106,17 @@ label {
     /*position: relative;*/
     vertical-align: middle;
   }
-  
+
   h1 {
     color: $brand-primary;
     font-weight: 400;
     font-size: 8.7vw;
   }
-  
+
   span {
     color: $brand-secondary;
   }
-  
+
   h2 {
     color: $brand-secondary;
     font-weight: 300;
@@ -123,7 +124,7 @@ label {
     padding-top: 30px;
     padding-bottom: 50px;
   }
-  
+
 }
 
 .pull-right {
@@ -143,12 +144,12 @@ label {
   margin-left: 10px;
   margin-top: 20px;
   box-shadow: none !important;
-  transition: opacity .2s ease-in-out, transform .2s ease-in-out; 
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out;
   font-size: 16px;
   font-weight: 700 !important;
   letter-spacing: 3px;
- 
-  &:hover, 
+
+  &:hover,
   &:focus{
     opacity: .7;
     transform: scale(1.05);
@@ -192,7 +193,7 @@ body .login-no-shadow {
 }
 
 .show-hide-password {
-  float: right; 
+  float: right;
   text-align: right
 }
 
@@ -207,12 +208,13 @@ body .login-no-shadow {
   font-style:italic
 }
 
-.agreement-label { 
+.agreement-label {
   font-weight: 200;
   cursor: pointer;
 }
 
 input.agreement-checkbox {
+  margin-top: 10px;
   margin-right: 10px;
   cursor: pointer;
 }
@@ -220,7 +222,7 @@ input.agreement-checkbox {
 /* Profile */
 
 .profile {
-  
+
 }
 
 .profile__header {
@@ -252,7 +254,7 @@ input.agreement-checkbox {
     padding: 30px;
     margin-top: 20px;
 
-    
+
     .major-pills {
         margin-left: 10px;
         border-left: $brand-primary solid 1px;
@@ -276,16 +278,16 @@ input.agreement-checkbox {
     padding-top: 5px;
     padding-right: 15px;
     font-size: 2em;
-    transition: opacity .1s ease-in-out, transform .1s ease-in-out; 
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out;
     cursor: pointer;
 
-    &:hover, 
+    &:hover,
     &:focus{
       opacity: .7;
       transform: scale(1.2);
       cursor: pointer;
     }
-  } 
+  }
 }
 
 .project {
@@ -299,7 +301,7 @@ input.agreement-checkbox {
     text-align: left;
     font-size: 20px;
     padding-bottom: 19px;
-    
+
     a {
       font-size: 24px;
     }
@@ -310,34 +312,34 @@ input.agreement-checkbox {
     padding-bottom: 20px;
     font-size: 15px;
   }
-  
+
   .project__author{
     text-align: right;
   }
-  
+
   a.author {
     font-weight: bold;
     text-align: right;
   }
-  
-  
+
+
   .project__required {
     font-weight:  bold;
     font-size: 15px;
   }
-  
+
   .project__location {
     margin-top: 10px;
     font-weight: normal;
     font-size: 15px;
- 
+
     .fa {
       padding-right: 10px;
       font-size: 1em;
       color: $brand-secondary;
     }
   }
-  
+
   .project__major {
     border-radius: 5px;
     background: $brand-light;
@@ -353,7 +355,7 @@ input.agreement-checkbox {
     height: 50px;
   }
 }
-  
+
 
 /* new-project */
 
@@ -368,12 +370,12 @@ input.agreement-checkbox {
     padding-top: 20px;
     font-family: 'Avenir',Helvetica,Arial,sans-serif;
   }
-  
+
    label {
     /*padding-top: 30px;*/
   }
-  
-  
+
+
 }
 
 /* DiscoverProjects */
@@ -399,32 +401,32 @@ input.agreement-checkbox {
     .navbar-brand {
       color: white;
     }
-    
-    .navbar-nav li a{ 
+
+    .navbar-nav li a{
       color: white;
     }
-    
+
     .navbar-brand:hover {
       color: #e0e0e0;
     }
   }
-  
+
   /* DiscoverProjects */
-  
+
   .no-projects-here {
     text-align: center;
   }
-  
+
   .btn-add-new-project {
     position: fixed;
     bottom: 20px;
     right: 20px;
   }
-  
+
   /* Navbar */
   /* See https://stackoverflow.com/questions/18529274/
      change-navbar-color-in-twitter-bootstrap-3 */
-  
+
   /* navbar */
   .navbar-default {
       background-color: $brand-primary;
@@ -432,21 +434,24 @@ input.agreement-checkbox {
       .navbar-brand {
         color: white;
       }
-      
-      .navbar-nav li a{ 
+
+      .navbar-nav li a{
         color: white;
       }
-      
+
       .navbar-brand:hover {
         color: #e0e0e0;
       }
-      
-      .navbar-nav li a:hover{ 
+
+      .navbar-nav li a:hover{
         color: #e0e0e0;
       }
   }
-  
-  
+
+  .large-modal {
+    width:400px;
+  }
+
   /* Title */
   /*.navbar-default .navbar-brand {
       color: #777;
@@ -456,7 +461,7 @@ input.agreement-checkbox {
       color: #5E5E5E;
   }
   */
-  
+
   /* Link */
   /*.navbar-default .navbar-nav > li > a {
       color: #777;
@@ -478,7 +483,7 @@ input.agreement-checkbox {
       background-color: #D5D5D5;
   }
   */
-  
+
   /* Caret */
   /*.navbar-default .navbar-nav > .dropdown > a .caret {
       border-top-color: #777;
