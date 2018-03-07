@@ -17,12 +17,8 @@
   function NewProjectController($rootScope, $scope, Authentication, Snackbar, Projects, Majors, $window) {
     const vm = this;
     vm.submit = submit;
-
-    // vm.majors = [];
-    // vm.tags = [];
-    // vm.allMajors = $scope.ngDialogData;
-
     vm.majors = null;
+    vm.tags = [];
     vm.clearTitle = clearTitle;
     vm.clearMajors = clearMajors;
 
@@ -120,8 +116,12 @@
         return major.title;
       });
 
-      Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
-      $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
+      const tags = vm.tags // TODO do some filtering similar to Majors
+
+      Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
+      
+      // TODO can remove the below line because it does nothing, just errors out
+      // $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
 
      /**
       * @name createProjectSuccessFn

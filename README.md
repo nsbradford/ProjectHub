@@ -27,6 +27,12 @@ We're looking for additional developers - we use {Heroku, Django, Angular} but n
 ## Installation
 
 Create a Python virtual environment, install bower components, instantiate the database, and start the dev server.
+
+    $ sudo -s
+    $ source scripts/setup.sh
+
+Or manually:
+
 ```bash
   $ virtualenv env
   $ source env/bin/activate
@@ -37,9 +43,11 @@ Create a Python virtual environment, install bower components, instantiate the d
   $ python manage.py migrate
   $ python manage.py loaddata majors
   $ python manage.py loaddata tags
-  $ python manage.py runserver
 ```
-For it to fully work, you'll need to define your own `components/settings_dev.py` file based off `components/settings_dev_template.py` with sensitive data (SECRET_KEY, database/email passwords, etc.) that you don't want committed to source control.
+
+For it to fully work, you'll need to define your own `components/settings_dev.py` file based off `components/settings_dev_template.py` with sensitive data (SECRET_KEY, database/email passwords, etc.) that you don't want committed to source control. The you can run the dev server:
+
+    $ python manage.py runserver
 
 ## Testing
 
@@ -115,6 +123,12 @@ You can deploy directly to production if you want to live dangerously:
 Or extra sketchy, push a branch other than Master:
 
     $ git push heroku deploy-heroku:master // deploy from a local deployment branch to Heroku
+
+We haven't found a good way to automatically load fixtures into the Heroku DB, so you'll need to do it manually during deployment:
+
+    $ git push heroku master
+    $ heroku run bash
+    $ > python manage.py loaddata YOUR_FILE
 
 Fun things to do:
 
