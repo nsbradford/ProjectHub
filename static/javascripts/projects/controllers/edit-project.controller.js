@@ -23,11 +23,11 @@
     vm.destroy = destroy;
     vm.update = update;
 
-    // vm.selectedTags = ''
+    vm.selectedTags = ''
     vm.clearTags = clearTags;
     vm.toggleFilterTags = toggleFilterTags
 
-    // vm.selectedMajors = ''
+    vm.selectedMajors = ''
     vm.clearMajors = clearMajors;
     vm.toggleFilterMajors = toggleFilterMajors;
 
@@ -277,6 +277,12 @@
         return major.active;
        }).map(function(selectedMajor) {
           return selectedMajor.title;
+      });
+
+      vm.project.tags = vm.allTags.filter(function(tag){
+        return tag.active;
+       }).map(function(selectedTag) {
+          return selectedTag.title;
       });
 
       Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
