@@ -37,6 +37,9 @@
   ng-dialog="/static/templates/projects/must-be-activated.html"
   ng-dialog-controller="NewProjectController as vm"
   ></a>
-
+  <a class="btn btn-primary btn-fab btn-raised mdi-content-add btn-add-new-project"
+  href="/new-project"
+  ng-show="vm.isActivated"
+  ></a>
 </body>
 </html>
