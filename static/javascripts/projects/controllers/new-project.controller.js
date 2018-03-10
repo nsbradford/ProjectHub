@@ -19,7 +19,7 @@
     const vm = this;
     vm.submit = submit;
     vm.allMajors = null;
-    vm.tags = [];
+    vm.allTags = null;
     vm.clearTitle = clearTitle;
     vm.clearMajors = clearMajors;
     vm.clearTags = clearTags;
@@ -162,7 +162,12 @@
         return major.title;
       });
 
-      const tags = vm.tags // TODO do some filtering similar to Majors
+      const tags = vm.allTags.filter( function(filter) {
+        return filter.active;
+      }).map(function(tag){
+        return tag.title;
+      });
+      console.log(tags)
 
       Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
       
