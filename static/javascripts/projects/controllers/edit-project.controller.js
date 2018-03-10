@@ -10,21 +10,27 @@
     .controller('EditProjectController', EditProjectController);
 
   EditProjectController.$inject = [
-    '$location', '$routeParams', 'Authentication', 'Snackbar', 'Projects', 'Majors'
+    '$location', '$routeParams', 'Authentication', 'Snackbar', 'Projects', 'Majors', 'Tags'
   ];
 
   /**
   * @namespace EditProjectController
   */
-  function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects, Majors) {
+  function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects, Majors, Tags) {
     const vm = this;
     vm.isUserOwnerOfProject = false
     vm.project = undefined
     vm.destroy = destroy;
     vm.update = update;
 
+    // vm.selectedTags = ''
+    vm.clearTags = clearTags;
+    vm.toggleFilterTags = toggleFilterTags
+
+    // vm.selectedMajors = ''
     vm.clearMajors = clearMajors;
-    vm.toggleFilter = toggleFilter;
+    vm.toggleFilterMajors = toggleFilterMajors;
+
     vm.clearTitle = clearTitle;
     vm.clearDescription = clearDescription;
 
@@ -75,6 +81,7 @@
          * Sending an ajax request to fetch majors is contingent on us loading the project.
          */
         Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
+        Tags.all().then(TagsSuccessCallback, TagsFailureCallback);
       }
 
       /**
@@ -93,7 +100,7 @@
         }).active = true;
       });
 
-      updateTextBox();
+      updateTextBoxMajors();
     }
 
     /**
@@ -105,6 +112,33 @@
         Snackbar.error("Unable to get majors. Please refresh the page.");
     }
 
+      /**
+     * @name MajorSuccessCallback
+     * @desc This function is called when a call to the Majors service
+     * returns successfully. We must then coalesce what majors are already selected into this payload.
+     *
+     * @param {object} response The response from the server
+     */
+    function TagsSuccessCallback(response) {
+      vm.allTags = response.data;
+
+      vm.project.tags.forEach(function(selectedTag) {
+        vm.allTags.find(function (major) {
+          return major.title == selectedTag;
+        }).active = true;
+      });
+
+      updateTextBoxTags();
+    }
+
+    /**
+     * @name TagsfailureCallback
+     * @desc Function that is calle when the Tags service fails to proivde a list of
+     * Tags
+     */
+    function TagsFailureCallback() {
+        Snackbar.error("Unable to get Tags. Please refresh the page.");
+    }
 
       /**
       * @name projectErrorFn
@@ -124,7 +158,7 @@
      */
      function clearMajors($event) {
       $event.preventDefault();
-      vm.selected = '';
+      vm.selectedMajors = '';
       vm.allMajors.map(function (major) {
         major.active = false;
       });
@@ -135,23 +169,65 @@
      * @desc Function that is called when a user applies a filter.
      *
      */
-    function toggleFilter(filter) {
+    function toggleFilterMajors(filter) {
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
       vm.allMajors.filter(function (f) {
         return filter.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
 
-      updateTextBox();
+      updateTextBoxMajors();
     }
 
     /**
-     * @name updateTextBox
+     * @name clearMajors
+     * @desc Clears the Majors multiselect, by changing th actual model.
+     *
+     * @param {event} event the event emitted by the clear click
+     */
+     function clearTags($event) {
+      $event.preventDefault();
+      vm.selectedTags = '';
+      vm.allTags.map(function (major) {
+        major.active = false;
+      });
+      }
+
+   /**
+     * @name filterToggleCallback
+     * @desc Function that is called when a user applies a filter.
+     *
+     */
+    function toggleFilterTags(filter) {
+      // Filter out the curent applied filter,
+      // and toggl its 'active' state.
+      vm.allTags.filter(function (f) {
+        return filter.title === f.title;
+      }).map(function (f) { return f.active = !f.active; });
+
+      updateTextBoxTags();
+    }
+
+    /**
+     * @name updateTextBoxMajors
      * @desc Concantenates all selected majors and seperates them by a comma
      *
      */
-    function updateTextBox() {
-      vm.selected = vm.allMajors.filter(function (filter) {
+    function updateTextBoxMajors() {
+      vm.selectedMajors = vm.allMajors.filter(function (filter) {
+        return filter.active;
+      }).map(function (filter) {
+        return filter.title;
+      }).join(', ');
+    }
+
+    /**
+     * @name updateTextBoxMajors
+     * @desc Concantenates all selected majors and seperates them by a comma
+     *
+     */
+    function updateTextBoxTags() {
+      vm.selectedTags = vm.allTags.filter(function (filter) {
         return filter.active;
       }).map(function (filter) {
         return filter.title;
