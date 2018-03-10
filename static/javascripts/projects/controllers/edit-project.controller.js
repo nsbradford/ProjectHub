@@ -87,13 +87,13 @@
     function MajorsSuccessCallback(response) {
       vm.allMajors = response.data;
 
-        vm.project.majors.forEach(function(selectedMajor) {
-          vm.allMajors.find(function (major) {
-            return major.title == selectedMajor;
-          }).active = true;
-        });
+      vm.project.majors.forEach(function(selectedMajor) {
+        vm.allMajors.find(function (major) {
+          return major.title == selectedMajor;
+        }).active = true;
+      });
 
-        updateTextBox();
+      updateTextBox();
     }
 
     /**

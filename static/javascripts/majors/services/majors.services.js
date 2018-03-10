@@ -18,7 +18,7 @@
   * @returns {Factory}
   */
   function Majors($http) {
-    var Majors = {
+    var majors = {
       all: all,
       // create: create,
       // deleteById: deleteById,
@@ -27,7 +27,7 @@
 
     const majorURL = '/api/v1/majors/';
 
-    return Majors;
+    return majors;
 
     /**
     * @name all

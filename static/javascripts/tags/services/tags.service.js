@@ -9,15 +9,15 @@
 
   angular
     .module('projecthub.tags.services')
-    .factory('tags', tags);
+    .factory('Tags', Tags);
 
-  tags.$inject = ['$http'];
+  Tags.$inject = ['$http'];
 
   /**
   * @namespace tags
   * @returns {Factory}
   */
-  function tags($http) {
+  function Tags($http) {
     var tags = {
       all: all
     };
