@@ -27,16 +27,23 @@
     <div class="majors-panel">
       <h3>Filter by Major</h3>
       <multiselect
+        options="vm.allMajors"
+        on-clear='vm.clearSelectedMajors'
+        selected="vm.selected"
+        is-active="vm.isMajorMultiSelectOpen"
+        on-activate="vm.toggleShowMultiSelect"
+        on-click="vm.toggleFilter"
+      ></multiselect>
+
+<!--       <multiselect
         options="vm.allFilters"
         on-clear='vm.clearFilteringPanel'
         selected="vm.selected"
         is-active="vm.isMajorMultiSelectOpen"
         on-activate="vm.toggleShowMultiSelect"
         on-click="vm.toggleFilter"
-      ></multiselect>
-      <!-- <ul class="nav nav-pills nav-stacked major-pills"> -->
-        <!-- <li class="major-list-item" ng-repeat="filter in vm.allFilters" ng-click="vm.toggleFilter(filter)" role="presentation" ng-class="{'active': filter.active }"><a href="#">{{filter.title}}</a></li> -->
-      <!-- </ul> -->
+      ></multiselect> -->
+      
     </div>
   </div>
 

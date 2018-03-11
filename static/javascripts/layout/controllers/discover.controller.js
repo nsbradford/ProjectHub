@@ -1,5 +1,5 @@
 /**
-* IndexController
+* DiscoverController
 * @namespace projecthub.layout.controllers
 */
 (function () {
@@ -7,17 +7,17 @@
 
   angular
     .module('projecthub.layout.controllers')
-    .controller('IndexController', IndexController);
+    .controller('DiscoverController', DiscoverController);
 
-  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors', '$document'];
+  DiscoverController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors', '$document'];
 
   /**
-  * @namespace IndexController
+  * @namespace DiscoverController
   */
-  function IndexController($scope, Authentication, Projects, Snackbar, Profile, Majors, $document) {
+  function DiscoverController($scope, Authentication, Projects, Snackbar, Profile, Majors, $document) {
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
-    vm.allFilters = [];
+    vm.allMajors = [];
     // This will be removed soon. We will be pulling the majors from the backend using angular.
     // Until we have that endpoint, we will be using a static list.
     vm.toggleFilter = toggleFilter;
@@ -28,7 +28,7 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
-    vm.clearFilteringPanel = clearFilteringPanel;
+    vm.clearSelectedMajors = clearSelectedMajors;
     vm.isMajorMultiSelectOpen = false;
     vm.toggleShowMultiSelect = toggleShowMultiSelect;
     vm.clearSearch = clearSearch;
@@ -50,7 +50,7 @@
     * @desc Actions to be performed when this controller is instantiated.
     *   On project.created or project.created.error, update the projects
     *   array to reflect the changes.
-    * @memberOf projecthub.layout.controllers.IndexController
+    * @memberOf projecthub.layout.controllers.DiscoverController
     */
     function activate() {
       Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
@@ -64,7 +64,7 @@
        * @param {object} response The response from the server
        */
       function MajorsSuccessCallback(response) {
-        vm.allFilters = response.data;
+        vm.allMajors = response.data;
       }
 
       /**
@@ -135,11 +135,11 @@
     function toggleFilter(filter) {
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
-      vm.allFilters.filter(function (f) {
+      vm.allMajors.filter(function (f) {
         return filter.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
 
-      vm.selected = vm.allFilters.filter(function (filter) {
+      vm.selected = vm.allMajors.filter(function (filter) {
         return filter.active;
       }).map(function (filter) {
         return filter.title;
@@ -154,7 +154,7 @@
      */
     function filterProjects() {
       // Retrieve all filters that are active.
-      const activeFilters = vm.allFilters.filter(function (f) {
+      const activeFilters = vm.allMajors.filter(function (f) {
         return f.active;
       }).map(function (activeMajors) {
         return activeMajors.title;
@@ -252,12 +252,12 @@
     }
 
     /**
-     * @name clearFilteringPanel
+     * @name clearSelectedMajors
      * @desc the callback fired when a use hits the c
      */
-    function clearFilteringPanel() {
+    function clearSelectedMajors() {
       vm.selected = '';
-      vm.allFilters.map(function (filter) {
+      vm.allMajors.map(function (filter) {
         return filter.active = false;
       });
 
