@@ -113,9 +113,9 @@
     }
 
       /**
-     * @name MajorSuccessCallback
-     * @desc This function is called when a call to the Majors service
-     * returns successfully. We must then coalesce what majors are already selected into this payload.
+     * @name TagsSuccessCallback
+     * @desc This function is called when a call to the Tags service
+     * returns successfully. We must then coalesce what tags are already selected into this payload.
      *
      * @param {object} response The response from the server
      */
@@ -156,27 +156,31 @@
      *
      * @param {event} event the event emitted by the clear click
      */
-     function clearMajors($event) {
+    function clearMajors($event) {
       $event.preventDefault();
       vm.selectedMajors = '';
       vm.allMajors.map(function (major) {
         major.active = false;
       });
-      }
+    }
+
+
+    // Filter out the curent applied filter,
+    // and toggl its 'active' state.
+    function toggleFilter(item, collection) {
+      vm.allMajors.filter(function (f) {
+        return item.title === f.title;
+      }).map(function (f) { return f.active = !f.active; });
+    }
 
    /**
      * @name filterToggleCallback
      * @desc Function that is called when a user applies a filter.
      *
      */
-    function toggleFilterMajors(filter) {
-      // Filter out the curent applied filter,
-      // and toggl its 'active' state.
-      vm.allMajors.filter(function (f) {
-        return filter.title === f.title;
-      }).map(function (f) { return f.active = !f.active; });
-
-      updateTextBoxMajors();
+    function toggleFilterMajors(item) {
+      toggleFilter(item, vm.allMajors)
+      updateTextBoxMajors(vm.allMajors, vm.selectedMajors);
     }
 
     /**
@@ -185,26 +189,21 @@
      *
      * @param {event} event the event emitted by the clear click
      */
-     function clearTags($event) {
+    function clearTags($event) {
       $event.preventDefault();
       vm.selectedTags = '';
       vm.allTags.map(function (major) {
         major.active = false;
       });
-      }
+    }
 
    /**
      * @name filterToggleCallback
      * @desc Function that is called when a user applies a filter.
      *
      */
-    function toggleFilterTags(filter) {
-      // Filter out the curent applied filter,
-      // and toggl its 'active' state.
-      vm.allTags.filter(function (f) {
-        return filter.title === f.title;
-      }).map(function (f) { return f.active = !f.active; });
-
+    function toggleFilterTags(item) {
+      toggleFilter(item, vm.allTags)
       updateTextBoxTags();
     }
 

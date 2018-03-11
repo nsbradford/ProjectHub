@@ -1,7 +1,7 @@
 
 /**
  * Majors Service
- * Provides Majors to other components
+ * Provides Majors to other components.
  * @namespace projecthub.majors.services
 */
 (function () {

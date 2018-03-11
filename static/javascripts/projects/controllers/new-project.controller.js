@@ -167,12 +167,8 @@
       }).map(function(tag){
         return tag.title;
       });
-      console.log(tags)
 
       Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
-      
-      // TODO can remove the below line because it does nothing, just errors out
-      // $scope.closeThisDialog();// ngDialog: closes the project-creation dialog
 
      /**
       * @name createProjectSuccessFn

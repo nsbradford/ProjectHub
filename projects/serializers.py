@@ -76,15 +76,6 @@ class MajorSerializer(serializers.ModelSerializer):
         fields = ('id', 'title')
         read_only_fields = ('id', 'title')
 
-    def validate(self, data):
-        """ Perform object-level validtion on all data.
-            titles shouldn't be null.
-        """
-        if data.title is None:
-            raise serializers.ValidationError('Majors must have a title.')
-
-        return data
-
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -96,11 +87,3 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ('id', 'title')
         read_only_fields = ('id', 'title')
 
-
-    def validate(self, data):
-        """ Perform object-level validtion on all data.
-            title shouldn't be null.
-        """
-        if data.title is None:
-            raise serializers.ValidationError('Tags must have a title.')
-        return data
