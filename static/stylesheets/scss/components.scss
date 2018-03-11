@@ -41,16 +41,14 @@
         overflow-y: scroll;
         max-height: 300px;
         min-width: 300px;
-        padding: 20px;
+        padding: 0px;
         border-radius: 11px;
 
-        .projecthub-multi-select-option{
-            height: 45px;
-            // display: table-cell;
+        .projecthub-multi-select-option {
+            height: auto;
             vertical-align: middle;
-            font-size: 15px;
-            // padding: 2px;
-            margin-bottom: 5px;
+            font-size: 14px;
+            padding-bottom: 30px;
             color: $brand-primary;
             background: white;
             &.active {

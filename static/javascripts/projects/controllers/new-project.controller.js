@@ -9,7 +9,7 @@
     .module('projecthub.projects.controllers')
     .controller('NewProjectController', NewProjectController);
 
-  NewProjectController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 
+  NewProjectController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar',
     'Projects', 'Majors', 'Tags', '$window'];
 
   /**
@@ -189,7 +189,13 @@
       * @param Error errorResponse
       */
       function createProjectErrorFn(errorResponse) {
-        Snackbar.error(errorResponse.error);
+        /**
+         * Take every field that came back as an error and map it to the
+         * field's error message.
+         */
+        Object.keys(errorResponse.data).forEach(function(field) {
+          vm['missing_'+field] = errorResponse.data[field][0];
+        });
       }
     }
   }
