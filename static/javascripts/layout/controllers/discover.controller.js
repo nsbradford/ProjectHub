@@ -179,18 +179,27 @@
      */
     function filterProjects() {
       // Retrieve all filters that are active.
-      const activeFilters = vm.allMajors.filter(function (f) {
+      const activeFiltersMajors = vm.allMajors.filter(function (f) {
         return f.active;
       }).map(function (activeMajors) {
         return activeMajors.title;
       });
+
+      const activeFiltersTags = vm.allTags.filter(function (f) {
+        return f.active;
+      }).map(function (activeTags) {
+        return activeTags.title;
+      });
+
+      console.log('ya')
+
       /*
       * If we dont have any filters that are applied.
       * Then Set the displayed projects to all projects.
       * Else Lets apply filters to each project and see if they
       * pass.
       */
-      if (!activeFilters.length) {
+      if (!activeFiltersMajors.length && !activeFiltersTags.length) {
         vm.filteredProjects = vm.projects;
         return;
       }
@@ -200,9 +209,18 @@
          * more efficiency if we use a traditional for loop. We cant achieve
          * short circuits using the functional components.
          */
-        return activeFilters.every(function (filter) {
+        const containsMajor = activeFiltersMajors.some(function (filter) {
           return (project.majors.indexOf(filter) > -1);
         });
+
+        const containsTag = activeFiltersTags.some(function (filter) {
+          return (project.tags.indexOf(filter) > -1);
+        });
+
+        const validMajor = !activeFiltersMajors.length || containsMajor
+        const validTag = !activeFiltersTags.length || containsTag
+
+        return (validMajor && validTag)
       });
     }
 
