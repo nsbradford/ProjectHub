@@ -28,22 +28,18 @@
           on-clear="vm.clearDescription"
         ></text-input>
 
-        <label for="project__majors">Majors</label>
-        <br>
         <multiselect
+          label="'Majors'"
           options="vm.allMajors"
           selected="vm.selectedMajors"
-          is-active="vm.isMajorMultiSelectOpen"
           on-click="vm.toggleFilterMajors"
           on-clear="vm.clearMajors"
         ></multiselect>
 
-        <label for="project__tags">Tags</label>
-        <br>
         <multiselect
+          label="'Tags'"
           options="vm.allTags"
           selected="vm.selectedTags"
-          is-active="vm.isTagMultiSelectOpen"
           on-click="vm.toggleFilterTags"
           on-clear="vm.clearTags"
         ></multiselect>

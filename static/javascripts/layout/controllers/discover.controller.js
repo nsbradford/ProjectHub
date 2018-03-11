@@ -9,18 +9,19 @@
     .module('projecthub.layout.controllers')
     .controller('DiscoverController', DiscoverController);
 
-  DiscoverController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors', '$document'];
+  DiscoverController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 
+    'Majors', 'Tags', '$document'];
 
   /**
   * @namespace DiscoverController
   */
-  function DiscoverController($scope, Authentication, Projects, Snackbar, Profile, Majors, $document) {
+  function DiscoverController($scope, Authentication, Projects, Snackbar, Profile, Majors, Tags, $document) {
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.allMajors = [];
     // This will be removed soon. We will be pulling the majors from the backend using angular.
     // Until we have that endpoint, we will be using a static list.
-    vm.toggleFilter = toggleFilter;
+    vm.toggleFilterMajors = toggleFilterMajors;
     vm.submitSearch = submitSearch;
     vm.lazyLoad = lazyLoad;
     vm.projects = [];
@@ -28,9 +29,8 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
+
     vm.clearSelectedMajors = clearSelectedMajors;
-    vm.isMajorMultiSelectOpen = false;
-    vm.toggleShowMultiSelect = toggleShowMultiSelect;
     vm.clearSearch = clearSearch;
 
     /**
@@ -55,9 +55,15 @@
     function activate() {
       Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
       Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
+      Tags.all().then(TagsSuccessCallback, TagsFailureCallback)
+
+      const account = Authentication.getAuthenticatedAccount();
+      if (account) {
+        Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
+      }
 
       /**
-       * @name MajorSuccessCallback
+       * @name MajorsSuccessCallback
        * @desc This function is called when a call to the Majors service
        * returns successfully.
        *
@@ -76,10 +82,24 @@
         Snackbar.error("Unable to get majors. Please refresh the page.");
       }
 
+      /**
+       * @name TagsSuccessCallback
+       * @desc This function is called when a call to the Tags service
+       * returns successfully.
+       *
+       * @param {object} response The response from the server
+       */
+      function TagsSuccessCallback(response) {
+        vm.allTags = response.data;
+      }
 
-      const account = Authentication.getAuthenticatedAccount();
-      if (account) {
-        Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
+      /**
+       * @name TagsfailureCallback
+       * @desc Function that is calle when the Tags service fails to proivde a list of
+       * Tags
+       */
+      function TagsFailureCallback() {
+        Snackbar.error("Unable to get Tags. Please refresh the page.");
       }
 
       function profileSuccessFn(data, status, headers, config) {
@@ -132,14 +152,14 @@
      * @desc Function that is called when a user applies a filter.
      *
      */
-    function toggleFilter(filter) {
+    function toggleFilterMajors(filter) {
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
       vm.allMajors.filter(function (f) {
         return filter.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
 
-      vm.selected = vm.allMajors.filter(function (filter) {
+      vm.selectedMajors = vm.allMajors.filter(function (filter) {
         return filter.active;
       }).map(function (filter) {
         return filter.title;
@@ -243,20 +263,13 @@
       }
     }
 
-    /**
-     * @name toggleShowMultiSelect
-     * @desc Toggles the display state of the multiselect.
-     */
-    function toggleShowMultiSelect() {
-      vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen;
-    }
 
     /**
      * @name clearSelectedMajors
      * @desc the callback fired when a use hits the c
      */
     function clearSelectedMajors() {
-      vm.selected = '';
+      vm.selectedMajors = '';
       vm.allMajors.map(function (filter) {
         return filter.active = false;
       });
