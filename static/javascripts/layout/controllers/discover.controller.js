@@ -191,24 +191,8 @@
         return activeTags.title;
       });
 
-      console.log('ya')
-
-      /*
-      * If we dont have any filters that are applied.
-      * Then Set the displayed projects to all projects.
-      * Else Lets apply filters to each project and see if they
-      * pass.
-      */
-      if (!activeFiltersMajors.length && !activeFiltersTags.length) {
-        vm.filteredProjects = vm.projects;
-        return;
-      }
       vm.filteredProjects = vm.projects.filter(function (project) {
-        /**
-         * Normally I would use another functional JS component, but we can get
-         * more efficiency if we use a traditional for loop. We cant achieve
-         * short circuits using the functional components.
-         */
+
         const containsMajor = activeFiltersMajors.some(function (filter) {
           return (project.majors.indexOf(filter) > -1);
         });
@@ -217,10 +201,10 @@
           return (project.tags.indexOf(filter) > -1);
         });
 
-        const validMajor = !activeFiltersMajors.length || containsMajor
-        const validTag = !activeFiltersTags.length || containsTag
+        const validMajors = !activeFiltersMajors.length || containsMajor;
+        const validTags = !activeFiltersTags.length || containsTag;
 
-        return (validMajor && validTag)
+        return (validMajors && validTags);
       });
     }
 
@@ -296,9 +280,7 @@
       vm.allMajors.map(function (filter) {
         return filter.active = false;
       });
-
-      vm.filteredProjects = vm.projects;
-
+      filterProjects();
     }
 
     /**
@@ -310,9 +292,7 @@
       vm.allTags.map(function (filter) {
         return filter.active = false;
       });
-
-      vm.filteredProjects = vm.projects; // TODO this breaks
-
+      filterProjects();
     }
 
     /**

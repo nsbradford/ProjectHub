@@ -81,14 +81,14 @@ class MajorSerializer(serializers.ModelSerializer):
             titles shouldn't be null.
         """
         if data.title is None:
-            raise serializers.ValidationError('Major\'s must have a title.')
+            raise serializers.ValidationError('Majors must have a title.')
 
         return data
 
 
 
 class TagSerializer(serializers.ModelSerializer):
-    """Serializer for Majors for use in a RESTful API"""
+    """Serializer for Tags for use in a RESTful API"""
 
 
     class Meta:
