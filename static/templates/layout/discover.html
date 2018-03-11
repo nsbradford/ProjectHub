@@ -35,12 +35,13 @@
         on-click="vm.toggleFilterMajors"
       ></multiselect>
 
-<!--       <multiselect
-        options="vm.allFilters"
-        on-clear='vm.clearFilteringPanel'
-        selected="vm.selected"
-        on-click="vm.toggleFilter"
-      ></multiselect> -->
+      <multiselect
+        label="'Tags'"
+        options="vm.allTags"
+        on-clear='vm.clearSelectedTags'
+        selected="vm.selectedTags"
+        on-click="vm.toggleFilterTags"
+      ></multiselect>
       
     </div>
   </div>

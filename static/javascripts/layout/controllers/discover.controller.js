@@ -18,10 +18,6 @@
   function DiscoverController($scope, Authentication, Projects, Snackbar, Profile, Majors, Tags, $document) {
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
-    vm.allMajors = [];
-    // This will be removed soon. We will be pulling the majors from the backend using angular.
-    // Until we have that endpoint, we will be using a static list.
-    vm.toggleFilterMajors = toggleFilterMajors;
     vm.submitSearch = submitSearch;
     vm.lazyLoad = lazyLoad;
     vm.projects = [];
@@ -29,9 +25,18 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
-
-    vm.clearSelectedMajors = clearSelectedMajors;
     vm.clearSearch = clearSearch;
+
+    vm.allMajors = [];
+    vm.selectedMajors = '';
+    vm.clearSelectedMajors = clearSelectedMajors;
+    vm.toggleFilterMajors = toggleFilterMajors;
+
+    vm.allTags = [];
+    vm.selectedTags = '';
+    vm.clearSelectedTags = clearSelectedTags;
+    vm.toggleFilterTags = toggleFilterTags;
+
 
     /**
      * We ask to filter on project creation, this function should stay outside the activate function
@@ -276,6 +281,40 @@
 
       vm.filteredProjects = vm.projects;
 
+    }
+
+    /**
+     * @name clearSelectedTags
+     * @desc the callback fired when a use hits the c
+     */
+    function clearSelectedTags() {
+      vm.selectedTags = '';
+      vm.allTags.map(function (filter) {
+        return filter.active = false;
+      });
+
+      vm.filteredProjects = vm.projects; // TODO this breaks
+
+    }
+
+    /**
+     * @name filterToggleTags
+     * @desc Function that is called when a user applies a filter.
+     *
+     */
+    function toggleFilterTags(filter) {
+      // Filter out the curent applied filter,
+      // and toggl its 'active' state.
+      vm.allTags.filter(function (f) {
+        return filter.title === f.title;
+      }).map(function (f) { return f.active = !f.active; });
+
+      vm.selectedTags = vm.allTags.filter(function (filter) {
+        return filter.active;
+      }).map(function (filter) {
+        return filter.title;
+      }).join(', ');
+      filterProjects();
     }
 
   }
