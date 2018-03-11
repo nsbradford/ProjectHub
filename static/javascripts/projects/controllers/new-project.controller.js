@@ -168,6 +168,14 @@
         return tag.title;
       });
 
+      vm.missing_title = !vm.email ? 'Project Title is Required' : '';
+      vm.missing_description = !vm.email ? 'Project Description is Required' : '';
+      vm.missing_majors = !vm.selected ? 'At least one major is Required' : '';
+
+      if (vm.title && vm.description && vm.selected ) {
+        Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
+      }
+
       Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
 
      /**
@@ -189,13 +197,7 @@
       * @param Error errorResponse
       */
       function createProjectErrorFn(errorResponse) {
-        /**
-         * Take every field that came back as an error and map it to the
-         * field's error message.
-         */
-        Object.keys(errorResponse.data).forEach(function(field) {
-          vm['missing_'+field] = errorResponse.data[field][0];
-        });
+        Snackbar.error("Unable to Create Project. Please Try again");
       }
     }
   }

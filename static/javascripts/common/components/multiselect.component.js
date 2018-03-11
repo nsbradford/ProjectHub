@@ -9,6 +9,7 @@
         .module('projecthub.common')
         .component('multiselect', {
             bindings: {
+                error: '=',
                 placeHolder: '=',
                 onClear: '=',
                 label: '=',
