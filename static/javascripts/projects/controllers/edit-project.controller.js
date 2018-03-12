@@ -272,11 +272,17 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function update() {
-      vm.project.majors = vm.allMajors.filter(function(major){
-        return major.active;
-       }).map(function(selectedMajor) {
+
+      vm.missing_title = !vm.project.title ? 'Project Title is Required' : '';
+      vm.missing_description = !vm.project.description ? 'Project Description is Required' : '';
+      vm.missing_majors = !vm.selected.length ? 'At least one major is Required' : '';
+
+      if (vm.project.title && vm.project.description && vm.selected) {
+        vm.project.majors = vm.allMajors.filter(function (major) {
+          return major.active;
+        }).map(function (selectedMajor) {
           return selectedMajor.title;
-      });
+        });
 
       vm.project.tags = vm.allTags.filter(function(tag){
         return tag.active;
@@ -285,6 +291,8 @@
       });
 
       Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
+        Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
+      }
 
       /**
       * @name projectSuccessFn
