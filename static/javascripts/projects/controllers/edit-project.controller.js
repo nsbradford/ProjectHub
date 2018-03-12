@@ -10,21 +10,27 @@
     .controller('EditProjectController', EditProjectController);
 
   EditProjectController.$inject = [
-    '$location', '$routeParams', 'Authentication', 'Snackbar', 'Projects', 'Majors'
+    '$location', '$routeParams', 'Authentication', 'Snackbar', 'Projects', 'Majors', 'Tags'
   ];
 
   /**
   * @namespace EditProjectController
   */
-  function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects, Majors) {
+  function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects, Majors, Tags) {
     const vm = this;
     vm.isUserOwnerOfProject = false
     vm.project = undefined
     vm.destroy = destroy;
     vm.update = update;
 
+    vm.selectedTags = ''
+    vm.clearTags = clearTags;
+    vm.toggleFilterTags = toggleFilterTags
+
+    vm.selectedMajors = ''
     vm.clearMajors = clearMajors;
-    vm.toggleFilter = toggleFilter;
+    vm.toggleFilterMajors = toggleFilterMajors;
+
     vm.clearTitle = clearTitle;
     vm.clearDescription = clearDescription;
 
@@ -75,6 +81,7 @@
          * Sending an ajax request to fetch majors is contingent on us loading the project.
          */
         Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
+        Tags.all().then(TagsSuccessCallback, TagsFailureCallback);
       }
 
       /**
@@ -87,13 +94,13 @@
     function MajorsSuccessCallback(response) {
       vm.allMajors = response.data;
 
-        vm.project.majors.forEach(function(selectedMajor) {
-          vm.allMajors.find(function (major) {
-            return major.title == selectedMajor;
-          }).active = true;
-        });
+      vm.project.majors.forEach(function(selectedMajor) {
+        vm.allMajors.find(function (major) {
+          return major.title == selectedMajor;
+        }).active = true;
+      });
 
-        updateTextBox();
+      updateTextBoxMajors();
     }
 
     /**
@@ -105,6 +112,33 @@
         Snackbar.error("Unable to get majors. Please refresh the page.");
     }
 
+      /**
+     * @name TagsSuccessCallback
+     * @desc This function is called when a call to the Tags service
+     * returns successfully. We must then coalesce what tags are already selected into this payload.
+     *
+     * @param {object} response The response from the server
+     */
+    function TagsSuccessCallback(response) {
+      vm.allTags = response.data;
+
+      vm.project.tags.forEach(function(selectedTag) {
+        vm.allTags.find(function (major) {
+          return major.title == selectedTag;
+        }).active = true;
+      });
+
+      updateTextBoxTags();
+    }
+
+    /**
+     * @name TagsfailureCallback
+     * @desc Function that is calle when the Tags service fails to proivde a list of
+     * Tags
+     */
+    function TagsFailureCallback() {
+        Snackbar.error("Unable to get Tags. Please refresh the page.");
+    }
 
       /**
       * @name projectErrorFn
@@ -122,36 +156,77 @@
      *
      * @param {event} event the event emitted by the clear click
      */
-     function clearMajors($event) {
+    function clearMajors($event) {
       $event.preventDefault();
-      vm.selected = '';
+      vm.selectedMajors = '';
       vm.allMajors.map(function (major) {
         major.active = false;
       });
-      }
+    }
+
+
+    // Filter out the curent applied filter,
+    // and toggl its 'active' state.
+    function toggleFilter(item, collection) {
+      vm.allMajors.filter(function (f) {
+        return item.title === f.title;
+      }).map(function (f) { return f.active = !f.active; });
+    }
 
    /**
      * @name filterToggleCallback
      * @desc Function that is called when a user applies a filter.
      *
      */
-    function toggleFilter(filter) {
-      // Filter out the curent applied filter,
-      // and toggl its 'active' state.
-      vm.allMajors.filter(function (f) {
-        return filter.title === f.title;
-      }).map(function (f) { return f.active = !f.active; });
-
-      updateTextBox();
+    function toggleFilterMajors(item) {
+      toggleFilter(item, vm.allMajors)
+      updateTextBoxMajors(vm.allMajors, vm.selectedMajors);
     }
 
     /**
-     * @name updateTextBox
+     * @name clearMajors
+     * @desc Clears the Majors multiselect, by changing th actual model.
+     *
+     * @param {event} event the event emitted by the clear click
+     */
+    function clearTags($event) {
+      $event.preventDefault();
+      vm.selectedTags = '';
+      vm.allTags.map(function (major) {
+        major.active = false;
+      });
+    }
+
+   /**
+     * @name filterToggleCallback
+     * @desc Function that is called when a user applies a filter.
+     *
+     */
+    function toggleFilterTags(item) {
+      toggleFilter(item, vm.allTags)
+      updateTextBoxTags();
+    }
+
+    /**
+     * @name updateTextBoxMajors
      * @desc Concantenates all selected majors and seperates them by a comma
      *
      */
-    function updateTextBox() {
-      vm.selected = vm.allMajors.filter(function (filter) {
+    function updateTextBoxMajors() {
+      vm.selectedMajors = vm.allMajors.filter(function (filter) {
+        return filter.active;
+      }).map(function (filter) {
+        return filter.title;
+      }).join(', ');
+    }
+
+    /**
+     * @name updateTextBoxMajors
+     * @desc Concantenates all selected majors and seperates them by a comma
+     *
+     */
+    function updateTextBoxTags() {
+      vm.selectedTags = vm.allTags.filter(function (filter) {
         return filter.active;
       }).map(function (filter) {
         return filter.title;
@@ -201,6 +276,12 @@
         return major.active;
        }).map(function(selectedMajor) {
           return selectedMajor.title;
+      });
+
+      vm.project.tags = vm.allTags.filter(function(tag){
+        return tag.active;
+       }).map(function(selectedTag) {
+          return selectedTag.title;
       });
 
       Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);

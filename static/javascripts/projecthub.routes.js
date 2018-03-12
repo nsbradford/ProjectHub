@@ -21,9 +21,9 @@
     }).when('/policies/terms-of-service', {
       templateUrl: 'static/templates/about/termsofservice.html'
     }).when('/', {
-      templateUrl: 'static/templates/layout/index.html'
+      templateUrl: 'static/templates/layout/home.html'
     }).when('/discover', {
-      controller: 'IndexController',
+      controller: 'DiscoverController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/layout/discover.html',
     }).when('/new-project', {

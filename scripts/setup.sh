@@ -5,4 +5,5 @@ npm install -g bower
 npm install
 bower install
 python manage.py migrate
-python manage.py runserver
+python manage.py loaddata majors
+python manage.py loaddata tags

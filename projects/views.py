@@ -13,8 +13,8 @@ from rest_framework.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
 
 from projects.permissions import IsAuthorOfProject, IsEmailActivated
-from projects.models import Project, Major
-from projects.serializers import ProjectSerializer, MajorSerializer
+from projects.models import Project, Major, Tag
+from projects.serializers import ProjectSerializer, MajorSerializer, TagSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -42,6 +42,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         # TODO ideally this would be handled with built-in permissions classes
         if not self.request.user.is_confirmed:
             raise PermissionDenied(detail='Only users with confirmed emails may create projects.')
+
         serializer.save(author=self.request.user)
         return super(ProjectViewSet, self).perform_create(serializer)
 
@@ -98,6 +99,7 @@ class AccountProjectsViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 
+
 class MajorViewSet(viewsets.ViewSet):
     queryset = Major.objects.all()
     serializer_class = MajorSerializer
@@ -105,3 +107,14 @@ class MajorViewSet(viewsets.ViewSet):
     def list(self, request):
         serializer = self.serializer_class(self.queryset, many=True)
         return Response(serializer.data)
+
+
+
+class TagViewSet(viewsets.ViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+    def list(self, request):
+        serializer = self.serializer_class(self.queryset, many=True)
+        return Response(serializer.data)
+

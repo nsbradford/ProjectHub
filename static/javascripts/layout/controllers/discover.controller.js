@@ -1,5 +1,5 @@
 /**
-* IndexController
+* DiscoverController
 * @namespace projecthub.layout.controllers
 */
 (function () {
@@ -7,20 +7,17 @@
 
   angular
     .module('projecthub.layout.controllers')
-    .controller('IndexController', IndexController);
+    .controller('DiscoverController', DiscoverController);
 
-  IndexController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 'Majors', '$document'];
+  DiscoverController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 
+    'Majors', 'Tags', '$document'];
 
   /**
-  * @namespace IndexController
+  * @namespace DiscoverController
   */
-  function IndexController($scope, Authentication, Projects, Snackbar, Profile, Majors, $document) {
+  function DiscoverController($scope, Authentication, Projects, Snackbar, Profile, Majors, Tags, $document) {
     const vm = this;
     vm.isAuthenticated = Authentication.isAuthenticated();
-    vm.allFilters = [];
-    // This will be removed soon. We will be pulling the majors from the backend using angular.
-    // Until we have that endpoint, we will be using a static list.
-    vm.toggleFilter = toggleFilter;
     vm.submitSearch = submitSearch;
     vm.lazyLoad = lazyLoad;
     vm.projects = [];
@@ -28,10 +25,18 @@
     vm.searchString = null;
     vm.lastProjectIndex = 0;
     vm.canLoadMoreProjects = true;
-    vm.clearFilteringPanel = clearFilteringPanel;
-    vm.isMajorMultiSelectOpen = false;
-    vm.toggleShowMultiSelect = toggleShowMultiSelect;
     vm.clearSearch = clearSearch;
+
+    vm.allMajors = [];
+    vm.selectedMajors = '';
+    vm.clearSelectedMajors = clearSelectedMajors;
+    vm.toggleFilterMajors = toggleFilterMajors;
+
+    vm.allTags = [];
+    vm.selectedTags = '';
+    vm.clearSelectedTags = clearSelectedTags;
+    vm.toggleFilterTags = toggleFilterTags;
+
 
     /**
      * We ask to filter on project creation, this function should stay outside the activate function
@@ -50,21 +55,27 @@
     * @desc Actions to be performed when this controller is instantiated.
     *   On project.created or project.created.error, update the projects
     *   array to reflect the changes.
-    * @memberOf projecthub.layout.controllers.IndexController
+    * @memberOf projecthub.layout.controllers.DiscoverController
     */
     function activate() {
       Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
       Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
+      Tags.all().then(TagsSuccessCallback, TagsFailureCallback)
+
+      const account = Authentication.getAuthenticatedAccount();
+      if (account) {
+        Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
+      }
 
       /**
-       * @name MajorSuccessCallback
+       * @name MajorsSuccessCallback
        * @desc This function is called when a call to the Majors service
        * returns successfully.
        *
        * @param {object} response The response from the server
        */
       function MajorsSuccessCallback(response) {
-        vm.allFilters = response.data;
+        vm.allMajors = response.data;
       }
 
       /**
@@ -76,10 +87,24 @@
         Snackbar.error("Unable to get majors. Please refresh the page.");
       }
 
+      /**
+       * @name TagsSuccessCallback
+       * @desc This function is called when a call to the Tags service
+       * returns successfully.
+       *
+       * @param {object} response The response from the server
+       */
+      function TagsSuccessCallback(response) {
+        vm.allTags = response.data;
+      }
 
-      const account = Authentication.getAuthenticatedAccount();
-      if (account) {
-        Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
+      /**
+       * @name TagsfailureCallback
+       * @desc Function that is calle when the Tags service fails to proivde a list of
+       * Tags
+       */
+      function TagsFailureCallback() {
+        Snackbar.error("Unable to get Tags. Please refresh the page.");
       }
 
       function profileSuccessFn(data, status, headers, config) {
@@ -132,14 +157,14 @@
      * @desc Function that is called when a user applies a filter.
      *
      */
-    function toggleFilter(filter) {
+    function toggleFilterMajors(filter) {
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
-      vm.allFilters.filter(function (f) {
+      vm.allMajors.filter(function (f) {
         return filter.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
 
-      vm.selected = vm.allFilters.filter(function (filter) {
+      vm.selectedMajors = vm.allMajors.filter(function (filter) {
         return filter.active;
       }).map(function (filter) {
         return filter.title;
@@ -154,30 +179,32 @@
      */
     function filterProjects() {
       // Retrieve all filters that are active.
-      const activeFilters = vm.allFilters.filter(function (f) {
+      const activeFiltersMajors = vm.allMajors.filter(function (f) {
         return f.active;
       }).map(function (activeMajors) {
         return activeMajors.title;
       });
-      /*
-      * If we dont have any filters that are applied.
-      * Then Set the displayed projects to all projects.
-      * Else Lets apply filters to each project and see if they
-      * pass.
-      */
-      if (!activeFilters.length) {
-        vm.filteredProjects = vm.projects;
-        return;
-      }
+
+      const activeFiltersTags = vm.allTags.filter(function (f) {
+        return f.active;
+      }).map(function (activeTags) {
+        return activeTags.title;
+      });
+
       vm.filteredProjects = vm.projects.filter(function (project) {
-        /**
-         * Normally I would use another functional JS component, but we can get
-         * more efficiency if we use a traditional for loop. We cant achieve
-         * short circuits using the functional components.
-         */
-        return activeFilters.every(function (filter) {
+
+        const containsMajor = activeFiltersMajors.some(function (filter) {
           return (project.majors.indexOf(filter) > -1);
         });
+
+        const containsTag = activeFiltersTags.some(function (filter) {
+          return (project.tags.indexOf(filter) > -1);
+        });
+
+        const validMajors = !activeFiltersMajors.length || containsMajor;
+        const validTags = !activeFiltersTags.length || containsTag;
+
+        return (validMajors && validTags);
       });
     }
 
@@ -243,26 +270,49 @@
       }
     }
 
+
     /**
-     * @name toggleShowMultiSelect
-     * @desc Toggles the display state of the multiselect.
+     * @name clearSelectedMajors
+     * @desc the callback fired when a use hits the c
      */
-    function toggleShowMultiSelect() {
-      vm.isMajorMultiSelectOpen = !vm.isMajorMultiSelectOpen;
+    function clearSelectedMajors() {
+      vm.selectedMajors = '';
+      vm.allMajors.map(function (filter) {
+        return filter.active = false;
+      });
+      filterProjects();
     }
 
     /**
-     * @name clearFilteringPanel
+     * @name clearSelectedTags
      * @desc the callback fired when a use hits the c
      */
-    function clearFilteringPanel() {
-      vm.selected = '';
-      vm.allFilters.map(function (filter) {
+    function clearSelectedTags() {
+      vm.selectedTags = '';
+      vm.allTags.map(function (filter) {
         return filter.active = false;
       });
+      filterProjects();
+    }
 
-      vm.filteredProjects = vm.projects;
+    /**
+     * @name filterToggleTags
+     * @desc Function that is called when a user applies a filter.
+     *
+     */
+    function toggleFilterTags(filter) {
+      // Filter out the curent applied filter,
+      // and toggl its 'active' state.
+      vm.allTags.filter(function (f) {
+        return filter.title === f.title;
+      }).map(function (f) { return f.active = !f.active; });
 
+      vm.selectedTags = vm.allTags.filter(function (filter) {
+        return filter.active;
+      }).map(function (filter) {
+        return filter.title;
+      }).join(', ');
+      filterProjects();
     }
 
   }

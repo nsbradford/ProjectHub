@@ -22,21 +22,26 @@
 
 <div class="row" ng-cloak>
 
-  <!-- <div class=""></div> -->
   <div class="col-xs-12 col-sm-10 col-md-10 col-lg-3 col-sm-offset-1 col-md-offset-1 col-lg-offset-0 major-panel-container">
     <div class="majors-panel">
-      <h3>Filter by Major</h3>
+      <h3>Filter</h3>
+      <br>
       <multiselect
-        options="vm.allFilters"
-        on-clear='vm.clearFilteringPanel'
-        selected="vm.selected"
-        is-active="vm.isMajorMultiSelectOpen"
-        on-activate="vm.toggleShowMultiSelect"
-        on-click="vm.toggleFilter"
+        label="'Majors'"
+        options="vm.allMajors"
+        on-clear='vm.clearSelectedMajors'
+        selected="vm.selectedMajors"
+        on-click="vm.toggleFilterMajors"
       ></multiselect>
-      <!-- <ul class="nav nav-pills nav-stacked major-pills"> -->
-        <!-- <li class="major-list-item" ng-repeat="filter in vm.allFilters" ng-click="vm.toggleFilter(filter)" role="presentation" ng-class="{'active': filter.active }"><a href="#">{{filter.title}}</a></li> -->
-      <!-- </ul> -->
+
+      <multiselect
+        label="'Tags'"
+        options="vm.allTags"
+        on-clear='vm.clearSelectedTags'
+        selected="vm.selectedTags"
+        on-click="vm.toggleFilterTags"
+      ></multiselect>
+      
     </div>
   </div>
 

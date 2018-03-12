@@ -8,46 +8,49 @@
     col-md-offset-3 col-md-6
     col-lg-offset-4 col-lg-4">
 
-    <div class="form-group">
+      <div class="form-group">
 
-      <text-input
-        error='vm.missing_title'
-        id="'title-input'"
-        label="'Title'"
-        place-holder="'Algorithmic trading with Python'"
-        model="vm.title"
-        on-clear="vm.clearTitle"
-      ></text-input>
+        <text-input
+          error='vm.missing_title'
+          id="'title-input'"
+          label="'Title'"
+          place-holder=""
+          model="vm.title"
+          on-clear="vm.clearTitle"
+        ></text-input>
 
-      <text-input
-        error='vm.missing_description'
-        id="'description-input'"
-        label="'Description'"
-        place-holder="'This is your big chance to get rich!'"
-        model="vm.description"
-        on-clear="vm.clearDescription"
-      ></text-input>
+        <text-input
+          error='vm.missing_description'
+          id="'description-input'"
+          label="'Description'"
+          place-holder=""
+          model="vm.description"
+          on-clear="vm.clearDescription"
+        ></text-input>
 
-      <label for="project__majors">Majors</label>
-      <br>
-      <!--     <input type="checkbox" name="majors" value="CS">CS <br>
-      <input type="checkbox" name="vehicle" value="RBE">RBE -->
         <multiselect
+          label="'Majors'"
           options="vm.allMajors"
-          selected="vm.selected"
-          is-active="vm.isMajorMultiSelectOpen"
-          on-activate="vm.toggleShowMultiSelect"
-          on-click="vm.toggleFilter"
+          selected="vm.selectedMajors"
+          on-click="vm.toggleFilterMajors"
           on-clear="vm.clearMajors"
         ></multiselect>
-    </div>
 
-    <div class="form-group text-center">
-      <button type="submit" class="btn discover-button">
-        Create
-      </button>
-    </div>
-    </div>
+        <multiselect
+          label="'Tags'"
+          options="vm.allTags"
+          selected="vm.selectedTags"
+          on-click="vm.toggleFilterTags"
+          on-clear="vm.clearTags"
+        ></multiselect>
+      </div>
 
-  </div>
+      <div class="form-group text-center">
+        <button type="submit" class="btn discover-button">
+          Create
+        </button>
+      </div>
+
+    </div> <!--column-->
+  </div> <!--container-->
 </form>

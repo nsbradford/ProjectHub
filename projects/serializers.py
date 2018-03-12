@@ -8,11 +8,7 @@
 from rest_framework import serializers
 
 from authentication.serializers import AccountSerializer
-from projects.models import Project, Major
-
-import logging
-log = logging.getLogger('projecthub')
-log.debug('!!!!!!')
+from projects.models import Project, Major, Tag
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -28,15 +24,23 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         """ Meta class configuring serializer. """
         model = Project
-        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at')
+        fields = ('id', 'author', 'title', 'description', 'created_at', 'updated_at',
+                         'majors', 'tags')
         read_only_fields = ('id', 'created_at', 'updated_at')
+
 
     author = AccountSerializer(read_only=True, required=False)
     majors = serializers.SlugRelatedField(
-            many=True,
-            slug_field='title',
-            queryset=Major.objects.all()
-        )
+        many=True,
+        slug_field='title',
+        queryset=Major.objects.all()
+    )
+    tags = serializers.SlugRelatedField(
+        many=True,
+        slug_field='title',
+        queryset=Tag.objects.all()
+    )
+
 
     def validate(self, data):
         """ Perform object-level validation on all the data. Called automatically
@@ -54,12 +58,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Major(s) not found.')
         return data
 
-    class Meta:
-        """ Meta class configuring serializer. """
-        model = Project
-        fields = ('id', 'author', 'title', 'description', 'created_at',
-                        'updated_at', 'majors')
-        read_only_fields = ('id', 'created_at', 'updated_at')
 
     def get_validation_exclusions(self, *args, **kwargs):
         """ Add 'author' to validation exclusions, because we'll be setting it
@@ -67,6 +65,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         """
         exclusions = super(ProjectSerializer, self).get_validation_exclusions()
         return exclusions + ['author']
+
 
 
 class MajorSerializer(serializers.ModelSerializer):
@@ -77,11 +76,14 @@ class MajorSerializer(serializers.ModelSerializer):
         fields = ('id', 'title')
         read_only_fields = ('id', 'title')
 
-    def validate(self, data):
-        """ Perform object-level validtion on all data.
-            titles shouldn't be null.
-        """
-        if data.title is None:
-            raise serializers.ValidationError('Major\'s must have a title.')
 
-        return data
+
+class TagSerializer(serializers.ModelSerializer):
+    """Serializer for Tags for use in a RESTful API"""
+
+
+    class Meta:
+        model = Tag
+        fields = ('id', 'title')
+        read_only_fields = ('id', 'title')
+
