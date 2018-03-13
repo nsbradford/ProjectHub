@@ -168,11 +168,13 @@
         return tag.title;
       });
 
-      vm.missing_title = !vm.title ? 'Project Title is Required' : '';
-      vm.missing_description = !vm.description ? 'Project Description is Required' : '';
-      vm.missing_majors = !vm.selected.length ? 'At least one major is Required' : '';
+      vm.missing_title = !vm.title ? 'Required' : '';
+      vm.missing_description = !vm.description ? 'Required' : '';
+      // vm.missing_majors = !vm.selected.length ? 'At least one major is Required' : ''; TOOO: Multiselect Refactor
+      // vm.missing_tags = !vm.selected.length ? 'At least one major is Required' : '';
 
-      if (vm.title && vm.description && vm.selected ) {
+
+      if (vm.title && vm.description) {
         Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
       }
 

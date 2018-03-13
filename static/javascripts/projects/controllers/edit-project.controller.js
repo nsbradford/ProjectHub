@@ -273,11 +273,12 @@
     */
     function update() {
 
-      vm.missing_title = !vm.project.title ? 'Project Title is Required' : '';
-      vm.missing_description = !vm.project.description ? 'Project Description is Required' : '';
-      vm.missing_majors = !vm.selected.length ? 'At least one major is Required' : '';
+      vm.missing_title = !vm.project.title ? 'Required' : '';
+      vm.missing_description = !vm.project.description ? 'Required' : '';
+      // vm.missing_majors = !vm.selected.length ? 'Required' : ''; This should be addressed in the MultiSelect Refactor
+      // vm.missing_tags = !vm.project.selected.length ? 'Required' : '';
 
-      if (vm.project.title && vm.project.description && vm.selected) {
+      if (vm.project.title && vm.project.description && vm.selected && vm.missing_tags) {
         vm.project.majors = vm.allMajors.filter(function (major) {
           return major.active;
         }).map(function (selectedMajor) {
