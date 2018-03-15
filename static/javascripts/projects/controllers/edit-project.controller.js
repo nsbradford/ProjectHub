@@ -272,8 +272,6 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function update() {
-      console.log('update')
-
       // vm.missing_title = !vm.project.title ? 'Required' : '';
       // vm.missing_description = !vm.project.description ? 'Required' : '';
       // // vm.missing_majors = !vm.selected.length ? 'Required' : ''; This should be addressed in the MultiSelect Refactor
