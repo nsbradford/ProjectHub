@@ -174,9 +174,9 @@
       // vm.missing_tags = !vm.selected.length ? 'At least one major is Required' : '';
 
 
-      if (vm.title && vm.description) {
-        Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
-      }
+      // if (vm.title && vm.description) {
+      //   Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
+      // }
 
       Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
 
