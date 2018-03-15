@@ -4,7 +4,7 @@
 
     <div class="well login-no-shadow" ng-show="vm.project">
 
-      <form role="form" class="settings" ng-submit="vm.update()">
+      <form role="form" class="settings" ng-submit="vm.update">
 
         <text-input
           error='vm.missing_title'
@@ -35,6 +35,7 @@
         ></multiselect>
 
         <multiselect
+          error='vm.missing_tags'
           options="vm.allTags"
           label="'Tags'"
           selected="vm.selectedTags"

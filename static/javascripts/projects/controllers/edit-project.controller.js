@@ -168,7 +168,7 @@
     // Filter out the curent applied filter,
     // and toggl its 'active' state.
     function toggleFilter(item, collection) {
-      vm.allMajors.filter(function (f) {
+      collection.filter(function (f) {
         return item.title === f.title;
       }).map(function (f) { return f.active = !f.active; });
     }
@@ -272,27 +272,30 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function update() {
+      console.log('update')
 
-      vm.missing_title = !vm.project.title ? 'Required' : '';
-      vm.missing_description = !vm.project.description ? 'Required' : '';
-      // vm.missing_majors = !vm.selected.length ? 'Required' : ''; This should be addressed in the MultiSelect Refactor
-      // vm.missing_tags = !vm.project.selected.length ? 'Required' : '';
+      // vm.missing_title = !vm.project.title ? 'Required' : '';
+      // vm.missing_description = !vm.project.description ? 'Required' : '';
+      // // vm.missing_majors = !vm.selected.length ? 'Required' : ''; This should be addressed in the MultiSelect Refactor
+      // // vm.missing_tags = !vm.project.selected.length ? 'Required' : '';
 
-      if (vm.project.title && vm.project.description && vm.selected && vm.missing_tags) {
-        vm.project.majors = vm.allMajors.filter(function (major) {
-          return major.active;
-        }).map(function (selectedMajor) {
-          return selectedMajor.title;
-        });
+      // if (vm.project.title && vm.project.description && vm.selected && vm.missing_tags) {
 
-        vm.project.tags = vm.allTags.filter(function(tag){
-          return tag.active;
-         }).map(function(selectedTag) {
-            return selectedTag.title;
-        });
+      // }
+
+      vm.project.majors = vm.allMajors.filter(function (major) {
+        return major.active;
+      }).map(function (selectedMajor) {
+        return selectedMajor.title;
+      });
+
+      vm.project.tags = vm.allTags.filter(function(tag){
+        return tag.active;
+       }).map(function(selectedTag) {
+          return selectedTag.title;
+      });
 
         Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
-      }
 
       /**
       * @name projectSuccessFn
