@@ -36,10 +36,7 @@
   z-index: 9999; }
   .major-panel-container .majors-panel {
     border: #687685 solid 1px;
-    min-width: 350px;
     border-radius: 10px;
-    margin-left: 30px;
-    margin-right: 30px;
     margin-bottom: 10px;
     padding-left: 15px;
     padding-right: 15px;

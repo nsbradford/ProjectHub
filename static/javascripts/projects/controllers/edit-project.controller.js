@@ -285,13 +285,12 @@
           return selectedMajor.title;
         });
 
-      vm.project.tags = vm.allTags.filter(function(tag){
-        return tag.active;
-       }).map(function(selectedTag) {
-          return selectedTag.title;
-      });
+        vm.project.tags = vm.allTags.filter(function(tag){
+          return tag.active;
+         }).map(function(selectedTag) {
+            return selectedTag.title;
+        });
 
-      Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
         Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
       }
 
