@@ -6,7 +6,7 @@
 
     <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10 ">
       <text-input
-        place-holder="'Search for a Project here...'"
+        place-holder="'Search for Projects'"
         on-clear='vm.clearSearch'
         cta="true"
         cta-icon="'fa-search'"
@@ -41,11 +41,11 @@
         selected="vm.selectedTags"
         on-click="vm.toggleFilterTags"
       ></multiselect>
-      
+
     </div>
   </div>
 
-  <div class="col-xs-12 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-1 col-lg-4">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-offset-2 col-md-8 col-lg-offset-1 col-lg-4">
         <discover-projects projects="vm.filteredProjects"></discover-projects>
         <div class="container-fluid">
           <div class="col-sm-12 text-center">

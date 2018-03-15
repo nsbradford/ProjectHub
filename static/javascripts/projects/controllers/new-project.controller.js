@@ -9,7 +9,7 @@
     .module('projecthub.projects.controllers')
     .controller('NewProjectController', NewProjectController);
 
-  NewProjectController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 
+  NewProjectController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar',
     'Projects', 'Majors', 'Tags', '$window'];
 
   /**
@@ -168,6 +168,16 @@
         return tag.title;
       });
 
+      vm.missing_title = !vm.title ? 'Required' : '';
+      vm.missing_description = !vm.description ? 'Required' : '';
+      // vm.missing_majors = !vm.selected.length ? 'At least one major is Required' : ''; TOOO: Multiselect Refactor
+      // vm.missing_tags = !vm.selected.length ? 'At least one major is Required' : '';
+
+
+      if (vm.title && vm.description) {
+        Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
+      }
+
       Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
 
      /**
@@ -189,7 +199,7 @@
       * @param Error errorResponse
       */
       function createProjectErrorFn(errorResponse) {
-        Snackbar.error(errorResponse.error);
+        Snackbar.error("Unable to Create Project. Please Try again");
       }
     }
   }

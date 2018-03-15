@@ -193,6 +193,7 @@ body .login-no-shadow {
 }
 
 .show-hide-password {
+  font-size: 14px;
   float: right;
   text-align: right
 }
@@ -345,6 +346,7 @@ input.agreement-checkbox {
     background: $brand-light;
     display: inline-block;
     padding: 3px 10px 3px 10px;
+    margin: 3px;
     color: $brand-royal;
     font-weight: normal;
   }
@@ -385,6 +387,7 @@ input.agreement-checkbox {
 }
 
 .btn-add-new-project {
+  z-index: 99999;
   position: fixed;
   bottom: 20px;
   right: 20px;

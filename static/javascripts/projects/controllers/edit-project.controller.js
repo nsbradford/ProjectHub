@@ -272,19 +272,27 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function update() {
-      vm.project.majors = vm.allMajors.filter(function(major){
-        return major.active;
-       }).map(function(selectedMajor) {
+
+      vm.missing_title = !vm.project.title ? 'Required' : '';
+      vm.missing_description = !vm.project.description ? 'Required' : '';
+      // vm.missing_majors = !vm.selected.length ? 'Required' : ''; This should be addressed in the MultiSelect Refactor
+      // vm.missing_tags = !vm.project.selected.length ? 'Required' : '';
+
+      if (vm.project.title && vm.project.description && vm.selected && vm.missing_tags) {
+        vm.project.majors = vm.allMajors.filter(function (major) {
+          return major.active;
+        }).map(function (selectedMajor) {
           return selectedMajor.title;
-      });
+        });
 
-      vm.project.tags = vm.allTags.filter(function(tag){
-        return tag.active;
-       }).map(function(selectedTag) {
-          return selectedTag.title;
-      });
+        vm.project.tags = vm.allTags.filter(function(tag){
+          return tag.active;
+         }).map(function(selectedTag) {
+            return selectedTag.title;
+        });
 
-      Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
+        Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
+      }
 
       /**
       * @name projectSuccessFn
