@@ -8,10 +8,12 @@
     </div>
     <div class="row">
         <div ng-class="{ 'col-xs-12 col-sm-12 col-md-12 col-lg-12': !$ctrl.ctaIcon, 'col-xs-10 col-sm-10 col-md-10 col-lg-10': $ctrl.ctaIcon }">
-            <input ng-readonly="$ctrl.readOnly" ng-class="{'disabled': $ctrl.disabled}" ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" id="{{$ctrl.id}}" ng-model="$ctrl.model" class="projecthub-text-input" placeholder="{{$ctrl.placeHolder}}">
-            <button tabindex="-1" type="button" ng-click="$ctrl.onClear($event)" ng-show='$ctrl.model && !$ctrl.disabled' class="input-clear-button">
-                <i class="fa fa-close" />
+            <input ng-if="!$ctrl.multiline" ng-readonly="$ctrl.readOnly" ng-class="{'disabled': $ctrl.disabled}" ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" id="{{$ctrl.id}}" ng-model="$ctrl.model" class="projecthub-text-input" placeholder="{{$ctrl.placeHolder}}">
+            <button ng-if="!$ctrl.multiline" tabindex="-1" type="button" ng-click="$ctrl.onClear($event)" ng-show='$ctrl.model && !$ctrl.disabled' class="input-clear-button">
+                <i ng-if="!$ctrl.multiline" class="fa fa-close" />
             </button>
+            </input>
+            <textarea rows="{{$ctrl.multiline || 1}}" ng-if="$ctrl.multiline" ng-readonly="$ctrl.readOnly" ng-class="{'disabled': $ctrl.disabled}" ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" id="{{$ctrl.id}}" ng-model="$ctrl.model" class="projecthub-text-area" placeholder="{{$ctrl.placeHolder}}">
         </div>
         <div ng-show="$ctrl.ctaIcon" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
             <button ng-submit="" ng-click="$ctrl.onClick($ctrl.model)" class="btn discover-button">

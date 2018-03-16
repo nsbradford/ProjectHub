@@ -9,6 +9,7 @@
         .module('projecthub.common')
         .component('textInput', {
             bindings: {
+                multiline: '=',
                 placeHolder: '=',
                 onClear: '=',
                 onChange: '=',
