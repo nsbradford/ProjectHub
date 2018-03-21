@@ -22,6 +22,11 @@
         }
     }
     .projecthub-text-area {
+        resize: vertical;
+        min-height: 60px;
+        padding-top: 2.5%;
+        padding-left: 2.5%;
+        padding-right: calc(10px + 10%);
         margin:0;
         border: $brand-primary solid;
         border-width: 1px;
