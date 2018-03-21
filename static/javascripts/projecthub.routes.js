@@ -1,4 +1,4 @@
-(function () {
+ (function () {
   'use strict';
 
   angular
@@ -12,6 +12,25 @@
   * @desc Define valid application routes
   */
   function config($routeProvider) {
+
+
+  function resolveUserAuthenticated($location, Authentication) {
+    if(!Authentication.getAuthenticatedAccount()) {
+      alert('You are not allowed to view this page.');
+      $location.path('/');
+    }
+  }
+
+  function resolveUserActivated($location) {
+    if('Your Condition'){
+        //Do something
+    }else{
+        $location.path('/');    //redirect user to home.
+        alert("You don't have access here");
+    }
+  }
+
+
     $routeProvider.when('/register', {
       controller: 'RegisterController',
       controllerAs: 'vm',
@@ -41,7 +60,10 @@
     }).when('/+:username/settings', {
       controller: 'ProfileSettingsController',
       controllerAs: 'vm',
-      templateUrl: '/static/templates/profiles/settings.html'
+      templateUrl: '/static/templates/profiles/settings.html',
+      resolve: [
+        'Authentication', resolveUserAuthenticated
+      ]
     }).when('/projects/:projectID', {
       controller: 'SingleProjectController',
       controllerAs: 'vm',

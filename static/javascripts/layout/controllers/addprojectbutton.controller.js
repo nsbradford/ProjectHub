@@ -9,14 +9,15 @@
         .module('projecthub.layout.controllers')
         .controller('AddProjectButtonController', AddProjectButtonController);
 
-    NavbarController.$inject = ['$scope', 'Authentication'];
+        AddProjectButtonController.$inject = ['$scope', 'Authentication'];
 
     /**
-     * @namespace NavbarController
+     * @namespace AddProjectButtonController
      * @desc This Controller is responsible for blocking unauthenticated and non-confirmed users
      * from creating new projecs.
      */
     function AddProjectButtonController($scope, Authentication) {
+
         const vm = this;
         const account = Authentication.getAuthenticatedAccount();
         if (account) {

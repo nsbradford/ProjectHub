@@ -28,6 +28,7 @@
     vm.toggleFilterMajors = toggleFilterMajors;
     vm.toggleFilterTags = toggleFilterTags;
 
+
     Majors.all().then(MajorsLoadSuccessCallback, MajorsLoadFailureCallback);
     Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback)
 
