@@ -4,7 +4,7 @@
     margin: 0;
     padding-left: 2.5%;
     padding-right: calc(10px + 10%);
-    height: 60px !important;
+    height: 60px;
     border: #0277bd solid;
     border-width: 1px;
     border-radius: 2px;
@@ -12,6 +12,23 @@
     width: 100%;
     cursor: inherit; }
     .projecthub-text-input-container .projecthub-text-input.disabled {
+      cursor: not-allowed;
+      border: dashed;
+      border-width: 1px; }
+  .projecthub-text-input-container .projecthub-text-area {
+    resize: vertical;
+    min-height: 60px;
+    padding-top: 2.5%;
+    padding-left: 2.5%;
+    padding-right: calc(10px + 10%);
+    margin: 0;
+    border: #0277bd solid;
+    border-width: 1px;
+    border-radius: 2px;
+    background-color: #f5f6f7;
+    width: 100%;
+    cursor: inherit; }
+    .projecthub-text-input-container .projecthub-text-area.disabled {
       cursor: not-allowed;
       border: dashed;
       border-width: 1px; }

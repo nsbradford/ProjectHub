@@ -24,7 +24,6 @@
     vm.clearMajors = clearMajors;
     vm.clearTags = clearTags;
 
-    vm.clearDescription = clearDescription;
     vm.toggleFilterMajors = toggleFilterMajors;
     vm.toggleFilterTags = toggleFilterTags;
 
@@ -68,17 +67,6 @@
     function clearTitle($event) {
       $event.preventDefault();
       vm.title = '';
-    }
-
-    /**
-     * @name clearDescription
-     * @desc Clears the Description textbox, by changing th actual model.
-     *
-     * @param {event} event the event emitted by the clear click
-     */
-    function clearDescription($event) {
-      $event.preventDefault();
-      vm.description = '';
     }
 
     /**
