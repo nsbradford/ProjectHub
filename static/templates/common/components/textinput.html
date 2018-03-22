@@ -13,7 +13,7 @@
                 <i ng-if="!$ctrl.multiline" class="fa fa-close" />
             </button>
             </input>
-            <textarea rows="{{$ctrl.multiline || 1}}" ng-if="$ctrl.multiline" ng-readonly="$ctrl.readOnly" ng-class="{'disabled': $ctrl.disabled}" ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" id="{{$ctrl.id}}" ng-model="$ctrl.model" class="projecthub-text-area" placeholder="{{$ctrl.placeHolder}}">
+            <textarea rows="{{$ctrl.multiline || 1}}" ng-if="$ctrl.multiline" ng-readonly="$ctrl.readOnly" ng-class="{'disabled': $ctrl.disabled}" ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" id="{{$ctrl.id}}" ng-model="$ctrl.model" class="projecthub-text-area" placeholder="{{$ctrl.placeHolder}}"/>
         </div>
         <div ng-show="$ctrl.ctaIcon" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
             <button ng-submit="" ng-click="$ctrl.onClick($ctrl.model)" class="btn discover-button">
