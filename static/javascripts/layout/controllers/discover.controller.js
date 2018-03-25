@@ -57,43 +57,16 @@
     *   array to reflect the changes.
     * @memberOf projecthub.layout.controllers.DiscoverController
     */
-    function activate() {
+    async function activate() {
       Projects.load(vm.lastProjectIndex).then(projectsSuccessFn, projectsErrorFn);
-      Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
-      Tags.all().then(TagsSuccessCallback, TagsFailureCallback)
-
+      vm.allMajors = await Majors.sortedList();
+      Tags.all().then(TagsSuccessCallback, TagsFailureCallback);
       const account = Authentication.getAuthenticatedAccount();
       if (account) {
         Profile.get(account.username).then(profileSuccessFn, profileErrorFn);
       }
 
-      /**
-       * @name MajorsSuccessCallback
-       * @desc This function is called when a call to the Majors service
-       * returns successfully.
-       *
-       * @param {object} response The response from the server
-       */
-      function MajorsSuccessCallback(response) {
-        vm.allMajors = response.data;
-        const anyMajor = vm.allMajors.find(function(major){
-          return major.title == "Any";
-        });
 
-        vm.allMajors = [anyMajor].concat(vm.allMajors.filter(function(major){
-          return major.title != "Any";
-        }));
-
-      }
-
-      /**
-       * @name MajorsfailureCallback
-       * @desc Function that is calle when the majors service fails to proivde a list of
-       * majors
-       */
-      function MajorsFailureCallback() {
-        Snackbar.error("Unable to get majors. Please refresh the page.");
-      }
 
       /**
        * @name TagsSuccessCallback

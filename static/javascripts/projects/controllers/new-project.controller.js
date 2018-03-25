@@ -27,41 +27,18 @@
     vm.toggleFilterMajors = toggleFilterMajors;
     vm.toggleFilterTags = toggleFilterTags;
 
+    activate();
 
-    Majors.all().then(MajorsLoadSuccessCallback, MajorsLoadFailureCallback);
-    Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback)
-
-    /**
-     * @name MajorLoadSuccessCallback
-     * @desc When we successfully load majors from the server, update the controller
-     *
-     * @param Object response the Reponse rom the server containing all majors.
-     */
-    function MajorsLoadSuccessCallback(responseSuccess) {
-      vm.allMajors = responseSuccess.data;
-
-      const anyMajor = vm.allMajors.find(function(major){
+    async function activate() {
+      vm.allMajors = await Majors.sortedList(true);
+      const anyMajor = vm.allMajors.find(function (major) {
         return major.title == "Any";
-      });
+      })
 
-      vm.allMajors = [anyMajor].concat(vm.allMajors.filter(function(major){
-        return major.title != "Any";
-      }));
+      toggleFilterMajors(anyMajor); // Set Default Major for a new project to Any
 
-      // By default, we want any to be selected first
-      vm.toggleFilterMajors (anyMajor);
+      Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback)
     }
-
-    /**
-     * @name MajorLoadFailureCallback
-     * @desc When we fail to load majors from the server, show an error.
-     *
-     * @param Object responseFailure the response we get from a failed ajax call.
-     */
-    function MajorsLoadFailureCallback(responseFailure) {
-      Snackbar.error("Unable to load Majors. Please refresh.");
-    }
-
     function TagsLoadSuccessCallback(response) {
       vm.allTags = response.data;
     }
@@ -93,14 +70,14 @@
       vm.selectedMajors = '';
       vm.allMajors.map(function (major) {
         major.active = false;
-    });
-  }
+      });
+    }
 
-   /**
-     * @name filterToggleCallback
-     * @desc Function that is called when a user applies a filter.
-     *
-     */
+    /**
+      * @name filterToggleCallback
+      * @desc Function that is called when a user applies a filter.
+      *
+      */
     function toggleFilterMajors(filter) {
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
@@ -127,14 +104,14 @@
       vm.selectedTags = '';
       vm.allTags.map(function (major) {
         major.active = false;
-    });
-  }
+      });
+    }
 
-   /**
-     * @name filterToggleCallback
-     * @desc Function that is called when a user applies a filter.
-     *
-     */
+    /**
+      * @name filterToggleCallback
+      * @desc Function that is called when a user applies a filter.
+      *
+      */
     function toggleFilterTags(filter) {
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
@@ -156,15 +133,15 @@
     */
     function submit() {
 
-      const majors = vm.allMajors.filter( function(filter) {
+      const majors = vm.allMajors.filter(function (filter) {
         return filter.active;
-      }).map(function(major){
+      }).map(function (major) {
         return major.title;
       });
 
-      const tags = vm.allTags.filter( function(filter) {
+      const tags = vm.allTags.filter(function (filter) {
         return filter.active;
-      }).map(function(tag){
+      }).map(function (tag) {
         return tag.title;
       });
 
@@ -175,28 +152,28 @@
 
 
       if (vm.title && vm.description && vm.selectedMajors && vm.selectedTags) {
-        Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
+        Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
       }
 
 
-     /**
-      * @name createProjectSuccessFn
-      * @desc Show snackbar with success message
-      *
-      * @param Project response the newly created project
-      */
+      /**
+       * @name createProjectSuccessFn
+       * @desc Show snackbar with success message
+       *
+       * @param Project response the newly created project
+       */
       function createProjectSuccessFn(response) {
         Snackbar.show('Success! Project created.');
         $window.location = `/projects/+${response.data.id}`;
       }
 
 
-     /**
-      * @name createProjectErrorFn
-      * @desc Propagate error event and show snackbar with error message
-      *
-      * @param Error errorResponse
-      */
+      /**
+       * @name createProjectErrorFn
+       * @desc Propagate error event and show snackbar with error message
+       *
+       * @param Error errorResponse
+       */
       function createProjectErrorFn(errorResponse) {
         Snackbar.error("Unable to Create Project. Please Try again");
       }

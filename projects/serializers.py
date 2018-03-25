@@ -31,7 +31,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     author = AccountSerializer(read_only=True, required=False)
     majors = serializers.SlugRelatedField(
-        allow_null=False,
         many=True,
         slug_field='title',
         queryset=Major.objects.all()

@@ -69,7 +69,7 @@
       * @name projectSuccessFn
       * @desc Update `project` for view
       */
-      function projectsSuccessFn(data, status, headers, config) {
+      async function projectsSuccessFn(data, status, headers, config) {
         vm.project = data.data;
         vm.isUserOwnerOfProject = userIsProjectOwner()
         if (!vm.isUserOwnerOfProject) {
@@ -80,44 +80,15 @@
         /**
          * Sending an ajax request to fetch majors is contingent on us loading the project.
          */
-        Majors.all().then(MajorsSuccessCallback, MajorsFailureCallback);
+        vm.allMajors = await Majors.sortedList();
+        vm.project.majors.forEach(function(selectedMajor) {
+          vm.allMajors.find(function (major) {
+            return major.title == selectedMajor;
+          }).active = true;
+        });
+        updateTextBoxMajors();
         Tags.all().then(TagsSuccessCallback, TagsFailureCallback);
       }
-
-      /**
-     * @name MajorSuccessCallback
-     * @desc This function is called when a call to the Majors service
-     * returns successfully. We must then coalesce what majors are already selected into this payload.
-     *
-     * @param {object} response The response from the server
-     */
-    function MajorsSuccessCallback(response) {
-      vm.allMajors = response.data;
-
-      const anyMajor = vm.allMajors.find(function(major){
-        return major.title == "Any";
-      });
-
-      vm.allMajors = [anyMajor].concat(vm.allMajors.filter(function(major){
-        return major.title != "Any";
-      }));
-
-      vm.project.majors.forEach(function(selectedMajor) {
-        vm.allMajors.find(function (major) {
-          return major.title == selectedMajor;
-        }).active = true;
-      });
-      updateTextBoxMajors();
-    }
-
-    /**
-     * @name MajorsfailureCallback
-     * @desc Function that is calle when the majors service fails to proivde a list of
-     * majors
-     */
-    function MajorsFailureCallback() {
-        Snackbar.error("Unable to get majors. Please refresh the page.");
-    }
 
       /**
      * @name TagsSuccessCallback
