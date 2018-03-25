@@ -10,7 +10,6 @@
           error='vm.missing_title'
           id="'title-input'"
           label="'Title'"
-          place-holder="'Algorithmic trading with Python'"
           model="vm.project.title"
           on-clear="vm.clearTitle"
         ></text-input>
@@ -20,12 +19,12 @@
           id="'description-input'"
           multiline="4"
           label="'Description'"
-          place-holder="'This is your big chance to get rich!'"
           model="vm.project.description"
         ></text-input>
 
         <!-- <div class="form-group"> -->
         <multiselect
+          error='vm.missing_majors'
           options="vm.allMajors"
           label="'Majors'"
           selected="vm.selectedMajors"
@@ -34,6 +33,7 @@
         ></multiselect>
 
         <multiselect
+          error='vm.missing_tags'
           options="vm.allTags"
           label="'Tags'"
           selected="vm.selectedTags"
@@ -43,9 +43,13 @@
 
 
         <div class="form-group text-center">
+          
+          <br>
           <h4>
             <a href='/projects/+{{vm.project.id}}/'>View project</a>
           </h4>
+          <br>
+
           <button type="submit" class="btn discover-button" ng-click="vm.update()">Update</button>
           <button type="button" class="btn red-button" ng-click="vm.destroy()">Delete Project</button>
         </div>

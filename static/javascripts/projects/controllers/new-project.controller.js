@@ -27,32 +27,29 @@
     vm.toggleFilterMajors = toggleFilterMajors;
     vm.toggleFilterTags = toggleFilterTags;
 
+    vm.title = ''
+    vm.description = ''
+    vm.selectedMajors = []
+    vm.selectedTags = []
 
-    Majors.all().then(MajorsLoadSuccessCallback, MajorsLoadFailureCallback);
-    Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback)
+    activate();
 
-    /**
-     * @name MajorLoadSuccessCallback
-     * @desc When we successfully load majors from the server, update the controller
-     *
-     * @param Object response the Reponse rom the server containing all majors.
-     */
-    function MajorsLoadSuccessCallback(responseSuccess) {
-      vm.allMajors = responseSuccess.data;
+    async function activate() {
+      vm.allMajors = await Majors.sortedList(true);
+      const defaultMajor = vm.allMajors.find(function (major) {
+        return major.title == "Any";
+      })
+      toggleFilterMajors(defaultMajor); // Set Default Major for a new project to Any
+
+      Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback)
     }
-
-    /**
-     * @name MajorLoadFailureCallback
-     * @desc When we fail to load majors from the server, show an error.
-     *
-     * @param Object responseFailure the response we get from a failed ajax call.
-     */
-    function MajorsLoadFailureCallback(responseFailure) {
-      Snackbar.error("Unable to load Majors. Please refresh.");
-    }
-
     function TagsLoadSuccessCallback(response) {
       vm.allTags = response.data;
+      console.log(vm.allTags)
+      const defaultTag = vm.allTags.find(function (tag) {
+        return tag.title == "Other";
+      });
+      toggleFilterTags(defaultTag)
     }
 
     function TagsLoadFailureCallback(response) {
@@ -82,14 +79,14 @@
       vm.selectedMajors = '';
       vm.allMajors.map(function (major) {
         major.active = false;
-    });
-  }
+      });
+    }
 
-   /**
-     * @name filterToggleCallback
-     * @desc Function that is called when a user applies a filter.
-     *
-     */
+    /**
+      * @name filterToggleCallback
+      * @desc Function that is called when a user applies a filter.
+      *
+      */
     function toggleFilterMajors(filter) {
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
@@ -116,15 +113,16 @@
       vm.selectedTags = '';
       vm.allTags.map(function (major) {
         major.active = false;
-    });
-  }
+      });
+    }
 
-   /**
-     * @name filterToggleCallback
-     * @desc Function that is called when a user applies a filter.
-     *
-     */
+    /**
+      * @name filterToggleCallback
+      * @desc Function that is called when a user applies a filter.
+      *
+      */
     function toggleFilterTags(filter) {
+      console.log(filter, vm.selectedTags)
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
       vm.allTags.filter(function (f) {
@@ -136,6 +134,7 @@
       }).map(function (filter) {
         return filter.title;
       }).join(', ');
+      console.log(vm.selectedTags)
     }
 
     /**
@@ -145,48 +144,47 @@
     */
     function submit() {
 
-      const majors = vm.allMajors.filter( function(filter) {
+      const majors = vm.allMajors.filter(function (filter) {
         return filter.active;
-      }).map(function(major){
+      }).map(function (major) {
         return major.title;
       });
 
-      const tags = vm.allTags.filter( function(filter) {
+      const tags = vm.allTags.filter(function (filter) {
         return filter.active;
-      }).map(function(tag){
+      }).map(function (tag) {
         return tag.title;
       });
 
       vm.missing_title = !vm.title ? 'required' : '';
       vm.missing_description = !vm.description ? 'required' : '';
-      // vm.missing_majors = !vm.selected.length ? 'At least one major is Required' : ''; TOOO: Multiselect Refactor
-      // vm.missing_tags = !vm.selected.length ? 'At least one major is Required' : '';
+      vm.missing_majors = !vm.selectedMajors.length ? 'required' : '';
+      vm.missing_tags = !vm.selectedTags.length ? 'required' : '';
 
 
-      // if (vm.title && vm.description) {
-      //   Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
-      // }
+      if (vm.title && vm.description && vm.selectedMajors && vm.selectedTags) {
+        Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
+      }
 
-      Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
 
-     /**
-      * @name createProjectSuccessFn
-      * @desc Show snackbar with success message
-      *
-      * @param Project response the newly created project
-      */
+      /**
+       * @name createProjectSuccessFn
+       * @desc Show snackbar with success message
+       *
+       * @param Project response the newly created project
+       */
       function createProjectSuccessFn(response) {
         Snackbar.show('Success! Project created.');
         $window.location = `/projects/+${response.data.id}`;
       }
 
 
-     /**
-      * @name createProjectErrorFn
-      * @desc Propagate error event and show snackbar with error message
-      *
-      * @param Error errorResponse
-      */
+      /**
+       * @name createProjectErrorFn
+       * @desc Propagate error event and show snackbar with error message
+       *
+       * @param Error errorResponse
+       */
       function createProjectErrorFn(errorResponse) {
         Snackbar.error("Unable to Create Project. Please Try again");
       }

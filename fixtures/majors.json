@@ -2,6 +2,12 @@
     {
         "model": "projects.Major",
         "fields": {
+            "title": "Any"
+        }
+    },
+    {
+        "model": "projects.Major",
+        "fields": {
             "title": "Actuarial Mathematics"
         }
     },
