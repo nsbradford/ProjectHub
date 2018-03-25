@@ -9,14 +9,14 @@
         .module('projecthub.layout.controllers')
         .controller('AddProjectButtonController', AddProjectButtonController);
 
-        AddProjectButtonController.$inject = ['$scope', 'Authentication'];
+        AddProjectButtonController.$inject = ['$scope', 'Authentication', 'Profile'];
 
     /**
      * @namespace AddProjectButtonController
      * @desc This Controller is responsible for blocking unauthenticated and non-confirmed users
      * from creating new projecs.
      */
-    function AddProjectButtonController($scope, Authentication) {
+    function AddProjectButtonController($scope, Authentication, Profile) {
 
         const vm = this;
         const account = Authentication.getAuthenticatedAccount();
@@ -31,8 +31,8 @@
          * @param {object} responseSuccess The response from the server
          */
         function profileSuccessFn(responseSuccess) {
-            const profile = response.data;
-            vm.isActivated = vm.profile.is_email_confirmed;
+            const profile = responseSuccess.data;
+            vm.isActivated = profile.is_email_confirmed;
         }
 
         /**
