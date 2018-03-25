@@ -63,7 +63,7 @@
     * @memberOf projecthub.authentication.controllers.LoginController
     */
     function login() {
-      Authentication.login(vm.email, vm.password).then(loginSuccessFn, loginErrorFn);;
+      Authentication.login(vm.email, vm.password).then(loginSuccessFn, loginErrorFn);
 
             /**
        * @name loginSuccessFn

@@ -66,16 +66,38 @@
       * @desc Log the new user in
       */
       function registerSuccessFn(data, status, headers, config) {
-        Authentication.login(email, password);
-        ngDialog.open({ 
-          template: ` 
-            <div class="text-center">
-              Welcome to ProjectHub! Check your inbox for your email confirmation link.
-            </div>
-          `, 
-          plain: true,
-          preCloseCallback: function(){ window.location = '/discover'; } 
-        });
+        Authentication.login(email, password)
+          .then(
+            loginSuccessFn, 
+            
+        );
+
+        function loginSuccessFn(data, status, headers, config) {
+          ngDialog.open({ 
+            template: ` 
+              <div class="text-center">
+                Welcome to ProjectHub! Check your inbox for your email confirmation link.
+              </div>
+            `, 
+            plain: true,
+            preCloseCallback: function(){ 
+              Authentication.setAuthenticatedAccount(data.data);
+              window.location = '/discover';
+            } 
+          });
+        }
+
+        function loginErrorFn(data, status, headers, config) {
+          ngDialog.open({ 
+              template: ` 
+                <div class="text-center">
+                  ERROR in login stage.
+                </div>
+              `, 
+              plain: true,
+              preCloseCallback: function(){ window.location = '/register'; } 
+          });
+        }
       }
 
       /**
