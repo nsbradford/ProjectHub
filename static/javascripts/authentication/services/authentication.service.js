@@ -69,7 +69,7 @@
         Authentication.login(email, password)
           .then(
             loginSuccessFn, 
-            
+            loginErrorFn
         );
 
         function loginSuccessFn(response) {
