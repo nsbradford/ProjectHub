@@ -43,8 +43,6 @@
 
 .major-panel-container {
   z-index: 9999; }
-  .major-panel-container h3 {
-    margin-bottom: 0px; }
   .major-panel-container .majors-panel {
     border: #687685 solid 1px;
     border-radius: 10px;
