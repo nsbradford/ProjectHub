@@ -32,19 +32,19 @@
     vm.toggleFilterMajors = toggleFilterMajors;
 
     vm.clearTitle = clearTitle;
-    vm.clearDescription = clearDescription;
 
     activate();
 
-
+    /**
+     * @name clearTitle
+     * @desc Clears The Title textbox
+     *
+     *
+     * @param {object} event The event emitted when a user clicks the clear button on the title textbox
+     */
     function clearTitle(event) {
       event.preventDefault();
       vm.project.title = "";
-    }
-
-    function clearDescription(event) {
-      event.preventDefault();
-      vm.project.description = "";
     }
 
     /**

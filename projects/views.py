@@ -50,7 +50,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         searchString = self.request.query_params.get("searchString", None)
         if searchString:
             return Project.objects.filter(
-                title__contains=searchString).order_by('-created_at')
+                title__icontains=searchString).order_by('-created_at')
         return Project.objects.all().order_by('-created_at')
 
 

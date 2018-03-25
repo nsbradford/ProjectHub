@@ -21,6 +21,26 @@
             border-width: 1px;
         }
     }
+    .projecthub-text-area {
+        resize: vertical;
+        min-height: 60px;
+        padding-top: 2.5%;
+        padding-left: 2.5%;
+        padding-right: calc(10px + 10%);
+        margin:0;
+        border: $brand-primary solid;
+        border-width: 1px;
+        border-radius: 2px;
+        background-color: lighten($brand-secondary, 50);
+        width: 100%;
+        cursor: inherit;
+        // font-size: 14px;
+        &.disabled {
+            cursor: not-allowed;
+            border: dashed;
+            border-width: 1px;
+        }
+    }
     .input-clear-button {
         background: transparent;
         position: absolute;
