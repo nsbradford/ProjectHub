@@ -250,10 +250,10 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function update() {
-      vm.missing_title = !vm.project.title ? 'Required' : '';
-      vm.missing_description = !vm.project.description ? 'Required' : '';
-      vm.missing_majors = !vm.selectedMajors.length ? 'Required' : '';
-      vm.missing_tags = !vm.selectedTags.length ? 'Required' : '';
+      vm.missing_title = !vm.project.title ? 'required' : '';
+      vm.missing_description = !vm.project.description ? 'required' : '';
+      vm.missing_majors = !vm.selectedMajors.length ? 'required' : '';
+      vm.missing_tags = !vm.selectedTags.length ? 'required' : '';
 
 
       vm.project.majors = vm.allMajors.filter(function (major) {

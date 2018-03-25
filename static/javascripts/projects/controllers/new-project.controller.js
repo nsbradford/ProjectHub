@@ -27,6 +27,11 @@
     vm.toggleFilterMajors = toggleFilterMajors;
     vm.toggleFilterTags = toggleFilterTags;
 
+    vm.title = ''
+    vm.description = ''
+    vm.selectedMajors = []
+    vm.selectedTags = []
+
     activate();
 
     async function activate() {
@@ -145,10 +150,10 @@
         return tag.title;
       });
 
-      vm.missing_title = !vm.title ? 'Required' : '';
-      vm.missing_description = !vm.description ? 'Required' : '';
-      vm.missing_majors = !vm.selectedMajors.length ? 'Required' : '';
-      vm.missing_tags = !vm.selectedTags.length ? 'Required' : '';
+      vm.missing_title = !vm.title ? 'required' : '';
+      vm.missing_description = !vm.description ? 'required' : '';
+      vm.missing_majors = !vm.selectedMajors.length ? 'required' : '';
+      vm.missing_tags = !vm.selectedTags.length ? 'required' : '';
 
 
       if (vm.title && vm.description && vm.selectedMajors && vm.selectedTags) {

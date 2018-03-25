@@ -10,7 +10,6 @@
           error='vm.missing_title'
           id="'title-input'"
           label="'Title'"
-          place-holder="'Algorithmic trading with Python'"
           model="vm.project.title"
           on-clear="vm.clearTitle"
         ></text-input>
@@ -20,7 +19,6 @@
           id="'description-input'"
           multiline="4"
           label="'Description'"
-          place-holder="'This is your big chance to get rich!'"
           model="vm.project.description"
         ></text-input>
 
@@ -35,6 +33,7 @@
         ></multiselect>
 
         <multiselect
+          error='vm.missing_tags'
           options="vm.allTags"
           label="'Tags'"
           selected="vm.selectedTags"
