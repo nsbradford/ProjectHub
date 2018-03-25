@@ -72,7 +72,7 @@
             
         );
 
-        function loginSuccessFn(data, status, headers, config) {
+        function loginSuccessFn(response) {
           ngDialog.open({ 
             template: ` 
               <div class="text-center">
@@ -81,13 +81,13 @@
             `, 
             plain: true,
             preCloseCallback: function(){ 
-              Authentication.setAuthenticatedAccount(data.data);
+              Authentication.setAuthenticatedAccount(response.data);
               window.location = '/discover';
             } 
           });
         }
 
-        function loginErrorFn(data, status, headers, config) {
+        function loginErrorFn(response) {
           ngDialog.open({ 
               template: ` 
                 <div class="text-center">

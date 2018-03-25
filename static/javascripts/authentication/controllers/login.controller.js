@@ -65,12 +65,12 @@
     function login() {
       Authentication.login(vm.email, vm.password).then(loginSuccessFn, loginErrorFn);
 
-            /**
+      /**
        * @name loginSuccessFn
        * @desc Set the authenticated account and redirect to index
        */
-      function loginSuccessFn(data, status, headers, config) {
-        Authentication.setAuthenticatedAccount(data.data);
+      function loginSuccessFn(response) {
+        Authentication.setAuthenticatedAccount(response.data);
         window.location = '/discover';
       }
 
@@ -78,7 +78,7 @@
        * @name loginErrorFn
        * @desc Log "Epic failure!" to the console
        */
-      function loginErrorFn(data, status, headers, config) {
+      function loginErrorFn(response) {
         ngDialog.open({ 
           template: ` 
             <div class="text-center">

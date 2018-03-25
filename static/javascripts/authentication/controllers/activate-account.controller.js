@@ -36,7 +36,6 @@
         .then(activateSuccessFn, activateErrorFn)
 
       function activateSuccessFn(data, status, headers, config) {
-        // Snackbar.show('Congrats! Your account was confirmed - you\'re ready to post!.');
         ngDialog.open({ 
           template: ` 
             <div class="text-center">
