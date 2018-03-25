@@ -48,12 +48,9 @@
   .major-panel-container .majors-panel {
     border: #687685 solid 1px;
     border-radius: 10px;
-    /*margin-bottom: 10px;*/
     padding-left: 15px;
     padding-right: 15px;
-    /*padding-top: 20px;*/
-    /*padding-bottom: 10px;*/
-    /*margin-top: 10px;*/ }
+    margin: 20px; }
     .major-panel-container .majors-panel .major-pills {
       margin-left: 10px;
       border-left: #0277bd solid 1px; }
@@ -110,7 +107,6 @@
     list-style: none;
     overflow-y: scroll;
     max-height: 300px;
-    min-width: 300px;
     padding: 0px;
     border-radius: 11px; }
     .multiselect-container .project-hub-multi-select-list .projecthub-multi-select-option {
@@ -343,8 +339,8 @@ input.agreement-checkbox {
 
 .project {
   border-bottom: #687685 solid 1px;
-  padding-bottom: 40px;
-  padding-top: 40px; }
+  padding-bottom: 20px;
+  padding-top: 20px; }
   .project .project__meta {
     font-weight: bold;
     text-align: left;
