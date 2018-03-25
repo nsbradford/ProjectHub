@@ -104,11 +104,11 @@
     * @memberOf projecthub.authentication.controllers.RegisterController
     */
     function register() {
-      vm.missing_email = !vm.email ? 'Email Address is Required' : '';
-      vm.missing_password = !vm.password ? 'Password is Required ' : '';
-      vm.missing_username = !vm.username ? 'Username is Required' : '';
-      vm.missing_firstname = !vm.firstname ? 'First Name is Required' : '';
-      vm.missing_lastname = !vm.lastname ? 'Last Name is Required' : '';
+      vm.missing_email = !vm.email ? 'required' : '';
+      vm.missing_username = !vm.username ? 'required' : '';
+      vm.missing_password = !vm.password ? 'required' : '';
+      vm.missing_firstname = !vm.firstname ? 'required' : '';
+      vm.missing_lastname = !vm.lastname ? 'required' : '';
       vm.missing_agreement = !vm.agreement ? 'You must agree to the terms to continue' : '';
 
       if (vm.email && vm.password && vm.username && vm.firstname && vm.lastname && vm.agreement) {
