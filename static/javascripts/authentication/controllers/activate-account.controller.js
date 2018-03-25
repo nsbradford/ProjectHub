@@ -15,7 +15,9 @@
   /**
   * @namespace ActivateAccountController
   */
-  function ActivateAccountController($scope, $routeParams, Snackbar, Authentication, ngDialog) {
+  function ActivateAccountController($location, $scope, $routeParams, Snackbar, Authentication, 
+    ngDialog) 
+  {
     const vm = this;
 
     activate();
@@ -49,7 +51,7 @@
 
       function activateErrorFn(data, status, headers, config) {
         Snackbar.error('Something went wrong during account confirmation.');
-        window.location = '/'
+        $location.url('/');
       }
 
     }
