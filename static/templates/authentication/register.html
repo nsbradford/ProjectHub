@@ -4,6 +4,7 @@
 
     <div class="well login-no-shadow">
       <form role="form" ng-submit="vm.register()">
+        <div class="row">
           <text-input
             error="vm.missing_email"
             id="'email-input'"
@@ -13,7 +14,7 @@
           ></text-input>
 
           <text-input
-            error="vm.missing_usernmae"
+            error="vm.missing_username"
             id="'username-input'"
             label="'Username'"
             type="'text'"
@@ -55,11 +56,10 @@
           </div>
 
           <text-input
-            error="vm.mising_password"
+            error="vm.missing_password"
             id="'password-input'"
             type="vm.inputType"
             model="vm.password"
-            place-holder=""
             on-clear="vm.clearPassword">
           </text-input>
 
@@ -70,6 +70,8 @@
             </label>
             <span ng-show='vm.missing_agreement' class='error-span'> required</span>
           </div>
+
+        </div>
 
         <div class="form-group text-center">
           <button type="submit" class="btn discover-button">Register</button>

@@ -27,6 +27,7 @@
     vm.toggleFilterMajors = toggleFilterMajors;
     vm.toggleFilterTags = toggleFilterTags;
 
+
     Majors.all().then(MajorsLoadSuccessCallback, MajorsLoadFailureCallback);
     Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback)
 
@@ -156,8 +157,8 @@
         return tag.title;
       });
 
-      vm.missing_title = !vm.title ? 'Required' : '';
-      vm.missing_description = !vm.description ? 'Required' : '';
+      vm.missing_title = !vm.title ? 'required' : '';
+      vm.missing_description = !vm.description ? 'required' : '';
       // vm.missing_majors = !vm.selected.length ? 'At least one major is Required' : ''; TOOO: Multiselect Refactor
       // vm.missing_tags = !vm.selected.length ? 'At least one major is Required' : '';
 

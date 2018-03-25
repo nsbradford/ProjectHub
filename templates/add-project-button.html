@@ -1,0 +1,15 @@
+<div ng-controller="AddProjectButtonController as vm">
+    <!-- Render the blocking modal if a user is not properly authenticated. -->
+    <a class="btn btn-primary btn-fab btn-raised mdi-content-add btn-add-new-project"
+    href="javascript:void(0)"
+    ng-hide="vm.isActivated"
+    ng-dialog="/static/templates/projects/must-be-activated.html"
+    ng-dialog-controller="NewProjectController as vm"
+    ></a>
+
+    <!-- Render the working add button if the user is authenticated. -->
+    <a class="btn btn-primary btn-fab btn-raised mdi-content-add btn-add-new-project"
+    href="/new-project"
+    ng-show="vm.isActivated"
+    ></a>
+</div>

@@ -9,7 +9,7 @@
     .module('projecthub.layout.controllers')
     .controller('DiscoverController', DiscoverController);
 
-  DiscoverController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile', 
+  DiscoverController.$inject = ['$scope', 'Authentication', 'Projects', 'Snackbar', 'Profile',
     'Majors', 'Tags', '$document'];
 
   /**

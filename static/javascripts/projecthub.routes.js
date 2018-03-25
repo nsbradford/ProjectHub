@@ -1,4 +1,4 @@
-(function () {
+ (function () {
   'use strict';
 
   angular
@@ -41,7 +41,7 @@
     }).when('/+:username/settings', {
       controller: 'ProfileSettingsController',
       controllerAs: 'vm',
-      templateUrl: '/static/templates/profiles/settings.html'
+      templateUrl: '/static/templates/profiles/settings.html',
     }).when('/projects/:projectID', {
       controller: 'SingleProjectController',
       controllerAs: 'vm',
