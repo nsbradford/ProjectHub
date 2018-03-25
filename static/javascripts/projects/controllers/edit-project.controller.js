@@ -94,12 +94,19 @@
     function MajorsSuccessCallback(response) {
       vm.allMajors = response.data;
 
+      const anyMajor = vm.allMajors.find(function(major){
+        return major.title == "Any";
+      });
+
+      vm.allMajors = [anyMajor].concat(vm.allMajors.filter(function(major){
+        return major.title != "Any";
+      }));
+
       vm.project.majors.forEach(function(selectedMajor) {
         vm.allMajors.find(function (major) {
           return major.title == selectedMajor;
         }).active = true;
       });
-
       updateTextBoxMajors();
     }
 
@@ -272,14 +279,11 @@
     * @memberOf projecthub.projects.controllers.EditProjectController
     */
     function update() {
-      // vm.missing_title = !vm.project.title ? 'Required' : '';
-      // vm.missing_description = !vm.project.description ? 'Required' : '';
-      // // vm.missing_majors = !vm.selected.length ? 'Required' : ''; This should be addressed in the MultiSelect Refactor
-      // // vm.missing_tags = !vm.project.selected.length ? 'Required' : '';
+      vm.missing_title = !vm.project.title ? 'Required' : '';
+      vm.missing_description = !vm.project.description ? 'Required' : '';
+      vm.missing_majors = !vm.selectedMajors.length ? 'Required' : '';
+      vm.missing_tags = !vm.selectedTags.length ? 'Required' : '';
 
-      // if (vm.project.title && vm.project.description && vm.selected && vm.missing_tags) {
-
-      // }
 
       vm.project.majors = vm.allMajors.filter(function (major) {
         return major.active;
@@ -293,7 +297,10 @@
           return selectedTag.title;
       });
 
+
+      if (vm.project.title && vm.project.description && vm.selectedMajors && vm.selectedTags) {
         Projects.update(vm.project).then(projectSuccessFn, projectErrorFn);
+      }
 
       /**
       * @name projectSuccessFn

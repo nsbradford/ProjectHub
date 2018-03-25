@@ -76,6 +76,14 @@
        */
       function MajorsSuccessCallback(response) {
         vm.allMajors = response.data;
+        const anyMajor = vm.allMajors.find(function(major){
+          return major.title == "Any";
+        });
+
+        vm.allMajors = [anyMajor].concat(vm.allMajors.filter(function(major){
+          return major.title != "Any";
+        }));
+
       }
 
       /**

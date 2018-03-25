@@ -39,6 +39,17 @@
      */
     function MajorsLoadSuccessCallback(responseSuccess) {
       vm.allMajors = responseSuccess.data;
+
+      const anyMajor = vm.allMajors.find(function(major){
+        return major.title == "Any";
+      });
+
+      vm.allMajors = [anyMajor].concat(vm.allMajors.filter(function(major){
+        return major.title != "Any";
+      }));
+
+      // By default, we want any to be selected first
+      vm.toggleFilterMajors (anyMajor);
     }
 
     /**
@@ -157,17 +168,16 @@
         return tag.title;
       });
 
-      vm.missing_title = !vm.title ? 'required' : '';
-      vm.missing_description = !vm.description ? 'required' : '';
-      // vm.missing_majors = !vm.selected.length ? 'At least one major is Required' : ''; TOOO: Multiselect Refactor
-      // vm.missing_tags = !vm.selected.length ? 'At least one major is Required' : '';
+      vm.missing_title = !vm.title ? 'Required' : '';
+      vm.missing_description = !vm.description ? 'Required' : '';
+      vm.missing_majors = !vm.selectedMajors.length ? 'Required' : '';
+      vm.missing_tags = !vm.selectedTags.length ? 'Required' : '';
 
 
-      // if (vm.title && vm.description) {
-      //   Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
-      // }
+      if (vm.title && vm.description && vm.selectedMajors && vm.selectedTags) {
+        Projects.create(vm.title, vm.description, majors).then(createProjectSuccessFn, createProjectErrorFn);
+      }
 
-      Projects.create(vm.title, vm.description, majors, tags).then(createProjectSuccessFn, createProjectErrorFn);
 
      /**
       * @name createProjectSuccessFn
