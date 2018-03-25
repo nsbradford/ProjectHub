@@ -20,7 +20,7 @@ from projects.serializers import ProjectSerializer, MajorSerializer, TagSerializ
 class ProjectViewSet(viewsets.ModelViewSet):
     """ Combined RESTful view for Project model. """
 
-    LAZYLOAD_TRANSACTION_LENGTH = 5
+    LAZYLOAD_TRANSACTION_LENGTH = 10
 
     serializer_class = ProjectSerializer
     lookup_field = 'pk'

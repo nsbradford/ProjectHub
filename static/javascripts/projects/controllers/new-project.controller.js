@@ -36,16 +36,20 @@
 
     async function activate() {
       vm.allMajors = await Majors.sortedList(true);
-      const anyMajor = vm.allMajors.find(function (major) {
+      const defaultMajor = vm.allMajors.find(function (major) {
         return major.title == "Any";
       })
-
-      toggleFilterMajors(anyMajor); // Set Default Major for a new project to Any
+      toggleFilterMajors(defaultMajor); // Set Default Major for a new project to Any
 
       Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback)
     }
     function TagsLoadSuccessCallback(response) {
       vm.allTags = response.data;
+      console.log(vm.allTags)
+      const defaultTag = vm.allTags.find(function (tag) {
+        return tag.title == "Other";
+      });
+      toggleFilterTags(defaultTag)
     }
 
     function TagsLoadFailureCallback(response) {
@@ -118,6 +122,7 @@
       *
       */
     function toggleFilterTags(filter) {
+      console.log(filter, vm.selectedTags)
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
       vm.allTags.filter(function (f) {
@@ -129,6 +134,7 @@
       }).map(function (filter) {
         return filter.title;
       }).join(', ');
+      console.log(vm.selectedTags)
     }
 
     /**
