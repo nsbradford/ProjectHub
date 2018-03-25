@@ -43,15 +43,17 @@
 
 .major-panel-container {
   z-index: 9999; }
+  .major-panel-container h3 {
+    margin-bottom: 0px; }
   .major-panel-container .majors-panel {
     border: #687685 solid 1px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 40px;
-    padding-bottom: 10px;
-    margin-top: 10px; }
+    /*padding-top: 20px;*/
+    /*padding-bottom: 10px;*/
+    /*margin-top: 10px;*/ }
     .major-panel-container .majors-panel .major-pills {
       margin-left: 10px;
       border-left: #0277bd solid 1px; }
@@ -64,7 +66,7 @@
     margin: 0;
     padding-left: 2.5%;
     padding-right: calc(10px + 10%);
-    height: 60px !important;
+    height: 40px !important;
     border: #0277bd solid;
     border-width: 1px;
     border-radius: 2px;
@@ -82,7 +84,7 @@
     color: #0277bd;
     right: 5%;
     width: 30px;
-    height: 60px;
+    height: 40px;
     outline: none; }
 
 .multiselect-container {
@@ -217,6 +219,14 @@ label {
   .btn:hover, .btn:focus {
     opacity: .7;
     transform: scale(1.05); }
+
+.search-button {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 40px !important;
+  color: #0277bd !important;
+  background-color: transparent !important;
+  border: 0px; }
 
 .discover-button {
   color: #0277bd !important;

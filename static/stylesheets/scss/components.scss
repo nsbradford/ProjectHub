@@ -7,7 +7,7 @@
         margin:0;
         padding-left: 2.5%;
         padding-right: calc(10px + 10%);
-        height:60px !important;
+        height:40px !important;
         border: $brand-primary solid;
         border-width: 1px;
         border-radius: 2px;
@@ -28,7 +28,7 @@
         color: $brand-primary;
         right: 5%;
         width: 30px;
-        height: 60px;
+        height: $text-input-height;
         outline: none;
     }
 }
