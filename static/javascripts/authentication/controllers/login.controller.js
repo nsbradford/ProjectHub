@@ -9,12 +9,12 @@
     .module('projecthub.authentication.controllers')
     .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['$location', '$scope', 'Authentication'];
+  LoginController.$inject = ['$location', '$scope', 'Authentication', 'ngDialog'];
 
   /**
   * @namespace LoginController
   */
-  function LoginController($location, $scope, Authentication) {
+  function LoginController($location, $scope, Authentication, ngDialog) {
     const vm = this;
     vm.inputType = 'password';
     vm.login = login;
@@ -63,7 +63,31 @@
     * @memberOf projecthub.authentication.controllers.LoginController
     */
     function login() {
-      Authentication.login(vm.email, vm.password);
+      Authentication.login(vm.email, vm.password).then(loginSuccessFn, loginErrorFn);;
+
+            /**
+       * @name loginSuccessFn
+       * @desc Set the authenticated account and redirect to index
+       */
+      function loginSuccessFn(data, status, headers, config) {
+        Authentication.setAuthenticatedAccount(data.data);
+        window.location = '/discover';
+      }
+
+      /**
+       * @name loginErrorFn
+       * @desc Log "Epic failure!" to the console
+       */
+      function loginErrorFn(data, status, headers, config) {
+        ngDialog.open({ 
+          template: ` 
+            <div class="text-center">
+              The username/password combination you entered was invalid.
+            </div>
+          `, 
+          plain: true 
+        });
+      }
     }
 
     function hideShowPassword() {

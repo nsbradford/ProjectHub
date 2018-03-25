@@ -33,7 +33,8 @@
         .then(activateSuccessFn, activateErrorFn)
 
       function activateSuccessFn(data, status, headers, config) {
-        Snackbar.show('Congrats! Your account was confirmed - you\'re ready to post!.');
+        // Snackbar.show('Congrats! Your account was confirmed - you\'re ready to post!.');
+        displayAccountActivatedDialog();
         $location.url('/discover');
       }
 
@@ -42,6 +43,16 @@
         $location.url('/');
       }
 
+      function displayAccountActivatedDialog() {
+        ngDialog.open({ 
+          template: ` 
+            <div class="text-center">
+              Congrats! Your account was confirmed - you're ready to post!.
+            </div>
+          `, 
+          plain: true,
+        });
+      }
     }
   }
 })();
