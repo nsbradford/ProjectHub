@@ -1,7 +1,10 @@
 module.exports = {
-
     "parserOptions": {
-        "ecmaVersion": 6,
+
+        /**
+         * We are using es2017 because we are using async/await in our controllers
+         */
+        "ecmaVersion": 2017,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
@@ -10,5 +13,4 @@ module.exports = {
     "rules": {
         "semi": 2
     }
-
 };

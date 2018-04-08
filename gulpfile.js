@@ -1,6 +1,6 @@
 /**
  * Project Hub Gulp File
- * 
+ *
  * 1. build   -- ngAnnotate and uglify the JS.
  * 2. serve   -- Compile Scss and use Browse-Sync to show changes
  * 3. sass    -- Compile Scss
@@ -19,10 +19,13 @@ const babel = require('gulp-babel');
 
 gulp.task('build', function () {
   return gulp.src('static/javascripts/**/*.js')
+  .pipe(
+      babel({
+        presets: ['es2015', 'es2017']
+      }
+    )
+  )
     .pipe(ngAnnotate())
-    .pipe(babel({
-      presets: ['es2015']
-    }))
     .pipe(uglify().on('error', gutil.log))
     .pipe(gulp.dest('dist/static/javascripts/'));
 });
@@ -42,7 +45,7 @@ gulp.task('serve', ['sass'], function () {
 gulp.task('sass', function(){
   return gulp.src('static/stylesheets/scss/**/*.scss')
     .pipe(sass())
-    .on('error', sass.logError) 
+    .on('error', sass.logError)
     .pipe(gulp.dest('static/stylesheets/css'));
 });
 
