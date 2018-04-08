@@ -200,7 +200,7 @@
       if (searchString) {
         Projects.search(searchString).then(ProjectSearchSuccessCallback, ProjectSearchFailureCallback);
       } else {
-        Snackbar.error("Pleae provide something to search.");
+        Snackbar.error("Please provide something to search.");
       }
     }
 
@@ -212,7 +212,7 @@
       vm.lastProjectIndex = 0;
       vm.searchString = '';
 
-      Projects.load(vm.lastProjectIndex).then(ProjectSearchSuccessCallback, ProjectSearchFailureCallback)
+      Projects.load(vm.lastProjectIndex).then(ProjectSearchSuccessCallback, ProjectSearchFailureCallback);
     }
 
     /**
