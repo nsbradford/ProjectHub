@@ -23,4 +23,4 @@ pipelines:
               - npm install -g bower
               - bower install
               - npm run-script lint
-              - npm te
+              - npm test
