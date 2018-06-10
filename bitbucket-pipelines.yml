@@ -20,7 +20,7 @@ pipelines:
             image: node:9.11.1
             script:
               - npm install
-              - npmi install -g bower
+              - npm install -g bower
               - bower install
               - npm run-script lint
-              - npm test
+              - npm te
