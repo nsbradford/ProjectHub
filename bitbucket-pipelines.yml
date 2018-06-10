@@ -19,7 +19,7 @@ pipelines:
     - step:
             image: node:9.11.1
             script:
-              - npm run-script lint
               - npm install
               - bower install
+              - npm run-script lint
               - npm test
