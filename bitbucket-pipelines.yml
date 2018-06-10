@@ -8,6 +8,8 @@
 pipelines:
   default:
     - step:
+            caches:
+              - pip
             image: python:2.7
             script:
               - apt-get update && apt-get install -y python-dev
@@ -17,10 +19,12 @@ pipelines:
               - cp projecthub/components/settings_dev_template.py projecthub/components/settings_dev.py
               - python manage.py test
     - step:
+            caches:
+              - node
             image: node:9.11.1
             script:
               - npm install
               - npm install -g bower
               - bower install --allow-root
-              - npm run-script lint
               - npm test
+              - npm run-script lint
