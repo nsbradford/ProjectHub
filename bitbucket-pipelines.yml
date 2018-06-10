@@ -1,0 +1,23 @@
+# This is a sample build configuration for all languages.
+# Check our guides at https://confluence.atlassian.com/x/5Q4SMw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+# image: docker-image:tag
+
+pipelines:
+  default:
+    - step:
+            image: python 2.7.14
+            script:
+              - virtualenv --python=/usr/bin/python2.7 env
+              - source env/bin/activate
+              - sudo pip install -r requirements.txt
+              - python manage.py test
+    - step:
+            image: node:9.11.1
+            script:
+              - npm lint
+              - npm install
+              - bower install
+              - npm test

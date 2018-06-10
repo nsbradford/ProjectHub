@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-karma": "./node_modules/karma/bin/karma start karma.conf.js --log-level debug --single-run",
+    "test": "./node_modules/karma/bin/karma start karma.conf.js --log-level debug --single-run",
+    "lint": "./node_modules/eslint/bin/eslint ./",
     "postinstall": "chmod +x ./scripts/postInstall.sh && ./scripts/postInstall.sh"
   },
   "repository": {
