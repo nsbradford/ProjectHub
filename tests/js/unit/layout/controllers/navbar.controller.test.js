@@ -16,14 +16,14 @@ describe('NavbarController', function () {
     /**
      * Define a controller, and anything else you need to share amongst tests.
      */
-    var $$scope, NavbarController, AuthenticationMock;
+    var NavbarController, AuthenticationMock;
 
     /**
      * This is Critical, define all Mocks/Dependencies in a beforeEach() call.
      * This is the simplest way to mock a dependency. Other ways are more intricate an provide
      * a little bit more control.
      */
-    beforeEach(function () {
+    beforeAll(function () {
         AuthenticationMock = {
             logout: function (book) { return true; },
             isAuthenticated: function () { return true; }
