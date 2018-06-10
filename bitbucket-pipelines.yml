@@ -21,6 +21,6 @@ pipelines:
             script:
               - npm install
               - npm install -g bower
-              - bower install
+              - bower install --allow-root
               - npm run-script lint
               - npm test
