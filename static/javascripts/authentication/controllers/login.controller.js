@@ -71,7 +71,8 @@
        */
       function loginSuccessFn(response) {
         Authentication.setAuthenticatedAccount(response.data);
-        window.location = '/discover';
+        console.log("setAuth")
+        $location.url('/discover');
       }
 
       /**
@@ -79,6 +80,8 @@
        * @desc Log "Epic failure!" to the console
        */
       function loginErrorFn(response) {
+        console.log("error");
+        console.log(ngDialog.open())
         ngDialog.open({ 
           template: ` 
             <div class="text-center">

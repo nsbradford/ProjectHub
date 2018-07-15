@@ -3,7 +3,7 @@
  *
  * @author Ben Bianchi <benjmaminbianchi@outlook.com>
  * @description This is a test that just shows users how to setup a test with mocks. This took me a very
- * long time, and I will remain adament about keeping this here since testing with karma and jasmine is extremely
+ * long time, and I will remain adamant about keeping this here since testing with karma and jasmine is extremely
  * confusing.
  */
 describe('NavbarController', function () {

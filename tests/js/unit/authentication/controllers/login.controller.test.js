@@ -26,15 +26,14 @@ describe('LoginController', function () {
 
         AuthenticationMock = {
             isAuthenticated: function () { return true; },
-            login : function(email, passwd) { return Promise();},
+            login : function(email, passwd) { return true; },
             setAuthenticatedAccount: function(data) {return data;}
         };
         spyOn(AuthenticationMock, "isAuthenticated");
-        spyOn(AuthenticationMock, "login");
-        spyOn(AuthenticationMock, "setAuthenticatedAccount");
 
         DialogMock = {
-            open: function (dialogData) { return dialogData; }
+            open: function (dialogData) { return dialogData; },
+            test: "true"
         };
         spyOn(DialogMock, "open");
     });
@@ -44,12 +43,24 @@ describe('LoginController', function () {
             $location: LocationMock,
             $scope: $rootScope.$new(),
             Authentication: AuthenticationMock,
-            Snackbar: SnackbarMock,
             ngDialog: DialogMock
         });
     }));
 
     it('Should be defined', function () {
         expect(LoginController).toBeDefined();
+    });
+    
+    it('Should call Authentication.setAuthenticatedAccount on success', function () {
+        spyOn(AuthenticationMock, "login").and.returnValue(Promise.resolve(
+            {
+                email: "email", password: "password"
+            }
+        ));
+        spyOn(AuthenticationMock, "setAuthenticatedAccount");
+ 
+        LoginController.login();
+        expect(AuthenticationMock.setAuthenticatedAccount).toHaveBeenCalled();
+        // expect(DialogMock.open).toHaveBeenCalled();
     });
 });

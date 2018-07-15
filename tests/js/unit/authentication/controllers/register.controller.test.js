@@ -88,24 +88,12 @@ describe('RegisterController', function () {
 
         it('Should Succeed, when we provide valid input to the controller', function () {
             RegisterController.register();
-            expect(RegisterController.missing_email).toBe('');
-            expect(RegisterController.missing_username).toBe('');
-            expect(RegisterController.missing_password).toBe('');
-            expect(RegisterController.missing_firstname).toBe('');
-            expect(RegisterController.missing_lastname).toBe('');
-            expect(RegisterController.missing_agreement).toBe('');
             expect(AuthenticationMock.register).toHaveBeenCalled();
         });
 
         it('Should fail and show dialog when we provide a bad email address, when we provide valid input to the controller', function () {
             RegisterController.email = "fool@rit.edu";
             RegisterController.register();
-            expect(RegisterController.missing_email).toBe('');
-            expect(RegisterController.missing_username).toBe('');
-            expect(RegisterController.missing_password).toBe('');
-            expect(RegisterController.missing_firstname).toBe('');
-            expect(RegisterController.missing_lastname).toBe('');
-            expect(RegisterController.missing_agreement).toBe('');
             expect(DialogMock.open).toHaveBeenCalled();
         });
 
@@ -113,70 +101,40 @@ describe('RegisterController', function () {
             RegisterController.email = '';
             RegisterController.register();
             expect(RegisterController.missing_email).toBe('required');
-            expect(RegisterController.missing_username).toBe('');
-            expect(RegisterController.missing_password).toBe('');
-            expect(RegisterController.missing_firstname).toBe('');
-            expect(RegisterController.missing_lastname).toBe('');
-            expect(RegisterController.missing_agreement).toBe('');
             expect(SnackbarMock.error).toHaveBeenCalled();
         });
 
         it('Should fail, when no username is provided', function() {
             RegisterController.username = '';
             RegisterController.register();
-            expect(RegisterController.missing_email).toBe('');
             expect(RegisterController.missing_username).toBe('required');
-            expect(RegisterController.missing_password).toBe('');
-            expect(RegisterController.missing_firstname).toBe('');
-            expect(RegisterController.missing_lastname).toBe('');
-            expect(RegisterController.missing_agreement).toBe('');
             expect(SnackbarMock.error).toHaveBeenCalled();
         });
 
         it('Should fail, when no password is provided', function() {
             RegisterController.password = '';
             RegisterController.register();
-            expect(RegisterController.missing_email).toBe('');
-            expect(RegisterController.missing_username).toBe('');
             expect(RegisterController.missing_password).toBe('required');
-            expect(RegisterController.missing_firstname).toBe('');
-            expect(RegisterController.missing_lastname).toBe('');
-            expect(RegisterController.missing_agreement).toBe('');
             expect(SnackbarMock.error).toHaveBeenCalled();
         });
 
         it('Should fail, when no firstname is provided', function() {
             RegisterController.firstname = '';
             RegisterController.register();
-            expect(RegisterController.missing_email).toBe('');
-            expect(RegisterController.missing_username).toBe('');
-            expect(RegisterController.missing_password).toBe('');
             expect(RegisterController.missing_firstname).toBe('required');
-            expect(RegisterController.missing_lastname).toBe('');
-            expect(RegisterController.missing_agreement).toBe('');
             expect(SnackbarMock.error).toHaveBeenCalled();
         });
 
         it('Should fail, when no lastname is provided', function() {
             RegisterController.lastname = '';
             RegisterController.register();
-            expect(RegisterController.missing_email).toBe('');
-            expect(RegisterController.missing_username).toBe('');
-            expect(RegisterController.missing_password).toBe('');
-            expect(RegisterController.missing_firstname).toBe('');
             expect(RegisterController.missing_lastname).toBe('required');
-            expect(RegisterController.missing_agreement).toBe('');
             expect(SnackbarMock.error).toHaveBeenCalled();
         });
 
         it('Should fail, when no agreement is provided', function() {
             RegisterController.agreement = '';
             RegisterController.register();
-            expect(RegisterController.missing_email).toBe('');
-            expect(RegisterController.missing_username).toBe('');
-            expect(RegisterController.missing_password).toBe('');
-            expect(RegisterController.missing_firstname).toBe('');
-            expect(RegisterController.missing_lastname).toBe('');
             expect(RegisterController.missing_agreement).toBe('You must agree to the terms to continue');
             expect(SnackbarMock.error).toHaveBeenCalled();
         });

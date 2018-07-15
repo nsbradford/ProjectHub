@@ -34,4 +34,4 @@ pipelines:
               - npm install -g bower
               - bower install --allow-root
               - npm test
-              - npm run-script lint
+              # - npm run-script lint
