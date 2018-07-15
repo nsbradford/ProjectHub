@@ -64,14 +64,12 @@
     */
     function login() {
       Authentication.login(vm.email, vm.password).then(loginSuccessFn, loginErrorFn);
-
       /**
        * @name loginSuccessFn
        * @desc Set the authenticated account and redirect to index
        */
       function loginSuccessFn(response) {
         Authentication.setAuthenticatedAccount(response.data);
-        console.log("setAuth")
         $location.url('/discover');
       }
 
@@ -80,15 +78,13 @@
        * @desc Log "Epic failure!" to the console
        */
       function loginErrorFn(response) {
-        console.log("error");
-        console.log(ngDialog.open())
-        ngDialog.open({ 
-          template: ` 
+        ngDialog.open({
+          template: `
             <div class="text-center">
               The username/password combination you entered was invalid.
             </div>
-          `, 
-          plain: true 
+          `,
+          plain: true
         });
       }
     }

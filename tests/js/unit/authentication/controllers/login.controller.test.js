@@ -13,54 +13,112 @@ describe('LoginController', function () {
      */
     beforeEach(module('projecthub.authentication.controllers'));
 
-    var LoginController, LocationMock, AuthenticationMock, DialogMock;
+    let LoginController, LocationMock, AuthenticationMock, DialogMock, $rootScopeGlobal;
 
-    /**
-     * Load Dependencies
-     */
-    beforeEach(loadDependencies = function () {
-        LocationMock = {
-            url: function (url) { return undefined; }
-        };
-        spyOn(LocationMock, "url");
+    describe('Login Controller Successess', function () {
+        /**
+         * Load Dependencies
+         */
+        beforeEach(loadDependencies = function () {
+            LocationMock = {
+                url: jasmine.createSpy("url").and.callFake(function () { })
+            };
 
-        AuthenticationMock = {
-            isAuthenticated: function () { return true; },
-            login : function(email, passwd) { return true; },
-            setAuthenticatedAccount: function(data) {return data;}
-        };
-        spyOn(AuthenticationMock, "isAuthenticated");
+            AuthenticationMock = {
+                isAuthenticated: function () { },
+                login: function (email, passwd) { },
+                setAuthenticatedAccount: function (data) { }
+            };
+            spyOn(AuthenticationMock, "login").and.returnValue(
+                Promise.resolve(
+                    { data: true }
+                )
+            );
 
-        DialogMock = {
-            open: function (dialogData) { return dialogData; },
-            test: "true"
-        };
-        spyOn(DialogMock, "open");
-    });
+            spyOn(AuthenticationMock, "setAuthenticatedAccount").and.returnValue(true);
 
-    beforeEach(angular.mock.inject(function ($rootScope, $controller) {
-        LoginController = $controller('LoginController', {
-            $location: LocationMock,
-            $scope: $rootScope.$new(),
-            Authentication: AuthenticationMock,
-            ngDialog: DialogMock
+            DialogMock = {
+                open: function (dialogData) { return dialogData; },
+                test: "true"
+            };
+            spyOn(DialogMock, "open");
         });
-    }));
 
-    it('Should be defined', function () {
-        expect(LoginController).toBeDefined();
+        beforeEach(angular.mock.inject(function ($rootScope, $controller) {
+            $rootScopeGlobal = $rootScope;
+
+            LoginController = $controller('LoginController', {
+                $location: LocationMock,
+                $scope: $rootScope.$new(),
+                Authentication: AuthenticationMock,
+                ngDialog: DialogMock
+            });
+        }));
+
+        it('Should be defined', function () {
+            expect(LoginController).toBeDefined();
+        });
+
+        it('Should call Authentication.setAuthenticatedAccount on success', function (done) {
+            LoginController.login();
+            AuthenticationMock.login().then(function () {
+                expect(AuthenticationMock.setAuthenticatedAccount).toHaveBeenCalled();
+                expect(LocationMock.url).toHaveBeenCalled();
+                done();
+            });
+        });
+
     });
-    
-    it('Should call Authentication.setAuthenticatedAccount on success', function () {
-        spyOn(AuthenticationMock, "login").and.returnValue(Promise.resolve(
-            {
-                email: "email", password: "password"
-            }
-        ));
-        spyOn(AuthenticationMock, "setAuthenticatedAccount");
- 
-        LoginController.login();
-        expect(AuthenticationMock.setAuthenticatedAccount).toHaveBeenCalled();
-        // expect(DialogMock.open).toHaveBeenCalled();
+
+    describe("Login Controller Failure Cases", function () {
+
+        /**
+ * Load Dependencies
+ */
+        beforeEach(loadDependencies = function () {
+            LocationMock = {
+                url: jasmine.createSpy("url").and.callFake(function () { })
+            };
+
+            AuthenticationMock = {
+                isAuthenticated: function () { },
+                login: function (email, passwd) { },
+                setAuthenticatedAccount: function (data) { }
+            };
+            spyOn(AuthenticationMock, "login").and.returnValue(
+                Promise.reject(
+                    { data: true }
+                )
+            );
+
+            spyOn(AuthenticationMock, "setAuthenticatedAccount").and.returnValue(true);
+
+            DialogMock = {
+                open: function (dialogData) { return dialogData; },
+                test: "true"
+            };
+            spyOn(DialogMock, "open");
+        });
+
+        beforeEach(angular.mock.inject(function ($rootScope, $controller) {
+            $rootScopeGlobal = $rootScope;
+
+            LoginController = $controller('LoginController', {
+                $location: LocationMock,
+                $scope: $rootScope.$new(),
+                Authentication: AuthenticationMock,
+                ngDialog: DialogMock
+            });
+        }));
+
+
+        it('Should call ngDialog.oepn on failure', function (done) {
+            LoginController.login();
+            AuthenticationMock.login().then(null, function () {
+                expect(DialogMock.open).toHaveBeenCalled();
+                done();
+            });
+        });
     });
+
 });
