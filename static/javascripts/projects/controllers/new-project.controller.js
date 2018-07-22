@@ -27,10 +27,10 @@
     vm.toggleFilterMajors = toggleFilterMajors;
     vm.toggleFilterTags = toggleFilterTags;
 
-    vm.title = ''
-    vm.description = ''
-    vm.selectedMajors = []
-    vm.selectedTags = []
+    vm.title = '';
+    vm.description = '';
+    vm.selectedMajors = [];
+    vm.selectedTags = [];
 
     activate();
 
@@ -38,18 +38,18 @@
       vm.allMajors = await Majors.sortedList(true);
       const defaultMajor = vm.allMajors.find(function (major) {
         return major.title == "Any";
-      })
+      });
       toggleFilterMajors(defaultMajor); // Set Default Major for a new project to Any
 
-      Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback)
+      Tags.all().then(TagsLoadSuccessCallback, TagsLoadFailureCallback);
     }
     function TagsLoadSuccessCallback(response) {
       vm.allTags = response.data;
-      console.log(vm.allTags)
+      console.log(vm.allTags);
       const defaultTag = vm.allTags.find(function (tag) {
         return tag.title == "Other";
       });
-      toggleFilterTags(defaultTag)
+      toggleFilterTags(defaultTag);
     }
 
     function TagsLoadFailureCallback(response) {
@@ -122,7 +122,7 @@
       *
       */
     function toggleFilterTags(filter) {
-      console.log(filter, vm.selectedTags)
+      console.log(filter, vm.selectedTags);
       // Filter out the curent applied filter,
       // and toggl its 'active' state.
       vm.allTags.filter(function (f) {
@@ -134,7 +134,7 @@
       }).map(function (filter) {
         return filter.title;
       }).join(', ');
-      console.log(vm.selectedTags)
+      console.log(vm.selectedTags);
     }
 
     /**

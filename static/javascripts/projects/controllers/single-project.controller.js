@@ -18,25 +18,25 @@
   function SingleProjectController($location, $routeParams, Projects, Profile, Snackbar, Authentication) {
     const vm = this;
     // vm.profile = undefined;
-    vm.project = undefined
-    vm.isUserOwnerOfProject = false
+    vm.project = undefined;
+    vm.isUserOwnerOfProject = false;
 
     activate();
 
     function userIsProjectOwner() {
-      var account = Authentication.getAuthenticatedAccount()
-      if (account === undefined) return false
-      return account.username === vm.project.author.username
+      var account = Authentication.getAuthenticatedAccount();
+      if (account === undefined) return false;
+      return account.username === vm.project.author.username;
     }
 
     function deleteProject() {
       if (!userIsProjectOwner()) {
-        alert('You\'re not the owner of this project, so you can\'t delete it.')
+        alert('You\'re not the owner of this project, so you can\'t delete it.');
       }
       else{
         var confirmed = confirm('Are you sure you want to delete this project? This action can\'t be undone.');
         if (confirmed) {
-          Projects.deleteById(vm.project.id)
+          Projects.deleteById(vm.project.id);
           window.location = '/discover';
           Snackbar.show('This project has been deleted.');
         }
@@ -45,16 +45,16 @@
 
     function editProject() {
       if (!userIsProjectOwner()) {
-        alert('You\'re not the owner of this project, so you can\'t edit it.')
+        alert('You\'re not the owner of this project, so you can\'t edit it.');
       }
       else {
         $location.url('projects/+' + vm.project.id + '/edit/');
       }
     }
 
-    vm.userIsProjectOwner = userIsProjectOwner
-    vm.deleteProject = deleteProject
-    vm.editProject = editProject
+    vm.userIsProjectOwner = userIsProjectOwner;
+    vm.deleteProject = deleteProject;
+    vm.editProject = editProject;
 
     /**
     * @name activate
@@ -65,7 +65,7 @@
       var projectID = $routeParams.projectID.substr(1);
 
       if (projectID === '') {
-        Snackbar.error('No such project found')
+        Snackbar.error('No such project found');
         $location.url('/discover');
       }
       else {
@@ -80,7 +80,7 @@
         */
       function projectsSuccessFn(data, status, headers, config) {
         vm.project = data.data;
-        vm.isUserOwnerOfProject = userIsProjectOwner()
+        vm.isUserOwnerOfProject = userIsProjectOwner();
       }
 
       /**
@@ -88,7 +88,7 @@
         * @desc Show error snackbar
         */
       function projectsErrorFn(data, status, headers, config) {
-        Snackbar.error('No such project found')
+        Snackbar.error('No such project found');
         $location.url('/discover');
       }
     }

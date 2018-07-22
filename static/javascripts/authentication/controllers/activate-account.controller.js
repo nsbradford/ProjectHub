@@ -33,7 +33,7 @@
       var key = $routeParams.key;
 
       Authentication.activateAccount(key)
-        .then(activateSuccessFn, activateErrorFn)
+        .then(activateSuccessFn, activateErrorFn);
 
       function activateSuccessFn(data, status, headers, config) {
         ngDialog.open({ 

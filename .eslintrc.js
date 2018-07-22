@@ -1,4 +1,11 @@
 module.exports = {
+
+    "overrides": [
+        {
+          "files": [ "static/**/*.js", "lib/*.js" ],
+          "excludedFiles": "static/bower_components/**/*",
+        }
+      ],
     "parserOptions": {
 
         /**

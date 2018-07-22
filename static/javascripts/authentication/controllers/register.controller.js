@@ -72,9 +72,9 @@
      * @memberOf projecthub.authentication.controllers.RegisterController
      */
     function checkForApprovedDomainAndDisplayDialog() {
-      const isApproved = vm.email ? isApprovedDomain(vm.email) : false
+      const isApproved = vm.email ? isApprovedDomain(vm.email) : false;
       if (! isApproved) {
-        displayUnapprovedDomainDialog()
+        displayUnapprovedDomainDialog();
       }
       return isApproved;
     }

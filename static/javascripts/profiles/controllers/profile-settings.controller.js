@@ -20,7 +20,7 @@
     const vm = this;
     vm.destroy = destroy;
     vm.update = update;
-    vm.resendConfirmation = resendConfirmation
+    vm.resendConfirmation = resendConfirmation;
 
     vm.missing_email = false;
     vm.missing_firstname = false;
@@ -67,7 +67,7 @@
       */
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
-        vm.is_confirmed = vm.profile.is_email_confirmed
+        vm.is_confirmed = vm.profile.is_email_confirmed;
       }
 
       /**
