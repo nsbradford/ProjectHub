@@ -30,10 +30,14 @@ describe('LoginController', function () {
                 setAuthenticatedAccount: function (data) { }
             };
             spyOn(AuthenticationMock, "login").and.returnValue(
-                Promise.resolve(
-                    { data: true }
-                )
+                {
+                    then: function (success, failure) {
+                        success({ data: {} });
+                    }
+                }
             );
+
+
 
             spyOn(AuthenticationMock, "setAuthenticatedAccount").and.returnValue(true);
 
@@ -59,13 +63,11 @@ describe('LoginController', function () {
             expect(LoginController).toBeDefined();
         });
 
-        it('Should call Authentication.setAuthenticatedAccount on success', function (done) {
+        it('Should call Authentication.setAuthenticatedAccount on success', function () {
             LoginController.login();
-            AuthenticationMock.login().then(function () {
-                expect(AuthenticationMock.setAuthenticatedAccount).toHaveBeenCalled();
-                expect(LocationMock.url).toHaveBeenCalled();
-                done();
-            });
+            expect(AuthenticationMock.setAuthenticatedAccount).toHaveBeenCalled();
+            expect(LocationMock.url).toHaveBeenCalled();
+
         });
 
     });
@@ -85,11 +87,15 @@ describe('LoginController', function () {
                 login: function (email, passwd) { },
                 setAuthenticatedAccount: function (data) { }
             };
+
             spyOn(AuthenticationMock, "login").and.returnValue(
-                Promise.reject(
-                    { data: true }
-                )
+                {
+                    then: function (success, failure) {
+                        failure({ data: {} });
+                    }
+                }
             );
+
 
             spyOn(AuthenticationMock, "setAuthenticatedAccount").and.returnValue(true);
 
@@ -112,12 +118,9 @@ describe('LoginController', function () {
         }));
 
 
-        it('Should call ngDialog.oepn on failure', function (done) {
+        it('Should call ngDialog.oepn on failure', function () {
             LoginController.login();
-            AuthenticationMock.login().then(null, function () {
-                expect(DialogMock.open).toHaveBeenCalled();
-                done();
-            });
+            expect(DialogMock.open).toHaveBeenCalled();
         });
     });
 
