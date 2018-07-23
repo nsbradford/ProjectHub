@@ -9,14 +9,14 @@
     .module('projecthub.authentication.controllers')
     .controller('ActivateAccountController', ActivateAccountController);
 
-  ActivateAccountController.$inject = ['$location', '$scope', '$routeParams', 'Snackbar', 
+  ActivateAccountController.$inject = ['$location', '$scope', '$routeParams', 'Snackbar',
   'Authentication', 'ngDialog'];
 
   /**
   * @namespace ActivateAccountController
   */
-  function ActivateAccountController($location, $scope, $routeParams, Snackbar, Authentication, 
-    ngDialog) 
+  function ActivateAccountController($location, $scope, $routeParams, Snackbar, Authentication,
+    ngDialog)
   {
     const vm = this;
 
@@ -33,22 +33,22 @@
       var key = $routeParams.key;
 
       Authentication.activateAccount(key)
-        .then(activateSuccessFn, activateErrorFn)
+        .then(activateSuccessFn, activateErrorFn);
 
-      function activateSuccessFn(data, status, headers, config) {
-        ngDialog.open({ 
-          template: ` 
+      function activateSuccessFn(response) {
+        ngDialog.open({
+          template: `
             <div class="text-center">
               Congrats! Your account was confirmed - you're ready to post!.
             </div>
-          `, 
+          `,
           plain: true,
-          preCloseCallback: function(){ window.location = '/login'; } 
+          preCloseCallback: function(){ window.location = '/login'; }
         });
-        
+
       }
 
-      function activateErrorFn(data, status, headers, config) {
+      function activateErrorFn(response) {
         Snackbar.error('Something went wrong during account confirmation.');
         $location.url('/');
       }

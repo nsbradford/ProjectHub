@@ -18,16 +18,16 @@
   */
   function EditProjectController($location, $routeParams, Authentication, Snackbar, Projects, Majors, Tags) {
     const vm = this;
-    vm.isUserOwnerOfProject = false
-    vm.project = undefined
+    vm.isUserOwnerOfProject = false;
+    vm.project = undefined;
     vm.destroy = destroy;
     vm.update = update;
 
-    vm.selectedTags = ''
+    vm.selectedTags = '';
     vm.clearTags = clearTags;
-    vm.toggleFilterTags = toggleFilterTags
+    vm.toggleFilterTags = toggleFilterTags;
 
-    vm.selectedMajors = ''
+    vm.selectedMajors = '';
     vm.clearMajors = clearMajors;
     vm.toggleFilterMajors = toggleFilterMajors;
 
@@ -51,9 +51,9 @@
      *
      */
     function userIsProjectOwner() {
-      var account = Authentication.getAuthenticatedAccount()
-      if (account === undefined) return false
-      return account.username === vm.project.author.username
+      var account = Authentication.getAuthenticatedAccount();
+      if (account === undefined) return false;
+      return account.username === vm.project.author.username;
     }
 
     /**
@@ -71,7 +71,7 @@
       */
       async function projectsSuccessFn(data, status, headers, config) {
         vm.project = data.data;
-        vm.isUserOwnerOfProject = userIsProjectOwner()
+        vm.isUserOwnerOfProject = userIsProjectOwner();
         if (!vm.isUserOwnerOfProject) {
           $location.url('/');
           Snackbar.error('You are not authorized to view this page.');
@@ -123,7 +123,7 @@
       * @desc Redirect to index
       */
       function projectsErrorFn(data, status, headers, config) {
-        Snackbar.error('No such project found')
+        Snackbar.error('No such project found');
         $location.url('/');
       }
     }
@@ -157,7 +157,7 @@
      *
      */
     function toggleFilterMajors(item) {
-      toggleFilter(item, vm.allMajors)
+      toggleFilter(item, vm.allMajors);
       updateTextBoxMajors(vm.allMajors, vm.selectedMajors);
     }
 
@@ -181,7 +181,7 @@
      *
      */
     function toggleFilterTags(item) {
-      toggleFilter(item, vm.allTags)
+      toggleFilter(item, vm.allTags);
       updateTextBoxTags();
     }
 

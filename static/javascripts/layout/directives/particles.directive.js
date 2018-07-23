@@ -104,7 +104,7 @@
       }
     },
     retina_detect: true
-  }
+  };
 
   var particlesConfigMobile = {
     "particles": {
@@ -215,7 +215,7 @@
       }
     },
     "retina_detect": true
-  }
+  };
 
   function particlesDrv($window, $log) {
     var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;

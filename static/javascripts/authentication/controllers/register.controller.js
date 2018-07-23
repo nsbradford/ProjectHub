@@ -72,9 +72,9 @@
      * @memberOf projecthub.authentication.controllers.RegisterController
      */
     function checkForApprovedDomainAndDisplayDialog() {
-      const isApproved = vm.email ? isApprovedDomain(vm.email) : false
+      const isApproved = vm.email ? isApprovedDomain(vm.email) : false;
       if (! isApproved) {
-        displayUnapprovedDomainDialog()
+        displayUnapprovedDomainDialog();
       }
       return isApproved;
     }
@@ -85,15 +85,15 @@
      * @memberOf projecthub.authentication.controllers.RegisterController
      */
     function displayUnapprovedDomainDialog() {
-      ngDialog.open({ 
-        template: ` 
+      ngDialog.open({
+        template: `
           <div class="text-center">
             We're only accepting <b>wpi.edu</b> emails at this time.
             <br><br>
-            If you have any questions, please reach out to 
+            If you have any questions, please reach out to
             <a href='mailto:support@goprojecthub.com'>support</a>.
           </div>
-        `, 
+        `,
         plain: true,
       });
     }

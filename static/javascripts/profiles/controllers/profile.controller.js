@@ -19,20 +19,20 @@
 
     vm.profile = undefined;
     vm.projects = [];
-    vm.isUserOwnerOfProject = false
-    vm.viewSettings = viewSettings
+    vm.isUserOwnerOfProject = false;
+    vm.viewSettings = viewSettings;
 
     activate();
 
     function userIsProjectOwner() {
-      var account = Authentication.getAuthenticatedAccount()
-      if (account === undefined) return false
-      return account.username === vm.profile.username
+      var account = Authentication.getAuthenticatedAccount();
+      if (account === undefined) return false;
+      return account.username === vm.profile.username;
     }
 
     function viewSettings() {
       if (!userIsProjectOwner()) {
-        alert('You\'re not allowed to view this page.')
+        alert('You\'re not allowed to view this page.');
       }
       else {
         $location.url('/' + vm.profile.username + '/settings/');
@@ -56,7 +56,7 @@
       */
       function profileSuccessFn(data, status, headers, config) {
         vm.profile = data.data;
-        vm.isUserOwnerOfProject = userIsProjectOwner()
+        vm.isUserOwnerOfProject = userIsProjectOwner();
       }
 
 

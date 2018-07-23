@@ -13,6 +13,7 @@
     "bootstrap-material-design": "~0.1.5",
     "jquery": "~2.1.1",
     "angular": "~1.5.0",
+    "angular-mocks": "~1.5.0",
     "angular-route": "~1.5.0",
     "angular-cookies": "~1.5.0",
     "angular-sanitize": "~1.5.0",

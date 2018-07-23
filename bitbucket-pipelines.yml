@@ -1,0 +1,37 @@
+# This is a sample build configuration for all languages.
+# Check our guides at https://confluence.atlassian.com/x/5Q4SMw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+# image: docker-image:tag
+
+pipelines:
+  default:
+    - step:
+            caches:
+              - pip
+            image: python:2.7
+            script:
+              - apt-get update && apt-get install -y python-dev
+              - virtualenv --python=/usr/bin/python2.7 env
+              - source env/bin/activate
+              - pip install -r requirements.txt
+              - cp projecthub/components/settings_dev_template.py projecthub/components/settings_dev.py
+              - python manage.py test
+    - step:
+            caches:
+              - node
+            image: node:9.11.1
+            script:
+              - apt-get update; apt-get install -y gettext-base;
+              - echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list
+              - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+              - set -x && apt-get update && apt-get install -y xvfb google-chrome-stable
+              - wget -q -O /usr/bin/xvfb-chrome https://bitbucket.org/atlassian/docker-node-chrome-firefox/raw/ff180e2f16ea8639d4ca4a3abb0017ee23c2836c/scripts/xvfb-chrome
+              - ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
+              - chmod 755 /usr/bin/google-chrome
+              - npm install
+              - npm install -g bower
+              - bower install --allow-root
+              - npm test
+              # - npm run-script lint

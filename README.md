@@ -51,6 +51,7 @@ For it to fully work, you'll need to define your own `components/settings_dev.py
 
 ## Testing
 
+### Django/Python Tests
 Run all Django tests:
 
     $ ./manage.py test
@@ -58,6 +59,22 @@ Run all Django tests:
 Run a specific test class or function:
 
     $ ./manage.py test tests.projects.tests:ProjectTests.test_create_project
+
+### JS
+We multiple frameworks for the frontend. We use *Karma* for Unit Tests, and *Protractor*
+
+#### Karma
+To run karma tests, ensure that you have ran `npm install` before. Then run
+
+```
+npm test
+```
+
+You should see a browser load, and close quickly, and the results of all tests will be printed in the console.
+
+#### Protractor
+
+Protractor tests are not currently implemented, they are on the way though!
 
 ## Structure Overview
 
@@ -89,6 +106,12 @@ Run a specific test class or function:
             /profiles                       profile, settings
             /projects                       discover-projects, new-project, project
     /templates                      Basic header/js templates used by Django
+    /test                           Tests used in our project
+        /authentication             Authentication Python tests             
+        /js                         JS tests
+            /unit                   JS Unit Tests (using karma)
+            /e2e                    End to End Unit tests (using protractor)
+        /projects                   Project Python Tests
     .bowerrc                        Bower set components directory
     .buildpacks                     Heroku buildpacks config
     .gitignore                      Ignore in Git
@@ -100,6 +123,13 @@ Run a specific test class or function:
     Procfile                        Heroku config
     requirements.txt                Python package requirements
     runtime.txt                     Heroku specify Python version
+    bitbucket-pipelines.yml         Bitbucket pipeline instructions.
+
+## Pipeline
+Currently we are using Bitbucket's pipelining system, which spins up a docker container where we can run commands. We run the following commands
+* Run Python Tests
+* Run Karma Tests
+* Run Eslint to lint our JS.
 
 ## Deploying to Heroku
 
