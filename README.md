@@ -1,5 +1,7 @@
 # ProjectHub
 
+UPDATE: ProjectHub is no longer operational as of 09-2018. Talk to @nsbradford or @benbianchi
+
 Visit us at https://www.goprojecthub.com
 
 ## About
